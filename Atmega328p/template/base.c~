@@ -1,0 +1,2 @@
+#include <avr/interrupt.h>  //allows interrupts
+#include <math.h> //math shit functions and constants

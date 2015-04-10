@@ -22,15 +22,15 @@ int main(void){
 
   while(1){
 
-  char VerticalReadValue ADCRead(Vertical, 0);
-  char ForwardReadValue ADCRead(Forward, 0);
-  char SideReadValue ADCRead(Side, 0);
+  char VerticalReadValue = ADCRead(Vertical, 0);
+  char ForwardReadValue = ADCRead(Forward, 0);
+  char SideReadValue = ADCRead(Side, 0);
 
   float VerticalRatio = (float)VerticalReadValue / (256.0);
   float ForwardRatio = (float)ForwardReadValue / (256.0);
   float SideRatio = (float)SideReadValue / (256.0);
 
-   
+  WriteTXCharTransit(VerticalReadValue, &PORTB, 1);  
 
   }
 

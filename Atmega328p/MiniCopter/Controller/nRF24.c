@@ -4,7 +4,9 @@
 #define F_CPU 1000000UL
 
 #include <util/delay.h>
-
+#include <avr/pgmspace.h>
+#include <avr/io.h>
+#include <stdio.h>
 
 
 void nRF24Init(volatile uint8_t *SSPort, uint8_t SSPin){
@@ -32,7 +34,7 @@ void nRF24Init(volatile uint8_t *SSPort, uint8_t SSPin){
 }
 
 
-void WriteTXCharTransmit(char Data, volatile uint8_t *CEPort, uint8_t CEPin){
+void WriteTXCharTransmit(char Data, volatile uint8_t *CEPort, uint8_t CEPin, volatile uint8_t *SSPort, uint8_t SSPin){
   
   *SSPort &= (0<<SSPin);  
   SPI_MasterTransmitByte(0xA0);
@@ -51,6 +53,7 @@ char ReadRXChar(char address, volatile uint8_t *SSPort, uint8_t SSPin){
   SPI_MasterTransmitByte(0x61);
   SPI_MasterTransmitByte(0xFF);
   *SSPort |= (1<<SSPin);
-  return SPDR;
+  char hold = SPDR;
+  return hold;
 
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <avr/io.h>
 #include <avr/pgmspace.h>
+#include <inttypes.h>
 
 #include "ADC.h"
 #include "SPI.h"
@@ -26,11 +27,11 @@ int main(void){
   char ForwardReadValue = ADCRead(Forward, 0);
   char SideReadValue = ADCRead(Side, 0);
 
-  float VerticalRatio = (float)VerticalReadValue / (256.0);
-  float ForwardRatio = (float)ForwardReadValue / (256.0);
-  float SideRatio = (float)SideReadValue / (256.0);
+//  float VerticalRatio = (float)VerticalReadValue / (256.0);
+//  float ForwardRatio = (float)ForwardReadValue / (256.0);
+//  float SideRatio = (float)SideReadValue / (256.0);
 
-  WriteTXCharTransit(VerticalReadValue, &PORTB, 1);  
+  WriteTXCharTransmit(VerticalReadValue, &PORTD, 7, &PORTB, 2);  
 
   }
 

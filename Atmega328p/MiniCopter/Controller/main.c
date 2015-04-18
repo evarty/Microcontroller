@@ -32,7 +32,7 @@ int main(void){
 //  float SideRatio = (float)SideReadValue / (256.0);
 
   WriteTXCharTransmit(VerticalReadValue, &PORTD, 7, &PORTB, 2);  
-
+//llama testing
   }
 
 

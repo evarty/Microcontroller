@@ -2,18 +2,19 @@
 #include "SPI.h"
 
 #define DDR_SPI DDRB
-#define SPI_MOSI_PIN 3
-#define SPI_SCK_PIN 5
-#define SPI_SS_PIN 2
+#define DD_MOSI 3
+#define DD_SCK 5
+#define DD_SS 2
 #define SPI_MISO_PIN 4
 
 
 
 void SPI_MasterInit(void){
   /* Set MOSI, SS, and SCK output, all others input */
-  DDR_SPI = (1<<SPI_MOSI_PIN)|(1<<SPI_SCK_PIN);
+  DDRB = (1<<DDB3)|(1<<DDB5)|(1<<DDB2);
   /* Enable SPI, Master, set clock rate fck/16 */
-  SPCR = ((1<<SPE)|(1<<MSTR)|(1<<SPR0))&~(1<<DORD)&~(1<<CPHA)&~(1<<CPOL);
+  SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);//&~(1<<DORD)&~(1<<CPHA)&~(1<<CPOL);
+  PORTB |= (1<<DDB2);
 }
 
 void SPI_MasterTransmitByte(char cData){

@@ -3,9 +3,9 @@
 //#include <avr/pgmspace.h>
 //#include <inttypes.h>
 
-//#include "ADC.h"
+#include "ADC.h"
 #include "SPI.h"
-//#include "nRF24.h"
+#include "nRF24.h"
 
 //#define SSPin 2
 
@@ -13,9 +13,9 @@ int main(void){
 
 //  DDRB |= (1<<SSPin);  
 //  PORTB |= (1<<SSPin);
-//  ADCInitilize();
+  ADCInitilize();
   SPI_MasterInit();
-//  nRF24Init(&PORTB, 2);
+  nRF24Init(&PORTB, 2);
 
 //  char Vertical = 0;
 //  char Forward = 1;

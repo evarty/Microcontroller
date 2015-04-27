@@ -15,8 +15,8 @@ int main(void){
 //  PORTB |= (1<<SSPin);
   ADCInitilize();
   SPI_MasterInit();
-  nRF24Init(&PORTB, 2);
-
+  nRF24InitTransmit(&PORTB, 2);
+  DDRD |= (1<<7);
 //  char Vertical = 0;
 //  char Forward = 1;
 //  char Side = 2;
@@ -30,12 +30,12 @@ int main(void){
 //  float VerticalRatio = (float)VerticalReadValue / (256.0);
 //  float ForwardRatio = (float)ForwardReadValue / (256.0);
 //  float SideRatio = (float)SideReadValue / (256.0);
+    char VerticalReadValue = 255;
+    WriteTXCharTransmit(VerticalReadValue, &PORTD, 7, &PORTB, 2);  
 
-//  WriteTXCharTransmit(VerticalReadValue, &PORTD, 7, &PORTB, 2);  
-
-    PORTB &= ~(1<<DDB2);
-    SPI_MasterTransmitByte(0xAA);
-    PORTB |= (1<<DDB2);
+//    PORTB &= ~(1<<DDB2);
+//    SPI_MasterTransmitByte(0xAA);
+//    PORTB |= (1<<DDB2);
 
   }
 

@@ -9,7 +9,7 @@
 #include <stdio.h>
 
 
-void nRF24Init(volatile uint8_t *SSPort, uint8_t SSPin){
+void nRF24InitTransmit(volatile uint8_t *SSPort, uint8_t SSPin){
   *SSPort &= ~(1<<SSPin);
   SPI_MasterTransmitByte(0x20);
   SPI_MasterTransmitByte(0x7E); //0b01111110
@@ -33,10 +33,33 @@ void nRF24Init(volatile uint8_t *SSPort, uint8_t SSPin){
   
 }
 
+void nRF24InitReceive(volatile uint8_t *SSPort, uint8_t SSPin){
+  *SSPort &= ~(1<<SSPin);
+  SPI_MasterTransmitByte(0x20);
+  SPI_MasterTransmitByte(0x7F); //0b01111111
+  *SSPort |= (1<<SSPin);
+  *SSPort &= ~(1<<SSPin);
+  SPI_MasterTransmitByte(0x23);
+  SPI_MasterTransmitByte(0x03);
+  *SSPort |= (1<<SSPin);
+  *SSPort &= ~(1<<SSPin);
+  SPI_MasterTransmitByte(0x24);
+  SPI_MasterTransmitByte(0x0F);
+  *SSPort |= (1<<SSPin);
+  *SSPort &= ~(1<<SSPin);
+  SPI_MasterTransmitByte(0x25);
+  SPI_MasterTransmitByte(0x46);
+  *SSPort |= (1<<SSPin);
+  *SSPort &= ~(1<<SSPin);
+  SPI_MasterTransmitByte(0x2B);
+  SPI_MasterTransmitByte(0x01);
+  *SSPort |= (1<<SSPin);
+  
+}
 
 void WriteTXCharTransmit(char Data, volatile uint8_t *CEPort, uint8_t CEPin, volatile uint8_t *SSPort, uint8_t SSPin){
   
-  *SSPort &= (1<<SSPin);  
+  *SSPort &= ~(1<<SSPin);  
   SPI_MasterTransmitByte(0xA0);
   SPI_MasterTransmitByte(Data);
   *SSPort |= (1<<SSPin);
@@ -47,13 +70,13 @@ void WriteTXCharTransmit(char Data, volatile uint8_t *CEPort, uint8_t CEPin, vol
 }
 
 
-char ReadRXChar(char address, volatile uint8_t *SSPort, uint8_t SSPin){
+char ReadRXChar(volatile uint8_t *SSPort, uint8_t SSPin){
 
   *SSPort &= ~(1<<SSPin);
   SPI_MasterTransmitByte(0x61);
-  SPI_MasterTransmitByte(0xFF);
+  char hold = SPI_MasterTransmitByte(0xFF);
   *SSPort |= (1<<SSPin);
-  char hold = SPDR;
+  //char hold = SPDR;
   return hold;
 
 }

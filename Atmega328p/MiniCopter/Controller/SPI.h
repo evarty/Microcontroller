@@ -9,7 +9,7 @@
 
 void SPI_MasterInit(void);
 
-void SPI_MasterTransmitByte(char cData);
+char SPI_MasterTransmitByte(char cData);
 
 void SPI_SlaveInit(void);
 

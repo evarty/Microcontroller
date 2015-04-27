@@ -17,11 +17,13 @@ void SPI_MasterInit(void){
   PORTB |= (1<<DDB2);
 }
 
-void SPI_MasterTransmitByte(char cData){
+char SPI_MasterTransmitByte(char cData){
   /* Start transmission */
   SPDR = cData;
   /* Wait for transmission complete */
   while(!(SPSR & (1<<SPIF)));
+  
+  return SPDR;
 }
 
 void SPI_SlaveInit(void){

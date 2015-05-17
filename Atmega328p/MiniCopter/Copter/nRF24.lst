@@ -1,0 +1,952 @@
+GAS LISTING /tmp/ccIKqndB.s 			page 1
+
+
+   1               		.file	"nRF24.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.stabs	"/home/edward/Microcontroller/Atmega328p/MiniCopter/Copter/",100,0,2,.Ltext0
+   8               		.stabs	"nRF24.c",100,0,2,.Ltext0
+   9               		.text
+  10               	.Ltext0:
+  11               		.stabs	"gcc2_compiled.",60,0,0,0
+  12               		.stabs	"int:t(0,1)=r(0,1);-32768;32767;",128,0,0,0
+  13               		.stabs	"char:t(0,2)=@s8;r(0,2);0;255;",128,0,0,0
+  14               		.stabs	"long int:t(0,3)=@s32;r(0,3);020000000000;017777777777;",128,0,0,0
+  15               		.stabs	"unsigned int:t(0,4)=r(0,4);0;0177777;",128,0,0,0
+  16               		.stabs	"long unsigned int:t(0,5)=@s32;r(0,5);0;037777777777;",128,0,0,0
+  17               		.stabs	"long long int:t(0,6)=@s64;r(0,6);01000000000000000000000;0777777777777777777777;",128,0,0,
+  18               		.stabs	"long long unsigned int:t(0,7)=@s64;r(0,7);0;01777777777777777777777;",128,0,0,0
+  19               		.stabs	"short int:t(0,8)=r(0,8);-32768;32767;",128,0,0,0
+  20               		.stabs	"short unsigned int:t(0,9)=r(0,9);0;0177777;",128,0,0,0
+  21               		.stabs	"signed char:t(0,10)=@s8;r(0,10);-128;127;",128,0,0,0
+  22               		.stabs	"unsigned char:t(0,11)=@s8;r(0,11);0;255;",128,0,0,0
+  23               		.stabs	"float:t(0,12)=r(0,1);4;0;",128,0,0,0
+  24               		.stabs	"double:t(0,13)=r(0,1);4;0;",128,0,0,0
+  25               		.stabs	"long double:t(0,14)=r(0,1);4;0;",128,0,0,0
+  26               		.stabs	"short _Fract:t(0,15)=r(0,1);1;0;",128,0,0,0
+  27               		.stabs	"_Fract:t(0,16)=r(0,1);2;0;",128,0,0,0
+  28               		.stabs	"long _Fract:t(0,17)=r(0,1);4;0;",128,0,0,0
+  29               		.stabs	"long long _Fract:t(0,18)=r(0,1);8;0;",128,0,0,0
+  30               		.stabs	"unsigned short _Fract:t(0,19)=r(0,1);1;0;",128,0,0,0
+  31               		.stabs	"unsigned _Fract:t(0,20)=r(0,1);2;0;",128,0,0,0
+  32               		.stabs	"unsigned long _Fract:t(0,21)=r(0,1);4;0;",128,0,0,0
+  33               		.stabs	"unsigned long long _Fract:t(0,22)=r(0,1);8;0;",128,0,0,0
+  34               		.stabs	"_Sat short _Fract:t(0,23)=r(0,1);1;0;",128,0,0,0
+  35               		.stabs	"_Sat _Fract:t(0,24)=r(0,1);2;0;",128,0,0,0
+  36               		.stabs	"_Sat long _Fract:t(0,25)=r(0,1);4;0;",128,0,0,0
+  37               		.stabs	"_Sat long long _Fract:t(0,26)=r(0,1);8;0;",128,0,0,0
+  38               		.stabs	"_Sat unsigned short _Fract:t(0,27)=r(0,1);1;0;",128,0,0,0
+  39               		.stabs	"_Sat unsigned _Fract:t(0,28)=r(0,1);2;0;",128,0,0,0
+  40               		.stabs	"_Sat unsigned long _Fract:t(0,29)=r(0,1);4;0;",128,0,0,0
+  41               		.stabs	"_Sat unsigned long long _Fract:t(0,30)=r(0,1);8;0;",128,0,0,0
+  42               		.stabs	"short _Accum:t(0,31)=r(0,1);2;0;",128,0,0,0
+  43               		.stabs	"_Accum:t(0,32)=r(0,1);4;0;",128,0,0,0
+  44               		.stabs	"long _Accum:t(0,33)=r(0,1);8;0;",128,0,0,0
+  45               		.stabs	"long long _Accum:t(0,34)=r(0,1);8;0;",128,0,0,0
+  46               		.stabs	"unsigned short _Accum:t(0,35)=r(0,1);2;0;",128,0,0,0
+  47               		.stabs	"unsigned _Accum:t(0,36)=r(0,1);4;0;",128,0,0,0
+  48               		.stabs	"unsigned long _Accum:t(0,37)=r(0,1);8;0;",128,0,0,0
+  49               		.stabs	"unsigned long long _Accum:t(0,38)=r(0,1);8;0;",128,0,0,0
+  50               		.stabs	"_Sat short _Accum:t(0,39)=r(0,1);2;0;",128,0,0,0
+  51               		.stabs	"_Sat _Accum:t(0,40)=r(0,1);4;0;",128,0,0,0
+  52               		.stabs	"_Sat long _Accum:t(0,41)=r(0,1);8;0;",128,0,0,0
+  53               		.stabs	"_Sat long long _Accum:t(0,42)=r(0,1);8;0;",128,0,0,0
+  54               		.stabs	"_Sat unsigned short _Accum:t(0,43)=r(0,1);2;0;",128,0,0,0
+  55               		.stabs	"_Sat unsigned _Accum:t(0,44)=r(0,1);4;0;",128,0,0,0
+  56               		.stabs	"_Sat unsigned long _Accum:t(0,45)=r(0,1);8;0;",128,0,0,0
+  57               		.stabs	"_Sat unsigned long long _Accum:t(0,46)=r(0,1);8;0;",128,0,0,0
+GAS LISTING /tmp/ccIKqndB.s 			page 2
+
+
+  58               		.stabs	"void:t(0,47)=(0,47)",128,0,0,0
+  59               		.stabs	"/usr/lib/avr/include/inttypes.h",130,0,0,0
+  60               		.stabs	"/usr/lib/gcc/avr/4.8.2/include/stdint.h",130,0,0,0
+  61               		.stabs	"/usr/lib/avr/include/stdint.h",130,0,0,0
+  62               		.stabs	"int8_t:t(3,1)=(0,10)",128,0,121,0
+  63               		.stabs	"uint8_t:t(3,2)=(0,11)",128,0,122,0
+  64               		.stabs	"int16_t:t(3,3)=(0,1)",128,0,123,0
+  65               		.stabs	"uint16_t:t(3,4)=(0,4)",128,0,124,0
+  66               		.stabs	"int32_t:t(3,5)=(0,3)",128,0,125,0
+  67               		.stabs	"uint32_t:t(3,6)=(0,5)",128,0,126,0
+  68               		.stabs	"int64_t:t(3,7)=(0,6)",128,0,128,0
+  69               		.stabs	"uint64_t:t(3,8)=(0,7)",128,0,129,0
+  70               		.stabs	"intptr_t:t(3,9)=(3,3)",128,0,142,0
+  71               		.stabs	"uintptr_t:t(3,10)=(3,4)",128,0,147,0
+  72               		.stabs	"int_least8_t:t(3,11)=(3,1)",128,0,159,0
+  73               		.stabs	"uint_least8_t:t(3,12)=(3,2)",128,0,164,0
+  74               		.stabs	"int_least16_t:t(3,13)=(3,3)",128,0,169,0
+  75               		.stabs	"uint_least16_t:t(3,14)=(3,4)",128,0,174,0
+  76               		.stabs	"int_least32_t:t(3,15)=(3,5)",128,0,179,0
+  77               		.stabs	"uint_least32_t:t(3,16)=(3,6)",128,0,184,0
+  78               		.stabs	"int_least64_t:t(3,17)=(3,7)",128,0,192,0
+  79               		.stabs	"uint_least64_t:t(3,18)=(3,8)",128,0,199,0
+  80               		.stabs	"int_fast8_t:t(3,19)=(3,1)",128,0,213,0
+  81               		.stabs	"uint_fast8_t:t(3,20)=(3,2)",128,0,218,0
+  82               		.stabs	"int_fast16_t:t(3,21)=(3,3)",128,0,223,0
+  83               		.stabs	"uint_fast16_t:t(3,22)=(3,4)",128,0,228,0
+  84               		.stabs	"int_fast32_t:t(3,23)=(3,5)",128,0,233,0
+  85               		.stabs	"uint_fast32_t:t(3,24)=(3,6)",128,0,238,0
+  86               		.stabs	"int_fast64_t:t(3,25)=(3,7)",128,0,246,0
+  87               		.stabs	"uint_fast64_t:t(3,26)=(3,8)",128,0,253,0
+  88               		.stabs	"intmax_t:t(3,27)=(3,7)",128,0,273,0
+  89               		.stabs	"uintmax_t:t(3,28)=(3,8)",128,0,278,0
+  90               		.stabn	162,0,0,0
+  91               		.stabn	162,0,0,0
+  92               		.stabs	"int_farptr_t:t(1,1)=(3,5)",128,0,77,0
+  93               		.stabs	"uint_farptr_t:t(1,2)=(3,6)",128,0,81,0
+  94               		.stabn	162,0,0,0
+  95               		.stabs	"/usr/lib/avr/include/avr/pgmspace.h",130,0,0,0
+  96               		.stabs	"/usr/lib/gcc/avr/4.8.2/include/stddef.h",130,0,0,0
+  97               		.stabs	"size_t:t(5,1)=(0,4)",128,0,212,0
+  98               		.stabn	162,0,0,0
+  99               		.stabs	"/usr/lib/avr/include/avr/io.h",130,0,0,0
+ 100               		.stabs	"/usr/lib/avr/include/avr/fuse.h",130,0,0,0
+ 101               		.stabs	"__fuse_t:t(7,1)=(7,2)=s3low:(0,11),0,8;high:(0,11),8,8;extended:(0,11),16,8;;",128,0,244,0
+ 102               		.stabn	162,0,0,0
+ 103               		.stabn	162,0,0,0
+ 104               		.stabn	162,0,0,0
+ 105               		.stabs	"/usr/lib/avr/include/stdio.h",130,0,0,0
+ 106               		.stabs	"/usr/lib/gcc/avr/4.8.2/include/stdarg.h",130,0,0,0
+ 107               		.stabs	"__gnuc_va_list:t(9,1)=(9,2)=*(0,47)",128,0,40,0
+ 108               		.stabs	"va_list:t(9,3)=(9,1)",128,0,98,0
+ 109               		.stabn	162,0,0,0
+ 110               		.stabs	"__file:T(8,1)=s14buf:(8,2)=*(0,2),0,16;unget:(0,11),16,8;flags:(3,2),24,8;size:(0,1),32,16
+ 111               		.stabn	162,0,0,0
+ 112               		.stabs	"nRF24InitTransmit:F(0,47)",36,0,12,nRF24InitTransmit
+ 113               		.stabs	"SSPort:P(0,48)=*(0,49)=B(3,2)",64,0,12,28
+ 114               		.stabs	"SSPin:P(3,2)",64,0,12,22
+GAS LISTING /tmp/ccIKqndB.s 			page 3
+
+
+ 115               	.global	nRF24InitTransmit
+ 116               		.type	nRF24InitTransmit, @function
+ 117               	nRF24InitTransmit:
+ 118               		.stabd	46,0,0
+   1:nRF24.c       **** #include "SPI.h"
+   2:nRF24.c       **** #include <inttypes.h>
+   3:nRF24.c       **** #include "nRF24.h"
+   4:nRF24.c       **** #define F_CPU 1000000UL
+   5:nRF24.c       **** 
+   6:nRF24.c       **** #include <util/delay.h>
+   7:nRF24.c       **** #include <avr/pgmspace.h>
+   8:nRF24.c       **** #include <avr/io.h>
+   9:nRF24.c       **** #include <stdio.h>
+  10:nRF24.c       **** 
+  11:nRF24.c       **** 
+  12:nRF24.c       **** void nRF24InitTransmit(volatile uint8_t *SSPort, uint8_t SSPin){
+ 119               		.stabn	68,0,12,.LM0-.LFBB1
+ 120               	.LM0:
+ 121               	.LFBB1:
+ 122 0000 0F93      		push r16
+ 123 0002 1F93      		push r17
+ 124 0004 CF93      		push r28
+ 125 0006 DF93      		push r29
+ 126               	/* prologue: function */
+ 127               	/* frame size = 0 */
+ 128               	/* stack size = 4 */
+ 129               	.L__stack_usage = 4
+ 130 0008 EC01      		movw r28,r24
+  13:nRF24.c       ****   *SSPort &= ~(1<<SSPin);
+ 131               		.stabn	68,0,13,.LM1-.LFBB1
+ 132               	.LM1:
+ 133 000a 8881      		ld r24,Y
+ 134 000c 01E0      		ldi r16,lo8(1)
+ 135 000e 10E0      		ldi r17,0
+ 136 0010 00C0      		rjmp 2f
+ 137               		1:
+ 138 0012 000F      		lsl r16
+ 139               		2:
+ 140 0014 6A95      		dec r22
+ 141 0016 02F4      		brpl 1b
+ 142 0018 102F      		mov r17,r16
+ 143 001a 1095      		com r17
+ 144 001c 8123      		and r24,r17
+ 145 001e 8883      		st Y,r24
+  14:nRF24.c       ****   SPI_MasterTransmitByte(0x20);
+ 146               		.stabn	68,0,14,.LM2-.LFBB1
+ 147               	.LM2:
+ 148 0020 80E2      		ldi r24,lo8(32)
+ 149 0022 0E94 0000 		call SPI_MasterTransmitByte
+  15:nRF24.c       ****   SPI_MasterTransmitByte(0x7E); //0b01111110
+ 150               		.stabn	68,0,15,.LM3-.LFBB1
+ 151               	.LM3:
+ 152 0026 8EE7      		ldi r24,lo8(126)
+ 153 0028 0E94 0000 		call SPI_MasterTransmitByte
+  16:nRF24.c       ****   *SSPort |= (1<<SSPin);
+ 154               		.stabn	68,0,16,.LM4-.LFBB1
+ 155               	.LM4:
+GAS LISTING /tmp/ccIKqndB.s 			page 4
+
+
+ 156 002c 8881      		ld r24,Y
+ 157 002e 802B      		or r24,r16
+ 158 0030 8883      		st Y,r24
+  17:nRF24.c       ****   *SSPort &= ~(1<<SSPin);
+ 159               		.stabn	68,0,17,.LM5-.LFBB1
+ 160               	.LM5:
+ 161 0032 8881      		ld r24,Y
+ 162 0034 8123      		and r24,r17
+ 163 0036 8883      		st Y,r24
+  18:nRF24.c       ****   SPI_MasterTransmitByte(0x23);
+ 164               		.stabn	68,0,18,.LM6-.LFBB1
+ 165               	.LM6:
+ 166 0038 83E2      		ldi r24,lo8(35)
+ 167 003a 0E94 0000 		call SPI_MasterTransmitByte
+  19:nRF24.c       ****   SPI_MasterTransmitByte(0x03);
+ 168               		.stabn	68,0,19,.LM7-.LFBB1
+ 169               	.LM7:
+ 170 003e 83E0      		ldi r24,lo8(3)
+ 171 0040 0E94 0000 		call SPI_MasterTransmitByte
+  20:nRF24.c       ****   *SSPort |= (1<<SSPin);
+ 172               		.stabn	68,0,20,.LM8-.LFBB1
+ 173               	.LM8:
+ 174 0044 8881      		ld r24,Y
+ 175 0046 802B      		or r24,r16
+ 176 0048 8883      		st Y,r24
+  21:nRF24.c       ****   *SSPort &= ~(1<<SSPin);
+ 177               		.stabn	68,0,21,.LM9-.LFBB1
+ 178               	.LM9:
+ 179 004a 8881      		ld r24,Y
+ 180 004c 8123      		and r24,r17
+ 181 004e 8883      		st Y,r24
+  22:nRF24.c       ****   SPI_MasterTransmitByte(0x24);
+ 182               		.stabn	68,0,22,.LM10-.LFBB1
+ 183               	.LM10:
+ 184 0050 84E2      		ldi r24,lo8(36)
+ 185 0052 0E94 0000 		call SPI_MasterTransmitByte
+  23:nRF24.c       ****   SPI_MasterTransmitByte(0x0F);
+ 186               		.stabn	68,0,23,.LM11-.LFBB1
+ 187               	.LM11:
+ 188 0056 8FE0      		ldi r24,lo8(15)
+ 189 0058 0E94 0000 		call SPI_MasterTransmitByte
+  24:nRF24.c       ****   *SSPort |= (1<<SSPin);
+ 190               		.stabn	68,0,24,.LM12-.LFBB1
+ 191               	.LM12:
+ 192 005c 8881      		ld r24,Y
+ 193 005e 802B      		or r24,r16
+ 194 0060 8883      		st Y,r24
+  25:nRF24.c       ****   *SSPort &= ~(1<<SSPin);
+ 195               		.stabn	68,0,25,.LM13-.LFBB1
+ 196               	.LM13:
+ 197 0062 8881      		ld r24,Y
+ 198 0064 8123      		and r24,r17
+ 199 0066 8883      		st Y,r24
+  26:nRF24.c       ****   SPI_MasterTransmitByte(0x25);
+ 200               		.stabn	68,0,26,.LM14-.LFBB1
+ 201               	.LM14:
+ 202 0068 85E2      		ldi r24,lo8(37)
+GAS LISTING /tmp/ccIKqndB.s 			page 5
+
+
+ 203 006a 0E94 0000 		call SPI_MasterTransmitByte
+  27:nRF24.c       ****   SPI_MasterTransmitByte(0x46);
+ 204               		.stabn	68,0,27,.LM15-.LFBB1
+ 205               	.LM15:
+ 206 006e 86E4      		ldi r24,lo8(70)
+ 207 0070 0E94 0000 		call SPI_MasterTransmitByte
+  28:nRF24.c       ****   *SSPort |= (1<<SSPin);
+ 208               		.stabn	68,0,28,.LM16-.LFBB1
+ 209               	.LM16:
+ 210 0074 8881      		ld r24,Y
+ 211 0076 802B      		or r24,r16
+ 212 0078 8883      		st Y,r24
+  29:nRF24.c       ****   *SSPort &= ~(1<<SSPin);
+ 213               		.stabn	68,0,29,.LM17-.LFBB1
+ 214               	.LM17:
+ 215 007a 8881      		ld r24,Y
+ 216 007c 8123      		and r24,r17
+ 217 007e 8883      		st Y,r24
+  30:nRF24.c       ****   SPI_MasterTransmitByte(0x2B);
+ 218               		.stabn	68,0,30,.LM18-.LFBB1
+ 219               	.LM18:
+ 220 0080 8BE2      		ldi r24,lo8(43)
+ 221 0082 0E94 0000 		call SPI_MasterTransmitByte
+  31:nRF24.c       ****   SPI_MasterTransmitByte(0x01);
+ 222               		.stabn	68,0,31,.LM19-.LFBB1
+ 223               	.LM19:
+ 224 0086 81E0      		ldi r24,lo8(1)
+ 225 0088 0E94 0000 		call SPI_MasterTransmitByte
+  32:nRF24.c       ****   *SSPort |= (1<<SSPin);
+ 226               		.stabn	68,0,32,.LM20-.LFBB1
+ 227               	.LM20:
+ 228 008c 8881      		ld r24,Y
+ 229 008e 802B      		or r24,r16
+ 230 0090 8883      		st Y,r24
+ 231               	/* epilogue start */
+  33:nRF24.c       ****   
+  34:nRF24.c       **** }
+ 232               		.stabn	68,0,34,.LM21-.LFBB1
+ 233               	.LM21:
+ 234 0092 DF91      		pop r29
+ 235 0094 CF91      		pop r28
+ 236 0096 1F91      		pop r17
+ 237 0098 0F91      		pop r16
+ 238 009a 0895      		ret
+ 239               		.size	nRF24InitTransmit, .-nRF24InitTransmit
+ 240               	.Lscope1:
+ 241               		.stabs	"",36,0,0,.Lscope1-.LFBB1
+ 242               		.stabd	78,0,0
+ 243               		.stabs	"nRF24InitReceive:F(0,47)",36,0,36,nRF24InitReceive
+ 244               		.stabs	"SSPort:P(0,48)",64,0,36,28
+ 245               		.stabs	"SSPin:P(3,2)",64,0,36,22
+ 246               	.global	nRF24InitReceive
+ 247               		.type	nRF24InitReceive, @function
+ 248               	nRF24InitReceive:
+ 249               		.stabd	46,0,0
+  35:nRF24.c       **** 
+  36:nRF24.c       **** void nRF24InitReceive(volatile uint8_t *SSPort, uint8_t SSPin){
+GAS LISTING /tmp/ccIKqndB.s 			page 6
+
+
+ 250               		.stabn	68,0,36,.LM22-.LFBB2
+ 251               	.LM22:
+ 252               	.LFBB2:
+ 253 009c 0F93      		push r16
+ 254 009e 1F93      		push r17
+ 255 00a0 CF93      		push r28
+ 256 00a2 DF93      		push r29
+ 257               	/* prologue: function */
+ 258               	/* frame size = 0 */
+ 259               	/* stack size = 4 */
+ 260               	.L__stack_usage = 4
+ 261 00a4 EC01      		movw r28,r24
+  37:nRF24.c       ****   *SSPort &= ~(1<<SSPin);
+ 262               		.stabn	68,0,37,.LM23-.LFBB2
+ 263               	.LM23:
+ 264 00a6 8881      		ld r24,Y
+ 265 00a8 01E0      		ldi r16,lo8(1)
+ 266 00aa 10E0      		ldi r17,0
+ 267 00ac 00C0      		rjmp 2f
+ 268               		1:
+ 269 00ae 000F      		lsl r16
+ 270               		2:
+ 271 00b0 6A95      		dec r22
+ 272 00b2 02F4      		brpl 1b
+ 273 00b4 102F      		mov r17,r16
+ 274 00b6 1095      		com r17
+ 275 00b8 8123      		and r24,r17
+ 276 00ba 8883      		st Y,r24
+  38:nRF24.c       ****   SPI_MasterTransmitByte(0x20);
+ 277               		.stabn	68,0,38,.LM24-.LFBB2
+ 278               	.LM24:
+ 279 00bc 80E2      		ldi r24,lo8(32)
+ 280 00be 0E94 0000 		call SPI_MasterTransmitByte
+  39:nRF24.c       ****   SPI_MasterTransmitByte(0x7F); //0b01111111
+ 281               		.stabn	68,0,39,.LM25-.LFBB2
+ 282               	.LM25:
+ 283 00c2 8FE7      		ldi r24,lo8(127)
+ 284 00c4 0E94 0000 		call SPI_MasterTransmitByte
+  40:nRF24.c       ****   *SSPort |= (1<<SSPin);
+ 285               		.stabn	68,0,40,.LM26-.LFBB2
+ 286               	.LM26:
+ 287 00c8 8881      		ld r24,Y
+ 288 00ca 802B      		or r24,r16
+ 289 00cc 8883      		st Y,r24
+  41:nRF24.c       ****   *SSPort &= ~(1<<SSPin);
+ 290               		.stabn	68,0,41,.LM27-.LFBB2
+ 291               	.LM27:
+ 292 00ce 8881      		ld r24,Y
+ 293 00d0 8123      		and r24,r17
+ 294 00d2 8883      		st Y,r24
+  42:nRF24.c       ****   SPI_MasterTransmitByte(0x23);
+ 295               		.stabn	68,0,42,.LM28-.LFBB2
+ 296               	.LM28:
+ 297 00d4 83E2      		ldi r24,lo8(35)
+ 298 00d6 0E94 0000 		call SPI_MasterTransmitByte
+  43:nRF24.c       ****   SPI_MasterTransmitByte(0x03);
+ 299               		.stabn	68,0,43,.LM29-.LFBB2
+GAS LISTING /tmp/ccIKqndB.s 			page 7
+
+
+ 300               	.LM29:
+ 301 00da 83E0      		ldi r24,lo8(3)
+ 302 00dc 0E94 0000 		call SPI_MasterTransmitByte
+  44:nRF24.c       ****   *SSPort |= (1<<SSPin);
+ 303               		.stabn	68,0,44,.LM30-.LFBB2
+ 304               	.LM30:
+ 305 00e0 8881      		ld r24,Y
+ 306 00e2 802B      		or r24,r16
+ 307 00e4 8883      		st Y,r24
+  45:nRF24.c       ****   *SSPort &= ~(1<<SSPin);
+ 308               		.stabn	68,0,45,.LM31-.LFBB2
+ 309               	.LM31:
+ 310 00e6 8881      		ld r24,Y
+ 311 00e8 8123      		and r24,r17
+ 312 00ea 8883      		st Y,r24
+  46:nRF24.c       ****   SPI_MasterTransmitByte(0x24);
+ 313               		.stabn	68,0,46,.LM32-.LFBB2
+ 314               	.LM32:
+ 315 00ec 84E2      		ldi r24,lo8(36)
+ 316 00ee 0E94 0000 		call SPI_MasterTransmitByte
+  47:nRF24.c       ****   SPI_MasterTransmitByte(0x0F);
+ 317               		.stabn	68,0,47,.LM33-.LFBB2
+ 318               	.LM33:
+ 319 00f2 8FE0      		ldi r24,lo8(15)
+ 320 00f4 0E94 0000 		call SPI_MasterTransmitByte
+  48:nRF24.c       ****   *SSPort |= (1<<SSPin);
+ 321               		.stabn	68,0,48,.LM34-.LFBB2
+ 322               	.LM34:
+ 323 00f8 8881      		ld r24,Y
+ 324 00fa 802B      		or r24,r16
+ 325 00fc 8883      		st Y,r24
+  49:nRF24.c       ****   *SSPort &= ~(1<<SSPin);
+ 326               		.stabn	68,0,49,.LM35-.LFBB2
+ 327               	.LM35:
+ 328 00fe 8881      		ld r24,Y
+ 329 0100 8123      		and r24,r17
+ 330 0102 8883      		st Y,r24
+  50:nRF24.c       ****   SPI_MasterTransmitByte(0x25);
+ 331               		.stabn	68,0,50,.LM36-.LFBB2
+ 332               	.LM36:
+ 333 0104 85E2      		ldi r24,lo8(37)
+ 334 0106 0E94 0000 		call SPI_MasterTransmitByte
+  51:nRF24.c       ****   SPI_MasterTransmitByte(0x46);
+ 335               		.stabn	68,0,51,.LM37-.LFBB2
+ 336               	.LM37:
+ 337 010a 86E4      		ldi r24,lo8(70)
+ 338 010c 0E94 0000 		call SPI_MasterTransmitByte
+  52:nRF24.c       ****   *SSPort |= (1<<SSPin);
+ 339               		.stabn	68,0,52,.LM38-.LFBB2
+ 340               	.LM38:
+ 341 0110 8881      		ld r24,Y
+ 342 0112 802B      		or r24,r16
+ 343 0114 8883      		st Y,r24
+  53:nRF24.c       ****   *SSPort &= ~(1<<SSPin);
+ 344               		.stabn	68,0,53,.LM39-.LFBB2
+ 345               	.LM39:
+ 346 0116 8881      		ld r24,Y
+GAS LISTING /tmp/ccIKqndB.s 			page 8
+
+
+ 347 0118 8123      		and r24,r17
+ 348 011a 8883      		st Y,r24
+  54:nRF24.c       ****   SPI_MasterTransmitByte(0x2B);
+ 349               		.stabn	68,0,54,.LM40-.LFBB2
+ 350               	.LM40:
+ 351 011c 8BE2      		ldi r24,lo8(43)
+ 352 011e 0E94 0000 		call SPI_MasterTransmitByte
+  55:nRF24.c       ****   SPI_MasterTransmitByte(0x01);
+ 353               		.stabn	68,0,55,.LM41-.LFBB2
+ 354               	.LM41:
+ 355 0122 81E0      		ldi r24,lo8(1)
+ 356 0124 0E94 0000 		call SPI_MasterTransmitByte
+  56:nRF24.c       ****   *SSPort |= (1<<SSPin);
+ 357               		.stabn	68,0,56,.LM42-.LFBB2
+ 358               	.LM42:
+ 359 0128 8881      		ld r24,Y
+ 360 012a 802B      		or r24,r16
+ 361 012c 8883      		st Y,r24
+ 362               	/* epilogue start */
+  57:nRF24.c       ****   
+  58:nRF24.c       **** }
+ 363               		.stabn	68,0,58,.LM43-.LFBB2
+ 364               	.LM43:
+ 365 012e DF91      		pop r29
+ 366 0130 CF91      		pop r28
+ 367 0132 1F91      		pop r17
+ 368 0134 0F91      		pop r16
+ 369 0136 0895      		ret
+ 370               		.size	nRF24InitReceive, .-nRF24InitReceive
+ 371               	.Lscope2:
+ 372               		.stabs	"",36,0,0,.Lscope2-.LFBB2
+ 373               		.stabd	78,0,0
+ 374               		.stabs	"WriteTXCharTransmit:F(0,47)",36,0,60,WriteTXCharTransmit
+ 375               		.stabs	"Data:P(0,2)",64,0,60,11
+ 376               		.stabs	"CEPort:P(0,48)",64,0,60,8
+ 377               		.stabs	"CEPin:P(3,2)",64,0,60,20
+ 378               		.stabs	"SSPort:P(0,48)",64,0,60,14
+ 379               		.stabs	"SSPin:P(3,2)",64,0,60,16
+ 380               	.global	WriteTXCharTransmit
+ 381               		.type	WriteTXCharTransmit, @function
+ 382               	WriteTXCharTransmit:
+ 383               		.stabd	46,0,0
+  59:nRF24.c       **** 
+  60:nRF24.c       **** void WriteTXCharTransmit(char Data, volatile uint8_t *CEPort, uint8_t CEPin, volatile uint8_t *SSPo
+ 384               		.stabn	68,0,60,.LM44-.LFBB3
+ 385               	.LM44:
+ 386               	.LFBB3:
+ 387 0138 8F92      		push r8
+ 388 013a 9F92      		push r9
+ 389 013c BF92      		push r11
+ 390 013e CF92      		push r12
+ 391 0140 DF92      		push r13
+ 392 0142 EF92      		push r14
+ 393 0144 FF92      		push r15
+ 394 0146 0F93      		push r16
+ 395 0148 1F93      		push r17
+ 396 014a CF93      		push r28
+GAS LISTING /tmp/ccIKqndB.s 			page 9
+
+
+ 397 014c DF93      		push r29
+ 398 014e 1F92      		push __zero_reg__
+ 399 0150 CDB7      		in r28,__SP_L__
+ 400 0152 DEB7      		in r29,__SP_H__
+ 401               	/* prologue: function */
+ 402               	/* frame size = 1 */
+ 403               	/* stack size = 12 */
+ 404               	.L__stack_usage = 12
+ 405 0154 B82E      		mov r11,r24
+ 406 0156 4B01      		movw r8,r22
+ 407 0158 7901      		movw r14,r18
+  61:nRF24.c       ****   
+  62:nRF24.c       ****   *SSPort &= ~(1<<SSPin);  
+ 408               		.stabn	68,0,62,.LM45-.LFBB3
+ 409               	.LM45:
+ 410 015a F901      		movw r30,r18
+ 411 015c 8081      		ld r24,Z
+ 412 015e CC24      		clr r12
+ 413 0160 C394      		inc r12
+ 414 0162 D12C      		mov r13,__zero_reg__
+ 415 0164 9601      		movw r18,r12
+ 416 0166 00C0      		rjmp 2f
+ 417               		1:
+ 418 0168 220F      		lsl r18
+ 419 016a 331F      		rol r19
+ 420               		2:
+ 421 016c 0A95      		dec r16
+ 422 016e 02F4      		brpl 1b
+ 423 0170 8901      		movw r16,r18
+ 424 0172 922F      		mov r25,r18
+ 425 0174 9095      		com r25
+ 426 0176 9823      		and r25,r24
+ 427 0178 9083      		st Z,r25
+  63:nRF24.c       ****   SPI_MasterTransmitByte(0xA0);
+ 428               		.stabn	68,0,63,.LM46-.LFBB3
+ 429               	.LM46:
+ 430 017a 80EA      		ldi r24,lo8(-96)
+ 431 017c 4983      		std Y+1,r20
+ 432 017e 0E94 0000 		call SPI_MasterTransmitByte
+  64:nRF24.c       ****   SPI_MasterTransmitByte(Data);
+ 433               		.stabn	68,0,64,.LM47-.LFBB3
+ 434               	.LM47:
+ 435 0182 8B2D      		mov r24,r11
+ 436 0184 0E94 0000 		call SPI_MasterTransmitByte
+  65:nRF24.c       ****   *SSPort |= (1<<SSPin);
+ 437               		.stabn	68,0,65,.LM48-.LFBB3
+ 438               	.LM48:
+ 439 0188 F701      		movw r30,r14
+ 440 018a 8081      		ld r24,Z
+ 441 018c 802B      		or r24,r16
+ 442 018e 8083      		st Z,r24
+  66:nRF24.c       **** 
+  67:nRF24.c       ****   *CEPort |= (1<<CEPin); 
+ 443               		.stabn	68,0,67,.LM49-.LFBB3
+ 444               	.LM49:
+ 445 0190 F401      		movw r30,r8
+ 446 0192 8081      		ld r24,Z
+GAS LISTING /tmp/ccIKqndB.s 			page 10
+
+
+ 447 0194 4981      		ldd r20,Y+1
+ 448 0196 042E      		mov r0,r20
+ 449 0198 00C0      		rjmp 2f
+ 450               		1:
+ 451 019a CC0C      		lsl r12
+ 452               		2:
+ 453 019c 0A94      		dec r0
+ 454 019e 02F4      		brpl 1b
+ 455 01a0 8C29      		or r24,r12
+ 456 01a2 8083      		st Z,r24
+ 457               	.LBB4:
+ 458               	.LBB5:
+ 459               		.stabs	"/usr/lib/avr/include/util/delay.h",132,0,0,.Ltext1
+ 460               	.Ltext1:
+   1:/usr/lib/avr/include/util/delay.h **** /* Copyright (c) 2002, Marek Michalkiewicz
+   2:/usr/lib/avr/include/util/delay.h ****    Copyright (c) 2004,2005,2007 Joerg Wunsch
+   3:/usr/lib/avr/include/util/delay.h ****    Copyright (c) 2007  Florin-Viorel Petrov
+   4:/usr/lib/avr/include/util/delay.h ****    All rights reserved.
+   5:/usr/lib/avr/include/util/delay.h **** 
+   6:/usr/lib/avr/include/util/delay.h ****    Redistribution and use in source and binary forms, with or without
+   7:/usr/lib/avr/include/util/delay.h ****    modification, are permitted provided that the following conditions are met:
+   8:/usr/lib/avr/include/util/delay.h **** 
+   9:/usr/lib/avr/include/util/delay.h ****    * Redistributions of source code must retain the above copyright
+  10:/usr/lib/avr/include/util/delay.h ****      notice, this list of conditions and the following disclaimer.
+  11:/usr/lib/avr/include/util/delay.h **** 
+  12:/usr/lib/avr/include/util/delay.h ****    * Redistributions in binary form must reproduce the above copyright
+  13:/usr/lib/avr/include/util/delay.h ****      notice, this list of conditions and the following disclaimer in
+  14:/usr/lib/avr/include/util/delay.h ****      the documentation and/or other materials provided with the
+  15:/usr/lib/avr/include/util/delay.h ****      distribution.
+  16:/usr/lib/avr/include/util/delay.h **** 
+  17:/usr/lib/avr/include/util/delay.h ****    * Neither the name of the copyright holders nor the names of
+  18:/usr/lib/avr/include/util/delay.h ****      contributors may be used to endorse or promote products derived
+  19:/usr/lib/avr/include/util/delay.h ****      from this software without specific prior written permission.
+  20:/usr/lib/avr/include/util/delay.h **** 
+  21:/usr/lib/avr/include/util/delay.h ****   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  22:/usr/lib/avr/include/util/delay.h ****   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  23:/usr/lib/avr/include/util/delay.h ****   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  24:/usr/lib/avr/include/util/delay.h ****   ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  25:/usr/lib/avr/include/util/delay.h ****   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  26:/usr/lib/avr/include/util/delay.h ****   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  27:/usr/lib/avr/include/util/delay.h ****   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  28:/usr/lib/avr/include/util/delay.h ****   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  29:/usr/lib/avr/include/util/delay.h ****   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  30:/usr/lib/avr/include/util/delay.h ****   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  31:/usr/lib/avr/include/util/delay.h ****   POSSIBILITY OF SUCH DAMAGE. */
+  32:/usr/lib/avr/include/util/delay.h **** 
+  33:/usr/lib/avr/include/util/delay.h **** /* $Id: delay.h.in 2251 2011-09-14 08:20:33Z joerg_wunsch $ */
+  34:/usr/lib/avr/include/util/delay.h **** 
+  35:/usr/lib/avr/include/util/delay.h **** #ifndef _UTIL_DELAY_H_
+  36:/usr/lib/avr/include/util/delay.h **** #define _UTIL_DELAY_H_ 1
+  37:/usr/lib/avr/include/util/delay.h **** 
+  38:/usr/lib/avr/include/util/delay.h **** #ifndef __HAS_DELAY_CYCLES
+  39:/usr/lib/avr/include/util/delay.h **** #define __HAS_DELAY_CYCLES 1
+  40:/usr/lib/avr/include/util/delay.h **** #endif
+  41:/usr/lib/avr/include/util/delay.h **** 
+  42:/usr/lib/avr/include/util/delay.h **** #include <inttypes.h>
+  43:/usr/lib/avr/include/util/delay.h **** #include <util/delay_basic.h>
+GAS LISTING /tmp/ccIKqndB.s 			page 11
+
+
+  44:/usr/lib/avr/include/util/delay.h **** #include <math.h>
+  45:/usr/lib/avr/include/util/delay.h **** 
+  46:/usr/lib/avr/include/util/delay.h **** /** \file */
+  47:/usr/lib/avr/include/util/delay.h **** /** \defgroup util_delay <util/delay.h>: Convenience functions for busy-wait delay loops
+  48:/usr/lib/avr/include/util/delay.h ****     \code
+  49:/usr/lib/avr/include/util/delay.h ****     #define F_CPU 1000000UL  // 1 MHz
+  50:/usr/lib/avr/include/util/delay.h ****     //#define F_CPU 14.7456E6
+  51:/usr/lib/avr/include/util/delay.h ****     #include <util/delay.h>
+  52:/usr/lib/avr/include/util/delay.h ****     \endcode
+  53:/usr/lib/avr/include/util/delay.h **** 
+  54:/usr/lib/avr/include/util/delay.h ****     \note As an alternative method, it is possible to pass the
+  55:/usr/lib/avr/include/util/delay.h ****     F_CPU macro down to the compiler from the Makefile.
+  56:/usr/lib/avr/include/util/delay.h ****     Obviously, in that case, no \c \#define statement should be
+  57:/usr/lib/avr/include/util/delay.h ****     used.
+  58:/usr/lib/avr/include/util/delay.h **** 
+  59:/usr/lib/avr/include/util/delay.h ****     The functions in this header file are wrappers around the basic
+  60:/usr/lib/avr/include/util/delay.h ****     busy-wait functions from <util/delay_basic.h>.  They are meant as
+  61:/usr/lib/avr/include/util/delay.h ****     convenience functions where actual time values can be specified
+  62:/usr/lib/avr/include/util/delay.h ****     rather than a number of cycles to wait for.  The idea behind is
+  63:/usr/lib/avr/include/util/delay.h ****     that compile-time constant expressions will be eliminated by
+  64:/usr/lib/avr/include/util/delay.h ****     compiler optimization so floating-point expressions can be used
+  65:/usr/lib/avr/include/util/delay.h ****     to calculate the number of delay cycles needed based on the CPU
+  66:/usr/lib/avr/include/util/delay.h ****     frequency passed by the macro F_CPU.
+  67:/usr/lib/avr/include/util/delay.h **** 
+  68:/usr/lib/avr/include/util/delay.h ****     \note In order for these functions to work as intended, compiler
+  69:/usr/lib/avr/include/util/delay.h ****     optimizations <em>must</em> be enabled, and the delay time
+  70:/usr/lib/avr/include/util/delay.h ****     <em>must</em> be an expression that is a known constant at
+  71:/usr/lib/avr/include/util/delay.h ****     compile-time.  If these requirements are not met, the resulting
+  72:/usr/lib/avr/include/util/delay.h ****     delay will be much longer (and basically unpredictable), and
+  73:/usr/lib/avr/include/util/delay.h ****     applications that otherwise do not use floating-point calculations
+  74:/usr/lib/avr/include/util/delay.h ****     will experience severe code bloat by the floating-point library
+  75:/usr/lib/avr/include/util/delay.h ****     routines linked into the application.
+  76:/usr/lib/avr/include/util/delay.h **** 
+  77:/usr/lib/avr/include/util/delay.h ****     The functions available allow the specification of microsecond, and
+  78:/usr/lib/avr/include/util/delay.h ****     millisecond delays directly, using the application-supplied macro
+  79:/usr/lib/avr/include/util/delay.h ****     F_CPU as the CPU clock frequency (in Hertz).
+  80:/usr/lib/avr/include/util/delay.h **** 
+  81:/usr/lib/avr/include/util/delay.h **** */
+  82:/usr/lib/avr/include/util/delay.h **** 
+  83:/usr/lib/avr/include/util/delay.h **** #if !defined(__DOXYGEN__)
+  84:/usr/lib/avr/include/util/delay.h **** static inline void _delay_us(double __us) __attribute__((always_inline));
+  85:/usr/lib/avr/include/util/delay.h **** static inline void _delay_ms(double __ms) __attribute__((always_inline));
+  86:/usr/lib/avr/include/util/delay.h **** #endif
+  87:/usr/lib/avr/include/util/delay.h **** 
+  88:/usr/lib/avr/include/util/delay.h **** #ifndef F_CPU
+  89:/usr/lib/avr/include/util/delay.h **** /* prevent compiler error by supplying a default */
+  90:/usr/lib/avr/include/util/delay.h **** # warning "F_CPU not defined for <util/delay.h>"
+  91:/usr/lib/avr/include/util/delay.h **** # define F_CPU 1000000UL
+  92:/usr/lib/avr/include/util/delay.h **** #endif
+  93:/usr/lib/avr/include/util/delay.h **** 
+  94:/usr/lib/avr/include/util/delay.h **** #ifndef __OPTIMIZE__
+  95:/usr/lib/avr/include/util/delay.h **** # warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+  96:/usr/lib/avr/include/util/delay.h **** #endif
+  97:/usr/lib/avr/include/util/delay.h **** 
+  98:/usr/lib/avr/include/util/delay.h **** #if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && \
+  99:/usr/lib/avr/include/util/delay.h ****   !defined(__DELAY_BACKWARD_COMPATIBLE__) &&	   \
+ 100:/usr/lib/avr/include/util/delay.h ****   __STDC_HOSTED__
+GAS LISTING /tmp/ccIKqndB.s 			page 12
+
+
+ 101:/usr/lib/avr/include/util/delay.h **** #  include <math.h>
+ 102:/usr/lib/avr/include/util/delay.h **** #endif
+ 103:/usr/lib/avr/include/util/delay.h **** 
+ 104:/usr/lib/avr/include/util/delay.h **** /**
+ 105:/usr/lib/avr/include/util/delay.h ****    \ingroup util_delay
+ 106:/usr/lib/avr/include/util/delay.h **** 
+ 107:/usr/lib/avr/include/util/delay.h ****    Perform a delay of \c __ms milliseconds, using _delay_loop_2().
+ 108:/usr/lib/avr/include/util/delay.h **** 
+ 109:/usr/lib/avr/include/util/delay.h ****    The macro F_CPU is supposed to be defined to a
+ 110:/usr/lib/avr/include/util/delay.h ****    constant defining the CPU clock frequency (in Hertz).
+ 111:/usr/lib/avr/include/util/delay.h **** 
+ 112:/usr/lib/avr/include/util/delay.h ****    The maximal possible delay is 262.14 ms / F_CPU in MHz.
+ 113:/usr/lib/avr/include/util/delay.h **** 
+ 114:/usr/lib/avr/include/util/delay.h ****    When the user request delay which exceed the maximum possible one,
+ 115:/usr/lib/avr/include/util/delay.h ****    _delay_ms() provides a decreased resolution functionality. In this
+ 116:/usr/lib/avr/include/util/delay.h ****    mode _delay_ms() will work with a resolution of 1/10 ms, providing
+ 117:/usr/lib/avr/include/util/delay.h ****    delays up to 6.5535 seconds (independent from CPU frequency).  The
+ 118:/usr/lib/avr/include/util/delay.h ****    user will not be informed about decreased resolution.
+ 119:/usr/lib/avr/include/util/delay.h **** 
+ 120:/usr/lib/avr/include/util/delay.h ****    If the avr-gcc toolchain has __builtin_avr_delay_cycles(unsigned long)
+ 121:/usr/lib/avr/include/util/delay.h ****    support, maximal possible delay is 4294967.295 ms/ F_CPU in MHz. For
+ 122:/usr/lib/avr/include/util/delay.h ****    values greater than the maximal possible delay, overflows results in
+ 123:/usr/lib/avr/include/util/delay.h ****    no delay i.e., 0ms.
+ 124:/usr/lib/avr/include/util/delay.h **** 
+ 125:/usr/lib/avr/include/util/delay.h ****    Conversion of __us into clock cycles may not always result in integer.
+ 126:/usr/lib/avr/include/util/delay.h ****    By default, the clock cycles rounded up to next integer. This ensures that
+ 127:/usr/lib/avr/include/util/delay.h ****    the user gets atleast __us microseconds of delay.
+ 128:/usr/lib/avr/include/util/delay.h **** 
+ 129:/usr/lib/avr/include/util/delay.h ****    Alternatively, user can define __DELAY_ROUND_DOWN__ and __DELAY_ROUND_CLOSEST__
+ 130:/usr/lib/avr/include/util/delay.h ****    to round down and round to closest integer.
+ 131:/usr/lib/avr/include/util/delay.h **** 
+ 132:/usr/lib/avr/include/util/delay.h ****    Note: The new implementation of _delay_ms(double __ms) with 
+ 133:/usr/lib/avr/include/util/delay.h ****     __builtin_avr_delay_cycles(unsigned long) support is not backward compatible. 
+ 134:/usr/lib/avr/include/util/delay.h ****    User can define __DELAY_BACKWARD_COMPATIBLE__ to get a backward compatible delay.
+ 135:/usr/lib/avr/include/util/delay.h ****    Also, the backward compatible
+ 136:/usr/lib/avr/include/util/delay.h ****    algorithm will be chosen if the code is compiled in a <em>freestanding
+ 137:/usr/lib/avr/include/util/delay.h ****    environment</em> (GCC option \c -ffreestanding), as the math functions
+ 138:/usr/lib/avr/include/util/delay.h ****    required for rounding are not available to the compiler then.
+ 139:/usr/lib/avr/include/util/delay.h **** 
+ 140:/usr/lib/avr/include/util/delay.h ****  */
+ 141:/usr/lib/avr/include/util/delay.h **** void
+ 142:/usr/lib/avr/include/util/delay.h **** _delay_ms(double __ms)
+ 143:/usr/lib/avr/include/util/delay.h **** {
+ 144:/usr/lib/avr/include/util/delay.h **** 	uint16_t __ticks;
+ 145:/usr/lib/avr/include/util/delay.h **** 	double __tmp ; 
+ 146:/usr/lib/avr/include/util/delay.h **** #if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && \
+ 147:/usr/lib/avr/include/util/delay.h ****   !defined(__DELAY_BACKWARD_COMPATIBLE__) &&	   \
+ 148:/usr/lib/avr/include/util/delay.h ****   __STDC_HOSTED__
+ 149:/usr/lib/avr/include/util/delay.h **** 	uint32_t __ticks_dc;
+ 150:/usr/lib/avr/include/util/delay.h **** 	extern void __builtin_avr_delay_cycles(unsigned long);
+ 151:/usr/lib/avr/include/util/delay.h **** 	__tmp = ((F_CPU) / 1e3) * __ms;
+ 152:/usr/lib/avr/include/util/delay.h **** 
+ 153:/usr/lib/avr/include/util/delay.h **** 	#if defined(__DELAY_ROUND_DOWN__)
+ 154:/usr/lib/avr/include/util/delay.h **** 		__ticks_dc = (uint32_t)fabs(__tmp);
+ 155:/usr/lib/avr/include/util/delay.h **** 
+ 156:/usr/lib/avr/include/util/delay.h **** 	#elif defined(__DELAY_ROUND_CLOSEST__)
+ 157:/usr/lib/avr/include/util/delay.h **** 		__ticks_dc = (uint32_t)(fabs(__tmp)+0.5);
+GAS LISTING /tmp/ccIKqndB.s 			page 13
+
+
+ 158:/usr/lib/avr/include/util/delay.h **** 
+ 159:/usr/lib/avr/include/util/delay.h **** 	#else
+ 160:/usr/lib/avr/include/util/delay.h **** 		//round up by default
+ 161:/usr/lib/avr/include/util/delay.h **** 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+ 162:/usr/lib/avr/include/util/delay.h **** 	#endif
+ 163:/usr/lib/avr/include/util/delay.h **** 
+ 164:/usr/lib/avr/include/util/delay.h **** 	__builtin_avr_delay_cycles(__ticks_dc);
+ 165:/usr/lib/avr/include/util/delay.h **** 
+ 166:/usr/lib/avr/include/util/delay.h **** #else
+ 167:/usr/lib/avr/include/util/delay.h **** 	__tmp = ((F_CPU) / 4e3) * __ms;
+ 168:/usr/lib/avr/include/util/delay.h **** 	if (__tmp < 1.0)
+ 169:/usr/lib/avr/include/util/delay.h **** 		__ticks = 1;
+ 170:/usr/lib/avr/include/util/delay.h **** 	else if (__tmp > 65535)
+ 171:/usr/lib/avr/include/util/delay.h **** 	{
+ 172:/usr/lib/avr/include/util/delay.h **** 		//	__ticks = requested delay in 1/10 ms
+ 173:/usr/lib/avr/include/util/delay.h **** 		__ticks = (uint16_t) (__ms * 10.0);
+ 174:/usr/lib/avr/include/util/delay.h **** 		while(__ticks)
+ 175:/usr/lib/avr/include/util/delay.h **** 		{
+ 176:/usr/lib/avr/include/util/delay.h **** 			// wait 1/10 ms
+ 177:/usr/lib/avr/include/util/delay.h **** 			_delay_loop_2(((F_CPU) / 4e3) / 10);
+ 178:/usr/lib/avr/include/util/delay.h **** 			__ticks --;
+ 179:/usr/lib/avr/include/util/delay.h **** 		}
+ 180:/usr/lib/avr/include/util/delay.h **** 		return;
+ 181:/usr/lib/avr/include/util/delay.h **** 	}
+ 182:/usr/lib/avr/include/util/delay.h **** 	else
+ 183:/usr/lib/avr/include/util/delay.h **** 		__ticks = (uint16_t)__tmp;
+ 184:/usr/lib/avr/include/util/delay.h **** 	_delay_loop_2(__ticks);
+ 185:/usr/lib/avr/include/util/delay.h **** #endif
+ 186:/usr/lib/avr/include/util/delay.h **** }
+ 187:/usr/lib/avr/include/util/delay.h **** 
+ 188:/usr/lib/avr/include/util/delay.h **** /**
+ 189:/usr/lib/avr/include/util/delay.h ****    \ingroup util_delay
+ 190:/usr/lib/avr/include/util/delay.h **** 
+ 191:/usr/lib/avr/include/util/delay.h ****    Perform a delay of \c __us microseconds, using _delay_loop_1().
+ 192:/usr/lib/avr/include/util/delay.h **** 
+ 193:/usr/lib/avr/include/util/delay.h ****    The macro F_CPU is supposed to be defined to a
+ 194:/usr/lib/avr/include/util/delay.h ****    constant defining the CPU clock frequency (in Hertz).
+ 195:/usr/lib/avr/include/util/delay.h **** 
+ 196:/usr/lib/avr/include/util/delay.h ****    The maximal possible delay is 768 us / F_CPU in MHz.
+ 197:/usr/lib/avr/include/util/delay.h **** 
+ 198:/usr/lib/avr/include/util/delay.h ****    If the user requests a delay greater than the maximal possible one,
+ 199:/usr/lib/avr/include/util/delay.h ****    _delay_us() will automatically call _delay_ms() instead.  The user
+ 200:/usr/lib/avr/include/util/delay.h ****    will not be informed about this case.
+ 201:/usr/lib/avr/include/util/delay.h **** 
+ 202:/usr/lib/avr/include/util/delay.h ****    If the avr-gcc toolchain has __builtin_avr_delay_cycles(unsigned long)
+ 203:/usr/lib/avr/include/util/delay.h ****    support, maximal possible delay is 4294967.295 us/ F_CPU in MHz. For
+ 204:/usr/lib/avr/include/util/delay.h ****    values greater than the maximal possible delay, overflow results in
+ 205:/usr/lib/avr/include/util/delay.h ****    no delay i.e., 0us.
+ 206:/usr/lib/avr/include/util/delay.h ****   
+ 207:/usr/lib/avr/include/util/delay.h ****    Conversion of __us into clock cycles may not always result in integer.
+ 208:/usr/lib/avr/include/util/delay.h ****    By default, the clock cycles rounded up to next integer. This ensures that
+ 209:/usr/lib/avr/include/util/delay.h ****    the user gets atleast __us microseconds of delay.
+ 210:/usr/lib/avr/include/util/delay.h **** 
+ 211:/usr/lib/avr/include/util/delay.h ****    Alternatively, user can define __DELAY_ROUND_DOWN__ and __DELAY_ROUND_CLOSEST__
+ 212:/usr/lib/avr/include/util/delay.h ****    to round down and round to closest integer.
+ 213:/usr/lib/avr/include/util/delay.h ****  
+ 214:/usr/lib/avr/include/util/delay.h ****    Note: The new implementation of _delay_us(double __us) with 
+GAS LISTING /tmp/ccIKqndB.s 			page 14
+
+
+ 215:/usr/lib/avr/include/util/delay.h ****     __builtin_avr_delay_cycles(unsigned long) support is not backward compatible.
+ 216:/usr/lib/avr/include/util/delay.h ****    User can define __DELAY_BACKWARD_COMPATIBLE__ to get a backward compatible delay.
+ 217:/usr/lib/avr/include/util/delay.h ****    Also, the backward compatible
+ 218:/usr/lib/avr/include/util/delay.h ****    algorithm will be chosen if the code is compiled in a <em>freestanding
+ 219:/usr/lib/avr/include/util/delay.h ****    environment</em> (GCC option \c -ffreestanding), as the math functions
+ 220:/usr/lib/avr/include/util/delay.h ****    required for rounding are not available to the compiler then.
+ 221:/usr/lib/avr/include/util/delay.h **** 
+ 222:/usr/lib/avr/include/util/delay.h ****  */
+ 223:/usr/lib/avr/include/util/delay.h **** void
+ 224:/usr/lib/avr/include/util/delay.h **** _delay_us(double __us)
+ 225:/usr/lib/avr/include/util/delay.h **** {
+ 226:/usr/lib/avr/include/util/delay.h **** 	uint8_t __ticks;
+ 227:/usr/lib/avr/include/util/delay.h **** 	double __tmp ; 
+ 228:/usr/lib/avr/include/util/delay.h **** #if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && \
+ 229:/usr/lib/avr/include/util/delay.h ****   !defined(__DELAY_BACKWARD_COMPATIBLE__) &&	   \
+ 230:/usr/lib/avr/include/util/delay.h ****   __STDC_HOSTED__
+ 231:/usr/lib/avr/include/util/delay.h **** 	uint32_t __ticks_dc;
+ 232:/usr/lib/avr/include/util/delay.h **** 	extern void __builtin_avr_delay_cycles(unsigned long);
+ 233:/usr/lib/avr/include/util/delay.h **** 	__tmp = ((F_CPU) / 1e6) * __us;
+ 234:/usr/lib/avr/include/util/delay.h **** 
+ 235:/usr/lib/avr/include/util/delay.h **** 	#if defined(__DELAY_ROUND_DOWN__)
+ 236:/usr/lib/avr/include/util/delay.h **** 		__ticks_dc = (uint32_t)fabs(__tmp);
+ 237:/usr/lib/avr/include/util/delay.h **** 
+ 238:/usr/lib/avr/include/util/delay.h **** 	#elif defined(__DELAY_ROUND_CLOSEST__)
+ 239:/usr/lib/avr/include/util/delay.h **** 		__ticks_dc = (uint32_t)(fabs(__tmp)+0.5);
+ 240:/usr/lib/avr/include/util/delay.h **** 
+ 241:/usr/lib/avr/include/util/delay.h **** 	#else
+ 242:/usr/lib/avr/include/util/delay.h **** 		//round up by default
+ 243:/usr/lib/avr/include/util/delay.h **** 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+ 244:/usr/lib/avr/include/util/delay.h **** 	#endif
+ 245:/usr/lib/avr/include/util/delay.h **** 
+ 246:/usr/lib/avr/include/util/delay.h **** 	__builtin_avr_delay_cycles(__ticks_dc);
+ 461               		.stabn	68,0,246,.LM50-.LFBB3
+ 462               	.LM50:
+ 463 01a4 F6E0      		ldi r31,lo8(6)
+ 464 01a6 FA95      		1: dec r31
+ 465 01a8 01F4      		brne 1b
+ 466 01aa 00C0      		rjmp .
+ 467               	.LBE5:
+ 468               	.LBE4:
+ 469               		.stabs	"nRF24.c",132,0,0,.Ltext2
+ 470               	.Ltext2:
+  68:nRF24.c       ****   _delay_us(20);
+  69:nRF24.c       ****   *CEPort &= ~(1<<CEPin);
+ 471               		.stabn	68,0,69,.LM51-.LFBB3
+ 472               	.LM51:
+ 473 01ac F401      		movw r30,r8
+ 474 01ae 8081      		ld r24,Z
+ 475 01b0 C094      		com r12
+ 476 01b2 C822      		and r12,r24
+ 477 01b4 C082      		st Z,r12
+ 478               	/* epilogue start */
+  70:nRF24.c       **** }
+ 479               		.stabn	68,0,70,.LM52-.LFBB3
+ 480               	.LM52:
+ 481 01b6 0F90      		pop __tmp_reg__
+ 482 01b8 DF91      		pop r29
+GAS LISTING /tmp/ccIKqndB.s 			page 15
+
+
+ 483 01ba CF91      		pop r28
+ 484 01bc 1F91      		pop r17
+ 485 01be 0F91      		pop r16
+ 486 01c0 FF90      		pop r15
+ 487 01c2 EF90      		pop r14
+ 488 01c4 DF90      		pop r13
+ 489 01c6 CF90      		pop r12
+ 490 01c8 BF90      		pop r11
+ 491 01ca 9F90      		pop r9
+ 492 01cc 8F90      		pop r8
+ 493 01ce 0895      		ret
+ 494               		.size	WriteTXCharTransmit, .-WriteTXCharTransmit
+ 495               	.Lscope3:
+ 496               		.stabs	"",36,0,0,.Lscope3-.LFBB3
+ 497               		.stabd	78,0,0
+ 498               		.stabs	"ReadRXChar:F(0,2)",36,0,73,ReadRXChar
+ 499               		.stabs	"SSPort:P(0,48)",64,0,73,28
+ 500               		.stabs	"SSPin:P(3,2)",64,0,73,22
+ 501               	.global	ReadRXChar
+ 502               		.type	ReadRXChar, @function
+ 503               	ReadRXChar:
+ 504               		.stabd	46,0,0
+  71:nRF24.c       **** 
+  72:nRF24.c       **** 
+  73:nRF24.c       **** char ReadRXChar(volatile uint8_t *SSPort, uint8_t SSPin){
+ 505               		.stabn	68,0,73,.LM53-.LFBB4
+ 506               	.LM53:
+ 507               	.LFBB4:
+ 508 01d0 0F93      		push r16
+ 509 01d2 1F93      		push r17
+ 510 01d4 CF93      		push r28
+ 511 01d6 DF93      		push r29
+ 512               	/* prologue: function */
+ 513               	/* frame size = 0 */
+ 514               	/* stack size = 4 */
+ 515               	.L__stack_usage = 4
+ 516 01d8 EC01      		movw r28,r24
+  74:nRF24.c       **** 
+  75:nRF24.c       ****   *SSPort &= ~(1<<SSPin);
+ 517               		.stabn	68,0,75,.LM54-.LFBB4
+ 518               	.LM54:
+ 519 01da 9881      		ld r25,Y
+ 520 01dc 01E0      		ldi r16,lo8(1)
+ 521 01de 10E0      		ldi r17,0
+ 522 01e0 00C0      		rjmp 2f
+ 523               		1:
+ 524 01e2 000F      		lsl r16
+ 525               		2:
+ 526 01e4 6A95      		dec r22
+ 527 01e6 02F4      		brpl 1b
+ 528 01e8 802F      		mov r24,r16
+ 529 01ea 8095      		com r24
+ 530 01ec 8923      		and r24,r25
+ 531 01ee 8883      		st Y,r24
+  76:nRF24.c       ****   SPI_MasterTransmitByte(0x61);
+ 532               		.stabn	68,0,76,.LM55-.LFBB4
+ 533               	.LM55:
+GAS LISTING /tmp/ccIKqndB.s 			page 16
+
+
+ 534 01f0 81E6      		ldi r24,lo8(97)
+ 535 01f2 0E94 0000 		call SPI_MasterTransmitByte
+  77:nRF24.c       ****   char hold = SPI_MasterTransmitByte(0xFF);
+ 536               		.stabn	68,0,77,.LM56-.LFBB4
+ 537               	.LM56:
+ 538 01f6 8FEF      		ldi r24,lo8(-1)
+ 539 01f8 0E94 0000 		call SPI_MasterTransmitByte
+  78:nRF24.c       ****   *SSPort |= (1<<SSPin);
+ 540               		.stabn	68,0,78,.LM57-.LFBB4
+ 541               	.LM57:
+ 542 01fc 9881      		ld r25,Y
+ 543 01fe 902B      		or r25,r16
+ 544 0200 9883      		st Y,r25
+ 545               	/* epilogue start */
+  79:nRF24.c       ****   //char hold = SPDR;
+  80:nRF24.c       ****   return hold;
+  81:nRF24.c       **** 
+  82:nRF24.c       **** }
+ 546               		.stabn	68,0,82,.LM58-.LFBB4
+ 547               	.LM58:
+ 548 0202 DF91      		pop r29
+ 549 0204 CF91      		pop r28
+ 550 0206 1F91      		pop r17
+ 551 0208 0F91      		pop r16
+ 552 020a 0895      		ret
+ 553               		.size	ReadRXChar, .-ReadRXChar
+ 554               	.Lscope4:
+ 555               		.stabs	"",36,0,0,.Lscope4-.LFBB4
+ 556               		.stabd	78,0,0
+ 557               		.stabs	"",100,0,0,.Letext0
+ 558               	.Letext0:
+ 559               		.ident	"GCC: (GNU) 4.8.2"
+GAS LISTING /tmp/ccIKqndB.s 			page 17
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 nRF24.c
+     /tmp/ccIKqndB.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccIKqndB.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccIKqndB.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccIKqndB.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccIKqndB.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccIKqndB.s:117    .text:0000000000000000 nRF24InitTransmit
+     /tmp/ccIKqndB.s:248    .text:000000000000009c nRF24InitReceive
+     /tmp/ccIKqndB.s:382    .text:0000000000000138 WriteTXCharTransmit
+     /tmp/ccIKqndB.s:503    .text:00000000000001d0 ReadRXChar
+
+UNDEFINED SYMBOLS
+SPI_MasterTransmitByte

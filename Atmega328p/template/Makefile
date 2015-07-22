@@ -92,6 +92,7 @@ INC=
 
 # libraries to link in (e.g. -lmylib)
 LIBS=
+LIBDIRECTORY=
 
 # Optimization level, 
 # use s (size opt), 1, 2, 3 or 0 (off)
@@ -160,7 +161,7 @@ ASMFLAGS =-I. $(INC) -mmcu=$(MCU)        \
 
 # linker
 LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU) \
-	-lm $(LIBS)
+	-lm $(LIBS) -L$(LIBDIRECTORY)
 
 ##### executables ####
 CC=avr-gcc

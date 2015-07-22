@@ -31,7 +31,7 @@ int main(void){
 //  float ForwardRatio = (float)ForwardReadValue / (256.0);
 //  float SideRatio = (float)SideReadValue / (256.0);
     char VerticalReadValue = 255;
-    WriteTXCharTransmit(VerticalReadValue, &PORTD, 7, &PORTB, 2);  
+    WriteTXCharTransmit(VerticalReadValue, &PORTD, 0, &PORTB, 2);  
 
 //    PORTB &= ~(1<<DDB2);
 //    SPI_MasterTransmitByte(0xAA);

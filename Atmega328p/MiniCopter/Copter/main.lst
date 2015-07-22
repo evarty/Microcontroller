@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccjQc01w.s 			page 1
+GAS LISTING /tmp/ccPnMyMQ.s 			page 1
 
 
    1               		.file	"main.c"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccjQc01w.s 			page 1
   55               		.stabs	"_Sat unsigned _Accum:t(0,44)=r(0,1);4;0;",128,0,0,0
   56               		.stabs	"_Sat unsigned long _Accum:t(0,45)=r(0,1);8;0;",128,0,0,0
   57               		.stabs	"_Sat unsigned long long _Accum:t(0,46)=r(0,1);8;0;",128,0,0,0
-GAS LISTING /tmp/ccjQc01w.s 			page 2
+GAS LISTING /tmp/ccPnMyMQ.s 			page 2
 
 
   58               		.stabs	"void:t(0,47)=(0,47)",128,0,0,0
@@ -118,7 +118,7 @@ GAS LISTING /tmp/ccjQc01w.s 			page 1
    5:main.c        **** 
    6:main.c        **** 
    7:main.c        **** int main(void){
-GAS LISTING /tmp/ccjQc01w.s 			page 3
+GAS LISTING /tmp/ccPnMyMQ.s 			page 3
 
 
  108               		.stabn	68,0,7,.LM0-.LFBB1
@@ -156,33 +156,31 @@ GAS LISTING /tmp/ccjQc01w.s 			page 1
  135               	.LBB2:
   13:main.c        **** 
   14:main.c        ****   while(1){
-  15:main.c        ****   
-  16:main.c        ****   PORTD &= ~(1<<0);
- 136               		.stabn	68,0,16,.LM5-.LFBB1
+  15:main.c        ****   PORTD &= ~(1<<0);
+ 136               		.stabn	68,0,15,.LM5-.LFBB1
  137               	.LM5:
  138 001a 5898      		cbi 0xb,0
-  17:main.c        ****   char ReadValue = ReadRXChar(&PORTB, 2);
- 139               		.stabn	68,0,17,.LM6-.LFBB1
+  16:main.c        ****   char ReadValue = ReadRXChar(&PORTB, 2);
+ 139               		.stabn	68,0,16,.LM6-.LFBB1
  140               	.LM6:
  141 001c 62E0      		ldi r22,lo8(2)
  142 001e 85E2      		ldi r24,lo8(37)
  143 0020 90E0      		ldi r25,0
  144 0022 0E94 0000 		call ReadRXChar
-  18:main.c        ****   PORTD |= (1<<0);
- 145               		.stabn	68,0,18,.LM7-.LFBB1
+  17:main.c        ****   PORTD |= (1<<0);
+ 145               		.stabn	68,0,17,.LM7-.LFBB1
  146               	.LM7:
  147 0026 589A      		sbi 0xb,0
-  19:main.c        **** 
-  20:main.c        **** //  PORTB &= ~(1<<2);
-  21:main.c        ****   SPI_MasterTransmitByte(ReadValue);
- 148               		.stabn	68,0,21,.LM8-.LFBB1
+  18:main.c        **** //  PORTB &= ~(1<<2);
+  19:main.c        ****   SPI_MasterTransmitByte(ReadValue);
+ 148               		.stabn	68,0,19,.LM8-.LFBB1
  149               	.LM8:
  150 0028 0E94 0000 		call SPI_MasterTransmitByte
-GAS LISTING /tmp/ccjQc01w.s 			page 4
-
-
  151 002c 00C0      		rjmp .L2
  152               	.LBE2:
+GAS LISTING /tmp/ccPnMyMQ.s 			page 4
+
+
  153               		.size	main, .-main
  154               	.Lscope1:
  155               		.stabs	"",36,0,0,.Lscope1-.LFBB1
@@ -191,17 +189,17 @@ GAS LISTING /tmp/ccjQc01w.s 			page 1
  158               		.stabs	"",100,0,0,.Letext0
  159               	.Letext0:
  160               		.ident	"GCC: (GNU) 4.8.2"
-GAS LISTING /tmp/ccjQc01w.s 			page 5
+GAS LISTING /tmp/ccPnMyMQ.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/ccjQc01w.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccjQc01w.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccjQc01w.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccjQc01w.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccjQc01w.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccjQc01w.s:106    .text.startup:0000000000000000 main
+     /tmp/ccPnMyMQ.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccPnMyMQ.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccPnMyMQ.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccPnMyMQ.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccPnMyMQ.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccPnMyMQ.s:106    .text.startup:0000000000000000 main
 
 UNDEFINED SYMBOLS
 SPI_MasterInit

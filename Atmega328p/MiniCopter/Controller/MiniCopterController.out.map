@@ -21,8 +21,9 @@ Address of section .data set to 0x800100
 LOAD /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm328p.o
 LOAD /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libm.a
 LOAD main.o
-LOAD nRF24.o
+LOAD ADC.o
 LOAD SPI.o
+LOAD nRF24.o
 START GROUP
 LOAD /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a
 LOAD /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libm.a
@@ -119,7 +120,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x2ba
+.text           0x0000000000000000      0x306
  *(.vectors)
  .vectors       0x0000000000000000       0x68 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm328p.o
                 0x0000000000000000                __vectors
@@ -198,39 +199,42 @@ END GROUP
                 0x000000000000007c                __vector_18
                 0x000000000000007c                __vector_20
  .text          0x0000000000000080        0x0 main.o
- .text          0x0000000000000080      0x1dc nRF24.o
-                0x0000000000000080                nRF24InitTransmit
-                0x0000000000000104                nRF24InitReceive
-                0x0000000000000188                WriteTXCharTransmit
-                0x0000000000000220                ReadRXChar
- .text          0x000000000000025c       0x2c SPI.o
-                0x000000000000025c                SPI_MasterInit
-                0x0000000000000268                SPI_MasterTransmitByte
-                0x0000000000000274                SPI_SlaveInit
-                0x000000000000027e                SPI_SlaveReceive
- .text          0x0000000000000288        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
-                0x0000000000000288                . = ALIGN (0x2)
+ .text          0x0000000000000080       0x52 ADC.o
+                0x0000000000000080                ADCInitilize
+                0x00000000000000aa                ADCRead
+ .text          0x00000000000000d2       0x2c SPI.o
+                0x00000000000000d2                SPI_MasterInit
+                0x00000000000000de                SPI_MasterTransmitByte
+                0x00000000000000ea                SPI_SlaveInit
+                0x00000000000000f4                SPI_SlaveReceive
+ .text          0x00000000000000fe      0x1dc nRF24.o
+                0x00000000000000fe                nRF24InitTransmit
+                0x0000000000000182                nRF24InitReceive
+                0x0000000000000206                WriteTXCharTransmit
+                0x000000000000029e                ReadRXChar
+ .text          0x00000000000002da        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000002da                . = ALIGN (0x2)
  *(.text.*)
- .text.startup  0x0000000000000288       0x2e main.o
-                0x0000000000000288                main
+ .text.startup  0x00000000000002da       0x28 main.o
+                0x00000000000002da                main
  .text.libgcc.mul
-                0x00000000000002b6        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x0000000000000302        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.div
-                0x00000000000002b6        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
- .text.libgcc   0x00000000000002b6        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x0000000000000302        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+ .text.libgcc   0x0000000000000302        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.prologue
-                0x00000000000002b6        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x0000000000000302        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.builtins
-                0x00000000000002b6        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x0000000000000302        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.fmul
-                0x00000000000002b6        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x0000000000000302        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.fixed
-                0x00000000000002b6        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
-                0x00000000000002b6                . = ALIGN (0x2)
+                0x0000000000000302        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x0000000000000302                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000000000002b6        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
-                0x00000000000002b6                exit
-                0x00000000000002b6                _exit
+ .fini9         0x0000000000000302        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x0000000000000302                exit
+                0x0000000000000302                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -249,17 +253,18 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000000000002b6        0x4 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+ .fini0         0x0000000000000302        0x4 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x00000000000002ba                _etext = .
+                0x0000000000000306                _etext = .
 
-.data           0x0000000000800100        0x0 load address 0x00000000000002ba
+.data           0x0000000000800100        0x0 load address 0x0000000000000306
                 0x0000000000800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm328p.o
  .data          0x0000000000800100        0x0 main.o
- .data          0x0000000000800100        0x0 nRF24.o
+ .data          0x0000000000800100        0x0 ADC.o
  .data          0x0000000000800100        0x0 SPI.o
+ .data          0x0000000000800100        0x0 nRF24.o
  .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  *(.data*)
  *(.rodata)
@@ -274,14 +279,15 @@ END GROUP
  *(.bss)
  .bss           0x0000000000800100        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm328p.o
  .bss           0x0000000000800100        0x0 main.o
- .bss           0x0000000000800100        0x0 nRF24.o
+ .bss           0x0000000000800100        0x0 ADC.o
  .bss           0x0000000000800100        0x0 SPI.o
+ .bss           0x0000000000800100        0x0 nRF24.o
  .bss           0x0000000000800100        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  *(.bss*)
  *(COMMON)
                 0x0000000000800100                PROVIDE (__bss_end, .)
-                0x00000000000002ba                __data_load_start = LOADADDR (.data)
-                0x00000000000002ba                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000000000000306                __data_load_start = LOADADDR (.data)
+                0x0000000000000306                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0000000000800100        0x0
                 0x0000000000800100                PROVIDE (__noinit_start, .)
@@ -309,19 +315,21 @@ END GROUP
 .user_signatures
  *(.user_signatures*)
 
-.stab           0x0000000000000000     0x1704
+.stab           0x0000000000000000     0x1b30
  *(.stab)
  .stab          0x0000000000000000      0x6cc /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm328p.o
- .stab          0x00000000000006cc      0x504 main.o
-                                        0x510 (size before relaxing)
- .stab          0x0000000000000bd0      0x6f0 nRF24.o
-                                        0x8ac (size before relaxing)
- .stab          0x00000000000012c0      0x444 SPI.o
+ .stab          0x00000000000006cc      0x4e0 main.o
+                                        0x4ec (size before relaxing)
+ .stab          0x0000000000000bac      0x4b0 ADC.o
+                                        0x678 (size before relaxing)
+ .stab          0x000000000000105c      0x438 SPI.o
                                         0x600 (size before relaxing)
+ .stab          0x0000000000001494      0x69c nRF24.o
+                                        0x8ac (size before relaxing)
 
-.stabstr        0x0000000000000000      0xf29
+.stabstr        0x0000000000000000      0xf8a
  *(.stabstr)
- .stabstr       0x0000000000000000      0xf29 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm328p.o
+ .stabstr       0x0000000000000000      0xf8a /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm328p.o
 
 .stab.excl
  *(.stab.excl)
@@ -339,8 +347,9 @@ END GROUP
  *(.comment)
  .comment       0x0000000000000000       0x11 main.o
                                          0x12 (size before relaxing)
- .comment       0x0000000000000000       0x12 nRF24.o
+ .comment       0x0000000000000000       0x12 ADC.o
  .comment       0x0000000000000000       0x12 SPI.o
+ .comment       0x0000000000000000       0x12 nRF24.o
 
 .debug
  *(.debug)
@@ -390,5 +399,5 @@ END GROUP
 
 .debug_macro
  *(.debug_macro)
-OUTPUT(myproject.out elf32-avr)
+OUTPUT(MiniCopterController.out elf32-avr)
 LOAD linker stubs

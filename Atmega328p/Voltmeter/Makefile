@@ -85,15 +85,15 @@ PROJECTNAME=VoltmeterTest
 # (list all files to compile, e.g. 'a.c b.cpp as.S'):
 # Use .cc, .cpp or .C suffix for C++ files, use .S 
 # (NOT .s !!!) for assembly source code files.
-PRJSRC=main.c ShiftOut.c
+PRJSRC=main.c /home/edward/Microcontroller/Atmega328p/Libraries/ShiftOut/ShiftOut.c
 
 
 # additional includes (e.g. -I/path/to/mydir)
-INC=
+INC=-I/home/edward/Microcontroller/Atmega328p/Libraries/ShiftOut
 
 # libraries to link in (e.g. -lmylib)
-LIBS=
-
+LIBS=#-lShiftOut
+LIBDIRECTORY=#-L/home/edward/Microntroller/Atmega328p/Libraries
 # Optimization level, 
 # use s (size opt), 1, 2, 3 or 0 (off)
 OPTLEVEL=s
@@ -162,7 +162,7 @@ ASMFLAGS =-I. $(INC) -mmcu=$(MCU)        \
 
 # linker
 LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU) \
-	-lm $(LIBS)
+	$(LIBDIRECTORY) -lm $(LIBS)
 
 ##### executables ####
 CC=avr-gcc

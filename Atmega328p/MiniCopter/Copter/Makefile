@@ -85,10 +85,10 @@ PROJECTNAME=myproject
 # (list all files to compile, e.g. 'a.c b.cpp as.S'):
 # Use .cc, .cpp or .C suffix for C++ files, use .S 
 # (NOT .s !!!) for assembly source code files.
-PRJSRC=main.c nRF24.c SPI.c #PWM.c
+PRJSRC=main.c /home/edward/Microcontroller/Atmega328p/Libraries/nRF24/nRF24.c /home/edward/Microcontroller/Atmega328p/Libraries/SPI/SPI.c #/home/edward/Microcontroller/Atmega328p/Libraries/PWM/PWM.c
 
 # additional includes (e.g. -I/path/to/mydir)
-INC=
+INC=-I/home/edward/Microcontroller/Atmega328p/Libraries/SPI -I/home/edward/Microcontroller/Atmega328p/Libraries/nRF24 #-I/home/edward/Microcontroller/Atmega328p/Libraries/PWM
 
 # libraries to link in (e.g. -lmylib)
 LIBS=

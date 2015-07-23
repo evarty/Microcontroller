@@ -85,14 +85,13 @@ PROJECTNAME=myproject
 # (list all files to compile, e.g. 'a.c b.cpp as.S'):
 # Use .cc, .cpp or .C suffix for C++ files, use .S 
 # (NOT .s !!!) for assembly source code files.
-PRJSRC=main.c
+PRJSRC=main.c /home/edward/Microcontroller/Atmega328p/Libraries/Thing/Thing.c
 
 # additional includes (e.g. -I/path/to/mydir)
-INC=
+INC=-I/home/edward/Microcontroller/Atmega328p/Libraries/Thing
 
 # libraries to link in (e.g. -lmylib)
 LIBS=
-LIBDIRECTORY=
 
 # Optimization level, 
 # use s (size opt), 1, 2, 3 or 0 (off)
@@ -161,7 +160,7 @@ ASMFLAGS =-I. $(INC) -mmcu=$(MCU)        \
 
 # linker
 LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU) \
-	-lm $(LIBS) -L$(LIBDIRECTORY)
+	-lm $(LIBS)
 
 ##### executables ####
 CC=avr-gcc

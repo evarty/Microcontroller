@@ -30,6 +30,7 @@ int main(void){
 
   TWIStart();
   TWIWrite(address | (0<<0));
+  TWIWrite(0x01);
   TWIStop();
 
 

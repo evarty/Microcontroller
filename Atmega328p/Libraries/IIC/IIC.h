@@ -1,7 +1,9 @@
 #ifndef _IIC
 #define _IIC
 
-void 
+void TWIInit(void);
+void TWIStart(void);
+void TWIStop(void);
 
 
 

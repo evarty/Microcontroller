@@ -23,17 +23,21 @@ int main(void){
 //  char Minutes = IICTransmitMasterRead(address);
 //  char Hours = 0x0A;//IICTransmitMasterRead(address);
 
-  int MinutesOnes = 8;//(Minutes & 0x01) + (2*(Minutes & 0x02)) + (4*(Minutes & 0x04)) + (8*(Minutes & 0x08));
-  int MinutesTens = 7;//(Minutes & 0x10) + (2*(Minutes & 0x20)) + (4*(Minutes & 0x40));
-  int HourOnes = 6;//(Hours & 0x01) + (2*(Hours & 0x02)) + (4*(Hours & 0x04)) + (8*(Hours & 0x08));
-  int HourTens = 5;//(Hours & 0x10)/* + (2*(Hours & 0x20))*/;
+    int MinutesOnes = 8;//(Minutes & 0x01) + (2*(Minutes & 0x02)) + (4*(Minutes & 0x04)) + (8*(Minutes & 0x08));
+    int MinutesTens = 7;//(Minutes & 0x10) + (2*(Minutes & 0x20)) + (4*(Minutes & 0x40));
+    int HourOnes = 6;//(Hours & 0x01) + (2*(Hours & 0x02)) + (4*(Hours & 0x04)) + (8*(Hours & 0x08));
+    int HourTens = 5;//(Hours & 0x10)/* + (2*(Hours & 0x20))*/;
 
-  TWIStart();
-  TWIWrite(address | (0<<0));
-  TWIWrite(0x01);
-  TWIStop();
+    TWIStart();
+    TWIWrite(address | (0<<0));
+    TWIWrite(0x01);
+    TWIStop();
 
-
+    TWIStart();
+    TWIWrite(address | (1<<0));
+    uint8_t Minutes = TWIReadACK();
+    uint8_t Hours = TWIReadNACK();
+    TWIStop();
 
 
 
@@ -44,12 +48,4 @@ int main(void){
     ShiftOut(ClockPin,DataPin,numbers[MinutesTens]);
     PORTD |= (1 << LatchPin);
   }
-
-
-
-
-
-
-
-
 }

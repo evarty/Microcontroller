@@ -65,7 +65,7 @@ void WriteTXCharTransmit(char Data, volatile uint8_t *CEPort, uint8_t CEPin, vol
   *SSPort |= (1<<SSPin);
 
   *CEPort |= (1<<CEPin); 
-  _delay_us(20);
+  _delay_us(30);
   *CEPort &= ~(1<<CEPin);
 }
 

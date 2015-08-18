@@ -9,7 +9,6 @@
 
 void ShiftOut(int SRCLK_Pin, int SER_Pin, int data){
         //PORTD &= ~(1 << RCLK_Pin); This is the Latch Pin                              // Set the register-clock pin low
-
         for (int i = 0; i < (8); i++){     // Now we are entering the loop to shift out 8+ bits
 
                 PORTD &= ~(1 << SRCLK_Pin);                     // Set the serial-clock pin low

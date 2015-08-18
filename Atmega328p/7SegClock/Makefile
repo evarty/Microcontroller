@@ -142,7 +142,8 @@ CFLAGS=-I. $(INC) -g -mmcu=$(MCU) -O$(OPTLEVEL) \
 	-funsigned-bitfields -funsigned-char    \
 	-Wall -Wstrict-prototypes               \
 	-Wa,-ahlms=$(firstword                  \
-	$(filter %.lst, $(<:.c=.lst)))
+	$(filter %.lst, $(<:.c=.lst)))          \
+        -std=c99
 
 # c++ specific flags
 CPPFLAGS=-fno-exceptions               \

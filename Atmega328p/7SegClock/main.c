@@ -30,8 +30,6 @@ int main(void){
     TWIStart();
     TWIWrite(address | (0<<0));
     TWIWrite(0x01);
-    TWIStop();
-
     TWIStart();
     TWIWrite(address | (1<<0));
     uint8_t Minutes = TWIReadACK();

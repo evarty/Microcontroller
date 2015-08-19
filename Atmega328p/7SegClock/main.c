@@ -12,10 +12,14 @@
 int main(void){
   DDRD = 0xff;
   DDRC = 0xff;
-  int numbers[] = {252,96,218,242,102,182,62,224,254,230};
+  uint8_t numbers[] = {252,96,218,242,102,182,62,224,254,230};
   uint8_t address = 0xD0; //1101000
   TWIInit();
-
+  TWIStart();
+  TWIWrite(address | (1<<0));
+  TWIWrite(0x00);
+  TWIWrite(0x00);
+  TWIStop();
 
   while(1){  
 //  IICTransmitMasterWrite(address, 0x01);

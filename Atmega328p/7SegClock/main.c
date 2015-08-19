@@ -27,6 +27,23 @@ int main(void){
 //  char Minutes = IICTransmitMasterRead(address);
 //  char Hours = 0x0A;//IICTransmitMasterRead(address);
 
+    static uint8_t MilTime = 0;
+    if(ModePin & ModeMask){
+      MilTime ^= 1;
+      if(MilTime){
+        TWIStart();
+        TWIWrite(address | (0<<0));
+        TWIWrite(0x02);
+        TWIWrite(0x20);
+        TWIStop();
+      }else{
+        TWIStart();
+        TWIWrite(address | (0<<0);
+        TWIWrite(0x02);
+        TWIWrite(0x00);
+        TWIStop();
+      }
+
     TWIStart();
     TWIWrite(address | (0<<0));
     TWIWrite(0x01);

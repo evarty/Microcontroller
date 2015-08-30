@@ -112,7 +112,7 @@ OPTLEVEL=s
 # one of the valid "-c PROGRAMMER-ID" values 
 # described in the avrdude info page.
 # 
-AVRDUDE_PROGRAMMERID=arduino
+AVRDUDE_PROGRAMMERID=arduino#linuxgpio
 
 # port--serial or parallel port to which your 
 # hardware programmer is attached

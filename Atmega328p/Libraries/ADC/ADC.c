@@ -15,19 +15,19 @@ void ADCInitilize(void)
   loop_until_bit_is_clear(ADCSRA,ADSC);
 }
 
-unsigned int ADCRead(char ADCPin, char Resolution)
+uint16_t ADCRead(uint8_t ADCPin, uint8_t Resolution)
 {
-  char r;
+  uint8_t r;
   r = 0x10;
   r += ADCPin;
   ADMUX = r;
   ADCSRA |= 1<<ADSC;
   loop_until_bit_is_clear(ADCSRA,ADSC);
-  char l = ADCL;
-  char h = ADCH;
+  uint8_t l = ADCL;
+  uint8_t h = ADCH;
 
   if(Resolution){ 
-    return ((int)h)<<8|l; 
+    return 0x0000| (h<<8)|(l<<0); 
   }else{
     return l;
   }

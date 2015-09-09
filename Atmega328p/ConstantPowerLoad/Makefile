@@ -85,10 +85,10 @@ PROJECTNAME=myproject
 # (list all files to compile, e.g. 'a.c b.cpp as.S'):
 # Use .cc, .cpp or .C suffix for C++ files, use .S 
 # (NOT .s !!!) for assembly source code files.
-PRJSRC=main.c /home/edward/Microcontroller/Atmega328p/Libraries/Thing/Thing.c
+PRJSRC=main.c ../Libraries/ShiftOut/ShiftOut.c ../Libraries/ADC/ADC.c
 
 # additional includes (e.g. -I/path/to/mydir)
-INC=-I/home/edward/Microcontroller/Atmega328p/Libraries/Thing
+INC=-I../Libraries/ShiftOut -I../Libraries/ADC
 
 # libraries to link in (e.g. -lmylib)
 LIBS=

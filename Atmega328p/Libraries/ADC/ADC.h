@@ -3,6 +3,6 @@
 
 void ADCInitilize(void);
 
-unsigned int ADCRead(char ADCPin, char Resolution);
+uint16_t ADCRead(uint8_t ADCPin, uint8_t Resolution);
 
 #endif

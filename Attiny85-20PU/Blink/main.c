@@ -14,7 +14,7 @@ int main(void)
 
   //setup the clock
   cli();                 //disable interrupts
-  TCCR1 |= (1<<CS12 | 1<<CS13 | 1<<CS10 | 1<CS11);     //divides clock by 4096. page 89 
+  TCCR1 |= (1<<CS12) | (1<<CS13) | (1<<CS10) | (1<CS11);     //divides clock by 4096. page 89 
   OCR1A = 20;         //sets 488 as the max number of cycles to use in the timer register. page 1  36 or page 125
   OCR1C = 122;          //set the number at which the timer/counter1 will equal OR1C for the reset in the next line
   TCCR1 |= 1<<CTC1;    //resets timer/counter 1 when it counts to value in OCR1C

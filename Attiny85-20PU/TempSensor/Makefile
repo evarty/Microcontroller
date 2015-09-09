@@ -85,10 +85,10 @@ PROJECTNAME=myproject
 # (list all files to compile, e.g. 'a.c b.cpp as.S'):
 # Use .cc, .cpp or .C suffix for C++ files, use .S 
 # (NOT .s !!!) for assembly source code files.
-PRJSRC=main.c ADC.c ShiftOut.c
+PRJSRC=main.c ../Libraries/ADC.c ../Libraries/ShiftOut.c
 
 # additional includes (e.g. -I/path/to/mydir)
-INC=
+INC=-I../Libraries
 
 # libraries to link in (e.g. -lmylib)
 LIBS=

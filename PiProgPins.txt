@@ -2,5 +2,5 @@ Reset = 12
 SCK = 24
 MOSI = 23
 MISO = 18
-Vcc = 5V
-GND = GND
+Vcc = 2
+GND = 6

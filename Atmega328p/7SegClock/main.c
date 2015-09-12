@@ -18,9 +18,9 @@
 #define MinuteMask 0x20
 //both preceding are arbitrary and currently placeholders
 
-volatile bool MilTimeChange = false;
-volatile bool HourAdd = false;
-volatile bool MinuteAdd = false;
+volatile uint8_t MilTimeChange = 0;
+volatile uint8_t HourAdd = 0;
+volatile uint8_t MinuteAdd = 0;
 
 int main(void){
   DDRD = 0xff;
@@ -41,7 +41,7 @@ int main(void){
 
   while(1){  
     
-    static bool MilTime = false;
+    static uint8_t MilTime = 0;
 
     if(MilTimeChange & !MilTime){//change to 24 hour clock
       TWIStart();
@@ -49,14 +49,14 @@ int main(void){
       TWIWrite(0x02);
       TWIWrite(0x00);
       TWIStop();
-      MilTime = true;
+      MilTime = 1;
     }else if(MilTimeChange & MilTime){//change to 12 hour clock
       TWIStart();
       TWIWrite(address | (0<<0));
       TWIWrite(0x02);
       TWIWrite(0x40);
       TWIStop();
-      MilTime = false;
+      MilTime = 0;
     }
     
 
@@ -69,39 +69,41 @@ int main(void){
     uint8_t Hours = TWIReadNACK();
     TWIStop();
 
-    static uint8_t MinutesOnes = (Minutes & 0x01) + (2*(Minutes & 0x02)) + (4*(Minutes & 0x04)) + (8*(Minutes & 0x08));
-    static uint8_t MinutesTens = (Minutes & 0x10) + (2*(Minutes & 0x20)) + (4*(Minutes & 0x40));
-    static uint8_t HourOnes = (Hours & 0x01) + (2*(Hours & 0x02)) + (4*(Hours & 0x04)) + (8*(Hours & 0x08));
+    static uint8_t MinutesOnes, MinutesTens, HoursOnes, HoursTens;
+
+    MinutesOnes = (Minutes & 0x01) + (2*(Minutes & 0x02)) + (4*(Minutes & 0x04)) + (8*(Minutes & 0x08));
+    MinutesTens = (Minutes & 0x10) + (2*(Minutes & 0x20)) + (4*(Minutes & 0x40));
+    HoursOnes = (Hours & 0x01) + (2*(Hours & 0x02)) + (4*(Hours & 0x04)) + (8*(Hours & 0x08));
     if(MilTime){
-      static uint8_t HourTens = (Hours & 0x10) + (2*(Hours & 0x20));
+      HoursTens = (Hours & 0x10) + (2*(Hours & 0x20));
     }else {
-      static uint8_t HourTens = (Hours & 0x10);
+      HoursTens = (Hours & 0x10);
     }
 
     PORTD &= ~(1 << LatchPin);
-    ShiftOut(ClockPin,DataPin,numbers[HourOnes]);
-    ShiftOut(ClockPin,DataPin,numbers[HourTens]);
+    ShiftOut(ClockPin,DataPin,numbers[HoursOnes]);
+    ShiftOut(ClockPin,DataPin,numbers[HoursTens]);
     ShiftOut(ClockPin,DataPin,numbers[MinutesOnes]);
     ShiftOut(ClockPin,DataPin,numbers[MinutesTens]);
     PORTD |= (1 << LatchPin);
     
     if(HourAdd){
-      HourOnes += 1;
+      HoursOnes += 1;
       if(MilTime){
-        if((HourOnes == 4) & (HourTens == 2)){
-          HourTens = 0;
-          HourOnes = 0;
-        }else if((HoursOnes == 10) & (HourTens < 2)){
-          HourTens += 1;
-          HourOnes = 0;
+        if((HoursOnes == 4) & (HoursTens == 2)){
+          HoursTens = 0;
+          HoursOnes = 0;
+        }else if((HoursOnes == 10) & (HoursTens < 2)){
+          HoursTens += 1;
+          HoursOnes = 0;
         }
       }else{
-        if((HourOnes == 3) & (HourTens == 1)){
-          HourTens = 0;
-          HourOnes = 1;
+        if((HoursOnes == 3) & (HoursTens == 1)){
+          HoursTens = 0;
+          HoursOnes = 1;
         }else if((HoursOnes = 10) & (HoursTens < 1)){
-          HourTens += 1;
-          HourOnes = 0;
+          HoursTens += 1;
+          HoursOnes = 0;
         }
       }
       
@@ -109,13 +111,13 @@ int main(void){
         TWIStart();
         TWIWrite(address | (0 << 0));
         TWIWrite(0x02);
-        TWIWrite(0x00 | (0<<6) | ((HourTens & 0x03)<<5) | ((HourOnes & 0x0F)<<3));
+        TWIWrite(0x00 | (0<<6) | ((HoursTens & 0x03)<<5) | ((HoursOnes & 0x0F)<<3));
         TWIStop();
       }else {
         TWIStart();
         TWIWrite(address | (0<<0));
         TWIWrite(0x02);
-        TWIWrite(0x00 | (1<<6) | ((HourTens & 0x03)<<5) | ((HourOnes & 0x0F)<<3));
+        TWIWrite(0x00 | (1<<6) | ((HoursTens & 0x03)<<5) | ((HoursOnes & 0x0F)<<3));
         TWIStop();
       }
     }
@@ -130,20 +132,20 @@ int main(void){
                  
 ISR(TIMER0_OVF_vect){
   if(MilPin & MilMask){
-    MilTimeChange = true;
+    MilTimeChange = 1;
   }else {
-    MilTimeChange = false;
+    MilTimeChange = 0;
   }
   
   if(HourPin & HourMask){
-    HourAdd = true;
+    HourAdd = 1;
   }else {
-    HourAdd = false;
+    HourAdd = 0;
   }
   
   if(MinutePin & MinuteMask){
-    MinuteAdd = true;
+    MinuteAdd = 1;
   }else{
-    MinuteAdd = false;
+    MinuteAdd = 0;
   }
 }

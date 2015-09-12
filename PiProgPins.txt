@@ -1,6 +1,6 @@
-Reset = 12
-SCK = 24
-MOSI = 23
-MISO = 18
-Vcc = 2
-GND = 6
+Reset = 20 physical pin 38
+SCK = 24 physical pin 18
+MOSI = 23 physical pin 16
+MISO = 18 physical pin 12
+Vcc = 2 physical pin 1 or 2. 1 is 3V3 2 is 5V
+GND = 6 physical pin 6

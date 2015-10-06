@@ -10,12 +10,12 @@
 #define DataPin 3
 #define ClockPin 4
 
-#define MilMask 0x20
-#define MilPin PINB
-#define HourPin PINB
-#define HourMask 0x20
-#define MinutePin PINB
-#define MinuteMask 0x20
+#define MilMask 0x04
+#define MilPin PIND
+#define HourPin PIND
+#define HourMask 0x00
+#define MinutePin PIND
+#define MinuteMask 0x02
 //both preceding are arbitrary and currently placeholders
 
 volatile uint8_t MilTimeChange = 0;

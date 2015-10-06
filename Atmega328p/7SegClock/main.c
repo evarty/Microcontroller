@@ -124,21 +124,6 @@ int main(void){
         }
       }
       
-      if(MilTime){
-        TWIStart();
-        TWIWrite(address | (0 << 0));
-        TWIWrite(0x02);
-        TWIWrite(0x00 | (0<<6) | ((HoursTens & 0x03)<<5) | ((HoursOnes & 0x0F)<<3));
-        TWIStop();
-      }else {
-        TWIStart();
-        TWIWrite(address | (0<<0));
-        TWIWrite(0x02);
-        TWIWrite(0x00 | (1<<6) | ((HoursTens & 0x03)<<5) | ((HoursOnes & 0x0F)<<3));
-        TWIStop();
-      }
-    }
-    
     
 */    
     

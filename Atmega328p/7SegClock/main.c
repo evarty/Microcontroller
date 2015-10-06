@@ -13,7 +13,7 @@
 #define MilMask 0x04
 #define MilPin PIND
 #define HourPin PIND
-#define HourMask 0x00
+#define HourMask 0x01
 #define MinutePin PIND
 #define MinuteMask 0x02
 //both preceding are arbitrary and currently placeholders

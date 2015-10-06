@@ -78,11 +78,11 @@ int main(void){
     static uint8_t MilTime = 0;
     if(MilTimeChange & !MilTime){//change to 24 hour clock
       TWIStart();
-      TWIWrite(address | 0<0);//Write to register
+      TWIWrite(address | 0<<0);//Write to register
       TWIWrite(0x02);//First write sets pointer to hours register
       TWIWrite(0x00);//Write whole hours register to 0. Changing from 12 to 24 resets hours and minutes anway
       TWIStart();//repeated start
-      TWIWrite(address | 0<0);
+      TWIWrite(address | 0<<0);
       TWIWrite(0x01);
       TWIWrite(Minutes);
       TWIWrite(Hours & 0x3F);
@@ -90,11 +90,11 @@ int main(void){
       MilTime = 1;
     }else if(MilTimeChange & MilTime){//Change to 12 hour clock
       TWIStart();
-      TWIWrite(address | 0<0);
+      TWIWrite(address | 0<<0);
       TWIWrite(0x02);
       TWIWrite(0x40);//Writes bit 6 to 1 which enables 12 hour mode
       TWIStart();
-      TWIWrite(address | 0<0);
+      TWIWrite(address | 0<<0);
       TWIWrite(0x01);
       TWIWrite(Minutes);
       TWIWrite(Hours & 0x7F);

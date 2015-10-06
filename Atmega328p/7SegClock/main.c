@@ -54,17 +54,18 @@ int main(void){
     uint8_t Minutes = TWIReadACK();
     uint8_t Hours = TWIReadNACK();
     TWIStop();
-
+    
+    static uint8_t MilTime = 0;//Defaults to 12 hour clock
     static uint8_t MinutesOnes, MinutesTens, HoursOnes, HoursTens;
 
     MinutesOnes = Minutes & 0x0F;//(Minutes & 0x01) + (2*(Minutes & 0x02)) + (4*(Minutes & 0x04)) + (8*(Minutes & 0x08));
     MinutesTens = Minutes & 0x70;//(Minutes & 0x10) + (2*(Minutes & 0x20)) + (4*(Minutes & 0x40));
     HoursOnes = Hours & 0x0F;//(Hours & 0x01) + (2*(Hours & 0x02)) + (4*(Hours & 0x04)) + (8*(Hours & 0x08));
-//    if(MilTime){
-//      HoursTens = (Hours & 0x10) + (2*(Hours & 0x20));
-//    }else {
+    if(MilTime){
+      HoursTens = Hours & 0x30;//(Hours & 0x10) + (2*(Hours & 0x20));
+    }else {
       HoursTens = (Hours & 0x10);
-//    }
+    }
 
     PORTD &= ~(1 << LatchPin);
     ShiftOut(ClockPin,DataPin,numbers[HoursOnes]);
@@ -75,7 +76,7 @@ int main(void){
     
     
     
-    static uint8_t MilTime = 0;
+    
     if(MilTimeChange & !MilTime){//change to 24 hour clock
       TWIStart();
       TWIWrite(address | 0<<0);//Write to register

@@ -44,25 +44,7 @@ int main(void){
   
 
   while(1){  
-/*    
-    static uint8_t MilTime = 0;
 
-    if(MilTimeChange & !MilTime){//change to 24 hour clock
-      TWIStart();
-      TWIWrite(address | (0<<0));
-      TWIWrite(0x02);
-      TWIWrite(0x00);
-      TWIStop();
-      MilTime = 1;
-    }else if(MilTimeChange & MilTime){//change to 12 hour clock
-      TWIStart();
-      TWIWrite(address | (0<<0));
-      TWIWrite(0x02);
-      TWIWrite(0x40);
-      TWIStop();
-      MilTime = 0;
-    }
-*/    
 
     TWIStart();
     TWIWrite(address | (0<<0));
@@ -90,6 +72,27 @@ int main(void){
     ShiftOut(ClockPin,DataPin,numbers[MinutesOnes]);
     ShiftOut(ClockPin,DataPin,numbers[MinutesTens]);
     PORTD |= (1 << LatchPin);
+    
+    
+    
+    static uint8_t MilTime = 0;
+    if(MilTimeChange & !MilTime){//change to 24 hour clock
+      TWIStart();
+      TWIWrite(address | 0<0);//Write to register
+      TWIWrite(0x02);//First write sets pointer to hours register
+      TWIWrite(0x00);//Write whole hours register to 0. Changing from 12 to 24 resets hours and minutes anway
+      TWIStop();
+      MilTime = 1;
+    }else if(MilTimeChange & MilTime){//Change to 12 hour clock
+      TWIStart();
+      TWIWrite(address | 0<0);
+      TWIWrite(0x02);
+      TWIWrite(0x40);//Writes bit 6 to 1 which enables 12 hour mode
+      TWIStop();
+      MilTime = 0;
+    }
+    
+    
 /*    
     if(HourAdd){
       HoursOnes += 1;

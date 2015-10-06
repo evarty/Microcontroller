@@ -23,3 +23,14 @@ void ShiftOut(int SRCLK_Pin, int SER_Pin, int data){
         //PORTD |= (1 << RCLK_Pin);                               // Set the register-clock pin high to update the output of the shift-register
 
 }
+
+void MultiByteShiftOut(uint8_t ClkPin, uint8_t DataPin, uint8_t LatchPin, uint8_t *data){
+        
+        
+        
+        
+        
+        
+        
+}
+}

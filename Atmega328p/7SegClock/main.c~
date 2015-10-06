@@ -29,13 +29,9 @@ int main(void){
   uint8_t address = 0xD0; //1101000
   TWIInit();
   TWIStart();
-  TWIWrite(address | (0<<0));
+  TWIWrite(address | (1<<0));
   TWIWrite(0x00);
   TWIWrite(0x00);
-  TWIStart();
-  TWIWrite(address | (0<<0));
-  TWIWrite(0x07);
-  TWIWrite(0x03);
   TWIStop();
   
   Timer0SetupMode(0x00);
@@ -44,7 +40,7 @@ int main(void){
   
 
   while(1){  
-/*    
+    
     static uint8_t MilTime = 0;
 
     if(MilTimeChange & !MilTime){//change to 24 hour clock
@@ -62,7 +58,7 @@ int main(void){
       TWIStop();
       MilTime = 0;
     }
-*/    
+    
 
     TWIStart();
     TWIWrite(address | (0<<0));
@@ -75,14 +71,14 @@ int main(void){
 
     static uint8_t MinutesOnes, MinutesTens, HoursOnes, HoursTens;
 
-    MinutesOnes = Minutes & 0x0F;//(Minutes & 0x01) + (2*(Minutes & 0x02)) + (4*(Minutes & 0x04)) + (8*(Minutes & 0x08));
-    MinutesTens = Minutes & 0x80;//(Minutes & 0x10) + (2*(Minutes & 0x20)) + (4*(Minutes & 0x40));
-    HoursOnes = Hours & 0x0F;//(Hours & 0x01) + (2*(Hours & 0x02)) + (4*(Hours & 0x04)) + (8*(Hours & 0x08));
-//    if(MilTime){
-//      HoursTens = (Hours & 0x10) + (2*(Hours & 0x20));
-//    }else {
+    MinutesOnes = (Minutes & 0x01) + (2*(Minutes & 0x02)) + (4*(Minutes & 0x04)) + (8*(Minutes & 0x08));
+    MinutesTens = (Minutes & 0x10) + (2*(Minutes & 0x20)) + (4*(Minutes & 0x40));
+    HoursOnes = (Hours & 0x01) + (2*(Hours & 0x02)) + (4*(Hours & 0x04)) + (8*(Hours & 0x08));
+    if(MilTime){
+      HoursTens = (Hours & 0x10) + (2*(Hours & 0x20));
+    }else {
       HoursTens = (Hours & 0x10);
-//    }
+    }
 
     PORTD &= ~(1 << LatchPin);
     ShiftOut(ClockPin,DataPin,numbers[HoursOnes]);
@@ -90,7 +86,7 @@ int main(void){
     ShiftOut(ClockPin,DataPin,numbers[MinutesOnes]);
     ShiftOut(ClockPin,DataPin,numbers[MinutesTens]);
     PORTD |= (1 << LatchPin);
-/*    
+    
     if(HourAdd){
       HoursOnes += 1;
       if(MilTime){
@@ -127,7 +123,7 @@ int main(void){
     }
     
     
-*/    
+    
     
     
   }

@@ -56,7 +56,7 @@ int main(void){
     uint8_t Hours = TWIReadNACK();
     TWIStop();
     
-    static uint8_t MilTime = 0;//Defaults to 12 hour clock
+    static uint8_t MilTime = 1;//Defaults to 24 hour clock
     static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
 
     MinutesOnes = Minutes & 0x0F;//(Minutes & 0x01) + (2*(Minutes & 0x02)) + (4*(Minutes & 0x04)) + (8*(Minutes & 0x08));

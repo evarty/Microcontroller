@@ -38,6 +38,7 @@ int main(void){
   TWIWrite(0x03);
   TWIStop();
   
+  sei();
   Timer0SetupMode(0x00);
   Timer0SetupPrescale(0x60);
   Timer0SetupInterrupt(0x20);

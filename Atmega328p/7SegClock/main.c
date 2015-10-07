@@ -10,12 +10,12 @@
 #define DataPin 3
 #define ClockPin 4
 
-#define MilMask 0x04
-#define MilPin PIND
-#define HourPin PIND
-#define HourMask 0x01
-#define MinutePin PIND
-#define MinuteMask 0x02
+#define MilMask 0x08//D2
+#define MilPin PINB
+#define HourPin PINB
+#define HourMask 0x02//D0
+#define MinutePin PINB
+#define MinuteMask 0x04//D1
 //both preceding are arbitrary and currently placeholders
 
 volatile uint8_t MilTimeChange = 0;
@@ -56,15 +56,15 @@ int main(void){
     TWIStop();
     
     static uint8_t MilTime = 0;//Defaults to 12 hour clock
-    static uint8_t MinutesOnes, MinutesTens, HoursOnes, HoursTens;
+    static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
 
     MinutesOnes = Minutes & 0x0F;//(Minutes & 0x01) + (2*(Minutes & 0x02)) + (4*(Minutes & 0x04)) + (8*(Minutes & 0x08));
-    MinutesTens = Minutes & 0x70;//(Minutes & 0x10) + (2*(Minutes & 0x20)) + (4*(Minutes & 0x40));
+    MinutesTens = (Minutes & 0x70) >> 4;//(Minutes & 0x10) + (2*(Minutes & 0x20)) + (4*(Minutes & 0x40));
     HoursOnes = Hours & 0x0F;//(Hours & 0x01) + (2*(Hours & 0x02)) + (4*(Hours & 0x04)) + (8*(Hours & 0x08));
     if(MilTime){
-      HoursTens = Hours & 0x30;//(Hours & 0x10) + (2*(Hours & 0x20));
+      HoursTens = (Hours & 0x30) >> 4;//(Hours & 0x10) + (2*(Hours & 0x20));
     }else {
-      HoursTens = (Hours & 0x10);
+      HoursTens = (Hours & 0x10) >> 4;
     }
 
     PORTD &= ~(1 << LatchPin);
@@ -89,6 +89,7 @@ int main(void){
       TWIWrite(Hours & 0x3F);
       TWIStop();
       MilTime = 1;
+      MilTimeChange = 0;
     }else if(MilTimeChange & MilTime){//Change to 12 hour clock
       TWIStart();
       TWIWrite(address | (0<<0));
@@ -101,6 +102,7 @@ int main(void){
       TWIWrite(Hours & 0x7F);
       TWIStop();
       MilTime = 0;
+      MilTimeChange = 0;
     }
     
     
@@ -116,7 +118,7 @@ int main(void){
           HoursOnes = 0;
         }
         
-        TWISTart();
+        TWIStart();
         TWIWrite(address | (0<<0));
         TWIWrite(0x02);
         TWIWrite(0x00 | (HoursTens << 4) | (HoursOnes << 0));
@@ -138,9 +140,9 @@ int main(void){
         TWIStop();
         
       }
+      HourAdd = 0;
     }
       
-    
     
     
     
@@ -151,19 +153,19 @@ int main(void){
 ISR(TIMER0_OVF_vect){
   if(MilPin & MilMask){
     MilTimeChange = 1;
-  }else {
-    MilTimeChange = 0;
-  }
+  }//else {
+  //  MilTimeChange = 0;
+ // }
   
   if(HourPin & HourMask){
     HourAdd = 1;
-  }else {
-    HourAdd = 0;
-  }
+  }//else {
+  //  HourAdd = 0;
+  //}
   
   if(MinutePin & MinuteMask){
     MinuteAdd = 1;
-  }else{
-    MinuteAdd = 0;
-  }
+  }//else{
+  //  MinuteAdd = 0;
+  //}
 }

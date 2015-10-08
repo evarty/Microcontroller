@@ -20,7 +20,7 @@
 
 //volatile uint8_t MilTimeChange = 0;
 volatile uint8_t HourAdd = 0;
-//volatile uint8_t MinuteAdd = 0;
+volatile uint8_t MinuteAdd = 0;
 
 int main(void){
   DDRD = 0xff;
@@ -56,18 +56,13 @@ int main(void){
     uint8_t Hours = TWIReadNACK();
     TWIStop();
     
-    static uint8_t HourState = 1;
-//    static uint8_t MilTime = 1;//Defaults to 24 hour clock
+    static uint8_t HourState = 1, MinuteState = 1;
     static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
 
     MinutesOnes = Minutes & 0x0F;//(Minutes & 0x01) + (2*(Minutes & 0x02)) + (4*(Minutes & 0x04)) + (8*(Minutes & 0x08));
     MinutesTens = (Minutes & 0x70) >> 4;//(Minutes & 0x10) + (2*(Minutes & 0x20)) + (4*(Minutes & 0x40));
     HoursOnes = Hours & 0x0F;//(Hours & 0x01) + (2*(Hours & 0x02)) + (4*(Hours & 0x04)) + (8*(Hours & 0x08));
-//    if(MilTime){
-      HoursTens = (Hours & 0x30) >> 4;//(Hours & 0x10) + (2*(Hours & 0x20));
-//    }else {
-///      HoursTens = (Hours & 0x10) >> 4;
-//    }
+    HoursTens = (Hours & 0x30) >> 4;//(Hours & 0x10) + (2*(Hours & 0x20));
 
     PORTD &= ~(1 << LatchPin);
     ShiftOut(ClockPin,DataPin,numbers[HoursOnes]);
@@ -75,53 +70,26 @@ int main(void){
     ShiftOut(ClockPin,DataPin,numbers[MinutesOnes]);
     ShiftOut(ClockPin,DataPin,numbers[MinutesTens]);
     PORTD |= (1 << LatchPin);
-    
-    
-/*    
-    
-    if(MilTimeChange & !MilTime){//change to 24 hour clock
-      TWIStart();
-      TWIWrite(address | (0<<0));//Write to register
-      TWIWrite(0x02);//First write sets pointer to hours register
-      TWIWrite(0x00);//Write whole hours register to 0. Changing from 12 to 24 resets hours and minutes anway
-      TWIStart();//repeated start
-      TWIWrite(address | (0<<0));
-      TWIWrite(0x01);
-      TWIWrite(Minutes);
-      TWIWrite(Hours & 0x3F);
-      TWIStop();
-      MilTime = 1;
-      MilTimeChange = 0;
-    }else if(MilTimeChange & MilTime){//Change to 12 hour clock
-      TWIStart();
-      TWIWrite(address | (0<<0));
-      TWIWrite(0x02);
-      TWIWrite(0x40);//Writes bit 6 to 1 which enables 12 hour mode
-      TWIStart();
-      TWIWrite(address | (0<<0));
-      TWIWrite(0x01);
-      TWIWrite(Minutes);
-      TWIWrite(Hours & 0x7F);
-      TWIStop();
-      MilTime = 0;
-      MilTimeChange = 0;
-    }
-    
-*/    
-
-      if((HourPort && HourMask) && !HourState){
-        HourAdd = 1;
-        HourState = 1;
-      }else if((!(HourPort && HourMask)) && HourState){
-        HourState = 0;
-      }else {;}
 
 
+    
+    if((HourPort & HourMask) && !HourState){
+      HourAdd = 1;
+      HourState = 1;
+    }else if((!(HourPort & HourMask)) && HourState){
+      HourState = 0;
+    }else {;}
+
+    if((MinutePort & MinuteMask) && !MinuteState){
+      MinuteAdd = 1;
+      MinuteState = 1;
+    }else if((!(MinutePort & MinuteMask)) && MinuteState){
+      MinuteState = 0;
+    }else {;}
 
     
     if(HourAdd){
       HoursOnes += 1;
-//      if(MilTime){
         if((HoursOnes == 4) & (HoursTens == 2)){
           HoursTens = 0;
           HoursOnes = 0;
@@ -135,50 +103,28 @@ int main(void){
         TWIWrite(0x02);
         TWIWrite(0x00 | (HoursTens << 4) | (HoursOnes << 0));
         TWIStop();
-/*        
-      }else{
-        if((HoursOnes == 3) & (HoursTens == 1)){
-          HoursTens = 0;
-          HoursOnes = 1;
-        }else if((HoursOnes = 10) & (HoursTens == 0)){
-          HoursTens += 1;
-          HoursOnes = 0;
+      HourAdd = 0;
+    }
+
+    if(MinuteAdd){
+      MinutesOnes += 1;
+        if((MinutesOnes == 0) & (MinutesTens == 6)){
+          MinutesTens = 0;
+          MinutesOnes = 0;
+        }else if((MinutesOnes == 10) & (MinutesTens < 6)){
+          MinutesTens += 1;
+          MinutesOnes = 0;
         }
         
         TWIStart();
         TWIWrite(address | (0<<0));
-        TWIWrite(0x02);
-        TWIWrite(0x40 | (HoursTens << 4) | (HoursOnes <<0));
+        TWIWrite(0x01);
+        TWIWrite(0x00 | (MinutesTens << 4) | (MinutesOnes << 0));
         TWIStop();
-        
-      }
-      HourAdd = 0;
-*/
-      HourAdd = 0;
-    }
-/*      
-      if(MilPin & MilMask){
-        MilTimeChange = 1;
-      }//else {
-      //  MilTimeChange = 0;
-      // }
-*//*  
-      if((HourPort & HourMask) & !HourState){
-        HourAdd = 1;
-        HourState = 1;
-      }else if((!(HourPort & HourMask)) & HourState){
-        HourState = 0;
-      }else {;}
-      //  HourAdd = 0;
-      //}
-*/  
-  //    if(MinutePort & MinuteMask){
-   //     MinuteAdd = 1;
-  //    }//else{
-      //  MinuteAdd = 0;
-      //}
 
-    
+      MinuteAdd = 0;
+    }
+
     
   }
 }

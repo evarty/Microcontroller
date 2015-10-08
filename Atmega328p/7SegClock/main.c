@@ -56,7 +56,7 @@ int main(void){
     uint8_t Hours = TWIReadNACK();
     TWIStop();
     
-    static uint8_t HourState = 0;
+    static uint8_t HourState = 1;
 //    static uint8_t MilTime = 1;//Defaults to 24 hour clock
     static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
 
@@ -108,6 +108,16 @@ int main(void){
     }
     
 */    
+
+      if((HourPort && HourMask) && !HourState){
+        HourAdd = 1;
+        HourState = 1;
+      }else if((!(HourPort && HourMask)) && HourState){
+        HourState = 0;
+      }else {;}
+
+
+
     
     if(HourAdd){
       HoursOnes += 1;
@@ -152,16 +162,16 @@ int main(void){
       }//else {
       //  MilTimeChange = 0;
       // }
-*/  
+*//*  
       if((HourPort & HourMask) & !HourState){
         HourAdd = 1;
         HourState = 1;
-      }else if(!(HourPort & HourMask) & HourState){
+      }else if((!(HourPort & HourMask)) & HourState){
         HourState = 0;
       }else {;}
       //  HourAdd = 0;
       //}
-  
+*/  
   //    if(MinutePort & MinuteMask){
    //     MinuteAdd = 1;
   //    }//else{

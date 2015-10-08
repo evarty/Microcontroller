@@ -18,7 +18,7 @@
 #define MinuteMask 0x04//D1
 //both preceding are arbitrary and currently placeholders
 
-volatile uint8_t MilTimeChange = 0;
+//volatile uint8_t MilTimeChange = 0;
 volatile uint8_t HourAdd = 0;
 volatile uint8_t MinuteAdd = 0;
 
@@ -56,17 +56,18 @@ int main(void){
     uint8_t Hours = TWIReadNACK();
     TWIStop();
     
-    static uint8_t MilTime = 1;//Defaults to 24 hour clock
+    static uint8_t HourState = 0;
+//    static uint8_t MilTime = 1;//Defaults to 24 hour clock
     static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
 
     MinutesOnes = Minutes & 0x0F;//(Minutes & 0x01) + (2*(Minutes & 0x02)) + (4*(Minutes & 0x04)) + (8*(Minutes & 0x08));
     MinutesTens = (Minutes & 0x70) >> 4;//(Minutes & 0x10) + (2*(Minutes & 0x20)) + (4*(Minutes & 0x40));
     HoursOnes = Hours & 0x0F;//(Hours & 0x01) + (2*(Hours & 0x02)) + (4*(Hours & 0x04)) + (8*(Hours & 0x08));
-    if(MilTime){
+//    if(MilTime){
       HoursTens = (Hours & 0x30) >> 4;//(Hours & 0x10) + (2*(Hours & 0x20));
-    }else {
-      HoursTens = (Hours & 0x10) >> 4;
-    }
+//    }else {
+///      HoursTens = (Hours & 0x10) >> 4;
+//    }
 
     PORTD &= ~(1 << LatchPin);
     ShiftOut(ClockPin,DataPin,numbers[HoursOnes]);
@@ -76,7 +77,7 @@ int main(void){
     PORTD |= (1 << LatchPin);
     
     
-    
+/*    
     
     if(MilTimeChange & !MilTime){//change to 24 hour clock
       TWIStart();
@@ -106,11 +107,11 @@ int main(void){
       MilTimeChange = 0;
     }
     
-    
+*/    
     
     if(HourAdd){
       HoursOnes += 1;
-      if(MilTime){
+//      if(MilTime){
         if((HoursOnes == 4) & (HoursTens == 2)){
           HoursTens = 0;
           HoursOnes = 0;
@@ -124,7 +125,7 @@ int main(void){
         TWIWrite(0x02);
         TWIWrite(0x00 | (HoursTens << 4) | (HoursOnes << 0));
         TWIStop();
-        
+/*        
       }else{
         if((HoursOnes == 3) & (HoursTens == 1)){
           HoursTens = 0;
@@ -142,9 +143,28 @@ int main(void){
         
       }
       HourAdd = 0;
+*/
+      HourAdd = 0;
     }
-      
-    
+/*      
+      if(MilPin & MilMask){
+        MilTimeChange = 1;
+      }//else {
+      //  MilTimeChange = 0;
+      // }
+*/  
+      if(HourPin & HourMask){
+        HourAdd = 1;
+      }//else {
+      //  HourAdd = 0;
+      //}
+  
+      if(MinutePin & MinuteMask){
+        MinuteAdd = 1;
+      }//else{
+      //  MinuteAdd = 0;
+      //}
+
     
     
   }
@@ -152,9 +172,9 @@ int main(void){
 
                  
 ISR(TIMER0_OVF_vect){
-  if(MilPin & MilMask){
-    MilTimeChange = 1;
-  }//else {
+//  if(MilPin & MilMask){
+//    MilTimeChange = 1;
+//  }//else {
   //  MilTimeChange = 0;
  // }
   

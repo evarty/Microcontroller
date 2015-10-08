@@ -177,7 +177,7 @@ ISR(TIMER0_OVF_vect){
 //  }//else {
   //  MilTimeChange = 0;
  // }
-  
+/*  
   if(HourPin & HourMask){
     HourAdd = 1;
   }//else {
@@ -189,4 +189,5 @@ ISR(TIMER0_OVF_vect){
   }//else{
   //  MinuteAdd = 0;
   //}
+*/
 }

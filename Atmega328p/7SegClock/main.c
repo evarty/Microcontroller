@@ -12,15 +12,15 @@
 
 #define MilMask 0x08//D2
 #define MilPin PINB
-#define HourPin PINB
+#define HourPort PINB
 #define HourMask 0x02//D0
-#define MinutePin PINB
+#define MinutePort PINB
 #define MinuteMask 0x04//D1
 //both preceding are arbitrary and currently placeholders
 
 //volatile uint8_t MilTimeChange = 0;
 volatile uint8_t HourAdd = 0;
-volatile uint8_t MinuteAdd = 0;
+//volatile uint8_t MinuteAdd = 0;
 
 int main(void){
   DDRD = 0xff;
@@ -153,15 +153,18 @@ int main(void){
       //  MilTimeChange = 0;
       // }
 */  
-      if(HourPin & HourMask){
+      if((HourPort & HourMask) & !HourState){
         HourAdd = 1;
-      }//else {
+        HourState = 1;
+      }else if(!(HourPort & HourMask) & HourState){
+        HourState = 0;
+      }else {;}
       //  HourAdd = 0;
       //}
   
-      if(MinutePin & MinuteMask){
-        MinuteAdd = 1;
-      }//else{
+  //    if(MinutePort & MinuteMask){
+   //     MinuteAdd = 1;
+  //    }//else{
       //  MinuteAdd = 0;
       //}
 

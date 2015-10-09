@@ -46,7 +46,7 @@ int main(void){
 
   while(1){  
 
-
+    cli();
     TWIStart();
     TWIWrite(address | (0<<0));
     TWIWrite(0x01);
@@ -55,6 +55,7 @@ int main(void){
     uint8_t Minutes = TWIReadACK();
     uint8_t Hours = TWIReadNACK();
     TWIStop();
+    sei();
     
     static uint8_t HourState = 1, MinuteState = 1;
     static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
@@ -90,37 +91,41 @@ int main(void){
     
     if(HourAdd){
       HoursOnes += 1;
-        if((HoursOnes == 4) & (HoursTens == 2)){
-          HoursTens = 0;
-          HoursOnes = 0;
-        }else if((HoursOnes == 10) & (HoursTens < 2)){
-          HoursTens += 1;
-          HoursOnes = 0;
-        }
+      if((HoursOnes == 4) & (HoursTens == 2)){
+        HoursTens = 0;
+        HoursOnes = 0;
+      }else if((HoursOnes == 10) & (HoursTens < 2)){
+        HoursTens += 1;
+        HoursOnes = 0;
+      }
         
-        TWIStart();
-        TWIWrite(address | (0<<0));
-        TWIWrite(0x02);
-        TWIWrite(0x00 | (HoursTens << 4) | (HoursOnes << 0));
-        TWIStop();
+      cli();
+      TWIStart();
+      TWIWrite(address | (0<<0));
+      TWIWrite(0x02);
+      TWIWrite(0x00 | (HoursTens << 4) | (HoursOnes << 0));
+      TWIStop();
+      sei();
       HourAdd = 0;
     }
 
     if(MinuteAdd){
       MinutesOnes += 1;
-        if((MinutesOnes == 0) & (MinutesTens == 6)){
-          MinutesTens = 0;
-          MinutesOnes = 0;
-        }else if((MinutesOnes == 10) & (MinutesTens < 6)){
-          MinutesTens += 1;
-          MinutesOnes = 0;
-        }
+      if((MinutesOnes == 0) & (MinutesTens == 6)){
+        MinutesTens = 0;
+        MinutesOnes = 0;
+      }else if((MinutesOnes == 10) & (MinutesTens < 6)){
+        MinutesTens += 1;
+        MinutesOnes = 0;
+      }
         
-        TWIStart();
-        TWIWrite(address | (0<<0));
-        TWIWrite(0x01);
-        TWIWrite(0x00 | (MinutesTens << 4) | (MinutesOnes << 0));
-        TWIStop();
+      cli();
+      TWIStart();
+      TWIWrite(address | (0<<0));
+      TWIWrite(0x01);
+      TWIWrite(0x00 | (MinutesTens << 4) | (MinutesOnes << 0));
+      TWIStop();
+      sei();
 
       MinuteAdd = 0;
     }

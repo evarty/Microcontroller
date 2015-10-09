@@ -21,6 +21,8 @@
 //volatile uint8_t MilTimeChange = 0;
 volatile uint8_t HourAdd = 0;
 volatile uint8_t MinuteAdd = 0;
+volatile uint8_t HourState = 1;
+volatile uint8_t MinuteState = 1;
 
 int main(void){
   DDRD = 0xff;
@@ -57,7 +59,6 @@ int main(void){
     TWIStop();
     sei();
     
-    static uint8_t HourState = 1, MinuteState = 1;
     static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
 
     MinutesOnes = Minutes & 0x0F;//(Minutes & 0x01) + (2*(Minutes & 0x02)) + (4*(Minutes & 0x04)) + (8*(Minutes & 0x08));

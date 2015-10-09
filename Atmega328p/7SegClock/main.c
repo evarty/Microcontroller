@@ -39,9 +39,9 @@ int main(void){
   TWIStop();
   
   sei();
-  Timer0SetupMode(0x00);
+  //Timer0SetupMode(0x00);
   Timer0SetupPrescale(0x60);
-  Timer0SetupInterrupt(0x20);
+  Timer0SetupInterrupt(0x10);
   
 
   while(1){  

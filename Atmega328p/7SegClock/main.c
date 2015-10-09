@@ -72,7 +72,7 @@ int main(void){
     PORTD |= (1 << LatchPin);
 
 
-    
+/*    
     if((HourPort & HourMask) && !HourState){
       HourAdd = 1;
       HourState = 1;
@@ -86,7 +86,7 @@ int main(void){
     }else if((!(MinutePort & MinuteMask)) && MinuteState){
       MinuteState = 0;
     }else {;}
-
+*/
     
     if(HourAdd){
       HoursOnes += 1;
@@ -131,22 +131,22 @@ int main(void){
 
                  
 ISR(TIMER0_OVF_vect){
-//  if(MilPin & MilMask){
-//    MilTimeChange = 1;
-//  }//else {
-  //  MilTimeChange = 0;
- // }
-/*  
-  if(HourPin & HourMask){
+
+  if((HourPort & HourMask) && !HourState){
     HourAdd = 1;
-  }//else {
-  //  HourAdd = 0;
-  //}
+    HourState = 1;
+  }else if((!(HourPort & HourMask)) && HourState){
+    HourState = 0;
+  }else {;}
   
-  if(MinutePin & MinuteMask){
+  if((MintuePort & MintueMask) && !MinuteState){
     MinuteAdd = 1;
-  }//else{
-  //  MinuteAdd = 0;
-  //}
-*/
+    MinuteState = 1;
+  }else if((!(MinutePort & MinuteMask)) && MinuteState){
+    MinuteState = 1;
+  }else {;}
+  
+  
+
+
 }

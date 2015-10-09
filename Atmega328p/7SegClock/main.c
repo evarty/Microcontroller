@@ -1,6 +1,6 @@
 #include <avr/io.h> //allows more human readable stuff
 #include <avr/interrupt.h>  //allows interrupts
-#include <avr/power.h> //power reduction management
+//#include <avr/power.h> //power reduction management
 
 #include "ShiftOut.h"
 #include "IIC.h"
@@ -42,13 +42,13 @@ int main(void){
   
   sei();
   //Timer0SetupMode(0x00);
-  Timer0SetupPrescale(0x60);
-  Timer0SetupInterrupt(0x10);
+  //Timer0SetupPrescale(0x60);
+  //Timer0SetupInterrupt(0x10);
   
 
   while(1){  
 
-    cli();
+    //cli();
     TWIStart();
     TWIWrite(address | (0<<0));
     TWIWrite(0x01);
@@ -57,8 +57,9 @@ int main(void){
     uint8_t Minutes = TWIReadACK();
     uint8_t Hours = TWIReadNACK();
     TWIStop();
-    sei();
+    //sei();
     
+    static uint8_t HourAdd = 0, MinuteAdd = 0, HourState = 1, MinuteState = 1;
     static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
 
     MinutesOnes = Minutes & 0x0F;//(Minutes & 0x01) + (2*(Minutes & 0x02)) + (4*(Minutes & 0x04)) + (8*(Minutes & 0x08));
@@ -74,7 +75,7 @@ int main(void){
     PORTD |= (1 << LatchPin);
 
 
-/*    
+///*    
     if((HourPort & HourMask) && !HourState){
       HourAdd = 1;
       HourState = 1;
@@ -88,7 +89,7 @@ int main(void){
     }else if((!(MinutePort & MinuteMask)) && MinuteState){
       MinuteState = 0;
     }else {;}
-*/
+//*/
     
     if(HourAdd){
       HoursOnes += 1;
@@ -100,13 +101,13 @@ int main(void){
         HoursOnes = 0;
       }
         
-      cli();
+      //cli();
       TWIStart();
       TWIWrite(address | (0<<0));
       TWIWrite(0x02);
       TWIWrite(0x00 | (HoursTens << 4) | (HoursOnes << 0));
       TWIStop();
-      sei();
+      //sei();
       HourAdd = 0;
     }
 
@@ -120,13 +121,13 @@ int main(void){
         MinutesOnes = 0;
       }
         
-      cli();
+      //cli();
       TWIStart();
       TWIWrite(address | (0<<0));
       TWIWrite(0x01);
       TWIWrite(0x00 | (MinutesTens << 4) | (MinutesOnes << 0));
       TWIStop();
-      sei();
+      //sei();
 
       MinuteAdd = 0;
     }
@@ -135,7 +136,7 @@ int main(void){
   }
 }
 
-                 
+/*                 
 ISR(TIMER0_OVF_vect){
 
   if((HourPort & HourMask) && !HourState){
@@ -156,3 +157,4 @@ ISR(TIMER0_OVF_vect){
 
 
 }
+*/

@@ -82,24 +82,24 @@ int main(void){
     if(HourButton && !HourState){
       HourAdd = 1;
       HourState = 1;
-    }else if(HourButton && HourState){
+    }else if(!HourButton && HourState){
       HourState = 0;
     }else {;}
 
     if(MinuteButton && !MinuteState){
       MinuteAdd = 1;
       MinuteState = 1;
-    }else if(MinuteButton && MinuteState){
+    }else if(!MinuteButton && MinuteState){
       MinuteState = 0;
     }else {;}
    
  
     if(HourAdd){
       HoursOnes += 1;
-      if((HoursOnes == 4) & (HoursTens == 2)){
+      if((HoursOnes == 4) && (HoursTens == 2)){
         HoursTens = 0;
         HoursOnes = 0;
-      }else if((HoursOnes == 10) & (HoursTens < 2)){
+      }else if((HoursOnes == 10) && (HoursTens < 2)){
         HoursTens += 1;
         HoursOnes = 0;
       }
@@ -116,10 +116,10 @@ int main(void){
 
     if(MinuteAdd){
       MinutesOnes += 1;
-      if((MinutesOnes == 0) & (MinutesTens == 6)){
+      if((MinutesOnes == 10) && (MinutesTens == 5)){
         MinutesTens = 0;
         MinutesOnes = 0;
-      }else if((MinutesOnes == 10) & (MinutesTens < 6)){
+      }else if((MinutesOnes == 10) && (MinutesTens < 6)){
         MinutesTens += 1;
         MinutesOnes = 0;
       }

@@ -10,12 +10,12 @@
 #define DataPin 3
 #define ClockPin 4
 
-#define MilMask 0x08//D2
+#define MilMask 0x08//B3
 #define MilPin PINB
 #define HourPort PINB
-#define HourMask 0x02//D0
+#define HourMask 0x02//B1
 #define MinutePort PINB
-#define MinuteMask 0x04//D1
+#define MinuteMask 0x04//B2
 //both preceding are arbitrary and currently placeholders
 
 volatile uint8_t HourButton = 0;
@@ -52,7 +52,7 @@ int main(void){
 
   while(1){  
 
-    //cli();
+    cli();
     TWIStart();
     TWIWrite(address | (0<<0));
     TWIWrite(0x01);
@@ -61,7 +61,7 @@ int main(void){
     uint8_t Minutes = TWIReadACK();
     uint8_t Hours = TWIReadNACK();
     TWIStop();
-    //sei();
+    sei();
     
     static uint8_t HourAdd = 0, MinuteAdd = 0, HourState = 1, MinuteState = 1;
     static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
@@ -79,22 +79,21 @@ int main(void){
     PORTD |= (1 << LatchPin);
 
 
-///*    
     if(HourButton && !HourState){
       HourAdd = 1;
       HourState = 1;
-    }else if((!(HourPort & HourMask)) && HourState){
+    }else if(HourButton && HourState){
       HourState = 0;
     }else {;}
 
     if(MinuteButton && !MinuteState){
       MinuteAdd = 1;
       MinuteState = 1;
-    }else if((!(MinutePort & MinuteMask)) && MinuteState){
+    }else if(MinuteButton && MinuteState){
       MinuteState = 0;
     }else {;}
-//*/
-    
+   
+ 
     if(HourAdd){
       HoursOnes += 1;
       if((HoursOnes == 4) & (HoursTens == 2)){
@@ -105,13 +104,13 @@ int main(void){
         HoursOnes = 0;
       }
         
-      //cli();
+      cli();
       TWIStart();
       TWIWrite(address | (0<<0));
       TWIWrite(0x02);
       TWIWrite(0x00 | (HoursTens << 4) | (HoursOnes << 0));
       TWIStop();
-      //sei();
+      sei();
       HourAdd = 0;
     }
 
@@ -125,13 +124,13 @@ int main(void){
         MinutesOnes = 0;
       }
         
-      //cli();
+      cli();
       TWIStart();
       TWIWrite(address | (0<<0));
       TWIWrite(0x01);
       TWIWrite(0x00 | (MinutesTens << 4) | (MinutesOnes << 0));
       TWIStop();
-      //sei();
+      sei();
 
       MinuteAdd = 0;
     }
@@ -142,7 +141,6 @@ int main(void){
 
                  
 ISR(TIMER0_OVF_vect){
-
   if(HourPort & HourMask){
     HourButton = 1;
   }else{
@@ -154,8 +152,5 @@ ISR(TIMER0_OVF_vect){
   }else{
     MinuteButton = 0;
   } 
-  
-
-
 }
 

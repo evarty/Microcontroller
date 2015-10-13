@@ -1,35 +1,44 @@
 #include <avr/io.h> //allows more human readable stuff
 #include <avr/interrupt.h>  //allows interrupts
-//#include <avr/power.h> //power reduction management
+
 
 #include "ShiftOut.h"
 #include "IIC.h"
 #include "Timer0.h"
 
+
+//define pins for 7 sef output 
 #define LatchPin 2
 #define DataPin 3
 #define ClockPin 4
 
-#define MilMask 0x08//B3
+
+//define button pins
+#define MilMask 0x08 //B3
 #define MilPin PINB
 #define HourPort PINB
-#define HourMask 0x02//B1
+#define HourMask 0x02 //B1
 #define MinutePort PINB
-#define MinuteMask 0x04//B2
-//both preceding are arbitrary and currently placeholders
+#define MinuteMask 0x04 //B2
 
+
+//define variables that will be affected by ISR
 volatile uint8_t HourButton = 0;
 volatile uint8_t MinuteButton = 0;
-//volatile uint8_t HourAdd = 0;
-//volatile uint8_t MinuteAdd = 0;
-//volatile uint8_t HourState = 1;
-//volatile uint8_t MinuteState = 1;
+
 
 int main(void){
+  
+  //set up output pins
   DDRD |= (1 << 4) | (1 << 3) | (1 << 2);
   DDRC |= (1 << 5) | (1 << 4);
+  //define 7 seg output values
   uint8_t numbers[] = {252,96,218,242,102,182,62,224,254,230};
+  //define clock iic address
   uint8_t address = 0xD0; //1101000
+  
+  
+  //init clock
   TWIInit();
   TWIStart();
   TWIWrite(address | (0<<0));
@@ -41,6 +50,8 @@ int main(void){
   TWIWrite(0x03);
   TWIStop();
   
+  
+  //set up timer0
 //  sei();
 //  Timer0SetupMode(0x00);
 //  Timer0SetupPrescale(0b01100000);
@@ -52,33 +63,39 @@ int main(void){
 
   while(1){  
 
+    //read current time from clock
     cli();
     TWIStart();
     TWIWrite(address | (0<<0));
     TWIWrite(0x01);
     TWIStart();
     TWIWrite(address | (1<<0));
-    uint8_t Minutes = TWIReadACK();
-    uint8_t Hours = TWIReadNACK();
+    static uint8_t Minutes = TWIReadACK();
+    static uint8_t Hours = TWIReadNACK();
     TWIStop();
     sei();
     
+    //define state variables
     static uint8_t HourAdd = 0, MinuteAdd = 0, HourState = 1, MinuteState = 1;
+    //define working variables
     static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
 
-    MinutesOnes = Minutes & 0x0F;//(Minutes & 0x01) + (2*(Minutes & 0x02)) + (4*(Minutes & 0x04)) + (8*(Minutes & 0x08));
-    MinutesTens = (Minutes & 0x70) >> 4;//(Minutes & 0x10) + (2*(Minutes & 0x20)) + (4*(Minutes & 0x40));
-    HoursOnes = Hours & 0x0F;//(Hours & 0x01) + (2*(Hours & 0x02)) + (4*(Hours & 0x04)) + (8*(Hours & 0x08));
-    HoursTens = (Hours & 0x30) >> 4;//(Hours & 0x10) + (2*(Hours & 0x20));
+    //separate digits from read values
+    MinutesOnes = Minutes & 0x0F;
+    MinutesTens = (Minutes & 0x70) >> 4;
+    HoursOnes = Hours & 0x0F;
+    HoursTens = (Hours & 0x30) >> 4;
 
+    //output to 7 segs
     PORTD &= ~(1 << LatchPin);
-    ShiftOut(ClockPin,DataPin,numbers[HoursOnes]);
+  ShiftOut(ClockPin,DataPin,numbers[HoursOnes]);
     ShiftOut(ClockPin,DataPin,numbers[HoursTens]);
     ShiftOut(ClockPin,DataPin,numbers[MinutesOnes]);
     ShiftOut(ClockPin,DataPin,numbers[MinutesTens]);
     PORTD |= (1 << LatchPin);
 
 
+    //signal if adding an hour, deal with hour state
     if(HourButton && !HourState){
       HourAdd = 1;
       HourState = 1;
@@ -86,6 +103,7 @@ int main(void){
       HourState = 0;
     }else {;}
 
+    //signal if adding a minute, deal with minute state
     if(MinuteButton && !MinuteState){
       MinuteAdd = 1;
       MinuteState = 1;
@@ -94,6 +112,7 @@ int main(void){
     }else {;}
    
  
+    //add an hour, account for base 10 stuff
     if(HourAdd){
       HoursOnes += 1;
       if((HoursOnes == 4) && (HoursTens == 2)){
@@ -114,6 +133,7 @@ int main(void){
       HourAdd = 0;
     }
 
+    //add a minute, account for base 10 stuff
     if(MinuteAdd){
       MinutesOnes += 1;
       if((MinutesOnes == 10) && (MinutesTens == 5)){
@@ -140,8 +160,9 @@ int main(void){
 }
 
                  
-ISR(TIMER0_OVF_vect){//ISR takes ~11 us
-  PORTD |= (1 << 0);
+ISR(TIMER0_OVF_vect){//ISR takes ~14 us, occurs every ~15ms
+  
+  //check if button pressed and indicate either way
   if(HourPort & HourMask){
     HourButton = 1;
   }else{
@@ -153,6 +174,5 @@ ISR(TIMER0_OVF_vect){//ISR takes ~11 us
   }else{
     MinuteButton = 0;
   } 
-  PORTD &= ~(1 << 0);
+  
 }
-

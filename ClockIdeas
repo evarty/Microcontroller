@@ -38,6 +38,7 @@ flash each number one at a time (with or without indication of first number)
 light that changes brightness throughout day
 light that changes color throughout day
 "landscape scene" with the sun/moon moving by (with weather if possible)
+time represented by sum of sine waves or fourier transform type thing
 
 
 Fun things extra
@@ -53,4 +54,3 @@ Fun things extra
   bluetooth time setting or status
   wifi time setting or status
   wifi hotspot
-   

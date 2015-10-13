@@ -10,19 +10,20 @@
 #define DataPin 3
 #define ClockPin 4
 
-#define MilMask 0x08//D2
+#define MilMask 0x08//B3
 #define MilPin PINB
 #define HourPort PINB
-#define HourMask 0x02//D0
+#define HourMask 0x02//B1
 #define MinutePort PINB
-#define MinuteMask 0x04//D1
+#define MinuteMask 0x04//B2
 //both preceding are arbitrary and currently placeholders
 
-//volatile uint8_t MilTimeChange = 0;
-volatile uint8_t HourAdd = 0;
-volatile uint8_t MinuteAdd = 0;
-volatile uint8_t HourState = 1;
-volatile uint8_t MinuteState = 1;
+volatile uint8_t HourButton = 0;
+volatile uint8_t MinuteButton = 0;
+//volatile uint8_t HourAdd = 0;
+//volatile uint8_t MinuteAdd = 0;
+//volatile uint8_t HourState = 1;
+//volatile uint8_t MinuteState = 1;
 
 int main(void){
   DDRD = 0xff;
@@ -40,15 +41,18 @@ int main(void){
   TWIWrite(0x03);
   TWIStop();
   
-  sei();
-  //Timer0SetupMode(0x00);
-  //Timer0SetupPrescale(0x60);
-  //Timer0SetupInterrupt(0x10);
-  
+//  sei();
+//  Timer0SetupMode(0x00);
+  Timer0SetupPrescale(0b01100000);
+  Timer0SetupInterrupt(0x20);
+  TCCR0A |= (0 << CS02);
+  TCCR0B |= (1 << CS01) | (1 << CS00);
+  TIMSK0 |= (1 << TOIE0);
+  sei(); 
 
   while(1){  
 
-    //cli();
+    cli();
     TWIStart();
     TWIWrite(address | (0<<0));
     TWIWrite(0x01);
@@ -57,7 +61,7 @@ int main(void){
     uint8_t Minutes = TWIReadACK();
     uint8_t Hours = TWIReadNACK();
     TWIStop();
-    //sei();
+    sei();
     
     static uint8_t HourAdd = 0, MinuteAdd = 0, HourState = 1, MinuteState = 1;
     static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
@@ -75,59 +79,58 @@ int main(void){
     PORTD |= (1 << LatchPin);
 
 
-///*    
-    if((HourPort & HourMask) && !HourState){
+    if(HourButton && !HourState){
       HourAdd = 1;
       HourState = 1;
-    }else if((!(HourPort & HourMask)) && HourState){
+    }else if(!HourButton && HourState){
       HourState = 0;
     }else {;}
 
-    if((MinutePort & MinuteMask) && !MinuteState){
+    if(MinuteButton && !MinuteState){
       MinuteAdd = 1;
       MinuteState = 1;
-    }else if((!(MinutePort & MinuteMask)) && MinuteState){
+    }else if(!MinuteButton && MinuteState){
       MinuteState = 0;
     }else {;}
-//*/
-    
+   
+ 
     if(HourAdd){
       HoursOnes += 1;
-      if((HoursOnes == 4) & (HoursTens == 2)){
+      if((HoursOnes == 4) && (HoursTens == 2)){
         HoursTens = 0;
         HoursOnes = 0;
-      }else if((HoursOnes == 10) & (HoursTens < 2)){
+      }else if((HoursOnes == 10) && (HoursTens < 2)){
         HoursTens += 1;
         HoursOnes = 0;
       }
         
-      //cli();
+      cli();
       TWIStart();
       TWIWrite(address | (0<<0));
       TWIWrite(0x02);
       TWIWrite(0x00 | (HoursTens << 4) | (HoursOnes << 0));
       TWIStop();
-      //sei();
+      sei();
       HourAdd = 0;
     }
 
     if(MinuteAdd){
       MinutesOnes += 1;
-      if((MinutesOnes == 0) & (MinutesTens == 6)){
+      if((MinutesOnes == 10) && (MinutesTens == 5)){
         MinutesTens = 0;
         MinutesOnes = 0;
-      }else if((MinutesOnes == 10) & (MinutesTens < 6)){
+      }else if((MinutesOnes == 10) && (MinutesTens < 6)){
         MinutesTens += 1;
         MinutesOnes = 0;
       }
         
-      //cli();
+      cli();
       TWIStart();
       TWIWrite(address | (0<<0));
       TWIWrite(0x01);
       TWIWrite(0x00 | (MinutesTens << 4) | (MinutesOnes << 0));
       TWIStop();
-      //sei();
+      sei();
 
       MinuteAdd = 0;
     }
@@ -136,25 +139,18 @@ int main(void){
   }
 }
 
-/*                 
+                 
 ISR(TIMER0_OVF_vect){
+  if(HourPort & HourMask){
+    HourButton = 1;
+  }else{
+    HourButton = 0;
+  }
 
-  if((HourPort & HourMask) && !HourState){
-    HourAdd = 1;
-    HourState = 1;
-  }else if((!(HourPort & HourMask)) && HourState){
-    HourState = 0;
-  }else {;}
-  
-  if((MintuePort & MintueMask) && !MinuteState){
-    MinuteAdd = 1;
-    MinuteState = 1;
-  }else if((!(MinutePort & MinuteMask)) && MinuteState){
-    MinuteState = 1;
-  }else {;}
-  
-  
-
-
+  if(MinutePort & MinuteMask){
+    MinuteButton = 1;
+  }else{
+    MinuteButton = 0;
+  } 
 }
-*/
+

@@ -1,0 +1,56 @@
+7 Seg Clock
+  12 hour
+  24 hour
+  switchable
+  decimal/percent of day
+  Seconds since start of day
+  minutes since start of day
+  Clock with year, day, etc
+  Alarm clock
+  GPS clock (time and location)
+
+Bar Graph Clock
+  Fraction of total day
+  Fraction of hour and minute
+  Fraction of week/month/year/decade/century/millennia
+  drop animation of next bar
+
+Ring Lights clock
+  Same as bar graph
+  Live Solar system map
+  Sun/Moon system map
+  epicycles (smaller rings -> smaller unit, would need motors)
+
+Pure LED
+  Binary Clock
+  pulse (rhythm/speed of pulse tells time)
+  
+Little Cube Things
+Nixie tubes
+wood cube with numbers showing through veneer
+scrolling LED Matrix
+hex clock
+write each number as a sum of fibonacci numbers, represented as different sized squares
+fake analog clock
+persistence of vision
+beat frequency two LEDs
+flash each number one at a time (with or without indication of first number)
+light that changes brightness throughout day
+light that changes color throughout day
+"landscape scene" with the sun/moon moving by (with weather if possible)
+
+
+Fun things extra
+  thermometer
+  barometer
+  compass
+  GPS
+  power usage display
+  visible circuitry
+  Phases of the moon
+  ISS overhead pass
+  As many time standards as possible
+  bluetooth time setting or status
+  wifi time setting or status
+  wifi hotspot
+   

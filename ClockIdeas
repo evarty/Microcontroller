@@ -25,6 +25,11 @@ Pure LED
   Binary Clock
   pulse (rhythm/speed of pulse tells time)
   
+Dot Matrix 
+  Basically any of these
+  irregular sized numbers
+  different boxes, size represnts time
+  
 Little Cube Things
 Nixie tubes
 wood cube with numbers showing through veneer
@@ -40,6 +45,9 @@ light that changes color throughout day
 "landscape scene" with the sun/moon moving by (with weather if possible)
 time represented by sum of sine waves or fourier transform type thing
 inverse sundial
+time dilation display (flesh this out)
+Fake water clock
+
 
 
 Fun things extra

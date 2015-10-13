@@ -26,8 +26,8 @@ volatile uint8_t MinuteButton = 0;
 //volatile uint8_t MinuteState = 1;
 
 int main(void){
-  DDRD = 0xff;
-  DDRC = 0xff;
+  DDRD |= (1 << 4) | (1 << 3) | (1 << 2);
+  DDRC |= (1 << 5) | (1 << 4);
   uint8_t numbers[] = {252,96,218,242,102,182,62,224,254,230};
   uint8_t address = 0xD0; //1101000
   TWIInit();
@@ -43,8 +43,8 @@ int main(void){
   
 //  sei();
 //  Timer0SetupMode(0x00);
-  Timer0SetupPrescale(0b01100000);
-  Timer0SetupInterrupt(0x20);
+//  Timer0SetupPrescale(0b01100000);
+//  Timer0SetupInterrupt(0x20);
   TCCR0A |= (0 << CS02);
   TCCR0B |= (1 << CS01) | (1 << CS00);
   TIMSK0 |= (1 << TOIE0);

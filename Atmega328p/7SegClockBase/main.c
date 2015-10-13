@@ -140,7 +140,8 @@ int main(void){
 }
 
                  
-ISR(TIMER0_OVF_vect){
+ISR(TIMER0_OVF_vect){//ISR takes ~11 us
+  PORTD |= (1 << 0);
   if(HourPort & HourMask){
     HourButton = 1;
   }else{
@@ -152,5 +153,6 @@ ISR(TIMER0_OVF_vect){
   }else{
     MinuteButton = 0;
   } 
+  PORTD &= ~(1 << 0);
 }
 

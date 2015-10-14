@@ -62,7 +62,8 @@ int main(void){
   sei(); 
 
   while(1){  
-
+    
+    static uint8_t Minutes = 0, Hours = 0;
     //read current time from clock
     cli();
     TWIStart();
@@ -70,8 +71,8 @@ int main(void){
     TWIWrite(0x01);
     TWIStart();
     TWIWrite(address | (1<<0));
-    static uint8_t Minutes = TWIReadACK();
-    static uint8_t Hours = TWIReadNACK();
+    Minutes = TWIReadACK();
+    Hours = TWIReadNACK();
     TWIStop();
     sei();
     

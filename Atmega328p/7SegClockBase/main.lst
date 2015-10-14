@@ -1,0 +1,976 @@
+GAS LISTING /tmp/ccoHPd7Y.s 			page 1
+
+
+   1               		.file	"main.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.stabs	"/home/edward/Microcontroller/Atmega328p/7SegClockBase/",100,0,2,.Ltext0
+   8               		.stabs	"main.c",100,0,2,.Ltext0
+   9               		.text
+  10               	.Ltext0:
+  11               		.stabs	"gcc2_compiled.",60,0,0,0
+  12               		.stabs	"int:t(0,1)=r(0,1);-32768;32767;",128,0,0,0
+  13               		.stabs	"char:t(0,2)=@s8;r(0,2);0;255;",128,0,0,0
+  14               		.stabs	"long int:t(0,3)=@s32;r(0,3);020000000000;017777777777;",128,0,0,0
+  15               		.stabs	"unsigned int:t(0,4)=r(0,4);0;0177777;",128,0,0,0
+  16               		.stabs	"long unsigned int:t(0,5)=@s32;r(0,5);0;037777777777;",128,0,0,0
+  17               		.stabs	"long long int:t(0,6)=@s64;r(0,6);01000000000000000000000;0777777777777777777777;",128,0,0,
+  18               		.stabs	"long long unsigned int:t(0,7)=@s64;r(0,7);0;01777777777777777777777;",128,0,0,0
+  19               		.stabs	"short int:t(0,8)=r(0,8);-32768;32767;",128,0,0,0
+  20               		.stabs	"short unsigned int:t(0,9)=r(0,9);0;0177777;",128,0,0,0
+  21               		.stabs	"signed char:t(0,10)=@s8;r(0,10);-128;127;",128,0,0,0
+  22               		.stabs	"unsigned char:t(0,11)=@s8;r(0,11);0;255;",128,0,0,0
+  23               		.stabs	"float:t(0,12)=r(0,1);4;0;",128,0,0,0
+  24               		.stabs	"double:t(0,13)=r(0,1);4;0;",128,0,0,0
+  25               		.stabs	"long double:t(0,14)=r(0,1);4;0;",128,0,0,0
+  26               		.stabs	"short _Fract:t(0,15)=r(0,1);1;0;",128,0,0,0
+  27               		.stabs	"long _Fract:t(0,16)=r(0,1);4;0;",128,0,0,0
+  28               		.stabs	"long long _Fract:t(0,17)=r(0,1);8;0;",128,0,0,0
+  29               		.stabs	"unsigned short _Fract:t(0,18)=r(0,1);1;0;",128,0,0,0
+  30               		.stabs	"unsigned _Fract:t(0,19)=r(0,1);2;0;",128,0,0,0
+  31               		.stabs	"unsigned long _Fract:t(0,20)=r(0,1);4;0;",128,0,0,0
+  32               		.stabs	"unsigned long long _Fract:t(0,21)=r(0,1);8;0;",128,0,0,0
+  33               		.stabs	"_Sat short _Fract:t(0,22)=r(0,1);1;0;",128,0,0,0
+  34               		.stabs	"_Sat _Fract:t(0,23)=r(0,1);2;0;",128,0,0,0
+  35               		.stabs	"_Sat long _Fract:t(0,24)=r(0,1);4;0;",128,0,0,0
+  36               		.stabs	"_Sat long long _Fract:t(0,25)=r(0,1);8;0;",128,0,0,0
+  37               		.stabs	"_Sat unsigned short _Fract:t(0,26)=r(0,1);1;0;",128,0,0,0
+  38               		.stabs	"_Sat unsigned _Fract:t(0,27)=r(0,1);2;0;",128,0,0,0
+  39               		.stabs	"_Sat unsigned long _Fract:t(0,28)=r(0,1);4;0;",128,0,0,0
+  40               		.stabs	"_Sat unsigned long long _Fract:t(0,29)=r(0,1);8;0;",128,0,0,0
+  41               		.stabs	"short _Accum:t(0,30)=r(0,1);2;0;",128,0,0,0
+  42               		.stabs	"long _Accum:t(0,31)=r(0,1);8;0;",128,0,0,0
+  43               		.stabs	"long long _Accum:t(0,32)=r(0,1);8;0;",128,0,0,0
+  44               		.stabs	"unsigned short _Accum:t(0,33)=r(0,1);2;0;",128,0,0,0
+  45               		.stabs	"unsigned _Accum:t(0,34)=r(0,1);4;0;",128,0,0,0
+  46               		.stabs	"unsigned long _Accum:t(0,35)=r(0,1);8;0;",128,0,0,0
+  47               		.stabs	"unsigned long long _Accum:t(0,36)=r(0,1);8;0;",128,0,0,0
+  48               		.stabs	"_Sat short _Accum:t(0,37)=r(0,1);2;0;",128,0,0,0
+  49               		.stabs	"_Sat _Accum:t(0,38)=r(0,1);4;0;",128,0,0,0
+  50               		.stabs	"_Sat long _Accum:t(0,39)=r(0,1);8;0;",128,0,0,0
+  51               		.stabs	"_Sat long long _Accum:t(0,40)=r(0,1);8;0;",128,0,0,0
+  52               		.stabs	"_Sat unsigned short _Accum:t(0,41)=r(0,1);2;0;",128,0,0,0
+  53               		.stabs	"_Sat unsigned _Accum:t(0,42)=r(0,1);4;0;",128,0,0,0
+  54               		.stabs	"_Sat unsigned long _Accum:t(0,43)=r(0,1);8;0;",128,0,0,0
+  55               		.stabs	"_Sat unsigned long long _Accum:t(0,44)=r(0,1);8;0;",128,0,0,0
+  56               		.stabs	"void:t(0,45)=(0,45)",128,0,0,0
+  57               		.stabs	"/usr/lib/avr/include/avr/io.h",130,0,0,0
+GAS LISTING /tmp/ccoHPd7Y.s 			page 2
+
+
+  58               		.stabs	"/usr/lib/avr/include/avr/sfr_defs.h",130,0,0,0
+  59               		.stabs	"/usr/lib/avr/include/inttypes.h",130,0,0,0
+  60               		.stabs	"/usr/lib/gcc/avr/4.8.1/include/stdint.h",130,0,0,0
+  61               		.stabs	"/usr/lib/avr/include/stdint.h",130,0,0,0
+  62               		.stabs	"int8_t:t(5,1)=(0,10)",128,0,121,0
+  63               		.stabs	"uint8_t:t(5,2)=(0,11)",128,0,122,0
+  64               		.stabs	"int16_t:t(5,3)=(0,1)",128,0,123,0
+  65               		.stabs	"uint16_t:t(5,4)=(0,4)",128,0,124,0
+  66               		.stabs	"int32_t:t(5,5)=(0,3)",128,0,125,0
+  67               		.stabs	"uint32_t:t(5,6)=(0,5)",128,0,126,0
+  68               		.stabs	"int64_t:t(5,7)=(0,6)",128,0,128,0
+  69               		.stabs	"uint64_t:t(5,8)=(0,7)",128,0,129,0
+  70               		.stabs	"intptr_t:t(5,9)=(5,3)",128,0,142,0
+  71               		.stabs	"uintptr_t:t(5,10)=(5,4)",128,0,147,0
+  72               		.stabs	"int_least8_t:t(5,11)=(5,1)",128,0,159,0
+  73               		.stabs	"uint_least8_t:t(5,12)=(5,2)",128,0,164,0
+  74               		.stabs	"int_least16_t:t(5,13)=(5,3)",128,0,169,0
+  75               		.stabs	"uint_least16_t:t(5,14)=(5,4)",128,0,174,0
+  76               		.stabs	"int_least32_t:t(5,15)=(5,5)",128,0,179,0
+  77               		.stabs	"uint_least32_t:t(5,16)=(5,6)",128,0,184,0
+  78               		.stabs	"int_least64_t:t(5,17)=(5,7)",128,0,192,0
+  79               		.stabs	"uint_least64_t:t(5,18)=(5,8)",128,0,199,0
+  80               		.stabs	"int_fast8_t:t(5,19)=(5,1)",128,0,213,0
+  81               		.stabs	"uint_fast8_t:t(5,20)=(5,2)",128,0,218,0
+  82               		.stabs	"int_fast16_t:t(5,21)=(5,3)",128,0,223,0
+  83               		.stabs	"uint_fast16_t:t(5,22)=(5,4)",128,0,228,0
+  84               		.stabs	"int_fast32_t:t(5,23)=(5,5)",128,0,233,0
+  85               		.stabs	"uint_fast32_t:t(5,24)=(5,6)",128,0,238,0
+  86               		.stabs	"int_fast64_t:t(5,25)=(5,7)",128,0,246,0
+  87               		.stabs	"uint_fast64_t:t(5,26)=(5,8)",128,0,253,0
+  88               		.stabs	"intmax_t:t(5,27)=(5,7)",128,0,273,0
+  89               		.stabs	"uintmax_t:t(5,28)=(5,8)",128,0,278,0
+  90               		.stabn	162,0,0,0
+  91               		.stabn	162,0,0,0
+  92               		.stabs	"int_farptr_t:t(3,1)=(5,5)",128,0,77,0
+  93               		.stabs	"uint_farptr_t:t(3,2)=(5,6)",128,0,81,0
+  94               		.stabn	162,0,0,0
+  95               		.stabn	162,0,0,0
+  96               		.stabs	"/usr/lib/avr/include/avr/fuse.h",130,0,0,0
+  97               		.stabs	"__fuse_t:t(6,1)=(6,2)=s3low:(0,11),0,8;high:(0,11),8,8;extended:(0,11),16,8;;",128,0,244,0
+  98               		.stabn	162,0,0,0
+  99               		.stabn	162,0,0,0
+ 100               		.section	.rodata
+ 101               	.LC0:
+ 102 0000 FC        		.byte	-4
+ 103 0001 60        		.byte	96
+ 104 0002 DA        		.byte	-38
+ 105 0003 F2        		.byte	-14
+ 106 0004 66        		.byte	102
+ 107 0005 B6        		.byte	-74
+ 108 0006 3E        		.byte	62
+ 109 0007 E0        		.byte	-32
+ 110 0008 FE        		.byte	-2
+ 111 0009 E6        		.byte	-26
+ 112               		.section	.text.startup,"ax",@progbits
+ 113               		.stabs	"main:F(0,1)",36,0,30,main
+ 114               	.global	main
+GAS LISTING /tmp/ccoHPd7Y.s 			page 3
+
+
+ 115               		.type	main, @function
+ 116               	main:
+ 117               		.stabd	46,0,0
+   1:main.c        **** #include <avr/io.h> //allows more human readable stuff
+   2:main.c        **** #include <avr/interrupt.h>  //allows interrupts 
+   3:main.c        **** 
+   4:main.c        **** 
+   5:main.c        **** #include "ShiftOut.h"
+   6:main.c        **** #include "IIC.h"
+   7:main.c        **** #include "Timer0.h"
+   8:main.c        **** 
+   9:main.c        **** 
+  10:main.c        **** //define pins for 7 sef output 
+  11:main.c        **** #define LatchPin 2
+  12:main.c        **** #define DataPin 3
+  13:main.c        **** #define ClockPin 4
+  14:main.c        **** 
+  15:main.c        **** 
+  16:main.c        **** //define button pins
+  17:main.c        **** #define MilMask 0x08 //B3
+  18:main.c        **** #define MilPin PINB
+  19:main.c        **** #define HourPort PINB
+  20:main.c        **** #define HourMask 0x02 //B1
+  21:main.c        **** #define MinutePort PINB
+  22:main.c        **** #define MinuteMask 0x04 //B2
+  23:main.c        **** 
+  24:main.c        **** 
+  25:main.c        **** //define variables that will be affected by ISR
+  26:main.c        **** volatile uint8_t HourButton = 0;
+  27:main.c        **** volatile uint8_t MinuteButton = 0;
+  28:main.c        **** 
+  29:main.c        **** 
+  30:main.c        **** int main(void){
+ 118               		.stabn	68,0,30,.LM0-.LFBB1
+ 119               	.LM0:
+ 120               	.LFBB1:
+ 121 0000 CF93      		push r28
+ 122 0002 DF93      		push r29
+ 123 0004 CDB7      		in r28,__SP_L__
+ 124 0006 DEB7      		in r29,__SP_H__
+ 125 0008 2A97      		sbiw r28,10
+ 126 000a 0FB6      		in __tmp_reg__,__SREG__
+ 127 000c F894      		cli
+ 128 000e DEBF      		out __SP_H__,r29
+ 129 0010 0FBE      		out __SREG__,__tmp_reg__
+ 130 0012 CDBF      		out __SP_L__,r28
+ 131               	/* prologue: function */
+ 132               	/* frame size = 10 */
+ 133               	/* stack size = 12 */
+ 134               	.L__stack_usage = 12
+  31:main.c        ****   
+  32:main.c        ****   //set up output pins
+  33:main.c        ****   DDRD |= (1 << 4) | (1 << 3) | (1 << 2);
+ 135               		.stabn	68,0,33,.LM1-.LFBB1
+ 136               	.LM1:
+ 137 0014 8AB1      		in r24,0xa
+ 138 0016 8C61      		ori r24,lo8(28)
+GAS LISTING /tmp/ccoHPd7Y.s 			page 4
+
+
+ 139 0018 8AB9      		out 0xa,r24
+  34:main.c        ****   DDRC |= (1 << 5) | (1 << 4);
+ 140               		.stabn	68,0,34,.LM2-.LFBB1
+ 141               	.LM2:
+ 142 001a 87B1      		in r24,0x7
+ 143 001c 8063      		ori r24,lo8(48)
+ 144 001e 87B9      		out 0x7,r24
+  35:main.c        ****   //define 7 seg output values
+  36:main.c        ****   uint8_t numbers[] = {252,96,218,242,102,182,62,224,254,230};
+ 145               		.stabn	68,0,36,.LM3-.LFBB1
+ 146               	.LM3:
+ 147 0020 8AE0      		ldi r24,lo8(10)
+ 148 0022 E0E0      		ldi r30,lo8(.LC0)
+ 149 0024 F0E0      		ldi r31,hi8(.LC0)
+ 150 0026 DE01      		movw r26,r28
+ 151 0028 1196      		adiw r26,1
+ 152               		0:
+ 153 002a 0190      		ld r0,Z+
+ 154 002c 0D92      		st X+,r0
+ 155 002e 8A95      		dec r24
+ 156 0030 01F4      		brne 0b
+  37:main.c        ****   //define clock iic address
+  38:main.c        ****   uint8_t address = 0xD0; //1101000
+  39:main.c        ****   
+  40:main.c        ****   
+  41:main.c        ****   //init clock
+  42:main.c        ****   TWIInit();
+ 157               		.stabn	68,0,42,.LM4-.LFBB1
+ 158               	.LM4:
+ 159 0032 0E94 0000 		call TWIInit
+  43:main.c        ****   TWIStart();
+ 160               		.stabn	68,0,43,.LM5-.LFBB1
+ 161               	.LM5:
+ 162 0036 0E94 0000 		call TWIStart
+  44:main.c        ****   TWIWrite(address | (0<<0));
+ 163               		.stabn	68,0,44,.LM6-.LFBB1
+ 164               	.LM6:
+ 165 003a 80ED      		ldi r24,lo8(-48)
+ 166 003c 0E94 0000 		call TWIWrite
+  45:main.c        ****   TWIWrite(0x00);
+ 167               		.stabn	68,0,45,.LM7-.LFBB1
+ 168               	.LM7:
+ 169 0040 80E0      		ldi r24,0
+ 170 0042 0E94 0000 		call TWIWrite
+  46:main.c        ****   TWIWrite(0x00);
+ 171               		.stabn	68,0,46,.LM8-.LFBB1
+ 172               	.LM8:
+ 173 0046 80E0      		ldi r24,0
+ 174 0048 0E94 0000 		call TWIWrite
+  47:main.c        ****   TWIStart();
+ 175               		.stabn	68,0,47,.LM9-.LFBB1
+ 176               	.LM9:
+ 177 004c 0E94 0000 		call TWIStart
+  48:main.c        ****   TWIWrite(address | (0<<0));
+ 178               		.stabn	68,0,48,.LM10-.LFBB1
+ 179               	.LM10:
+ 180 0050 80ED      		ldi r24,lo8(-48)
+GAS LISTING /tmp/ccoHPd7Y.s 			page 5
+
+
+ 181 0052 0E94 0000 		call TWIWrite
+  49:main.c        ****   TWIWrite(0x07);
+ 182               		.stabn	68,0,49,.LM11-.LFBB1
+ 183               	.LM11:
+ 184 0056 87E0      		ldi r24,lo8(7)
+ 185 0058 0E94 0000 		call TWIWrite
+  50:main.c        ****   TWIWrite(0x03);
+ 186               		.stabn	68,0,50,.LM12-.LFBB1
+ 187               	.LM12:
+ 188 005c 83E0      		ldi r24,lo8(3)
+ 189 005e 0E94 0000 		call TWIWrite
+  51:main.c        ****   TWIStop();
+ 190               		.stabn	68,0,51,.LM13-.LFBB1
+ 191               	.LM13:
+ 192 0062 0E94 0000 		call TWIStop
+  52:main.c        ****   
+  53:main.c        ****   
+  54:main.c        ****   //set up timer0
+  55:main.c        **** //  sei();
+  56:main.c        **** //  Timer0SetupMode(0x00);
+  57:main.c        **** //  Timer0SetupPrescale(0b01100000);
+  58:main.c        **** //  Timer0SetupInterrupt(0x20);
+  59:main.c        ****   TCCR0A |= (0 << CS02);
+ 193               		.stabn	68,0,59,.LM14-.LFBB1
+ 194               	.LM14:
+ 195 0066 84B5      		in r24,0x24
+ 196 0068 84BD      		out 0x24,r24
+  60:main.c        ****   TCCR0B |= (1 << CS01) | (1 << CS00);
+ 197               		.stabn	68,0,60,.LM15-.LFBB1
+ 198               	.LM15:
+ 199 006a 85B5      		in r24,0x25
+ 200 006c 8360      		ori r24,lo8(3)
+ 201 006e 85BD      		out 0x25,r24
+  61:main.c        ****   TIMSK0 |= (1 << TOIE0);
+ 202               		.stabn	68,0,61,.LM16-.LFBB1
+ 203               	.LM16:
+ 204 0070 8091 6E00 		lds r24,110
+ 205 0074 8160      		ori r24,lo8(1)
+ 206 0076 8093 6E00 		sts 110,r24
+  62:main.c        ****   sei(); 
+ 207               		.stabn	68,0,62,.LM17-.LFBB1
+ 208               	.LM17:
+ 209               	/* #APP */
+ 210               	 ;  62 "main.c" 1
+ 211 007a 7894      		sei
+ 212               	 ;  0 "" 2
+ 213               	/* #NOAPP */
+ 214               	.L10:
+ 215               	.LBB2:
+  63:main.c        **** 
+  64:main.c        ****   while(1){  
+  65:main.c        ****     
+  66:main.c        ****     static uint8_t Minutes = 0, Hours = 0;
+  67:main.c        ****     //read current time from clock
+  68:main.c        ****     cli();
+ 216               		.stabn	68,0,68,.LM18-.LFBB1
+ 217               	.LM18:
+GAS LISTING /tmp/ccoHPd7Y.s 			page 6
+
+
+ 218               	/* #APP */
+ 219               	 ;  68 "main.c" 1
+ 220 007c F894      		cli
+ 221               	 ;  0 "" 2
+  69:main.c        ****     TWIStart();
+ 222               		.stabn	68,0,69,.LM19-.LFBB1
+ 223               	.LM19:
+ 224               	/* #NOAPP */
+ 225 007e 0E94 0000 		call TWIStart
+  70:main.c        ****     TWIWrite(address | (0<<0));
+ 226               		.stabn	68,0,70,.LM20-.LFBB1
+ 227               	.LM20:
+ 228 0082 80ED      		ldi r24,lo8(-48)
+ 229 0084 0E94 0000 		call TWIWrite
+  71:main.c        ****     TWIWrite(0x01);
+ 230               		.stabn	68,0,71,.LM21-.LFBB1
+ 231               	.LM21:
+ 232 0088 81E0      		ldi r24,lo8(1)
+ 233 008a 0E94 0000 		call TWIWrite
+  72:main.c        ****     TWIStart();
+ 234               		.stabn	68,0,72,.LM22-.LFBB1
+ 235               	.LM22:
+ 236 008e 0E94 0000 		call TWIStart
+  73:main.c        ****     TWIWrite(address | (1<<0));
+ 237               		.stabn	68,0,73,.LM23-.LFBB1
+ 238               	.LM23:
+ 239 0092 81ED      		ldi r24,lo8(-47)
+ 240 0094 0E94 0000 		call TWIWrite
+  74:main.c        ****     Minutes = TWIReadACK();
+ 241               		.stabn	68,0,74,.LM24-.LFBB1
+ 242               	.LM24:
+ 243 0098 0E94 0000 		call TWIReadACK
+ 244 009c 8093 0000 		sts Minutes.1404,r24
+  75:main.c        ****     Hours = TWIReadNACK();
+ 245               		.stabn	68,0,75,.LM25-.LFBB1
+ 246               	.LM25:
+ 247 00a0 0E94 0000 		call TWIReadNACK
+ 248 00a4 8093 0000 		sts Hours.1405,r24
+  76:main.c        ****     TWIStop();
+ 249               		.stabn	68,0,76,.LM26-.LFBB1
+ 250               	.LM26:
+ 251 00a8 0E94 0000 		call TWIStop
+  77:main.c        ****     sei();
+ 252               		.stabn	68,0,77,.LM27-.LFBB1
+ 253               	.LM27:
+ 254               	/* #APP */
+ 255               	 ;  77 "main.c" 1
+ 256 00ac 7894      		sei
+ 257               	 ;  0 "" 2
+  78:main.c        ****     
+  79:main.c        ****     //define state variables
+  80:main.c        ****     static uint8_t HourAdd = 0, MinuteAdd = 0, HourState = 1, MinuteState = 1;
+  81:main.c        ****     //define working variables
+  82:main.c        ****     static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
+  83:main.c        **** 
+  84:main.c        ****     //separate digits from read values
+  85:main.c        ****     MinutesOnes = Minutes & 0x0F;
+GAS LISTING /tmp/ccoHPd7Y.s 			page 7
+
+
+ 258               		.stabn	68,0,85,.LM28-.LFBB1
+ 259               	.LM28:
+ 260               	/* #NOAPP */
+ 261 00ae 8091 0000 		lds r24,Minutes.1404
+ 262 00b2 982F      		mov r25,r24
+ 263 00b4 9F70      		andi r25,lo8(15)
+ 264 00b6 9093 0000 		sts MinutesOnes.1410,r25
+  86:main.c        ****     MinutesTens = (Minutes & 0x70) >> 4;
+ 265               		.stabn	68,0,86,.LM29-.LFBB1
+ 266               	.LM29:
+ 267 00ba 8077      		andi r24,lo8(112)
+ 268 00bc 90E0      		ldi r25,0
+ 269 00be 24E0      		ldi r18,4
+ 270               		1:
+ 271 00c0 9595      		asr r25
+ 272 00c2 8795      		ror r24
+ 273 00c4 2A95      		dec r18
+ 274 00c6 01F4      		brne 1b
+ 275 00c8 8093 0000 		sts MinutesTens.1411,r24
+  87:main.c        ****     HoursOnes = Hours & 0x0F;
+ 276               		.stabn	68,0,87,.LM30-.LFBB1
+ 277               	.LM30:
+ 278 00cc 8091 0000 		lds r24,Hours.1405
+ 279 00d0 982F      		mov r25,r24
+ 280 00d2 9F70      		andi r25,lo8(15)
+ 281 00d4 9093 0000 		sts HoursOnes.1412,r25
+  88:main.c        ****     HoursTens = (Hours & 0x30) >> 4;
+ 282               		.stabn	68,0,88,.LM31-.LFBB1
+ 283               	.LM31:
+ 284 00d8 8073      		andi r24,lo8(48)
+ 285 00da 90E0      		ldi r25,0
+ 286 00dc 34E0      		ldi r19,4
+ 287               		1:
+ 288 00de 9595      		asr r25
+ 289 00e0 8795      		ror r24
+ 290 00e2 3A95      		dec r19
+ 291 00e4 01F4      		brne 1b
+ 292 00e6 8093 0000 		sts HoursTens.1413,r24
+  89:main.c        **** 
+  90:main.c        ****     //output to 7 segs
+  91:main.c        ****     PORTD &= ~(1 << LatchPin);
+ 293               		.stabn	68,0,91,.LM32-.LFBB1
+ 294               	.LM32:
+ 295 00ea 5A98      		cbi 0xb,2
+  92:main.c        ****   ShiftOut(ClockPin,DataPin,numbers[HoursOnes]);
+ 296               		.stabn	68,0,92,.LM33-.LFBB1
+ 297               	.LM33:
+ 298 00ec 8091 0000 		lds r24,HoursOnes.1412
+ 299 00f0 E1E0      		ldi r30,lo8(1)
+ 300 00f2 F0E0      		ldi r31,0
+ 301 00f4 EC0F      		add r30,r28
+ 302 00f6 FD1F      		adc r31,r29
+ 303 00f8 E80F      		add r30,r24
+ 304 00fa F11D      		adc r31,__zero_reg__
+ 305 00fc 4081      		ld r20,Z
+ 306 00fe 50E0      		ldi r21,0
+ 307 0100 63E0      		ldi r22,lo8(3)
+GAS LISTING /tmp/ccoHPd7Y.s 			page 8
+
+
+ 308 0102 70E0      		ldi r23,0
+ 309 0104 84E0      		ldi r24,lo8(4)
+ 310 0106 90E0      		ldi r25,0
+ 311 0108 0E94 0000 		call ShiftOut
+  93:main.c        ****     ShiftOut(ClockPin,DataPin,numbers[HoursTens]);
+ 312               		.stabn	68,0,93,.LM34-.LFBB1
+ 313               	.LM34:
+ 314 010c 8091 0000 		lds r24,HoursTens.1413
+ 315 0110 E1E0      		ldi r30,lo8(1)
+ 316 0112 F0E0      		ldi r31,0
+ 317 0114 EC0F      		add r30,r28
+ 318 0116 FD1F      		adc r31,r29
+ 319 0118 E80F      		add r30,r24
+ 320 011a F11D      		adc r31,__zero_reg__
+ 321 011c 4081      		ld r20,Z
+ 322 011e 50E0      		ldi r21,0
+ 323 0120 63E0      		ldi r22,lo8(3)
+ 324 0122 70E0      		ldi r23,0
+ 325 0124 84E0      		ldi r24,lo8(4)
+ 326 0126 90E0      		ldi r25,0
+ 327 0128 0E94 0000 		call ShiftOut
+  94:main.c        ****     ShiftOut(ClockPin,DataPin,numbers[MinutesOnes]);
+ 328               		.stabn	68,0,94,.LM35-.LFBB1
+ 329               	.LM35:
+ 330 012c 8091 0000 		lds r24,MinutesOnes.1410
+ 331 0130 E1E0      		ldi r30,lo8(1)
+ 332 0132 F0E0      		ldi r31,0
+ 333 0134 EC0F      		add r30,r28
+ 334 0136 FD1F      		adc r31,r29
+ 335 0138 E80F      		add r30,r24
+ 336 013a F11D      		adc r31,__zero_reg__
+ 337 013c 4081      		ld r20,Z
+ 338 013e 50E0      		ldi r21,0
+ 339 0140 63E0      		ldi r22,lo8(3)
+ 340 0142 70E0      		ldi r23,0
+ 341 0144 84E0      		ldi r24,lo8(4)
+ 342 0146 90E0      		ldi r25,0
+ 343 0148 0E94 0000 		call ShiftOut
+  95:main.c        ****     ShiftOut(ClockPin,DataPin,numbers[MinutesTens]);
+ 344               		.stabn	68,0,95,.LM36-.LFBB1
+ 345               	.LM36:
+ 346 014c 8091 0000 		lds r24,MinutesTens.1411
+ 347 0150 E1E0      		ldi r30,lo8(1)
+ 348 0152 F0E0      		ldi r31,0
+ 349 0154 EC0F      		add r30,r28
+ 350 0156 FD1F      		adc r31,r29
+ 351 0158 E80F      		add r30,r24
+ 352 015a F11D      		adc r31,__zero_reg__
+ 353 015c 4081      		ld r20,Z
+ 354 015e 50E0      		ldi r21,0
+ 355 0160 63E0      		ldi r22,lo8(3)
+ 356 0162 70E0      		ldi r23,0
+ 357 0164 84E0      		ldi r24,lo8(4)
+ 358 0166 90E0      		ldi r25,0
+ 359 0168 0E94 0000 		call ShiftOut
+  96:main.c        ****     PORTD |= (1 << LatchPin);
+ 360               		.stabn	68,0,96,.LM37-.LFBB1
+GAS LISTING /tmp/ccoHPd7Y.s 			page 9
+
+
+ 361               	.LM37:
+ 362 016c 5A9A      		sbi 0xb,2
+  97:main.c        **** 
+  98:main.c        **** 
+  99:main.c        ****     //signal if adding an hour, deal with hour state
+ 100:main.c        ****     if(HourButton && !HourState){
+ 363               		.stabn	68,0,100,.LM38-.LFBB1
+ 364               	.LM38:
+ 365 016e 8091 0000 		lds r24,HourButton
+ 366 0172 8823      		tst r24
+ 367 0174 01F0      		breq .L2
+ 368               		.stabn	68,0,100,.LM39-.LFBB1
+ 369               	.LM39:
+ 370 0176 8091 0000 		lds r24,HourState.1408
+ 371 017a 8111      		cpse r24,__zero_reg__
+ 372 017c 00C0      		rjmp .L2
+ 101:main.c        ****       HourAdd = 1;
+ 373               		.stabn	68,0,101,.LM40-.LFBB1
+ 374               	.LM40:
+ 375 017e 81E0      		ldi r24,lo8(1)
+ 376 0180 8093 0000 		sts HourAdd.1406,r24
+ 102:main.c        ****       HourState = 1;
+ 377               		.stabn	68,0,102,.LM41-.LFBB1
+ 378               	.LM41:
+ 379 0184 8093 0000 		sts HourState.1408,r24
+ 380 0188 00C0      		rjmp .L3
+ 381               	.L2:
+ 103:main.c        ****     }else if(!HourButton && HourState){
+ 382               		.stabn	68,0,103,.LM42-.LFBB1
+ 383               	.LM42:
+ 384 018a 8091 0000 		lds r24,HourButton
+ 385 018e 8111      		cpse r24,__zero_reg__
+ 386 0190 00C0      		rjmp .L3
+ 387               		.stabn	68,0,103,.LM43-.LFBB1
+ 388               	.LM43:
+ 389 0192 8091 0000 		lds r24,HourState.1408
+ 390 0196 8111      		cpse r24,__zero_reg__
+ 104:main.c        ****       HourState = 0;
+ 391               		.stabn	68,0,104,.LM44-.LFBB1
+ 392               	.LM44:
+ 393 0198 1092 0000 		sts HourState.1408,__zero_reg__
+ 394               	.L3:
+ 105:main.c        ****     }else {;}
+ 106:main.c        **** 
+ 107:main.c        ****     //signal if adding a minute, deal with minute state
+ 108:main.c        ****     if(MinuteButton && !MinuteState){
+ 395               		.stabn	68,0,108,.LM45-.LFBB1
+ 396               	.LM45:
+ 397 019c 8091 0000 		lds r24,MinuteButton
+ 398 01a0 8823      		tst r24
+ 399 01a2 01F0      		breq .L4
+ 400               		.stabn	68,0,108,.LM46-.LFBB1
+ 401               	.LM46:
+ 402 01a4 8091 0000 		lds r24,MinuteState.1409
+ 403 01a8 8111      		cpse r24,__zero_reg__
+ 404 01aa 00C0      		rjmp .L4
+ 109:main.c        ****       MinuteAdd = 1;
+GAS LISTING /tmp/ccoHPd7Y.s 			page 10
+
+
+ 405               		.stabn	68,0,109,.LM47-.LFBB1
+ 406               	.LM47:
+ 407 01ac 81E0      		ldi r24,lo8(1)
+ 408 01ae 8093 0000 		sts MinuteAdd.1407,r24
+ 110:main.c        ****       MinuteState = 1;
+ 409               		.stabn	68,0,110,.LM48-.LFBB1
+ 410               	.LM48:
+ 411 01b2 8093 0000 		sts MinuteState.1409,r24
+ 412 01b6 00C0      		rjmp .L5
+ 413               	.L4:
+ 111:main.c        ****     }else if(!MinuteButton && MinuteState){
+ 414               		.stabn	68,0,111,.LM49-.LFBB1
+ 415               	.LM49:
+ 416 01b8 8091 0000 		lds r24,MinuteButton
+ 417 01bc 8111      		cpse r24,__zero_reg__
+ 418 01be 00C0      		rjmp .L5
+ 419               		.stabn	68,0,111,.LM50-.LFBB1
+ 420               	.LM50:
+ 421 01c0 8091 0000 		lds r24,MinuteState.1409
+ 422 01c4 8111      		cpse r24,__zero_reg__
+ 112:main.c        ****       MinuteState = 0;
+ 423               		.stabn	68,0,112,.LM51-.LFBB1
+ 424               	.LM51:
+ 425 01c6 1092 0000 		sts MinuteState.1409,__zero_reg__
+ 426               	.L5:
+ 113:main.c        ****     }else {;}
+ 114:main.c        ****    
+ 115:main.c        ****  
+ 116:main.c        ****     //add an hour, account for base 10 stuff
+ 117:main.c        ****     if(HourAdd){
+ 427               		.stabn	68,0,117,.LM52-.LFBB1
+ 428               	.LM52:
+ 429 01ca 8091 0000 		lds r24,HourAdd.1406
+ 430 01ce 8823      		tst r24
+ 431 01d0 01F0      		breq .L6
+ 118:main.c        ****       HoursOnes += 1;
+ 432               		.stabn	68,0,118,.LM53-.LFBB1
+ 433               	.LM53:
+ 434 01d2 8091 0000 		lds r24,HoursOnes.1412
+ 435 01d6 8F5F      		subi r24,lo8(-(1))
+ 436 01d8 8093 0000 		sts HoursOnes.1412,r24
+ 119:main.c        ****       if((HoursOnes == 4) && (HoursTens == 2)){
+ 437               		.stabn	68,0,119,.LM54-.LFBB1
+ 438               	.LM54:
+ 439 01dc 8430      		cpi r24,lo8(4)
+ 440 01de 01F4      		brne .L7
+ 441               		.stabn	68,0,119,.LM55-.LFBB1
+ 442               	.LM55:
+ 443 01e0 8091 0000 		lds r24,HoursTens.1413
+ 444 01e4 8230      		cpi r24,lo8(2)
+ 445 01e6 01F4      		brne .L8
+ 120:main.c        ****         HoursTens = 0;
+ 446               		.stabn	68,0,120,.LM56-.LFBB1
+ 447               	.LM56:
+ 448 01e8 1092 0000 		sts HoursTens.1413,__zero_reg__
+ 449 01ec 00C0      		rjmp .L29
+ 450               	.L7:
+GAS LISTING /tmp/ccoHPd7Y.s 			page 11
+
+
+ 121:main.c        ****         HoursOnes = 0;
+ 122:main.c        ****       }else if((HoursOnes == 10) && (HoursTens < 2)){
+ 451               		.stabn	68,0,122,.LM57-.LFBB1
+ 452               	.LM57:
+ 453 01ee 8A30      		cpi r24,lo8(10)
+ 454 01f0 01F4      		brne .L8
+ 455               		.stabn	68,0,122,.LM58-.LFBB1
+ 456               	.LM58:
+ 457 01f2 8091 0000 		lds r24,HoursTens.1413
+ 458 01f6 8230      		cpi r24,lo8(2)
+ 459 01f8 00F4      		brsh .L8
+ 123:main.c        ****         HoursTens += 1;
+ 460               		.stabn	68,0,123,.LM59-.LFBB1
+ 461               	.LM59:
+ 462 01fa 8F5F      		subi r24,lo8(-(1))
+ 463 01fc 8093 0000 		sts HoursTens.1413,r24
+ 464               	.L29:
+ 124:main.c        ****         HoursOnes = 0;
+ 465               		.stabn	68,0,124,.LM60-.LFBB1
+ 466               	.LM60:
+ 467 0200 1092 0000 		sts HoursOnes.1412,__zero_reg__
+ 468               	.L8:
+ 125:main.c        ****       }
+ 126:main.c        ****         
+ 127:main.c        ****       cli();
+ 469               		.stabn	68,0,127,.LM61-.LFBB1
+ 470               	.LM61:
+ 471               	/* #APP */
+ 472               	 ;  127 "main.c" 1
+ 473 0204 F894      		cli
+ 474               	 ;  0 "" 2
+ 128:main.c        ****       TWIStart();
+ 475               		.stabn	68,0,128,.LM62-.LFBB1
+ 476               	.LM62:
+ 477               	/* #NOAPP */
+ 478 0206 0E94 0000 		call TWIStart
+ 129:main.c        ****       TWIWrite(address | (0<<0));
+ 479               		.stabn	68,0,129,.LM63-.LFBB1
+ 480               	.LM63:
+ 481 020a 80ED      		ldi r24,lo8(-48)
+ 482 020c 0E94 0000 		call TWIWrite
+ 130:main.c        ****       TWIWrite(0x02);
+ 483               		.stabn	68,0,130,.LM64-.LFBB1
+ 484               	.LM64:
+ 485 0210 82E0      		ldi r24,lo8(2)
+ 486 0212 0E94 0000 		call TWIWrite
+ 131:main.c        ****       TWIWrite(0x00 | (HoursTens << 4) | (HoursOnes << 0));
+ 487               		.stabn	68,0,131,.LM65-.LFBB1
+ 488               	.LM65:
+ 489 0216 8091 0000 		lds r24,HoursTens.1413
+ 490 021a 20E1      		ldi r18,lo8(16)
+ 491 021c 829F      		mul r24,r18
+ 492 021e C001      		movw r24,r0
+ 493 0220 1124      		clr __zero_reg__
+ 494 0222 9091 0000 		lds r25,HoursOnes.1412
+ 495 0226 892B      		or r24,r25
+ 496 0228 0E94 0000 		call TWIWrite
+GAS LISTING /tmp/ccoHPd7Y.s 			page 12
+
+
+ 132:main.c        ****       TWIStop();
+ 497               		.stabn	68,0,132,.LM66-.LFBB1
+ 498               	.LM66:
+ 499 022c 0E94 0000 		call TWIStop
+ 133:main.c        ****       sei();
+ 500               		.stabn	68,0,133,.LM67-.LFBB1
+ 501               	.LM67:
+ 502               	/* #APP */
+ 503               	 ;  133 "main.c" 1
+ 504 0230 7894      		sei
+ 505               	 ;  0 "" 2
+ 134:main.c        ****       HourAdd = 0;
+ 506               		.stabn	68,0,134,.LM68-.LFBB1
+ 507               	.LM68:
+ 508               	/* #NOAPP */
+ 509 0232 1092 0000 		sts HourAdd.1406,__zero_reg__
+ 510               	.L6:
+ 135:main.c        ****     }
+ 136:main.c        **** 
+ 137:main.c        ****     //add a minute, account for base 10 stuff
+ 138:main.c        ****     if(MinuteAdd){
+ 511               		.stabn	68,0,138,.LM69-.LFBB1
+ 512               	.LM69:
+ 513 0236 8091 0000 		lds r24,MinuteAdd.1407
+ 514 023a 8823      		tst r24
+ 515 023c 01F4      		brne .+2
+ 516 023e 00C0      		rjmp .L10
+ 139:main.c        ****       MinutesOnes += 1;
+ 517               		.stabn	68,0,139,.LM70-.LFBB1
+ 518               	.LM70:
+ 519 0240 8091 0000 		lds r24,MinutesOnes.1410
+ 520 0244 8F5F      		subi r24,lo8(-(1))
+ 521 0246 8093 0000 		sts MinutesOnes.1410,r24
+ 140:main.c        ****       if((MinutesOnes == 10) && (MinutesTens == 5)){
+ 522               		.stabn	68,0,140,.LM71-.LFBB1
+ 523               	.LM71:
+ 524 024a 8A30      		cpi r24,lo8(10)
+ 525 024c 01F4      		brne .L11
+ 526               		.stabn	68,0,140,.LM72-.LFBB1
+ 527               	.LM72:
+ 528 024e 8091 0000 		lds r24,MinutesTens.1411
+ 529 0252 8530      		cpi r24,lo8(5)
+ 530 0254 01F4      		brne .L12
+ 141:main.c        ****         MinutesTens = 0;
+ 531               		.stabn	68,0,141,.LM73-.LFBB1
+ 532               	.LM73:
+ 533 0256 1092 0000 		sts MinutesTens.1411,__zero_reg__
+ 534 025a 00C0      		rjmp .L30
+ 535               	.L12:
+ 142:main.c        ****         MinutesOnes = 0;
+ 143:main.c        ****       }else if((MinutesOnes == 10) && (MinutesTens < 6)){
+ 536               		.stabn	68,0,143,.LM74-.LFBB1
+ 537               	.LM74:
+ 538 025c 8630      		cpi r24,lo8(6)
+ 539 025e 00F4      		brsh .L11
+ 144:main.c        ****         MinutesTens += 1;
+ 540               		.stabn	68,0,144,.LM75-.LFBB1
+GAS LISTING /tmp/ccoHPd7Y.s 			page 13
+
+
+ 541               	.LM75:
+ 542 0260 8F5F      		subi r24,lo8(-(1))
+ 543 0262 8093 0000 		sts MinutesTens.1411,r24
+ 544               	.L30:
+ 145:main.c        ****         MinutesOnes = 0;
+ 545               		.stabn	68,0,145,.LM76-.LFBB1
+ 546               	.LM76:
+ 547 0266 1092 0000 		sts MinutesOnes.1410,__zero_reg__
+ 548               	.L11:
+ 146:main.c        ****       }
+ 147:main.c        ****         
+ 148:main.c        ****       cli();
+ 549               		.stabn	68,0,148,.LM77-.LFBB1
+ 550               	.LM77:
+ 551               	/* #APP */
+ 552               	 ;  148 "main.c" 1
+ 553 026a F894      		cli
+ 554               	 ;  0 "" 2
+ 149:main.c        ****       TWIStart();
+ 555               		.stabn	68,0,149,.LM78-.LFBB1
+ 556               	.LM78:
+ 557               	/* #NOAPP */
+ 558 026c 0E94 0000 		call TWIStart
+ 150:main.c        ****       TWIWrite(address | (0<<0));
+ 559               		.stabn	68,0,150,.LM79-.LFBB1
+ 560               	.LM79:
+ 561 0270 80ED      		ldi r24,lo8(-48)
+ 562 0272 0E94 0000 		call TWIWrite
+ 151:main.c        ****       TWIWrite(0x01);
+ 563               		.stabn	68,0,151,.LM80-.LFBB1
+ 564               	.LM80:
+ 565 0276 81E0      		ldi r24,lo8(1)
+ 566 0278 0E94 0000 		call TWIWrite
+ 152:main.c        ****       TWIWrite(0x00 | (MinutesTens << 4) | (MinutesOnes << 0));
+ 567               		.stabn	68,0,152,.LM81-.LFBB1
+ 568               	.LM81:
+ 569 027c 8091 0000 		lds r24,MinutesTens.1411
+ 570 0280 20E1      		ldi r18,lo8(16)
+ 571 0282 829F      		mul r24,r18
+ 572 0284 C001      		movw r24,r0
+ 573 0286 1124      		clr __zero_reg__
+ 574 0288 9091 0000 		lds r25,MinutesOnes.1410
+ 575 028c 892B      		or r24,r25
+ 576 028e 0E94 0000 		call TWIWrite
+ 153:main.c        ****       TWIStop();
+ 577               		.stabn	68,0,153,.LM82-.LFBB1
+ 578               	.LM82:
+ 579 0292 0E94 0000 		call TWIStop
+ 154:main.c        ****       sei();
+ 580               		.stabn	68,0,154,.LM83-.LFBB1
+ 581               	.LM83:
+ 582               	/* #APP */
+ 583               	 ;  154 "main.c" 1
+ 584 0296 7894      		sei
+ 585               	 ;  0 "" 2
+ 155:main.c        **** 
+ 156:main.c        ****       MinuteAdd = 0;
+GAS LISTING /tmp/ccoHPd7Y.s 			page 14
+
+
+ 586               		.stabn	68,0,156,.LM84-.LFBB1
+ 587               	.LM84:
+ 588               	/* #NOAPP */
+ 589 0298 1092 0000 		sts MinuteAdd.1407,__zero_reg__
+ 590 029c 00C0      		rjmp .L10
+ 591               	.LBE2:
+ 592               		.size	main, .-main
+ 593               		.stabs	"numbers:(0,46)=ar(0,47)=r(0,47);0;0177777;;0;9;(5,2)",128,0,36,1
+ 594               		.stabn	192,0,0,.LFBB1-.LFBB1
+ 595               		.stabs	"Minutes:V(5,2)",38,0,66,Minutes.1404
+ 596               		.stabs	"Hours:V(5,2)",38,0,66,Hours.1405
+ 597               		.stabs	"HourAdd:V(5,2)",38,0,80,HourAdd.1406
+ 598               		.stabs	"MinuteAdd:V(5,2)",38,0,80,MinuteAdd.1407
+ 599               		.stabs	"HourState:V(5,2)",38,0,80,HourState.1408
+ 600               		.stabs	"MinuteState:V(5,2)",38,0,80,MinuteState.1409
+ 601               		.stabs	"MinutesOnes:V(5,2)",38,0,82,MinutesOnes.1410
+ 602               		.stabs	"MinutesTens:V(5,2)",38,0,82,MinutesTens.1411
+ 603               		.stabs	"HoursOnes:V(5,2)",38,0,82,HoursOnes.1412
+ 604               		.stabs	"HoursTens:V(5,2)",38,0,82,HoursTens.1413
+ 605               		.stabn	192,0,0,.LBB2-.LFBB1
+ 606               		.stabn	224,0,0,.LBE2-.LFBB1
+ 607               		.stabn	224,0,0,.Lscope1-.LFBB1
+ 608               	.Lscope1:
+ 609               		.stabs	"",36,0,0,.Lscope1-.LFBB1
+ 610               		.stabd	78,0,0
+ 611               		.text
+ 612               		.stabs	"__vector_16:F(0,45)",36,0,164,__vector_16
+ 613               	.global	__vector_16
+ 614               		.type	__vector_16, @function
+ 615               	__vector_16:
+ 616               		.stabd	46,0,0
+ 157:main.c        ****     }
+ 158:main.c        **** 
+ 159:main.c        ****     
+ 160:main.c        ****   }
+ 161:main.c        **** }
+ 162:main.c        **** 
+ 163:main.c        ****                  
+ 164:main.c        **** ISR(TIMER0_OVF_vect){//ISR takes ~14 us, occurs every ~15ms
+ 617               		.stabn	68,0,164,.LM85-.LFBB2
+ 618               	.LM85:
+ 619               	.LFBB2:
+ 620 0000 1F92      		push r1
+ 621 0002 0F92      		push r0
+ 622 0004 0FB6      		in r0,__SREG__
+ 623 0006 0F92      		push r0
+ 624 0008 1124      		clr __zero_reg__
+ 625 000a 8F93      		push r24
+ 626               	/* prologue: Signal */
+ 627               	/* frame size = 0 */
+ 628               	/* stack size = 4 */
+ 629               	.L__stack_usage = 4
+ 165:main.c        ****   
+ 166:main.c        ****   //check if button pressed and indicate either way
+ 167:main.c        ****   if(HourPort & HourMask){
+ 630               		.stabn	68,0,167,.LM86-.LFBB2
+ 631               	.LM86:
+GAS LISTING /tmp/ccoHPd7Y.s 			page 15
+
+
+ 632 000c 199B      		sbis 0x3,1
+ 633 000e 00C0      		rjmp .L33
+ 168:main.c        ****     HourButton = 1;
+ 634               		.stabn	68,0,168,.LM87-.LFBB2
+ 635               	.LM87:
+ 636 0010 81E0      		ldi r24,lo8(1)
+ 637 0012 8093 0000 		sts HourButton,r24
+ 638 0016 00C0      		rjmp .L34
+ 639               	.L33:
+ 169:main.c        ****   }else{
+ 170:main.c        ****     HourButton = 0;
+ 640               		.stabn	68,0,170,.LM88-.LFBB2
+ 641               	.LM88:
+ 642 0018 1092 0000 		sts HourButton,__zero_reg__
+ 643               	.L34:
+ 171:main.c        ****   }
+ 172:main.c        **** 
+ 173:main.c        ****   if(MinutePort & MinuteMask){
+ 644               		.stabn	68,0,173,.LM89-.LFBB2
+ 645               	.LM89:
+ 646 001c 1A9B      		sbis 0x3,2
+ 647 001e 00C0      		rjmp .L35
+ 174:main.c        ****     MinuteButton = 1;
+ 648               		.stabn	68,0,174,.LM90-.LFBB2
+ 649               	.LM90:
+ 650 0020 81E0      		ldi r24,lo8(1)
+ 651 0022 8093 0000 		sts MinuteButton,r24
+ 652 0026 00C0      		rjmp .L32
+ 653               	.L35:
+ 175:main.c        ****   }else{
+ 176:main.c        ****     MinuteButton = 0;
+ 654               		.stabn	68,0,176,.LM91-.LFBB2
+ 655               	.LM91:
+ 656 0028 1092 0000 		sts MinuteButton,__zero_reg__
+ 657               	.L32:
+ 658               	/* epilogue start */
+ 177:main.c        ****   } 
+ 178:main.c        ****   
+ 179:main.c        **** }
+ 659               		.stabn	68,0,179,.LM92-.LFBB2
+ 660               	.LM92:
+ 661 002c 8F91      		pop r24
+ 662 002e 0F90      		pop r0
+ 663 0030 0FBE      		out __SREG__,r0
+ 664 0032 0F90      		pop r0
+ 665 0034 1F90      		pop r1
+ 666 0036 1895      		reti
+ 667               		.size	__vector_16, .-__vector_16
+ 668               	.Lscope2:
+ 669               		.stabs	"",36,0,0,.Lscope2-.LFBB2
+ 670               		.stabd	78,0,0
+ 671               		.local	MinuteAdd.1407
+ 672               		.comm	MinuteAdd.1407,1,1
+ 673               		.data
+ 674               		.type	MinuteState.1409, @object
+ 675               		.size	MinuteState.1409, 1
+ 676               	MinuteState.1409:
+GAS LISTING /tmp/ccoHPd7Y.s 			page 16
+
+
+ 677 0000 01        		.byte	1
+ 678               		.local	HourAdd.1406
+ 679               		.comm	HourAdd.1406,1,1
+ 680               		.type	HourState.1408, @object
+ 681               		.size	HourState.1408, 1
+ 682               	HourState.1408:
+ 683 0001 01        		.byte	1
+ 684               		.local	HoursTens.1413
+ 685               		.comm	HoursTens.1413,1,1
+ 686               		.local	HoursOnes.1412
+ 687               		.comm	HoursOnes.1412,1,1
+ 688               		.local	MinutesTens.1411
+ 689               		.comm	MinutesTens.1411,1,1
+ 690               		.local	MinutesOnes.1410
+ 691               		.comm	MinutesOnes.1410,1,1
+ 692               		.local	Hours.1405
+ 693               		.comm	Hours.1405,1,1
+ 694               		.local	Minutes.1404
+ 695               		.comm	Minutes.1404,1,1
+ 696               	.global	MinuteButton
+ 697               		.section .bss
+ 698               		.type	MinuteButton, @object
+ 699               		.size	MinuteButton, 1
+ 700               	MinuteButton:
+ 701 0000 00        		.zero	1
+ 702               	.global	HourButton
+ 703               		.type	HourButton, @object
+ 704               		.size	HourButton, 1
+ 705               	HourButton:
+ 706 0001 00        		.zero	1
+ 707               		.stabs	"HourButton:G(0,48)=B(5,2)",32,0,26,0
+ 708               		.stabs	"MinuteButton:G(0,48)",32,0,27,0
+ 709               		.text
+ 710               		.stabs	"",100,0,0,.Letext0
+ 711               	.Letext0:
+ 712               		.ident	"GCC: (GNU) 4.8.1"
+ 713               	.global __do_copy_data
+ 714               	.global __do_clear_bss
+GAS LISTING /tmp/ccoHPd7Y.s 			page 17
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+     /tmp/ccoHPd7Y.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccoHPd7Y.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccoHPd7Y.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccoHPd7Y.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccoHPd7Y.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccoHPd7Y.s:116    .text.startup:0000000000000000 main
+     /tmp/ccoHPd7Y.s:693    .bss:0000000000000009 Minutes.1404
+     /tmp/ccoHPd7Y.s:691    .bss:0000000000000008 Hours.1405
+     /tmp/ccoHPd7Y.s:689    .bss:0000000000000007 MinutesOnes.1410
+     /tmp/ccoHPd7Y.s:687    .bss:0000000000000006 MinutesTens.1411
+     /tmp/ccoHPd7Y.s:685    .bss:0000000000000005 HoursOnes.1412
+     /tmp/ccoHPd7Y.s:679    .bss:0000000000000004 HoursTens.1413
+     /tmp/ccoHPd7Y.s:705    .bss:0000000000000001 HourButton
+     /tmp/ccoHPd7Y.s:682    .data:0000000000000001 HourState.1408
+     /tmp/ccoHPd7Y.s:672    .bss:0000000000000003 HourAdd.1406
+     /tmp/ccoHPd7Y.s:700    .bss:0000000000000000 MinuteButton
+     /tmp/ccoHPd7Y.s:676    .data:0000000000000000 MinuteState.1409
+                             .bss:0000000000000002 MinuteAdd.1407
+     /tmp/ccoHPd7Y.s:615    .text:0000000000000000 __vector_16
+
+UNDEFINED SYMBOLS
+TWIInit
+TWIStart
+TWIWrite
+TWIStop
+TWIReadACK
+TWIReadNACK
+ShiftOut
+__do_copy_data
+__do_clear_bss

@@ -85,10 +85,10 @@ PROJECTNAME=myproject
 # (list all files to compile, e.g. 'a.c b.cpp as.S'):
 # Use .cc, .cpp or .C suffix for C++ files, use .S 
 # (NOT .s !!!) for assembly source code files.
-PRJSRC=main.c ../../Libraries/nRF24/nRF24.c ../../Libraries/SPI/SPI.c #../../Libraries/PWM/PWM.c
+PRJSRC=main.c ../Libraries/nRF24/nRF24.c ../Libraries/SPI/SPI.c #../../Libraries/PWM/PWM.c
 
 # additional includes (e.g. -I/path/to/mydir)
-INC=-I../../Libraries/SPI -I../../Libraries/nRF24 #-I../../Libraries/PWM
+INC=-I../Libraries/SPI -I../Libraries/nRF24 #-I../../Libraries/PWM
 
 # libraries to link in (e.g. -lmylib)
 LIBS=

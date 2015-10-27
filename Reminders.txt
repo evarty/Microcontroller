@@ -1,0 +1,4 @@
+For 74hc595,
+RCLK=Latch
+SRCLK=Clock
+SER=Data

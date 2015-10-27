@@ -17,7 +17,7 @@ void SPI_MasterInit(void){
   PORTB |= (1<<DDB2);
 }
 
-char SPI_MasterTransmitByte(char cData){
+uint8_t SPI_MasterTransmitByte(char cData){
   /* Start transmission */
   SPDR = cData;
   /* Wait for transmission complete */

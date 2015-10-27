@@ -31,7 +31,7 @@ int main(void){
 //  float VerticalRatio = (float)VerticalReadValue / (256.0);
 //  float ForwardRatio = (float)ForwardReadValue / (256.0);
 //  float SideRatio = (float)SideReadValue / (256.0);
-    char VerticalReadValue = 0xAA;
+    uint8_t VerticalReadValue = 0xAA;
     WriteTXCharTransmit(VerticalReadValue, &PORTD, 0, &PORTB, 2);  
 
 //    PORTB &= ~(1<<DDB2);

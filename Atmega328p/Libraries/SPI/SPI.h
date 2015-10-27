@@ -2,14 +2,14 @@
 
 #define SPI_H
 
-
+#include <avr/io.h>
 
 
 
 
 void SPI_MasterInit(void);
 
-char SPI_MasterTransmitByte(char cData);
+uint8_t SPI_MasterTransmitByte(char cData);
 
 void SPI_SlaveInit(void);
 

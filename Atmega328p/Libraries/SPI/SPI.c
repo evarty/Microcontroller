@@ -10,20 +10,33 @@
 
 
 void SPI_MasterInit(void){
-  /* Set MOSI, SS, and SCK output, all others input */
-  DDRB = (1<<DDB3)|(1<<DDB5)|(1<<DDB2);
+  /* Set MOSI and SCK output, all others input */
+  DDRB |= (1<<DDB3)|(1<<DDB5);
   /* Enable SPI, Master, set clock rate fck/16 */
   SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);//&~(1<<DORD)&~(1<<CPHA)&~(1<<CPOL);
-  PORTB |= (1<<DDB2);
 }
 
-uint8_t SPI_MasterTransmitByte(char cData){
+uint8_t SPI_MasterTransmitByte(char Data){
   /* Start transmission */
-  SPDR = cData;
+  SPDR = Data;
   /* Wait for transmission complete */
   while(!(SPSR & (1<<SPIF)));
   
   return SPDR;
+}
+
+void SPI_MasterTransmitArb(uint8_t *DataArray, ArrayLength){
+  uint8_t i = 0;
+  for(i = 0; i < ArrayLength; i++){
+    SPI_MasterTransmitByte(DataArray[i]);
+  }
+}
+
+void SPI_MasterReceiveArb(uint8_t *DataArray, uint8_t ArrayLength){
+  uint8_t i = 0;
+  for(i = 0; i < Length; i++){
+    DataArray[i] = SPI_MasterTransmitByte(0x00);
+  }
 }
 
 void SPI_SlaveInit(void){

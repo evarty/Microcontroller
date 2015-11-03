@@ -1,12 +1,10 @@
 #include "SPI.h"
-#include <inttypes.h>
 #include "nRF24.h"
 #define F_CPU 1000000UL
 
 #include <util/delay.h>
-#include <avr/pgmspace.h>
 #include <avr/io.h>
-#include <stdio.h>
+
 
 
 void nRF24InitTransmit(volatile uint8_t *SSPort, uint8_t SSPin){

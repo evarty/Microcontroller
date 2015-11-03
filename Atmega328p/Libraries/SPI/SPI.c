@@ -4,7 +4,6 @@
 #define DDR_SPI DDRB
 #define DD_MOSI 3
 #define DD_SCK 5
-#define DD_SS 2
 #define SPI_MISO_PIN 4
 
 
@@ -16,7 +15,7 @@ void SPI_MasterInit(void){
   SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);//&~(1<<DORD)&~(1<<CPHA)&~(1<<CPOL);
 }
 
-uint8_t SPI_MasterTransmitByte(char Data){
+uint8_t SPI_MasterTransmitByte(uint8_t Data){
   /* Start transmission */
   SPDR = Data;
   /* Wait for transmission complete */
@@ -46,7 +45,7 @@ void SPI_SlaveInit(void){
   SPCR = (1<<SPE);
 }
 
-char SPI_SlaveReceive(void){
+uint8_t SPI_SlaveReceive(void){
   /* Wait for reception complete */
   while(!(SPSR & (1<<SPIF)));
   /* Return Data Register */

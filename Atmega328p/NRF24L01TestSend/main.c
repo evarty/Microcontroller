@@ -7,12 +7,12 @@
 #include "SPI.h"
 #include "nRF24.h"
 
-//#define SSPin 2
+#define SSPin 2
 
 int main(void){
 
-//  DDRB |= (1<<SSPin);  
-//  PORTB |= (1<<SSPin);
+  DDRB |= (1<<SSPin);  
+  PORTB |= (1<<SSPin);
   DDRD |= (1<<0);
   PORTD |= (0<<0);
 //  ADCInitilize();

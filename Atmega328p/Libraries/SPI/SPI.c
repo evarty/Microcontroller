@@ -20,7 +20,7 @@ uint8_t SPI_MasterTransmitByte(uint8_t Data){
   SPDR = Data;
   /* Wait for transmission complete */
   while(!(SPSR & (1<<SPIF)));
-  
+
   return SPDR;
 }
 

@@ -39,12 +39,12 @@ int main(void){
   TWIWrite(0x07);
   TWIWrite(0x03);
   TWIStop();
-  
+
   sei();
   //Timer0SetupMode(0x00);
   //Timer0SetupPrescale(0x60);
   //Timer0SetupInterrupt(0x10);
-  
+
 
   while(1){  
 
@@ -58,7 +58,7 @@ int main(void){
     uint8_t Hours = TWIReadNACK();
     TWIStop();
     //sei();
-    
+
     static uint8_t HourAdd = 0, MinuteAdd = 0, HourState = 1, MinuteState = 1;
     static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
 
@@ -75,7 +75,7 @@ int main(void){
     PORTD |= (1 << LatchPin);
 
 
-///*    
+    ///*    
     if((HourPort & HourMask) && !HourState){
       HourAdd = 1;
       HourState = 1;
@@ -89,8 +89,8 @@ int main(void){
     }else if((!(MinutePort & MinuteMask)) && MinuteState){
       MinuteState = 0;
     }else {;}
-//*/
-    
+    //*/
+
     if(HourAdd){
       HoursOnes += 1;
       if((HoursOnes == 4) & (HoursTens == 2)){
@@ -100,7 +100,7 @@ int main(void){
         HoursTens += 1;
         HoursOnes = 0;
       }
-        
+
       //cli();
       TWIStart();
       TWIWrite(address | (0<<0));
@@ -120,7 +120,7 @@ int main(void){
         MinutesTens += 1;
         MinutesOnes = 0;
       }
-        
+
       //cli();
       TWIStart();
       TWIWrite(address | (0<<0));
@@ -132,29 +132,29 @@ int main(void){
       MinuteAdd = 0;
     }
 
-    
+
   }
 }
 
 /*                 
-ISR(TIMER0_OVF_vect){
+                   ISR(TIMER0_OVF_vect){
 
-  if((HourPort & HourMask) && !HourState){
-    HourAdd = 1;
-    HourState = 1;
-  }else if((!(HourPort & HourMask)) && HourState){
-    HourState = 0;
-  }else {;}
-  
-  if((MintuePort & MintueMask) && !MinuteState){
-    MinuteAdd = 1;
-    MinuteState = 1;
-  }else if((!(MinutePort & MinuteMask)) && MinuteState){
-    MinuteState = 1;
-  }else {;}
-  
-  
+                   if((HourPort & HourMask) && !HourState){
+                   HourAdd = 1;
+                   HourState = 1;
+                   }else if((!(HourPort & HourMask)) && HourState){
+                   HourState = 0;
+                   }else {;}
+
+                   if((MintuePort & MintueMask) && !MinuteState){
+                   MinuteAdd = 1;
+                   MinuteState = 1;
+                   }else if((!(MinutePort & MinuteMask)) && MinuteState){
+                   MinuteState = 1;
+                   }else {;}
 
 
-}
-*/
+
+
+                   }
+ */

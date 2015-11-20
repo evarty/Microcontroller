@@ -23,7 +23,7 @@ int main(void)
 
 
 
-//  TCCR1 |= 1<<WGM12;    //sets the clock mode. page 136
+  //  TCCR1 |= 1<<WGM12;    //sets the clock mode. page 136
   TIMSK |= 1<<OCIE1A;   //enables the interrupts for when the timer maxes out. page 92 
   sei();                 //enables global interrupts
 

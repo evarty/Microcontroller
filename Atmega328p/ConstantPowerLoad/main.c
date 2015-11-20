@@ -9,15 +9,15 @@
 #define DataPin 3
 
 int main(void){
-  
+
   ADCInitilize();
   uint8_t numbers[] = {252,96,218,242,102,182,62,224,254,230};
-  
+
   DDRD = 0xFF;
   PORTD |= 1<<LatchPin;
 
   for(;;){
-    
+
     static uint16_t V_BatteryRead;
     static uint16_t V_SetRead;
     static uint16_t V_R_OutRead;

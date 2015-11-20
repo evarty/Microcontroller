@@ -21,7 +21,7 @@ void ADCInitilize(void)
 unsigned int ADCRead(void)
 {
   unsigned int r;
-  
+
 
   r = 0x10;
   ADMUX = r;

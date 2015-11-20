@@ -14,12 +14,12 @@ int main(void){
 
   while(1){
 
-  Read = ADCReadChar(2);
-  Hold = (((Read / 100.) - .75 ) * 100.) + 25;
-  Temp = (char)(Hold);
-  PORTB &= ~(1<<1);
-  ShiftOut(2, 0, Temp);
-  PORTB |= (1<<1);
+    Read = ADCReadChar(2);
+    Hold = (((Read / 100.) - .75 ) * 100.) + 25;
+    Temp = (char)(Hold);
+    PORTB &= ~(1<<1);
+    ShiftOut(2, 0, Temp);
+    PORTB |= (1<<1);
   }
 
 }

@@ -10,9 +10,9 @@ void IICTransmitMasterWrite(char SlaveAddress, int Data){
 
   while (!(TWCR & (1 << TWINT))){} //Wait for TWINT Flag to set. This indicates that START has been transmitted
 
-//  if((TWSR & 0xF8) != START){
-//    IICError();
-//  }
+  //  if((TWSR & 0xF8) != START){
+  //    IICError();
+  //  }
 
   TWDR = SlaveAddress | (0<<0);
   TWCR = (1 << TWINT) | (1 << TWEN);
@@ -37,10 +37,10 @@ char IICTransmitMasterRead(int SlaveAddress){
   TWDR = SlaveAddress | (1<<0);
   TWCR = (1<<TWINT) | (1<<TWEN) | (0<<TWSTA);
   while (!(TWCR & ( 1 << TWINT))){}
- //This while loop is exiting 
+  //This while loop is exiting 
   TWCR = (1<<TWINT) | (1<<TWEA) | (0<<TWSTO) | (0<<TWSTA);
-//  while (!(TWCR & (1<<TWINT))){}
-  
+  //  while (!(TWCR & (1<<TWINT))){}
+
   char temp = TWDR;
 
   TWCR = (1 << TWINT) | (1 << TWEN) | (1 << TWSTO);
@@ -51,7 +51,7 @@ char IICTransmitMasterRead(int SlaveAddress){
 
 //void IICError(){
 
-  
+
 
 
 void TWIInit(void){
@@ -86,7 +86,7 @@ uint8_t TWIReadACK(void){
 uint8_t TWIReadNACK(void){
   TWCR = (1<<TWINT) | (1<<TWEN);
   while ((TWCR & (1<<TWINT)) == 0);
- return TWDR;
+  return TWDR;
 }
 
 uint8_t TWIGetStatus(void){

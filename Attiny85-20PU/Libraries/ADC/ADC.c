@@ -12,21 +12,21 @@ void ADCInitChar(void){
 char ADCReadChar(char Pin){
   if(Pin == 0){
   }else
-  if(Pin == 1){
-    ADMUX |= (1<<MUX0);
-  }else
-  if(Pin == 2){
-    ADMUX |= (1<<MUX1);
-  }else
-  if(Pin == 3){
-    ADMUX |= (1<<MUX1)|(1<<MUX0);
-  }else
-  if(Pin == 4){
-    ADMUX |= (1<<MUX0)|(1<<MUX1)|(1<<MUX2)|(1<<MUX3);
-  }
-  
+    if(Pin == 1){
+      ADMUX |= (1<<MUX0);
+    }else
+      if(Pin == 2){
+        ADMUX |= (1<<MUX1);
+      }else
+        if(Pin == 3){
+          ADMUX |= (1<<MUX1)|(1<<MUX0);
+        }else
+          if(Pin == 4){
+            ADMUX |= (1<<MUX0)|(1<<MUX1)|(1<<MUX2)|(1<<MUX3);
+          }
+
   ADCSRA |= 1<<ADSC;
   loop_until_bit_is_clear(ADCSRA,ADSC);
-  
+
   return ADCH;
 }

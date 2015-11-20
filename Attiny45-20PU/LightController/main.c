@@ -27,7 +27,7 @@ int main(void)
   for(;;){
 
     if(PINB & 0x10){
-     OCR0B = 10;
+      OCR0B = 10;
       TCCR0B |= (1<<CS00);
       _delay_ms(1000);
       TCCR0B &= ~(1<<CS00);

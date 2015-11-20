@@ -28,7 +28,7 @@ void nRF24InitTransmit(volatile uint8_t *SSPort, uint8_t SSPin){
   //SPI_MasterTransmitByte(0x2B);
   //SPI_MasterTransmitByte(0x01);
   //*SSPort |= (1<<SSPin);
-  
+
 }
 
 void nRF24InitReceive(volatile uint8_t *SSPort, uint8_t SSPin){
@@ -52,11 +52,11 @@ void nRF24InitReceive(volatile uint8_t *SSPort, uint8_t SSPin){
   //SPI_MasterTransmitByte(0x2B);
   //SPI_MasterTransmitByte(0x01);
   //*SSPort |= (1<<SSPin);
-  
+
 }
 
 void WriteTXCharTransmit(char Data, volatile uint8_t *CEPort, uint8_t CEPin, volatile uint8_t *SSPort, uint8_t SSPin){
-  
+
   *SSPort &= ~(1<<SSPin);  
   SPI_MasterTransmitByte(0xA0);
   SPI_MasterTransmitByte(Data);

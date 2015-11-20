@@ -8,29 +8,26 @@
 
 
 void ShiftOut(int SRCLK_Pin, int SER_Pin, int data){
-        //PORTD &= ~(1 << RCLK_Pin); This is the Latch Pin                              // Set the register-clock pin low
-        for (int i = 0; i < (8); i++){     // Now we are entering the loop to shift out 8+ bits
+  //PORTD &= ~(1 << RCLK_Pin); This is the Latch Pin                              // Set the register-clock pin low
+  for (int i = 0; i < (8); i++){     // Now we are entering the loop to shift out 8+ bits
 
-                PORTD &= ~(1 << SRCLK_Pin);                     // Set the serial-clock pin low
+    PORTD &= ~(1 << SRCLK_Pin);                     // Set the serial-clock pin low
+    PORTD |= (((data&(0x01<<i))>>i) << SER_Pin );   // Go through each bit of data and output it
+    PORTD |= (1 << SRCLK_Pin);                      // Set the serial-clock pin high
+    PORTD &= ~(((data&(0x01<<i))>>i) << SER_Pin );  // Set the datapin low again    
+  }
 
-                PORTD |= (((data&(0x01<<i))>>i) << SER_Pin );   // Go through each bit of data and output it
-
-                PORTD |= (1 << SRCLK_Pin);                      // Set the serial-clock pin high
-
-                PORTD &= ~(((data&(0x01<<i))>>i) << SER_Pin );  // Set the datapin low again    
-        }
-
-        //PORTD |= (1 << RCLK_Pin);                               // Set the register-clock pin high to update the output of the shift-register
+  //PORTD |= (1 << RCLK_Pin);                               // Set the register-clock pin high to update the output of the shift-register
 
 }
 
 void MultiByteShiftOut(uint8_t ClkPin, uint8_t DataPin, uint8_t LatchPin, uint8_t *data){
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
 }
 

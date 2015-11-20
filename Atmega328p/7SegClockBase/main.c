@@ -28,7 +28,7 @@ volatile uint8_t MinuteButton = 0;
 
 
 int main(void){
-  
+
   //set up output pins
   DDRD |= (1 << 4) | (1 << 3) | (1 << 2);
   DDRC |= (1 << 5) | (1 << 4);
@@ -36,8 +36,8 @@ int main(void){
   uint8_t numbers[] = {252,96,218,242,102,182,62,224,254,230};
   //define clock iic address
   uint8_t address = 0xD0; //1101000
-  
-  
+
+
   //init clock
   TWIInit();
   TWIStart();
@@ -49,20 +49,20 @@ int main(void){
   TWIWrite(0x07);
   TWIWrite(0x03);
   TWIStop();
-  
-  
+
+
   //set up timer0
-//  sei();
-//  Timer0SetupMode(0x00);
-//  Timer0SetupPrescale(0b01100000);
-//  Timer0SetupInterrupt(0x20);
+  //  sei();
+  //  Timer0SetupMode(0x00);
+  //  Timer0SetupPrescale(0b01100000);
+  //  Timer0SetupInterrupt(0x20);
   TCCR0A |= (0 << CS02);
   TCCR0B |= (1 << CS01) | (1 << CS00);
   TIMSK0 |= (1 << TOIE0);
   sei(); 
 
   while(1){  
-    
+
     static uint8_t Minutes = 0, Hours = 0;
     //read current time from clock
     cli();
@@ -75,7 +75,7 @@ int main(void){
     Hours = TWIReadNACK();
     TWIStop();
     sei();
-    
+
     //define state variables
     static uint8_t HourAdd = 0, MinuteAdd = 0, HourState = 1, MinuteState = 1;
     //define working variables
@@ -89,7 +89,7 @@ int main(void){
 
     //output to 7 segs
     PORTD &= ~(1 << LatchPin);
-  ShiftOut(ClockPin,DataPin,numbers[HoursOnes]);
+    ShiftOut(ClockPin,DataPin,numbers[HoursOnes]);
     ShiftOut(ClockPin,DataPin,numbers[HoursTens]);
     ShiftOut(ClockPin,DataPin,numbers[MinutesOnes]);
     ShiftOut(ClockPin,DataPin,numbers[MinutesTens]);
@@ -111,8 +111,8 @@ int main(void){
     }else if(!MinuteButton && MinuteState){
       MinuteState = 0;
     }else {;}
-   
- 
+
+
     //add an hour, account for base 10 stuff
     if(HourAdd){
       HoursOnes += 1;
@@ -123,7 +123,7 @@ int main(void){
         HoursTens += 1;
         HoursOnes = 0;
       }
-        
+
       cli();
       TWIStart();
       TWIWrite(address | (0<<0));
@@ -144,7 +144,7 @@ int main(void){
         MinutesTens += 1;
         MinutesOnes = 0;
       }
-        
+
       cli();
       TWIStart();
       TWIWrite(address | (0<<0));
@@ -156,13 +156,13 @@ int main(void){
       MinuteAdd = 0;
     }
 
-    
+
   }
 }
 
-                 
+
 ISR(TIMER0_OVF_vect){//ISR takes ~14 us, occurs every ~15ms
-  
+
   //check if button pressed and indicate either way
   if(HourPort & HourMask){
     HourButton = 1;
@@ -175,5 +175,5 @@ ISR(TIMER0_OVF_vect){//ISR takes ~14 us, occurs every ~15ms
   }else{
     MinuteButton = 0;
   } 
-  
+
 }

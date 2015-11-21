@@ -4,7 +4,10 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#define ControlButton 0xFF
+#define TurnOnMask 0x02
+#define TurnOnPort PINB
+#define TurnOffMask 0x04
+#define TurnOffPort PINB
 
 int main(void)
 {
@@ -22,32 +25,41 @@ int main(void)
   //TCCR0B |= (1<<CS00);//Activate timer with no prescale
 
   //OCR0B = 50;
-  uint8_t State = 0;
-  uint8_t ButtonPressed = 0;
+  uint8_t OnState = 0;
+  uint8_t OffState = 0;
+  uint8_t TurnOnEngaged = 0;
+  uint8_t TurnOffEngaged = 0;
+
   for(;;){
 
-    if(PINB & 0x10){
+    if(TurnOnMask & TurnOnPort){
+      TurnOnEngaged = 1;
+    }else{
+      TurnOnEngaged = 0;
+    }
+
+    if(TurnOffMask & TurnOffPort){
+      TurnOffEngaged = 1;
+    }else{
+      TurnOffEngaged = 0;
+    }
+
+    if(TurnOnEngaged && !OnState){
+      OnState = 1;
       OCR0B = 10;
       TCCR0B |= (1<<CS00);
-      _delay_ms(1000);
-      TCCR0B &= ~(1<<CS00);
-    }else{
+    }else if(!TurnOnEngaged && OnState){
+      OnState = 0;
+    }else{;}
+
+    if(TurnOffEngaged && !OffState){
+      OffState = 1;
       OCR0B = 5;
       TCCR0B |= (1<<CS00);
-      _delay_ms(1000);
-      TCCR0B &= ~(1<<CS00);
-    }
+    }else if(!TurnOffEngaged && OffState){
+      OffState = 0;
+    }else{;}
 
-    if((PINB & ControlButton) && !State){
-      ButtonPressed = 1;
-      State = 1;
-    }else if(!(PNB & ControlButton) && State){
-      State = 0;
-    }else {;}
-
-    if(ButtonPressed){
-      //Enable square wave
-    }
 
   }
 }

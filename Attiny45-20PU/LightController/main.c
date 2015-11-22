@@ -4,9 +4,9 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#define TurnOnMask 0x02
+#define TurnOnMask 0x08
 #define TurnOnPort PINB
-#define TurnOffMask 0x04
+#define TurnOffMask 0x10
 #define TurnOffPort PINB
 
 int main(void)
@@ -39,9 +39,9 @@ int main(void)
     }
 
     if(TurnOffMask & TurnOffPort){
-      TurnOffEngaged = 1;
-    }else{
       TurnOffEngaged = 0;
+    }else{
+      TurnOffEngaged = 1;
     }
 
     if(TurnOnEngaged && !OnState){

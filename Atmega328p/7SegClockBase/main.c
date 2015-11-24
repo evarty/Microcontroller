@@ -1,3 +1,5 @@
+//7 segment clock based on DS1307 for timekeeping
+
 #include <avr/io.h> //allows more human readable stuff
 #include <avr/interrupt.h>  //allows interrupts 
 
@@ -38,7 +40,7 @@ int main(void){
   uint8_t address = 0xD0; //1101000
 
 
-  //init clock
+  //init clock chip (ds1307)
   TWIInit();
   TWIStart();
   TWIWrite(address | (0<<0));

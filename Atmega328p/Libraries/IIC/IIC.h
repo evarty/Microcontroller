@@ -1,5 +1,5 @@
-#ifndef _IIC
-#define _IIC
+#ifndef IIC_H
+#define IIC_H
 
 void TWIInit(void);
 void TWIStart(void);

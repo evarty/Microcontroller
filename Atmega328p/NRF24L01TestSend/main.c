@@ -1,7 +1,4 @@
-//#include <stdio.h>
 #include <avr/io.h>
-//#include <avr/pgmspace.h>
-//#include <inttypes.h>
 
 #include "ADC.h"
 #include "SPI.h"
@@ -42,4 +39,3 @@ int main(void){
 
 
 }
-

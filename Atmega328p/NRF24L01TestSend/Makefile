@@ -85,10 +85,10 @@ PROJECTNAME=MiniCopterController
 # (list all files to compile, e.g. 'a.c b.cpp as.S'):
 # Use .cc, .cpp or .C suffix for C++ files, use .S 
 # (NOT .s !!!) for assembly source code files.
-PRJSRC=main.c ../Libraries/ADC/ADC.c ../Libraries/SPI/SPI.c ../Libraries/nRF24/nRF24.c
+PRJSRC=main.c ../Libraries/ADC/ADC.c ../Libraries/MIRF/spi.c ../Libraries/MIRF/mirf.c#../Libraries/SPI/SPI.c ../Libraries/nRF24/nRF24.c
 
 # additional includes (e.g. -I/path/to/mydir)
-INC=-I../Libraries/ADC -I../Libraries/SPI -I../Libraries/nRF24
+INC=-I../Libraries/ADC -I../Libraries/MIRF#-I../Libraries/SPI -I../Libraries/nRF24
 
 # libraries to link in (e.g. -lmylib)
 LIBS=

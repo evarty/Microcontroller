@@ -24,6 +24,10 @@ void nRF24InitTransmit(volatile uint8_t *SSPort, uint8_t SSPin){
   SPI_MasterTransmitByte(0x25);
   SPI_MasterTransmitByte(0x46);
   *SSPort |= (1<<SSPin);
+  *SSPort &= ~(1<<SSPin);
+  SPI_MasterTransmitByte(0x26);
+  SPI_MasterTransmitByte(0x07);
+  *SSPort |= (1<<SSPin);
   //*SSPort &= ~(1<<SSPin);
   //SPI_MasterTransmitByte(0x2B);
   //SPI_MasterTransmitByte(0x01);

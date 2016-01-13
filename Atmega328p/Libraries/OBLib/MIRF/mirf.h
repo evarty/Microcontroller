@@ -24,6 +24,8 @@
     $Id$
 */
 
+//Minor Compatibility changes made by Ted
+
 #ifndef _MIRF_H_
 #define _MIRF_H_
 
@@ -35,8 +37,8 @@
 #define mirf_CONFIG     ( (1<<MASK_RX_DR) | (1<<EN_CRC) | (0<<CRCO) )
 
 // Pin definitions for chip select and chip enabled of the MiRF module
-#define CE  PB0
-#define CSN PB1
+#define CE  DDB0
+#define CSN DDB1
 
 // Definitions for selecting and enabling MiRF module
 #define mirf_CSN_hi     PORTB |=  (1<<CSN);

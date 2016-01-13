@@ -16,6 +16,7 @@ int main(void){
   //nRF24InitReceive(&PORTB, 2);
   DDRD |= (1<<0)|(1<<7)|(1<<1);
   PORTD |= (1<<0)|(1<<7)|(0<<1);
+  DDRB |= (1<<2);
 
   spi_init();
   mirf_init();

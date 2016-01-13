@@ -2,7 +2,7 @@
 //#include "nRF24.h"
 #include <avr/io.h>
 
-#define F_CPU 1000000
+#define F_CPU 8000000
 #include <util/delay.h>
 #include <avr/interrupt.h>
 

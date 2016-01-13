@@ -1,9 +1,9 @@
 #include <avr/io.h>
-#define F_CPU 1000000
+#define F_CPU 8000000
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-#include "ADC.h"
+//#include "ADC.h"
 //#include "SPI.h"
 //#include "nRF24.h"
 
@@ -15,10 +15,10 @@
 
 int main(void){
 
-  DDRB |= (1<<SSPin);  
-  PORTB |= (1<<SSPin);
-  DDRD |= (1<<0);
-  PORTD |= (0<<0);
+  //DDRB |= (1<<SSPin);  
+  //PORTB |= (1<<SSPin);
+  //DDRD |= (1<<0);
+  //PORTD |= (0<<0);
   //  ADCInitilize();
   //SPI_MasterInit();
   //nRF24InitTransmit(&PORTB, 2);

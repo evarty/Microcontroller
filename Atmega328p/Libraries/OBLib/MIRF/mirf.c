@@ -56,9 +56,9 @@ void mirf_init()
     GICR  = ((0<<INT1)|(1<<INT0));                         // Activate INT0
 #endif // __AVR_ATmega8__
 
-#if defined(__AVR_ATmega168__)
+#if defined(__AVR_ATmega328P__)
     // Initialize external interrupt on port PD6 (PCINT22)
-    DDRB &= ~(1<<PD6);
+    DDRB &= ~(1<<DDB6);
     PCMSK2 = (1<<PCINT22);
     PCICR  = (1<<PCIE2);
 #endif // __AVR_ATmega168__    

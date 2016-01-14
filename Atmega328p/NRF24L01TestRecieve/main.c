@@ -35,7 +35,7 @@ int main(void){
     //  PORTB &= ~(1<<2);
     //  SPI_MasterTransmitByte(ReadValue);
     //  PORTB |= (1<<2);
-
+    if(mirf_data_ready())
       mirf_get_data(buffer);
 
     if(buffer[0] == 0xAA){

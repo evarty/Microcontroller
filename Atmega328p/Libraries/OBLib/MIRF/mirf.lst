@@ -1,0 +1,958 @@
+GAS LISTING /tmp/cc2IBXG1.s 			page 1
+
+
+   1               		.file	"mirf.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.stabs	"/home/edward/Microcontroller/Atmega328p/NRF24L01TestSend/",100,0,2,.Ltext0
+   8               		.stabs	"../Libraries/OBLib/MIRF/mirf.c",100,0,2,.Ltext0
+   9               		.text
+  10               	.Ltext0:
+  11               		.stabs	"gcc2_compiled.",60,0,0,0
+  12               		.stabs	"int:t(0,1)=r(0,1);-32768;32767;",128,0,0,0
+  13               		.stabs	"char:t(0,2)=@s8;r(0,2);0;255;",128,0,0,0
+  14               		.stabs	"long int:t(0,3)=@s32;r(0,3);020000000000;017777777777;",128,0,0,0
+  15               		.stabs	"unsigned int:t(0,4)=r(0,4);0;0177777;",128,0,0,0
+  16               		.stabs	"long unsigned int:t(0,5)=@s32;r(0,5);0;037777777777;",128,0,0,0
+  17               		.stabs	"long long int:t(0,6)=@s64;r(0,6);01000000000000000000000;0777777777777777777777;",128,0,0,
+  18               		.stabs	"long long unsigned int:t(0,7)=@s64;r(0,7);0;01777777777777777777777;",128,0,0,0
+  19               		.stabs	"short int:t(0,8)=r(0,8);-32768;32767;",128,0,0,0
+  20               		.stabs	"short unsigned int:t(0,9)=r(0,9);0;0177777;",128,0,0,0
+  21               		.stabs	"signed char:t(0,10)=@s8;r(0,10);-128;127;",128,0,0,0
+  22               		.stabs	"unsigned char:t(0,11)=@s8;r(0,11);0;255;",128,0,0,0
+  23               		.stabs	"float:t(0,12)=r(0,1);4;0;",128,0,0,0
+  24               		.stabs	"double:t(0,13)=r(0,1);4;0;",128,0,0,0
+  25               		.stabs	"long double:t(0,14)=r(0,1);4;0;",128,0,0,0
+  26               		.stabs	"short _Fract:t(0,15)=r(0,1);1;0;",128,0,0,0
+  27               		.stabs	"_Fract:t(0,16)=r(0,1);2;0;",128,0,0,0
+  28               		.stabs	"long _Fract:t(0,17)=r(0,1);4;0;",128,0,0,0
+  29               		.stabs	"long long _Fract:t(0,18)=r(0,1);8;0;",128,0,0,0
+  30               		.stabs	"unsigned short _Fract:t(0,19)=r(0,1);1;0;",128,0,0,0
+  31               		.stabs	"unsigned _Fract:t(0,20)=r(0,1);2;0;",128,0,0,0
+  32               		.stabs	"unsigned long _Fract:t(0,21)=r(0,1);4;0;",128,0,0,0
+  33               		.stabs	"unsigned long long _Fract:t(0,22)=r(0,1);8;0;",128,0,0,0
+  34               		.stabs	"_Sat short _Fract:t(0,23)=r(0,1);1;0;",128,0,0,0
+  35               		.stabs	"_Sat _Fract:t(0,24)=r(0,1);2;0;",128,0,0,0
+  36               		.stabs	"_Sat long _Fract:t(0,25)=r(0,1);4;0;",128,0,0,0
+  37               		.stabs	"_Sat long long _Fract:t(0,26)=r(0,1);8;0;",128,0,0,0
+  38               		.stabs	"_Sat unsigned short _Fract:t(0,27)=r(0,1);1;0;",128,0,0,0
+  39               		.stabs	"_Sat unsigned _Fract:t(0,28)=r(0,1);2;0;",128,0,0,0
+  40               		.stabs	"_Sat unsigned long _Fract:t(0,29)=r(0,1);4;0;",128,0,0,0
+  41               		.stabs	"_Sat unsigned long long _Fract:t(0,30)=r(0,1);8;0;",128,0,0,0
+  42               		.stabs	"short _Accum:t(0,31)=r(0,1);2;0;",128,0,0,0
+  43               		.stabs	"_Accum:t(0,32)=r(0,1);4;0;",128,0,0,0
+  44               		.stabs	"long _Accum:t(0,33)=r(0,1);8;0;",128,0,0,0
+  45               		.stabs	"long long _Accum:t(0,34)=r(0,1);8;0;",128,0,0,0
+  46               		.stabs	"unsigned short _Accum:t(0,35)=r(0,1);2;0;",128,0,0,0
+  47               		.stabs	"unsigned _Accum:t(0,36)=r(0,1);4;0;",128,0,0,0
+  48               		.stabs	"unsigned long _Accum:t(0,37)=r(0,1);8;0;",128,0,0,0
+  49               		.stabs	"unsigned long long _Accum:t(0,38)=r(0,1);8;0;",128,0,0,0
+  50               		.stabs	"_Sat short _Accum:t(0,39)=r(0,1);2;0;",128,0,0,0
+  51               		.stabs	"_Sat _Accum:t(0,40)=r(0,1);4;0;",128,0,0,0
+  52               		.stabs	"_Sat long _Accum:t(0,41)=r(0,1);8;0;",128,0,0,0
+  53               		.stabs	"_Sat long long _Accum:t(0,42)=r(0,1);8;0;",128,0,0,0
+  54               		.stabs	"_Sat unsigned short _Accum:t(0,43)=r(0,1);2;0;",128,0,0,0
+  55               		.stabs	"_Sat unsigned _Accum:t(0,44)=r(0,1);4;0;",128,0,0,0
+  56               		.stabs	"_Sat unsigned long _Accum:t(0,45)=r(0,1);8;0;",128,0,0,0
+  57               		.stabs	"_Sat unsigned long long _Accum:t(0,46)=r(0,1);8;0;",128,0,0,0
+GAS LISTING /tmp/cc2IBXG1.s 			page 2
+
+
+  58               		.stabs	"void:t(0,47)=(0,47)",128,0,0,0
+  59               		.stabs	"../Libraries/OBLib/MIRF/mirf.h",130,0,0,0
+  60               		.stabs	"/usr/lib/avr/include/avr/io.h",130,0,0,0
+  61               		.stabs	"/usr/lib/avr/include/avr/sfr_defs.h",130,0,0,0
+  62               		.stabs	"/usr/lib/avr/include/inttypes.h",130,0,0,0
+  63               		.stabs	"/usr/lib/gcc/avr/4.8.1/include/stdint.h",130,0,0,0
+  64               		.stabs	"/usr/lib/avr/include/stdint.h",130,0,0,0
+  65               		.stabs	"int8_t:t(6,1)=(0,10)",128,0,121,0
+  66               		.stabs	"uint8_t:t(6,2)=(0,11)",128,0,122,0
+  67               		.stabs	"int16_t:t(6,3)=(0,1)",128,0,123,0
+  68               		.stabs	"uint16_t:t(6,4)=(0,4)",128,0,124,0
+  69               		.stabs	"int32_t:t(6,5)=(0,3)",128,0,125,0
+  70               		.stabs	"uint32_t:t(6,6)=(0,5)",128,0,126,0
+  71               		.stabs	"int64_t:t(6,7)=(0,6)",128,0,128,0
+  72               		.stabs	"uint64_t:t(6,8)=(0,7)",128,0,129,0
+  73               		.stabs	"intptr_t:t(6,9)=(6,3)",128,0,142,0
+  74               		.stabs	"uintptr_t:t(6,10)=(6,4)",128,0,147,0
+  75               		.stabs	"int_least8_t:t(6,11)=(6,1)",128,0,159,0
+  76               		.stabs	"uint_least8_t:t(6,12)=(6,2)",128,0,164,0
+  77               		.stabs	"int_least16_t:t(6,13)=(6,3)",128,0,169,0
+  78               		.stabs	"uint_least16_t:t(6,14)=(6,4)",128,0,174,0
+  79               		.stabs	"int_least32_t:t(6,15)=(6,5)",128,0,179,0
+  80               		.stabs	"uint_least32_t:t(6,16)=(6,6)",128,0,184,0
+  81               		.stabs	"int_least64_t:t(6,17)=(6,7)",128,0,192,0
+  82               		.stabs	"uint_least64_t:t(6,18)=(6,8)",128,0,199,0
+  83               		.stabs	"int_fast8_t:t(6,19)=(6,1)",128,0,213,0
+  84               		.stabs	"uint_fast8_t:t(6,20)=(6,2)",128,0,218,0
+  85               		.stabs	"int_fast16_t:t(6,21)=(6,3)",128,0,223,0
+  86               		.stabs	"uint_fast16_t:t(6,22)=(6,4)",128,0,228,0
+  87               		.stabs	"int_fast32_t:t(6,23)=(6,5)",128,0,233,0
+  88               		.stabs	"uint_fast32_t:t(6,24)=(6,6)",128,0,238,0
+  89               		.stabs	"int_fast64_t:t(6,25)=(6,7)",128,0,246,0
+  90               		.stabs	"uint_fast64_t:t(6,26)=(6,8)",128,0,253,0
+  91               		.stabs	"intmax_t:t(6,27)=(6,7)",128,0,273,0
+  92               		.stabs	"uintmax_t:t(6,28)=(6,8)",128,0,278,0
+  93               		.stabn	162,0,0,0
+  94               		.stabn	162,0,0,0
+  95               		.stabs	"int_farptr_t:t(4,1)=(6,5)",128,0,77,0
+  96               		.stabs	"uint_farptr_t:t(4,2)=(6,6)",128,0,81,0
+  97               		.stabn	162,0,0,0
+  98               		.stabn	162,0,0,0
+  99               		.stabs	"/usr/lib/avr/include/avr/fuse.h",130,0,0,0
+ 100               		.stabs	"__fuse_t:t(7,1)=(7,2)=s3low:(0,11),0,8;high:(0,11),8,8;extended:(0,11),16,8;;",128,0,244,0
+ 101               		.stabn	162,0,0,0
+ 102               		.stabn	162,0,0,0
+ 103               		.stabn	162,0,0,0
+ 104               		.stabs	"mirf_init:F(0,47)",36,0,44,mirf_init
+ 105               	.global	mirf_init
+ 106               		.type	mirf_init, @function
+ 107               	mirf_init:
+ 108               		.stabd	46,0,0
+   1:../Libraries/OBLib/MIRF/mirf.c **** /*
+   2:../Libraries/OBLib/MIRF/mirf.c ****    Copyright (c) 2007 Stefan Engelke <mbox@stefanengelke.de>
+   3:../Libraries/OBLib/MIRF/mirf.c **** 
+   4:../Libraries/OBLib/MIRF/mirf.c ****    Permission is hereby granted, free of charge, to any person 
+   5:../Libraries/OBLib/MIRF/mirf.c ****    obtaining a copy of this software and associated documentation 
+   6:../Libraries/OBLib/MIRF/mirf.c ****    files (the "Software"), to deal in the Software without 
+GAS LISTING /tmp/cc2IBXG1.s 			page 3
+
+
+   7:../Libraries/OBLib/MIRF/mirf.c ****    restriction, including without limitation the rights to use, copy, 
+   8:../Libraries/OBLib/MIRF/mirf.c ****    modify, merge, publish, distribute, sublicense, and/or sell copies 
+   9:../Libraries/OBLib/MIRF/mirf.c ****    of the Software, and to permit persons to whom the Software is 
+  10:../Libraries/OBLib/MIRF/mirf.c ****    furnished to do so, subject to the following conditions:
+  11:../Libraries/OBLib/MIRF/mirf.c **** 
+  12:../Libraries/OBLib/MIRF/mirf.c ****    The above copyright notice and this permission notice shall be 
+  13:../Libraries/OBLib/MIRF/mirf.c ****    included in all copies or substantial portions of the Software.
+  14:../Libraries/OBLib/MIRF/mirf.c **** 
+  15:../Libraries/OBLib/MIRF/mirf.c ****    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+  16:../Libraries/OBLib/MIRF/mirf.c ****    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+  17:../Libraries/OBLib/MIRF/mirf.c ****    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
+  18:../Libraries/OBLib/MIRF/mirf.c ****    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+  19:../Libraries/OBLib/MIRF/mirf.c ****    HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+  20:../Libraries/OBLib/MIRF/mirf.c ****    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+  21:../Libraries/OBLib/MIRF/mirf.c ****    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+  22:../Libraries/OBLib/MIRF/mirf.c ****    DEALINGS IN THE SOFTWARE.
+  23:../Libraries/OBLib/MIRF/mirf.c **** 
+  24:../Libraries/OBLib/MIRF/mirf.c ****    $Id$
+  25:../Libraries/OBLib/MIRF/mirf.c ****  */
+  26:../Libraries/OBLib/MIRF/mirf.c **** /*
+  27:../Libraries/OBLib/MIRF/mirf.c ****    Minor update to work with ATmega328P and AVR-GCC 4.8.1 made by Ted
+  28:../Libraries/OBLib/MIRF/mirf.c ****  */
+  29:../Libraries/OBLib/MIRF/mirf.c **** 
+  30:../Libraries/OBLib/MIRF/mirf.c **** #include "mirf.h"
+  31:../Libraries/OBLib/MIRF/mirf.c **** #include "nRF24L01.h"
+  32:../Libraries/OBLib/MIRF/mirf.c **** #include "spi.h"
+  33:../Libraries/OBLib/MIRF/mirf.c **** #include <avr/io.h>
+  34:../Libraries/OBLib/MIRF/mirf.c **** #include <avr/interrupt.h>
+  35:../Libraries/OBLib/MIRF/mirf.c **** 
+  36:../Libraries/OBLib/MIRF/mirf.c **** // Defines for setting the MiRF registers for transmitting or receiving mode
+  37:../Libraries/OBLib/MIRF/mirf.c **** #define TX_POWERUP mirf_config_register(CONFIG, mirf_CONFIG | ( (1<<PWR_UP) | (0<<PRIM_RX) ) )
+  38:../Libraries/OBLib/MIRF/mirf.c **** #define RX_POWERUP mirf_config_register(CONFIG, mirf_CONFIG | ( (1<<PWR_UP) | (1<<PRIM_RX) ) )
+  39:../Libraries/OBLib/MIRF/mirf.c **** 
+  40:../Libraries/OBLib/MIRF/mirf.c **** 
+  41:../Libraries/OBLib/MIRF/mirf.c **** // Flag which denotes transmitting mode
+  42:../Libraries/OBLib/MIRF/mirf.c **** volatile uint8_t PTX;
+  43:../Libraries/OBLib/MIRF/mirf.c **** 
+  44:../Libraries/OBLib/MIRF/mirf.c **** void mirf_init() 
+  45:../Libraries/OBLib/MIRF/mirf.c ****   // Initializes pins ans interrupt to communicate with the MiRF module
+  46:../Libraries/OBLib/MIRF/mirf.c ****   // Should be called in the early initializing phase at startup.
+  47:../Libraries/OBLib/MIRF/mirf.c **** {
+ 109               		.stabn	68,0,47,.LM0-.LFBB1
+ 110               	.LM0:
+ 111               	.LFBB1:
+ 112               	/* prologue: function */
+ 113               	/* frame size = 0 */
+ 114               	/* stack size = 0 */
+ 115               	.L__stack_usage = 0
+  48:../Libraries/OBLib/MIRF/mirf.c ****   // Define CSN and CE as Output and set them to default
+  49:../Libraries/OBLib/MIRF/mirf.c ****   DDRB |= ((1<<CSN)|(1<<CE));
+ 116               		.stabn	68,0,49,.LM1-.LFBB1
+ 117               	.LM1:
+ 118 0000 84B1      		in r24,0x4
+ 119 0002 8360      		ori r24,lo8(3)
+ 120 0004 84B9      		out 0x4,r24
+  50:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CE_lo;
+ 121               		.stabn	68,0,50,.LM2-.LFBB1
+GAS LISTING /tmp/cc2IBXG1.s 			page 4
+
+
+ 122               	.LM2:
+ 123 0006 2898      		cbi 0x5,0
+  51:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_hi;
+ 124               		.stabn	68,0,51,.LM3-.LFBB1
+ 125               	.LM3:
+ 126 0008 299A      		sbi 0x5,1
+  52:../Libraries/OBLib/MIRF/mirf.c **** 
+  53:../Libraries/OBLib/MIRF/mirf.c ****   // Initialize external interrupt on port PB6 (PCINT6)
+  54:../Libraries/OBLib/MIRF/mirf.c ****   DDRB &= ~(1<<6);
+ 127               		.stabn	68,0,54,.LM4-.LFBB1
+ 128               	.LM4:
+ 129 000a 2698      		cbi 0x4,6
+  55:../Libraries/OBLib/MIRF/mirf.c ****   PCICR  |= (1<<PCIE0);
+ 130               		.stabn	68,0,55,.LM5-.LFBB1
+ 131               	.LM5:
+ 132 000c E8E6      		ldi r30,lo8(104)
+ 133 000e F0E0      		ldi r31,0
+ 134 0010 8081      		ld r24,Z
+ 135 0012 8160      		ori r24,lo8(1)
+ 136 0014 8083      		st Z,r24
+  56:../Libraries/OBLib/MIRF/mirf.c ****   PCMSK0 |= (1<<PCINT6);
+ 137               		.stabn	68,0,56,.LM6-.LFBB1
+ 138               	.LM6:
+ 139 0016 EBE6      		ldi r30,lo8(107)
+ 140 0018 F0E0      		ldi r31,0
+ 141 001a 8081      		ld r24,Z
+ 142 001c 8064      		ori r24,lo8(64)
+ 143 001e 8083      		st Z,r24
+  57:../Libraries/OBLib/MIRF/mirf.c **** 
+  58:../Libraries/OBLib/MIRF/mirf.c ****   // Initialize spi module
+  59:../Libraries/OBLib/MIRF/mirf.c ****   spi_init();
+ 144               		.stabn	68,0,59,.LM7-.LFBB1
+ 145               	.LM7:
+ 146 0020 0C94 0000 		jmp spi_init
+ 147               		.size	mirf_init, .-mirf_init
+ 148               	.Lscope1:
+ 149               		.stabs	"",36,0,0,.Lscope1-.LFBB1
+ 150               		.stabd	78,0,0
+ 151               		.stabs	"mirf_data_ready:F(6,2)",36,0,114,mirf_data_ready
+ 152               	.global	mirf_data_ready
+ 153               		.type	mirf_data_ready, @function
+ 154               	mirf_data_ready:
+ 155               		.stabd	46,0,0
+  60:../Libraries/OBLib/MIRF/mirf.c **** }
+  61:../Libraries/OBLib/MIRF/mirf.c **** 
+  62:../Libraries/OBLib/MIRF/mirf.c **** 
+  63:../Libraries/OBLib/MIRF/mirf.c **** void mirf_config() 
+  64:../Libraries/OBLib/MIRF/mirf.c ****   // Sets the important registers in the MiRF module and powers the module
+  65:../Libraries/OBLib/MIRF/mirf.c ****   // in receiving mode
+  66:../Libraries/OBLib/MIRF/mirf.c **** {
+  67:../Libraries/OBLib/MIRF/mirf.c ****   // Set RF channel
+  68:../Libraries/OBLib/MIRF/mirf.c ****   mirf_config_register(RF_CH,mirf_CH);
+  69:../Libraries/OBLib/MIRF/mirf.c **** 
+  70:../Libraries/OBLib/MIRF/mirf.c ****   // Set length of incoming payload 
+  71:../Libraries/OBLib/MIRF/mirf.c ****   mirf_config_register(RX_PW_P0, mirf_PAYLOAD);
+  72:../Libraries/OBLib/MIRF/mirf.c **** 
+  73:../Libraries/OBLib/MIRF/mirf.c ****   // Start receiver 
+GAS LISTING /tmp/cc2IBXG1.s 			page 5
+
+
+  74:../Libraries/OBLib/MIRF/mirf.c ****   PTX = 0;        // Start in receiving mode
+  75:../Libraries/OBLib/MIRF/mirf.c ****   RX_POWERUP;     // Power up in receiving mode
+  76:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CE_hi;     // Listening for pakets
+  77:../Libraries/OBLib/MIRF/mirf.c **** }
+  78:../Libraries/OBLib/MIRF/mirf.c **** 
+  79:../Libraries/OBLib/MIRF/mirf.c **** void mirf_set_RADDR(uint8_t * adr) 
+  80:../Libraries/OBLib/MIRF/mirf.c ****   // Sets the receiving address
+  81:../Libraries/OBLib/MIRF/mirf.c **** {
+  82:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CE_lo;
+  83:../Libraries/OBLib/MIRF/mirf.c ****   mirf_write_register(RX_ADDR_P0,adr,5);
+  84:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CE_hi;
+  85:../Libraries/OBLib/MIRF/mirf.c **** }
+  86:../Libraries/OBLib/MIRF/mirf.c **** 
+  87:../Libraries/OBLib/MIRF/mirf.c **** void mirf_set_TADDR(uint8_t * adr)
+  88:../Libraries/OBLib/MIRF/mirf.c ****   // Sets the transmitting address
+  89:../Libraries/OBLib/MIRF/mirf.c **** {
+  90:../Libraries/OBLib/MIRF/mirf.c ****   mirf_write_register(TX_ADDR, adr,5);
+  91:../Libraries/OBLib/MIRF/mirf.c **** }
+  92:../Libraries/OBLib/MIRF/mirf.c **** 
+  93:../Libraries/OBLib/MIRF/mirf.c **** ISR(PCINT0_vect)
+  94:../Libraries/OBLib/MIRF/mirf.c ****   // Interrupt handler 
+  95:../Libraries/OBLib/MIRF/mirf.c **** {
+  96:../Libraries/OBLib/MIRF/mirf.c ****   uint8_t status;   
+  97:../Libraries/OBLib/MIRF/mirf.c ****   // If still in transmitting mode then finish transmission
+  98:../Libraries/OBLib/MIRF/mirf.c ****   if (PTX) {
+  99:../Libraries/OBLib/MIRF/mirf.c ****     // Read MiRF status 
+ 100:../Libraries/OBLib/MIRF/mirf.c ****     mirf_CSN_lo;                                // Pull down chip select
+ 101:../Libraries/OBLib/MIRF/mirf.c ****     status = spi_fast_shift(NOP);               // Read status register
+ 102:../Libraries/OBLib/MIRF/mirf.c ****     mirf_CSN_hi;                                // Pull up chip select
+ 103:../Libraries/OBLib/MIRF/mirf.c **** 
+ 104:../Libraries/OBLib/MIRF/mirf.c ****     mirf_CE_lo;                             // Deactivate transreceiver
+ 105:../Libraries/OBLib/MIRF/mirf.c ****     RX_POWERUP;                             // Power up in receiving mode
+ 106:../Libraries/OBLib/MIRF/mirf.c ****     mirf_CE_hi;                             // Listening for pakets
+ 107:../Libraries/OBLib/MIRF/mirf.c ****     PTX = 0;                                // Set to receiving mode
+ 108:../Libraries/OBLib/MIRF/mirf.c **** 
+ 109:../Libraries/OBLib/MIRF/mirf.c ****     // Reset status register for further interaction
+ 110:../Libraries/OBLib/MIRF/mirf.c ****     mirf_config_register(STATUS,(1<<TX_DS)|(1<<MAX_RT)); // Reset status register
+ 111:../Libraries/OBLib/MIRF/mirf.c ****   }
+ 112:../Libraries/OBLib/MIRF/mirf.c **** }
+ 113:../Libraries/OBLib/MIRF/mirf.c **** 
+ 114:../Libraries/OBLib/MIRF/mirf.c **** extern uint8_t mirf_data_ready() 
+ 115:../Libraries/OBLib/MIRF/mirf.c ****   // Checks if data is available for reading
+ 116:../Libraries/OBLib/MIRF/mirf.c **** {
+ 156               		.stabn	68,0,116,.LM8-.LFBB2
+ 157               	.LM8:
+ 158               	.LFBB2:
+ 159               	/* prologue: function */
+ 160               	/* frame size = 0 */
+ 161               	/* stack size = 0 */
+ 162               	.L__stack_usage = 0
+ 117:../Libraries/OBLib/MIRF/mirf.c ****   PORTD ^= (1<<2);
+ 163               		.stabn	68,0,117,.LM9-.LFBB2
+ 164               	.LM9:
+ 165 0024 8BB1      		in r24,0xb
+ 166 0026 94E0      		ldi r25,lo8(4)
+ 167 0028 8927      		eor r24,r25
+ 168 002a 8BB9      		out 0xb,r24
+GAS LISTING /tmp/cc2IBXG1.s 			page 6
+
+
+ 118:../Libraries/OBLib/MIRF/mirf.c ****   if (PTX) {
+ 169               		.stabn	68,0,118,.LM10-.LFBB2
+ 170               	.LM10:
+ 171 002c 8091 0000 		lds r24,PTX
+ 172 0030 8111      		cpse r24,__zero_reg__
+ 173 0032 00C0      		rjmp .L4
+ 119:../Libraries/OBLib/MIRF/mirf.c ****     return 0;
+ 120:../Libraries/OBLib/MIRF/mirf.c ****   }
+ 121:../Libraries/OBLib/MIRF/mirf.c ****   uint8_t status;
+ 122:../Libraries/OBLib/MIRF/mirf.c ****   // Read MiRF status 
+ 123:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_lo;                                // Pull down chip select
+ 174               		.stabn	68,0,123,.LM11-.LFBB2
+ 175               	.LM11:
+ 176 0034 2998      		cbi 0x5,1
+ 124:../Libraries/OBLib/MIRF/mirf.c ****   status = spi_fast_shift(NOP);               // Read status register
+ 177               		.stabn	68,0,124,.LM12-.LFBB2
+ 178               	.LM12:
+ 179 0036 8FEF      		ldi r24,lo8(-1)
+ 180 0038 0E94 0000 		call spi_fast_shift
+ 125:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_hi;                                // Pull up chip select
+ 181               		.stabn	68,0,125,.LM13-.LFBB2
+ 182               	.LM13:
+ 183 003c 299A      		sbi 0x5,1
+ 126:../Libraries/OBLib/MIRF/mirf.c ****   return status & (1<<RX_DR);
+ 184               		.stabn	68,0,126,.LM14-.LFBB2
+ 185               	.LM14:
+ 186 003e 8074      		andi r24,lo8(64)
+ 187 0040 0895      		ret
+ 188               	.L4:
+ 119:../Libraries/OBLib/MIRF/mirf.c ****   }
+ 189               		.stabn	68,0,119,.LM15-.LFBB2
+ 190               	.LM15:
+ 191 0042 80E0      		ldi r24,0
+ 127:../Libraries/OBLib/MIRF/mirf.c **** }
+ 192               		.stabn	68,0,127,.LM16-.LFBB2
+ 193               	.LM16:
+ 194 0044 0895      		ret
+ 195               		.size	mirf_data_ready, .-mirf_data_ready
+ 196               	.Lscope2:
+ 197               		.stabs	"",36,0,0,.Lscope2-.LFBB2
+ 198               		.stabd	78,0,0
+ 199               		.stabs	"mirf_config_register:F(0,47)",36,0,139,mirf_config_register
+ 200               		.stabs	"reg:P(6,2)",64,0,139,24
+ 201               		.stabs	"value:P(6,2)",64,0,139,22
+ 202               	.global	mirf_config_register
+ 203               		.type	mirf_config_register, @function
+ 204               	mirf_config_register:
+ 205               		.stabd	46,0,0
+ 128:../Libraries/OBLib/MIRF/mirf.c **** 
+ 129:../Libraries/OBLib/MIRF/mirf.c **** extern void mirf_get_data(uint8_t * data) 
+ 130:../Libraries/OBLib/MIRF/mirf.c ****   // Reads mirf_PAYLOAD bytes into data array
+ 131:../Libraries/OBLib/MIRF/mirf.c **** {
+ 132:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_lo;                               // Pull down chip select
+ 133:../Libraries/OBLib/MIRF/mirf.c ****   spi_fast_shift( R_RX_PAYLOAD );            // Send cmd to read rx payload
+ 134:../Libraries/OBLib/MIRF/mirf.c ****   spi_transfer_sync(data,data,mirf_PAYLOAD); // Read payload
+ 135:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_hi;                               // Pull up chip select
+ 136:../Libraries/OBLib/MIRF/mirf.c ****   mirf_config_register(STATUS,(1<<RX_DR));   // Reset status register
+GAS LISTING /tmp/cc2IBXG1.s 			page 7
+
+
+ 137:../Libraries/OBLib/MIRF/mirf.c **** }
+ 138:../Libraries/OBLib/MIRF/mirf.c **** 
+ 139:../Libraries/OBLib/MIRF/mirf.c **** void mirf_config_register(uint8_t reg, uint8_t value)
+ 140:../Libraries/OBLib/MIRF/mirf.c ****   // Clocks only one byte into the given MiRF register
+ 141:../Libraries/OBLib/MIRF/mirf.c **** {
+ 206               		.stabn	68,0,141,.LM17-.LFBB3
+ 207               	.LM17:
+ 208               	.LFBB3:
+ 209 0046 CF93      		push r28
+ 210 0048 DF93      		push r29
+ 211 004a 1F92      		push __zero_reg__
+ 212 004c CDB7      		in r28,__SP_L__
+ 213 004e DEB7      		in r29,__SP_H__
+ 214               	/* prologue: function */
+ 215               	/* frame size = 1 */
+ 216               	/* stack size = 3 */
+ 217               	.L__stack_usage = 3
+ 142:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_lo;
+ 218               		.stabn	68,0,142,.LM18-.LFBB3
+ 219               	.LM18:
+ 220 0050 2998      		cbi 0x5,1
+ 143:../Libraries/OBLib/MIRF/mirf.c ****   spi_fast_shift(W_REGISTER | (REGISTER_MASK & reg));
+ 221               		.stabn	68,0,143,.LM19-.LFBB3
+ 222               	.LM19:
+ 223 0052 8F71      		andi r24,lo8(31)
+ 224 0054 8062      		ori r24,lo8(32)
+ 225 0056 6983      		std Y+1,r22
+ 226 0058 0E94 0000 		call spi_fast_shift
+ 144:../Libraries/OBLib/MIRF/mirf.c ****   spi_fast_shift(value);
+ 227               		.stabn	68,0,144,.LM20-.LFBB3
+ 228               	.LM20:
+ 229 005c 6981      		ldd r22,Y+1
+ 230 005e 862F      		mov r24,r22
+ 231 0060 0E94 0000 		call spi_fast_shift
+ 145:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_hi;
+ 232               		.stabn	68,0,145,.LM21-.LFBB3
+ 233               	.LM21:
+ 234 0064 299A      		sbi 0x5,1
+ 235               	/* epilogue start */
+ 146:../Libraries/OBLib/MIRF/mirf.c **** }
+ 236               		.stabn	68,0,146,.LM22-.LFBB3
+ 237               	.LM22:
+ 238 0066 0F90      		pop __tmp_reg__
+ 239 0068 DF91      		pop r29
+ 240 006a CF91      		pop r28
+ 241 006c 0895      		ret
+ 242               		.size	mirf_config_register, .-mirf_config_register
+ 243               	.Lscope3:
+ 244               		.stabs	"",36,0,0,.Lscope3-.LFBB3
+ 245               		.stabd	78,0,0
+ 246               		.stabs	"mirf_config:F(0,47)",36,0,63,mirf_config
+ 247               	.global	mirf_config
+ 248               		.type	mirf_config, @function
+ 249               	mirf_config:
+ 250               		.stabd	46,0,0
+  66:../Libraries/OBLib/MIRF/mirf.c ****   // Set RF channel
+ 251               		.stabn	68,0,66,.LM23-.LFBB4
+GAS LISTING /tmp/cc2IBXG1.s 			page 8
+
+
+ 252               	.LM23:
+ 253               	.LFBB4:
+ 254               	/* prologue: function */
+ 255               	/* frame size = 0 */
+ 256               	/* stack size = 0 */
+ 257               	.L__stack_usage = 0
+  68:../Libraries/OBLib/MIRF/mirf.c **** 
+ 258               		.stabn	68,0,68,.LM24-.LFBB4
+ 259               	.LM24:
+ 260 006e 62E0      		ldi r22,lo8(2)
+ 261 0070 85E0      		ldi r24,lo8(5)
+ 262 0072 0E94 0000 		call mirf_config_register
+  71:../Libraries/OBLib/MIRF/mirf.c **** 
+ 263               		.stabn	68,0,71,.LM25-.LFBB4
+ 264               	.LM25:
+ 265 0076 60E1      		ldi r22,lo8(16)
+ 266 0078 81E1      		ldi r24,lo8(17)
+ 267 007a 0E94 0000 		call mirf_config_register
+  74:../Libraries/OBLib/MIRF/mirf.c ****   RX_POWERUP;     // Power up in receiving mode
+ 268               		.stabn	68,0,74,.LM26-.LFBB4
+ 269               	.LM26:
+ 270 007e 1092 0000 		sts PTX,__zero_reg__
+  75:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CE_hi;     // Listening for pakets
+ 271               		.stabn	68,0,75,.LM27-.LFBB4
+ 272               	.LM27:
+ 273 0082 6BE4      		ldi r22,lo8(75)
+ 274 0084 80E0      		ldi r24,0
+ 275 0086 0E94 0000 		call mirf_config_register
+  76:../Libraries/OBLib/MIRF/mirf.c **** }
+ 276               		.stabn	68,0,76,.LM28-.LFBB4
+ 277               	.LM28:
+ 278 008a 289A      		sbi 0x5,0
+ 279 008c 0895      		ret
+ 280               		.size	mirf_config, .-mirf_config
+ 281               	.Lscope4:
+ 282               		.stabs	"",36,0,0,.Lscope4-.LFBB4
+ 283               		.stabd	78,0,0
+ 284               		.stabs	"__vector_3:F(0,47)",36,0,93,__vector_3
+ 285               	.global	__vector_3
+ 286               		.type	__vector_3, @function
+ 287               	__vector_3:
+ 288               		.stabd	46,0,0
+  95:../Libraries/OBLib/MIRF/mirf.c ****   uint8_t status;   
+ 289               		.stabn	68,0,95,.LM29-.LFBB5
+ 290               	.LM29:
+ 291               	.LFBB5:
+ 292 008e 1F92      		push r1
+ 293 0090 0F92      		push r0
+ 294 0092 0FB6      		in r0,__SREG__
+ 295 0094 0F92      		push r0
+ 296 0096 1124      		clr __zero_reg__
+ 297 0098 2F93      		push r18
+ 298 009a 3F93      		push r19
+ 299 009c 4F93      		push r20
+ 300 009e 5F93      		push r21
+ 301 00a0 6F93      		push r22
+ 302 00a2 7F93      		push r23
+GAS LISTING /tmp/cc2IBXG1.s 			page 9
+
+
+ 303 00a4 8F93      		push r24
+ 304 00a6 9F93      		push r25
+ 305 00a8 AF93      		push r26
+ 306 00aa BF93      		push r27
+ 307 00ac EF93      		push r30
+ 308 00ae FF93      		push r31
+ 309               	/* prologue: Signal */
+ 310               	/* frame size = 0 */
+ 311               	/* stack size = 15 */
+ 312               	.L__stack_usage = 15
+  98:../Libraries/OBLib/MIRF/mirf.c ****     // Read MiRF status 
+ 313               		.stabn	68,0,98,.LM30-.LFBB5
+ 314               	.LM30:
+ 315 00b0 8091 0000 		lds r24,PTX
+ 316 00b4 8823      		tst r24
+ 317 00b6 01F0      		breq .L8
+ 100:../Libraries/OBLib/MIRF/mirf.c ****     status = spi_fast_shift(NOP);               // Read status register
+ 318               		.stabn	68,0,100,.LM31-.LFBB5
+ 319               	.LM31:
+ 320 00b8 2998      		cbi 0x5,1
+ 101:../Libraries/OBLib/MIRF/mirf.c ****     mirf_CSN_hi;                                // Pull up chip select
+ 321               		.stabn	68,0,101,.LM32-.LFBB5
+ 322               	.LM32:
+ 323 00ba 8FEF      		ldi r24,lo8(-1)
+ 324 00bc 0E94 0000 		call spi_fast_shift
+ 102:../Libraries/OBLib/MIRF/mirf.c **** 
+ 325               		.stabn	68,0,102,.LM33-.LFBB5
+ 326               	.LM33:
+ 327 00c0 299A      		sbi 0x5,1
+ 104:../Libraries/OBLib/MIRF/mirf.c ****     RX_POWERUP;                             // Power up in receiving mode
+ 328               		.stabn	68,0,104,.LM34-.LFBB5
+ 329               	.LM34:
+ 330 00c2 2898      		cbi 0x5,0
+ 105:../Libraries/OBLib/MIRF/mirf.c ****     mirf_CE_hi;                             // Listening for pakets
+ 331               		.stabn	68,0,105,.LM35-.LFBB5
+ 332               	.LM35:
+ 333 00c4 6BE4      		ldi r22,lo8(75)
+ 334 00c6 80E0      		ldi r24,0
+ 335 00c8 0E94 0000 		call mirf_config_register
+ 106:../Libraries/OBLib/MIRF/mirf.c ****     PTX = 0;                                // Set to receiving mode
+ 336               		.stabn	68,0,106,.LM36-.LFBB5
+ 337               	.LM36:
+ 338 00cc 289A      		sbi 0x5,0
+ 107:../Libraries/OBLib/MIRF/mirf.c **** 
+ 339               		.stabn	68,0,107,.LM37-.LFBB5
+ 340               	.LM37:
+ 341 00ce 1092 0000 		sts PTX,__zero_reg__
+ 110:../Libraries/OBLib/MIRF/mirf.c ****   }
+ 342               		.stabn	68,0,110,.LM38-.LFBB5
+ 343               	.LM38:
+ 344 00d2 60E3      		ldi r22,lo8(48)
+ 345 00d4 87E0      		ldi r24,lo8(7)
+ 346 00d6 0E94 0000 		call mirf_config_register
+ 347               	.L8:
+ 348               	/* epilogue start */
+ 112:../Libraries/OBLib/MIRF/mirf.c **** 
+ 349               		.stabn	68,0,112,.LM39-.LFBB5
+GAS LISTING /tmp/cc2IBXG1.s 			page 10
+
+
+ 350               	.LM39:
+ 351 00da FF91      		pop r31
+ 352 00dc EF91      		pop r30
+ 353 00de BF91      		pop r27
+ 354 00e0 AF91      		pop r26
+ 355 00e2 9F91      		pop r25
+ 356 00e4 8F91      		pop r24
+ 357 00e6 7F91      		pop r23
+ 358 00e8 6F91      		pop r22
+ 359 00ea 5F91      		pop r21
+ 360 00ec 4F91      		pop r20
+ 361 00ee 3F91      		pop r19
+ 362 00f0 2F91      		pop r18
+ 363 00f2 0F90      		pop r0
+ 364 00f4 0FBE      		out __SREG__,r0
+ 365 00f6 0F90      		pop r0
+ 366 00f8 1F90      		pop r1
+ 367 00fa 1895      		reti
+ 368               		.size	__vector_3, .-__vector_3
+ 369               	.Lscope5:
+ 370               		.stabs	"",36,0,0,.Lscope5-.LFBB5
+ 371               		.stabd	78,0,0
+ 372               		.stabs	"mirf_get_data:F(0,47)",36,0,129,mirf_get_data
+ 373               		.stabs	"data:P(0,48)=*(6,2)",64,0,129,28
+ 374               	.global	mirf_get_data
+ 375               		.type	mirf_get_data, @function
+ 376               	mirf_get_data:
+ 377               		.stabd	46,0,0
+ 131:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_lo;                               // Pull down chip select
+ 378               		.stabn	68,0,131,.LM40-.LFBB6
+ 379               	.LM40:
+ 380               	.LFBB6:
+ 381 00fc CF93      		push r28
+ 382 00fe DF93      		push r29
+ 383               	/* prologue: function */
+ 384               	/* frame size = 0 */
+ 385               	/* stack size = 2 */
+ 386               	.L__stack_usage = 2
+ 387 0100 EC01      		movw r28,r24
+ 132:../Libraries/OBLib/MIRF/mirf.c ****   spi_fast_shift( R_RX_PAYLOAD );            // Send cmd to read rx payload
+ 388               		.stabn	68,0,132,.LM41-.LFBB6
+ 389               	.LM41:
+ 390 0102 2998      		cbi 0x5,1
+ 133:../Libraries/OBLib/MIRF/mirf.c ****   spi_transfer_sync(data,data,mirf_PAYLOAD); // Read payload
+ 391               		.stabn	68,0,133,.LM42-.LFBB6
+ 392               	.LM42:
+ 393 0104 81E6      		ldi r24,lo8(97)
+ 394 0106 0E94 0000 		call spi_fast_shift
+ 134:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_hi;                               // Pull up chip select
+ 395               		.stabn	68,0,134,.LM43-.LFBB6
+ 396               	.LM43:
+ 397 010a 40E1      		ldi r20,lo8(16)
+ 398 010c BE01      		movw r22,r28
+ 399 010e CE01      		movw r24,r28
+ 400 0110 0E94 0000 		call spi_transfer_sync
+ 135:../Libraries/OBLib/MIRF/mirf.c ****   mirf_config_register(STATUS,(1<<RX_DR));   // Reset status register
+ 401               		.stabn	68,0,135,.LM44-.LFBB6
+GAS LISTING /tmp/cc2IBXG1.s 			page 11
+
+
+ 402               	.LM44:
+ 403 0114 299A      		sbi 0x5,1
+ 136:../Libraries/OBLib/MIRF/mirf.c **** }
+ 404               		.stabn	68,0,136,.LM45-.LFBB6
+ 405               	.LM45:
+ 406 0116 60E4      		ldi r22,lo8(64)
+ 407 0118 87E0      		ldi r24,lo8(7)
+ 408               	/* epilogue start */
+ 137:../Libraries/OBLib/MIRF/mirf.c **** 
+ 409               		.stabn	68,0,137,.LM46-.LFBB6
+ 410               	.LM46:
+ 411 011a DF91      		pop r29
+ 412 011c CF91      		pop r28
+ 136:../Libraries/OBLib/MIRF/mirf.c **** }
+ 413               		.stabn	68,0,136,.LM47-.LFBB6
+ 414               	.LM47:
+ 415 011e 0C94 0000 		jmp mirf_config_register
+ 416               		.size	mirf_get_data, .-mirf_get_data
+ 417               	.Lscope6:
+ 418               		.stabs	"",36,0,0,.Lscope6-.LFBB6
+ 419               		.stabd	78,0,0
+ 420               		.stabs	"mirf_read_register:F(0,47)",36,0,148,mirf_read_register
+ 421               		.stabs	"reg:P(6,2)",64,0,148,24
+ 422               		.stabs	"value:P(0,48)",64,0,148,16
+ 423               		.stabs	"len:P(6,2)",64,0,148,20
+ 424               	.global	mirf_read_register
+ 425               		.type	mirf_read_register, @function
+ 426               	mirf_read_register:
+ 427               		.stabd	46,0,0
+ 147:../Libraries/OBLib/MIRF/mirf.c **** 
+ 148:../Libraries/OBLib/MIRF/mirf.c **** void mirf_read_register(uint8_t reg, uint8_t * value, uint8_t len)
+ 149:../Libraries/OBLib/MIRF/mirf.c ****   // Reads an array of bytes from the given start position in the MiRF registers.
+ 150:../Libraries/OBLib/MIRF/mirf.c **** {
+ 428               		.stabn	68,0,150,.LM48-.LFBB7
+ 429               	.LM48:
+ 430               	.LFBB7:
+ 431 0122 0F93      		push r16
+ 432 0124 1F93      		push r17
+ 433 0126 CF93      		push r28
+ 434 0128 DF93      		push r29
+ 435 012a 1F92      		push __zero_reg__
+ 436 012c CDB7      		in r28,__SP_L__
+ 437 012e DEB7      		in r29,__SP_H__
+ 438               	/* prologue: function */
+ 439               	/* frame size = 1 */
+ 440               	/* stack size = 5 */
+ 441               	.L__stack_usage = 5
+ 442 0130 8B01      		movw r16,r22
+ 151:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_lo;
+ 443               		.stabn	68,0,151,.LM49-.LFBB7
+ 444               	.LM49:
+ 445 0132 2998      		cbi 0x5,1
+ 152:../Libraries/OBLib/MIRF/mirf.c ****   spi_fast_shift(R_REGISTER | (REGISTER_MASK & reg));
+ 446               		.stabn	68,0,152,.LM50-.LFBB7
+ 447               	.LM50:
+ 448 0134 8F71      		andi r24,lo8(31)
+ 449 0136 4983      		std Y+1,r20
+GAS LISTING /tmp/cc2IBXG1.s 			page 12
+
+
+ 450 0138 0E94 0000 		call spi_fast_shift
+ 153:../Libraries/OBLib/MIRF/mirf.c ****   spi_transfer_sync(value,value,len);
+ 451               		.stabn	68,0,153,.LM51-.LFBB7
+ 452               	.LM51:
+ 453 013c 4981      		ldd r20,Y+1
+ 454 013e B801      		movw r22,r16
+ 455 0140 C801      		movw r24,r16
+ 456 0142 0E94 0000 		call spi_transfer_sync
+ 154:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_hi;
+ 457               		.stabn	68,0,154,.LM52-.LFBB7
+ 458               	.LM52:
+ 459 0146 299A      		sbi 0x5,1
+ 460               	/* epilogue start */
+ 155:../Libraries/OBLib/MIRF/mirf.c **** }
+ 461               		.stabn	68,0,155,.LM53-.LFBB7
+ 462               	.LM53:
+ 463 0148 0F90      		pop __tmp_reg__
+ 464 014a DF91      		pop r29
+ 465 014c CF91      		pop r28
+ 466 014e 1F91      		pop r17
+ 467 0150 0F91      		pop r16
+ 468 0152 0895      		ret
+ 469               		.size	mirf_read_register, .-mirf_read_register
+ 470               	.Lscope7:
+ 471               		.stabs	"",36,0,0,.Lscope7-.LFBB7
+ 472               		.stabd	78,0,0
+ 473               		.stabs	"mirf_write_register:F(0,47)",36,0,157,mirf_write_register
+ 474               		.stabs	"reg:P(6,2)",64,0,157,24
+ 475               		.stabs	"value:P(0,48)",64,0,157,16
+ 476               		.stabs	"len:P(6,2)",64,0,157,20
+ 477               	.global	mirf_write_register
+ 478               		.type	mirf_write_register, @function
+ 479               	mirf_write_register:
+ 480               		.stabd	46,0,0
+ 156:../Libraries/OBLib/MIRF/mirf.c **** 
+ 157:../Libraries/OBLib/MIRF/mirf.c **** void mirf_write_register(uint8_t reg, uint8_t * value, uint8_t len) 
+ 158:../Libraries/OBLib/MIRF/mirf.c ****   // Writes an array of bytes into inte the MiRF registers.
+ 159:../Libraries/OBLib/MIRF/mirf.c **** {
+ 481               		.stabn	68,0,159,.LM54-.LFBB8
+ 482               	.LM54:
+ 483               	.LFBB8:
+ 484 0154 0F93      		push r16
+ 485 0156 1F93      		push r17
+ 486 0158 CF93      		push r28
+ 487 015a DF93      		push r29
+ 488 015c 1F92      		push __zero_reg__
+ 489 015e CDB7      		in r28,__SP_L__
+ 490 0160 DEB7      		in r29,__SP_H__
+ 491               	/* prologue: function */
+ 492               	/* frame size = 1 */
+ 493               	/* stack size = 5 */
+ 494               	.L__stack_usage = 5
+ 495 0162 8B01      		movw r16,r22
+ 160:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_lo;
+ 496               		.stabn	68,0,160,.LM55-.LFBB8
+ 497               	.LM55:
+ 498 0164 2998      		cbi 0x5,1
+GAS LISTING /tmp/cc2IBXG1.s 			page 13
+
+
+ 161:../Libraries/OBLib/MIRF/mirf.c ****   spi_fast_shift(W_REGISTER | (REGISTER_MASK & reg));
+ 499               		.stabn	68,0,161,.LM56-.LFBB8
+ 500               	.LM56:
+ 501 0166 8F71      		andi r24,lo8(31)
+ 502 0168 8062      		ori r24,lo8(32)
+ 503 016a 4983      		std Y+1,r20
+ 504 016c 0E94 0000 		call spi_fast_shift
+ 162:../Libraries/OBLib/MIRF/mirf.c ****   spi_transmit_sync(value,len);
+ 505               		.stabn	68,0,162,.LM57-.LFBB8
+ 506               	.LM57:
+ 507 0170 4981      		ldd r20,Y+1
+ 508 0172 642F      		mov r22,r20
+ 509 0174 C801      		movw r24,r16
+ 510 0176 0E94 0000 		call spi_transmit_sync
+ 163:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_hi;
+ 511               		.stabn	68,0,163,.LM58-.LFBB8
+ 512               	.LM58:
+ 513 017a 299A      		sbi 0x5,1
+ 514               	/* epilogue start */
+ 164:../Libraries/OBLib/MIRF/mirf.c **** }
+ 515               		.stabn	68,0,164,.LM59-.LFBB8
+ 516               	.LM59:
+ 517 017c 0F90      		pop __tmp_reg__
+ 518 017e DF91      		pop r29
+ 519 0180 CF91      		pop r28
+ 520 0182 1F91      		pop r17
+ 521 0184 0F91      		pop r16
+ 522 0186 0895      		ret
+ 523               		.size	mirf_write_register, .-mirf_write_register
+ 524               	.Lscope8:
+ 525               		.stabs	"",36,0,0,.Lscope8-.LFBB8
+ 526               		.stabd	78,0,0
+ 527               		.stabs	"mirf_set_RADDR:F(0,47)",36,0,79,mirf_set_RADDR
+ 528               		.stabs	"adr:P(0,48)",64,0,79,24
+ 529               	.global	mirf_set_RADDR
+ 530               		.type	mirf_set_RADDR, @function
+ 531               	mirf_set_RADDR:
+ 532               		.stabd	46,0,0
+  81:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CE_lo;
+ 533               		.stabn	68,0,81,.LM60-.LFBB9
+ 534               	.LM60:
+ 535               	.LFBB9:
+ 536               	/* prologue: function */
+ 537               	/* frame size = 0 */
+ 538               	/* stack size = 0 */
+ 539               	.L__stack_usage = 0
+  82:../Libraries/OBLib/MIRF/mirf.c ****   mirf_write_register(RX_ADDR_P0,adr,5);
+ 540               		.stabn	68,0,82,.LM61-.LFBB9
+ 541               	.LM61:
+ 542 0188 2898      		cbi 0x5,0
+  83:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CE_hi;
+ 543               		.stabn	68,0,83,.LM62-.LFBB9
+ 544               	.LM62:
+ 545 018a 45E0      		ldi r20,lo8(5)
+ 546 018c BC01      		movw r22,r24
+ 547 018e 8AE0      		ldi r24,lo8(10)
+ 548 0190 0E94 0000 		call mirf_write_register
+GAS LISTING /tmp/cc2IBXG1.s 			page 14
+
+
+  84:../Libraries/OBLib/MIRF/mirf.c **** }
+ 549               		.stabn	68,0,84,.LM63-.LFBB9
+ 550               	.LM63:
+ 551 0194 289A      		sbi 0x5,0
+ 552 0196 0895      		ret
+ 553               		.size	mirf_set_RADDR, .-mirf_set_RADDR
+ 554               	.Lscope9:
+ 555               		.stabs	"",36,0,0,.Lscope9-.LFBB9
+ 556               		.stabd	78,0,0
+ 557               		.stabs	"mirf_set_TADDR:F(0,47)",36,0,87,mirf_set_TADDR
+ 558               		.stabs	"adr:P(0,48)",64,0,87,24
+ 559               	.global	mirf_set_TADDR
+ 560               		.type	mirf_set_TADDR, @function
+ 561               	mirf_set_TADDR:
+ 562               		.stabd	46,0,0
+  89:../Libraries/OBLib/MIRF/mirf.c ****   mirf_write_register(TX_ADDR, adr,5);
+ 563               		.stabn	68,0,89,.LM64-.LFBB10
+ 564               	.LM64:
+ 565               	.LFBB10:
+ 566               	/* prologue: function */
+ 567               	/* frame size = 0 */
+ 568               	/* stack size = 0 */
+ 569               	.L__stack_usage = 0
+  90:../Libraries/OBLib/MIRF/mirf.c **** }
+ 570               		.stabn	68,0,90,.LM65-.LFBB10
+ 571               	.LM65:
+ 572 0198 45E0      		ldi r20,lo8(5)
+ 573 019a BC01      		movw r22,r24
+ 574 019c 80E1      		ldi r24,lo8(16)
+ 575 019e 0C94 0000 		jmp mirf_write_register
+ 576               		.size	mirf_set_TADDR, .-mirf_set_TADDR
+ 577               	.Lscope10:
+ 578               		.stabs	"",36,0,0,.Lscope10-.LFBB10
+ 579               		.stabd	78,0,0
+ 580               		.stabs	"mirf_send:F(0,47)",36,0,167,mirf_send
+ 581               		.stabs	"value:P(0,48)",64,0,167,28
+ 582               		.stabs	"len:P(6,2)",64,0,167,17
+ 583               	.global	mirf_send
+ 584               		.type	mirf_send, @function
+ 585               	mirf_send:
+ 586               		.stabd	46,0,0
+ 165:../Libraries/OBLib/MIRF/mirf.c **** 
+ 166:../Libraries/OBLib/MIRF/mirf.c **** 
+ 167:../Libraries/OBLib/MIRF/mirf.c **** void mirf_send(uint8_t * value, uint8_t len) 
+ 168:../Libraries/OBLib/MIRF/mirf.c ****   // Sends a data package to the default address. Be sure to send the correct
+ 169:../Libraries/OBLib/MIRF/mirf.c ****   // amount of bytes as configured as payload on the receiver.
+ 170:../Libraries/OBLib/MIRF/mirf.c **** {
+ 587               		.stabn	68,0,170,.LM66-.LFBB11
+ 588               	.LM66:
+ 589               	.LFBB11:
+ 590 01a2 1F93      		push r17
+ 591 01a4 CF93      		push r28
+ 592 01a6 DF93      		push r29
+ 593               	/* prologue: function */
+ 594               	/* frame size = 0 */
+ 595               	/* stack size = 3 */
+ 596               	.L__stack_usage = 3
+GAS LISTING /tmp/cc2IBXG1.s 			page 15
+
+
+ 597 01a8 EC01      		movw r28,r24
+ 598 01aa 162F      		mov r17,r22
+ 599               	.L20:
+ 171:../Libraries/OBLib/MIRF/mirf.c ****   while (PTX) {}                  // Wait until last paket is send
+ 600               		.stabn	68,0,171,.LM67-.LFBB11
+ 601               	.LM67:
+ 602 01ac 8091 0000 		lds r24,PTX
+ 603 01b0 8111      		cpse r24,__zero_reg__
+ 604 01b2 00C0      		rjmp .L20
+ 172:../Libraries/OBLib/MIRF/mirf.c **** 
+ 173:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CE_lo;
+ 605               		.stabn	68,0,173,.LM68-.LFBB11
+ 606               	.LM68:
+ 607 01b4 2898      		cbi 0x5,0
+ 174:../Libraries/OBLib/MIRF/mirf.c **** 
+ 175:../Libraries/OBLib/MIRF/mirf.c ****   PTX = 1;                        // Set to transmitter mode
+ 608               		.stabn	68,0,175,.LM69-.LFBB11
+ 609               	.LM69:
+ 610 01b6 81E0      		ldi r24,lo8(1)
+ 611 01b8 8093 0000 		sts PTX,r24
+ 176:../Libraries/OBLib/MIRF/mirf.c ****   TX_POWERUP;                     // Power up
+ 612               		.stabn	68,0,176,.LM70-.LFBB11
+ 613               	.LM70:
+ 614 01bc 6AE4      		ldi r22,lo8(74)
+ 615 01be 80E0      		ldi r24,0
+ 616 01c0 0E94 0000 		call mirf_config_register
+ 177:../Libraries/OBLib/MIRF/mirf.c **** 
+ 178:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_lo;                    // Pull down chip select
+ 617               		.stabn	68,0,178,.LM71-.LFBB11
+ 618               	.LM71:
+ 619 01c4 2998      		cbi 0x5,1
+ 179:../Libraries/OBLib/MIRF/mirf.c ****   spi_fast_shift( FLUSH_TX );     // Write cmd to flush tx fifo
+ 620               		.stabn	68,0,179,.LM72-.LFBB11
+ 621               	.LM72:
+ 622 01c6 81EE      		ldi r24,lo8(-31)
+ 623 01c8 0E94 0000 		call spi_fast_shift
+ 180:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_hi;                    // Pull up chip select
+ 624               		.stabn	68,0,180,.LM73-.LFBB11
+ 625               	.LM73:
+ 626 01cc 299A      		sbi 0x5,1
+ 181:../Libraries/OBLib/MIRF/mirf.c **** 
+ 182:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_lo;                    // Pull down chip select
+ 627               		.stabn	68,0,182,.LM74-.LFBB11
+ 628               	.LM74:
+ 629 01ce 2998      		cbi 0x5,1
+ 183:../Libraries/OBLib/MIRF/mirf.c ****   spi_fast_shift( W_TX_PAYLOAD ); // Write cmd to write payload
+ 630               		.stabn	68,0,183,.LM75-.LFBB11
+ 631               	.LM75:
+ 632 01d0 80EA      		ldi r24,lo8(-96)
+ 633 01d2 0E94 0000 		call spi_fast_shift
+ 184:../Libraries/OBLib/MIRF/mirf.c ****   spi_transmit_sync(value,len);   // Write payload
+ 634               		.stabn	68,0,184,.LM76-.LFBB11
+ 635               	.LM76:
+ 636 01d6 612F      		mov r22,r17
+ 637 01d8 CE01      		movw r24,r28
+ 638 01da 0E94 0000 		call spi_transmit_sync
+ 185:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CSN_hi;                    // Pull up chip select
+GAS LISTING /tmp/cc2IBXG1.s 			page 16
+
+
+ 639               		.stabn	68,0,185,.LM77-.LFBB11
+ 640               	.LM77:
+ 641 01de 299A      		sbi 0x5,1
+ 186:../Libraries/OBLib/MIRF/mirf.c **** 
+ 187:../Libraries/OBLib/MIRF/mirf.c ****   mirf_CE_hi;                     // Start transmission
+ 642               		.stabn	68,0,187,.LM78-.LFBB11
+ 643               	.LM78:
+ 644 01e0 289A      		sbi 0x5,0
+ 645               	/* epilogue start */
+ 188:../Libraries/OBLib/MIRF/mirf.c **** }
+ 646               		.stabn	68,0,188,.LM79-.LFBB11
+ 647               	.LM79:
+ 648 01e2 DF91      		pop r29
+ 649 01e4 CF91      		pop r28
+ 650 01e6 1F91      		pop r17
+ 651 01e8 0895      		ret
+ 652               		.size	mirf_send, .-mirf_send
+ 653               	.Lscope11:
+ 654               		.stabs	"",36,0,0,.Lscope11-.LFBB11
+ 655               		.stabd	78,0,0
+ 656               		.comm	PTX,1,1
+ 657               		.stabs	"PTX:G(0,49)=B(6,2)",32,0,42,0
+ 658               		.stabs	"",100,0,0,.Letext0
+ 659               	.Letext0:
+ 660               		.ident	"GCC: (GNU) 4.8.1"
+ 661               	.global __do_clear_bss
+GAS LISTING /tmp/cc2IBXG1.s 			page 17
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 mirf.c
+     /tmp/cc2IBXG1.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/cc2IBXG1.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/cc2IBXG1.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/cc2IBXG1.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/cc2IBXG1.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/cc2IBXG1.s:107    .text:0000000000000000 mirf_init
+     /tmp/cc2IBXG1.s:154    .text:0000000000000024 mirf_data_ready
+                            *COM*:0000000000000001 PTX
+     /tmp/cc2IBXG1.s:204    .text:0000000000000046 mirf_config_register
+     /tmp/cc2IBXG1.s:249    .text:000000000000006e mirf_config
+     /tmp/cc2IBXG1.s:287    .text:000000000000008e __vector_3
+     /tmp/cc2IBXG1.s:376    .text:00000000000000fc mirf_get_data
+     /tmp/cc2IBXG1.s:426    .text:0000000000000122 mirf_read_register
+     /tmp/cc2IBXG1.s:479    .text:0000000000000154 mirf_write_register
+     /tmp/cc2IBXG1.s:531    .text:0000000000000188 mirf_set_RADDR
+     /tmp/cc2IBXG1.s:561    .text:0000000000000198 mirf_set_TADDR
+     /tmp/cc2IBXG1.s:585    .text:00000000000001a2 mirf_send
+
+UNDEFINED SYMBOLS
+spi_init
+spi_fast_shift
+spi_transfer_sync
+spi_transmit_sync
+__do_clear_bss

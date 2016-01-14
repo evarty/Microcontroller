@@ -78,7 +78,7 @@ PROGRAMMER_MCU=m328p
 
 # Name of our project
 # (use a single word, e.g. 'myproject')
-PROJECTNAME=MiniCopterController
+PROJECTNAME=myproject
 
 # Source files
 # List C/C++/Assembly source files:

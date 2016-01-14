@@ -14,11 +14,11 @@ int main(void){
 
   //SPI_MasterInit();
   //nRF24InitReceive(&PORTB, 2);
-  DDRD |= (1<<0)|(1<<7)|(1<<1);
-  PORTD |= (1<<0)|(1<<7)|(0<<1);
-  DDRB |= (1<<2);
+  //DDRD |= (1<<0)|(1<<7)|(1<<1);
+  //PORTD |= (1<<0)|(1<<7)|(0<<1);
+  //DDRB |= (1<<2);
+  DDRD |= (1<<1);
 
-  spi_init();
   mirf_init();
   _delay_ms(50);
 
@@ -36,7 +36,7 @@ int main(void){
     //  SPI_MasterTransmitByte(ReadValue);
     //  PORTB |= (1<<2);
 
-    mirf_get_data(buffer);
+      mirf_get_data(buffer);
 
     if(buffer[0] == 0xAA){
       PORTD |= (1<<1);

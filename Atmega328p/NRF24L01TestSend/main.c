@@ -23,17 +23,22 @@ int main(void){
   while(1){
 
     buffer[0] = 0xAA;
-
     mirf_send(buffer, 1);
-    //PORTD |= (1<<0);
-    /*while(!mirf_data_ready()) {
-      _delay_ms(100);
-    }
-    PORTD |= (1<<1);
+
+    if(mirf_data_ready()){ 
     mirf_get_data(buffer);
-    //PORTD |= (1<<2);
-    */
+    }
+
+    if (buffer[0] == 0xFA){
+      PORTD |= (1<<0);
+    }
+    
+
+
+
+
+
+
+
   }
-
-
 }

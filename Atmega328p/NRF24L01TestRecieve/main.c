@@ -1,7 +1,4 @@
-//#include "SPI.h"
-//#include "nRF24.h"
 #include <avr/io.h>
-
 #define F_CPU 8000000
 #include <util/delay.h>
 #include <avr/interrupt.h>
@@ -12,11 +9,6 @@
 
 int main(void){
 
-  //SPI_MasterInit();
-  //nRF24InitReceive(&PORTB, 2);
-  //DDRD |= (1<<0)|(1<<7)|(1<<1);
-  //PORTD |= (1<<0)|(1<<7)|(0<<1);
-  //DDRB |= (1<<2);
   DDRD |= (1<<1);
 
   mirf_init();
@@ -29,20 +21,21 @@ int main(void){
   uint8_t buffer[1];
 
   while(1){
-    //PORTD &= ~(1<<0);
-    //char ReadValue = ReadRXChar(&PORTB, 2);
-    //PORTD |= (1<<0);
-    //  PORTB &= ~(1<<2);
-    //  SPI_MasterTransmitByte(ReadValue);
-    //  PORTB |= (1<<2);
-    if(mirf_data_ready())
+
+
+    buffer[0] = 0xFA;
+    mirf_send(buffer, 1);
+
+    if(mirf_data_ready()){
       mirf_get_data(buffer);
+    }
 
     if(buffer[0] == 0xAA){
       PORTD |= (1<<1);
     }
+
+
+
+
   }  
-
-
-
 }

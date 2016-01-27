@@ -19,6 +19,8 @@ int main(void){
   mirf_config();
   
   uint8_t buffer[1];
+  uint8_t recbuffer[1];
+  recbuffer[0] = 0x00;
 
   while(1){
 
@@ -26,10 +28,10 @@ int main(void){
     mirf_send(buffer, 1);
 
     if(mirf_data_ready()){ 
-    mirf_get_data(buffer);
+    mirf_get_data(recbuffer);
     }
 
-    if (buffer[0] == 0xFA){
+    if (recbuffer[0] == 0xFA){
       PORTD |= (1<<0);
     }
     

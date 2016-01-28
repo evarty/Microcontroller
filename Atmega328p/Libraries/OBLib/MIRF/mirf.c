@@ -114,7 +114,6 @@ ISR(PCINT0_vect)
 extern uint8_t mirf_data_ready() 
   // Checks if data is available for reading
 {
-  PORTD ^= (1<<2);
   if (PTX) {
     return 0;
   }

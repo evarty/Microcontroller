@@ -9,7 +9,7 @@
 
 int main(void){
 
-  DDRD = 0x07;
+  DDRD |= (1<<0);
 
   mirf_init();
   _delay_ms(100);
@@ -19,22 +19,24 @@ int main(void){
   mirf_config();
   
   uint8_t buffer[1];
-  uint8_t recbuffer[1];
-  recbuffer[0] = 0x00;
+//  uint8_t recbuffer[1];
+//  recbuffer[0] = 0x00;
 
   while(1){
 
     buffer[0] = 0xAA;
     mirf_send(buffer, 1);
 
-    if(mirf_data_ready()){ 
+    _delay_ms(100);
+
+    /*if(mirf_data_ready()){ 
     mirf_get_data(recbuffer);
     }
 
     if (recbuffer[0] == 0xFA){
       PORTD |= (1<<0);
     }
-    
+   */ 
 
 
 

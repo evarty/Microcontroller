@@ -9,10 +9,10 @@
 #include "Timer0.h"
 
 
-//define pins for 7 sef output 
-#define LatchPin 2
-#define DataPin 3
-#define ClockPin 4
+//define pins for 7 seg output 
+#define LatchPin 3
+#define DataPin 4
+#define ClockPin 2
 
 
 //define button pins
@@ -91,10 +91,10 @@ int main(void){
 
     //output to 7 segs
     PORTD &= ~(1 << LatchPin);
-    ShiftOut(ClockPin,DataPin,numbers[HoursOnes]);
-    ShiftOut(ClockPin,DataPin,numbers[HoursTens]);
     ShiftOut(ClockPin,DataPin,numbers[MinutesOnes]);
     ShiftOut(ClockPin,DataPin,numbers[MinutesTens]);
+    ShiftOut(ClockPin,DataPin,numbers[HoursOnes]);
+    ShiftOut(ClockPin,DataPin,numbers[HoursTens]);
     PORTD |= (1 << LatchPin);
 
 

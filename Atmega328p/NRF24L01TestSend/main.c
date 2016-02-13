@@ -27,7 +27,7 @@ int main(void){
     buffer[0] = 0xAA;
     mirf_send(buffer, 1);
 
-    _delay_ms(100);
+    //_delay_ms(100);
 
     /*if(mirf_data_ready()){ 
     mirf_get_data(recbuffer);

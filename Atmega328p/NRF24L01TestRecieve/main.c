@@ -28,12 +28,15 @@ int main(void){
     //buffer[0] = 0xFA;
     //mirf_send(buffer, 1);
 
-    if(mirf_data_ready()){
+    //if(mirf_data_ready()){
       mirf_get_data(recbuffer);
-    }
+    //}
 
     if(recbuffer[0] == 0xAA){
-      PORTD ^= (1<<1);
+      PORTD |= (1<<1);
+      _delay_ms(100);
+      PORTD &= ~(1<<1);
+      _delay_ms(100);
     }
 
 

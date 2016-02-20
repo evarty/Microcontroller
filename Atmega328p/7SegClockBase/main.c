@@ -1,8 +1,8 @@
 //7 segment clock based on DS1307 for timekeeping
-
+#define F_CPU 1000000
 #include <avr/io.h> //allows more human readable stuff
 #include <avr/interrupt.h>  //allows interrupts 
-
+#include <util/delay.h>
 
 #include "ShiftOut.h"
 #include "IIC.h"
@@ -30,10 +30,10 @@ volatile uint8_t MinuteButton = 0;
 
 
 int main(void){
-
+  _delay_ms(50);
   //set up output pins
-  DDRD |= (1 << 4) | (1 << 3) | (1 << 2);
-  DDRC |= (1 << 5) | (1 << 4);
+  DDRD = 0xFF;//DDRD |= (1 << 4) | (1 << 3) | (1 << 2);
+  DDRC = 0xFF;//DDRC |= (1 << 5) | (1 << 4);
   //define 7 seg output values
   uint8_t numbers[] = {252,96,218,242,102,182,62,224,254,230};
   //define clock iic address
@@ -79,7 +79,7 @@ int main(void){
     sei();
 
     //define state variables
-    static uint8_t HourAdd = 0, MinuteAdd = 0, HourState = 1, MinuteState = 1;
+    static uint8_t HourAdd = 0, MinuteAdd = 0, HourState = 0, MinuteState = 0;
     //define working variables
     static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
 

@@ -34,9 +34,9 @@ int main(void){
 
     if(recbuffer[0] == 0xAA){
       PORTD |= (1<<1);
-      _delay_ms(100);
+      _delay_ms(10);
       PORTD &= ~(1<<1);
-      _delay_ms(100);
+      _delay_ms(10);
     }
 
 

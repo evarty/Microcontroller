@@ -65,7 +65,7 @@
 # Name of target controller 
 # (e.g. 'at90s8515', see the available avr-gcc mmcu 
 # options for possible values)
-MCU=atmega328p
+MCU=attiny45
 
 # id to use with programmer
 # default: PROGRAMMER_MCU=$(MCU)
@@ -74,7 +74,7 @@ MCU=atmega328p
 # for ATmega8s, avr-gcc expects 'atmega8' and 
 # avrdude requires 'm8')
 #PROGRAMMER_MCU=m8
-PROGRAMMER_MCU=m328p
+PROGRAMMER_MCU=attiny45
 
 # Name of our project
 # (use a single word, e.g. 'myproject')
@@ -85,10 +85,10 @@ PROJECTNAME=myproject
 # (list all files to compile, e.g. 'a.c b.cpp as.S'):
 # Use .cc, .cpp or .C suffix for C++ files, use .S 
 # (NOT .s !!!) for assembly source code files.
-PRJSRC=main.c ../Libraries/OBLib/MIRF/mirf.c ../Libraries/OBLib/MIRF/spi.c#../Libraries/nRF24/nRF24.c ../Libraries/OBLib/MIRF/mirf.c ../Libraries/OBLib/MIRF/spi.c #../Libraries/SPI/SPI.c #../../Libraries/PWM/PWM.c
+PRJSRC=main.c
 
 # additional includes (e.g. -I/path/to/mydir)
-INC=-I../Libraries/OBLib/MIRF#-I../Libraries/SPI -I../Libraries/OBLib/MIRF# -I../Libraries/nRF24 #-I../../Libraries/PWM
+INC=
 
 # libraries to link in (e.g. -lmylib)
 LIBS=

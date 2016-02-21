@@ -2,14 +2,16 @@
 #define F_CPU 8000000UL //Clock frequency
 #include <util/delay.h>
 
-#define RangeSensor 2
 #define LiftControl OCR0A
 #define LeftControl OCR1B
 #define RightControl OCR0B
+#define LeftGate0 3
+#define LeftGate1 2
 
 int main(void){
 
   DDRB = 0xFF;
+  PORTB = 0x00;
 
   CLKPR = 0x80;
   CLKPR = 0x00;//Set main clock prescale to 1. clock:8MHz
@@ -29,31 +31,22 @@ int main(void){
     //LiftControl = 128;
   while(1){
 
-    //LiftControl = 255;
-/*    LeftControl = 64;
-    RightControl = 64;
+    LiftControl = 255;
+    LeftControl = 255;
+    RightControl = 255;
 
-    PORTB |= (1<<RangeSensor);//Make the ultrasonic interface pin high
-    _delay_us(5);//wait for adequate pulse to ultrasonic
-    PORTB &= ~(1<<RangeSensor);//Bring ultrasonic pin low
-    DDRB &= ~(1<<RangeSensor);//Set ultrasonic pin as input to detect return pulse
-    _delay_us(200);//wait for time which corresponds to desired distance (200us ~3.5in)
-    if(PINB & (1<<RangeSensor)){//if ultrasonic still outputting high, then any object is beyond 3.5in
-      ; 
-    }else{//if not still high, then pulse is ended, and craft is within 3.5in of obstacle
-      LeftControl = 0;
-      _delay_ms(500);
-      LeftControl = 64;
-    }
-*/
-    PORTB |= (1<<RangeSensor);
-    _delay_us(5);
-    PORTB &= ~(1<<RangeSensor);
-    DDRB &= ~(1<RangeSensor);
-    _delay_us(400);
-    if(PINB & (1<<RangeSensor)){
-      LiftControl = 1;
-    }else{;}
+    PORTB &= ~(1<<LeftGate1);
+    PORTB |= (1<<LeftGate0);
+
+    _delay_ms(3000);
+
+    PORTB &= ~(1<<LeftGate0);
+    PORTB |= (1<<LeftGate1);
+
+    _delay_ms(1000);
+
+    PORTB &= ~(1<<LeftGate1);
+    PORTB |= (1<<LeftGate0);
 
   }
 }

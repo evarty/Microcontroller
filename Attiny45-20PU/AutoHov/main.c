@@ -31,9 +31,9 @@ int main(void){
     //LiftControl = 128;
   while(1){
 
-    LiftControl = 255;
-    LeftControl = 255;
-    RightControl = 255;
+    LiftControl = 0;
+    LeftControl = 1;
+    RightControl = 0;
 
     PORTB &= ~(1<<LeftGate1);
     PORTB |= (1<<LeftGate0);

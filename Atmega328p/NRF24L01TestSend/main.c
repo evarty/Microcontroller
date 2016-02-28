@@ -18,14 +18,17 @@ int main(void){
 
   mirf_config();
   
-  uint8_t buffer[1];
+  uint8_t buffer[3];
 //  uint8_t recbuffer[1];
 //  recbuffer[0] = 0x00;
 
   while(1){
 
     buffer[0] = 0xAA;
-    mirf_send(buffer, 1);
+    buffer[1] = 0xFF;
+    buffer[2] = 0xFA;
+
+    mirf_send(buffer, 3);
 
     //_delay_ms(100);
 

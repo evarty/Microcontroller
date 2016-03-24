@@ -9,9 +9,13 @@ OPT=s#optimization level: s (size), 0 (off), 1, 2, 3
 #Project files and output
 SRC=main.c#C source files, including files in other folders, "library" method suported
 TARGET=Blink#name of output, change for project, or dont, doesnt matter
-OBJECTS=#object files to include, for precompiled libraries
+OBJECTS=#object files to include
 INC=#extra directories to search for headers, mainly useful for "library" method
-INC_PARAMS=$(foreach d, $(INC), -I$d)#prepends a -I to each item in INC
+$(foreach d, $(INC), -I$d)#prepends a -I to each item in INC
+LIBS=#Libraries to include
+$(foreach d, $(LIBS), -l$d)#prepends a -l to each item in LIBS
+LIBPATHS=#Paths to libraries to include
+$(foreach d, $(LIBPATHS), -L$d)#prepends a -L to each item in LIBPATHS
 
 #Chip and project global definitions
 MCU=atmega328p#compiler name of target chip, avr-gcc take atmega328p, avrdude does not. Also used for avr-size
@@ -38,7 +42,7 @@ elf: object $(OBJECTS)
 	$(CC) $(LDFLAGS) $(TARGET_ARCH) $^ -o $(TARGET).elf
 
 object: $(SRC)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(INC) $(TARGET_ARCH) $^ -o $(TARGET).o
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LIBPATHS) $(LIBS) $(INC) $(TARGET_ARCH) $^ -o $(TARGET).o
 
 clean:
 	rm -f $(TARGET).elf $(TARGET).hex $(TARGET).map $(TARGET).o

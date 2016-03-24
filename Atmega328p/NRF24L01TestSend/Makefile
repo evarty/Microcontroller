@@ -8,7 +8,7 @@ OPT=s#optimization level: s (size), 0 (off), 1, 2, 3
 
 #Project files and output
 SRC=main.c ../Libraries/ADC/ADC.c ../Libraries/OBLib/MIRF/spi.c ../Libraries/OBLib/MIRF/mirf.c#C source files, including files in other folders, "library" method suported
-TARGET=Blink#name of output, change for project, or dont, doesnt matter
+TARGET=NRFSend#name of output, change for project, or dont, doesnt matter
 OBJECTS=#object files to include, for precompiled libraries
 INC=-I../Libraries/ADC -I../Libraries/OBLib/MIRF#extra directories to search for headers, used for library headers
 #INC_PARAMS=$(foreach d, $(INC), -I$d)#prepends a -I to each item in INC

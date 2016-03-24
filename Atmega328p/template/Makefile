@@ -10,7 +10,7 @@ OPT=s#optimization level: s (size), 0 (off), 1, 2, 3
 SRC=main.c#C source files, including files in other folders, "library" method suported
 TARGET=Blink#name of output, change for project, or dont, doesnt matter
 OBJECTS=#object files to include
-INC=#extra directories to search for headers, mainly useful for "library" method
+INC=#extra directories to search for headers, used for library headers
 $(foreach d, $(INC), -I$d)#prepends a -I to each item in INC
 LIBS=#Libraries to include
 $(foreach d, $(LIBS), -l$d)#prepends a -l to each item in LIBS

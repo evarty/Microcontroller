@@ -38,10 +38,10 @@ elf: object $(OBJECTS)
 	$(CC) $(LDFLAGS) $(TARGET_ARCH) $^ -o $(TARGET).elf
 
 object: $(SRC)
-	$(CC) $(CFLAGS) $(INC) $(TARGET_ARCH) $^ -o $(TARGET)
+	$(CC) $(CFLAGS) $(INC) $(TARGET_ARCH) $^ -o $(TARGET).o
 
 clean:
-	rm -f $(TARGET).elf $(TARGET).hex $(TARGET).map
+	rm -f $(TARGET).elf $(TARGET).hex $(TARGET).map $(TARGET).o
 	
 size: hex
 	avr-size -B -x -t $(TARGET).hex

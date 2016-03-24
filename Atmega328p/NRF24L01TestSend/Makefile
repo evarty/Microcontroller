@@ -10,8 +10,12 @@ OPT=s#optimization level: s (size), 0 (off), 1, 2, 3
 SRC=main.c ../Libraries/ADC/ADC.c ../Libraries/OBLib/MIRF/spi.c ../Libraries/OBLib/MIRF/mirf.c#C source files, including files in other folders, "library" method suported
 TARGET=Blink#name of output, change for project, or dont, doesnt matter
 OBJECTS=#object files to include, for precompiled libraries
-INC=../Libraries/ADC ../Libraries/OBLib/MIRF#extra directories to search for headers, mainly useful for "library" method
-INC_PARAMS=$(foreach d, $(INC), -I$d)#prepends a -I to each item in INC
+INC=../Libraries/ADC ../Libraries/OBLib/MIRF#extra directories to search for headers, used for library headers
+$(foreach d, $(INC), -I$d)#prepends a -I to each item in INC
+LIBS=#Libraries to include
+$(foreach d, $(LIBS), -l$d)#prepends a -l to each item in LIBS
+LIBPATHS=#Paths to libraries to include
+$(foreach d, $(LIBPATHS), -L$d)#prepends a -L to each item in LIBPATHS
 
 #Chip and project global definitions
 MCU=atmega328p#compiler name of target chip, avr-gcc take atmega328p, avrdude does not. Also used for avr-size

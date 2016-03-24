@@ -1,6 +1,6 @@
 #General compiler and linker stuff
 CC=avr-gcc#which compiler to use
-CFLAGS=-O$(OPT) -g -std=gnu99 -Wall -ffunctions-sections -fdata-sections#compiler flags to use
+CFLAGS=-O$(OPT) -g -std=gnu99 -Wall -Wstrict-prototypes -ffunctions-sections -fdata-sections#compiler flags to use
 OBJCOPY=avr-objcopy#what version of objcopy to use to change formats
 TARGET_ARCH=-mmcu=$(MCU)#compiler flag for target uC name come from MCU below
 LDFLAGS=-Wl,-Map,$(TARGET).map -Wl,--gc-sections#linker flags

@@ -1,21 +1,21 @@
 #General compiler and linker stuff
 CC=avr-gcc#which compiler to use
-CFLAGS=-O$(OPT) -g -std=gnu99 -Wall -Wstrict-prototypes -ffunctions-sections -fdata-sections#compiler flags to use
+CFLAGS=-O$(OPT) -g -std=gnu99 -Wall -Wstrict-prototypes -ffunction-sections -fdata-sections#compiler flags to use
 OBJCOPY=avr-objcopy#what version of objcopy to use to change formats
 TARGET_ARCH=-mmcu=$(MCU)#compiler flag for target uC name come from MCU below
-LDFLAGS=-Wl,-Map,$(TARGET).map -Wl,--gc-sections#linker flags
+LDFLAGS=-Wl,-Map=$(TARGET).map -Wl,--gc-sections#linker flags
 OPT=s#optimization level: s (size), 0 (off), 1, 2, 3
 
 #Project files and output
 SRC=main.c ../Libraries/ADC/ADC.c ../Libraries/OBLib/MIRF/spi.c ../Libraries/OBLib/MIRF/mirf.c#C source files, including files in other folders, "library" method suported
 TARGET=Blink#name of output, change for project, or dont, doesnt matter
 OBJECTS=#object files to include, for precompiled libraries
-INC=../Libraries/ADC ../Libraries/OBLib/MIRF#extra directories to search for headers, used for library headers
-$(foreach d, $(INC), -I$d)#prepends a -I to each item in INC
+INC=-I../Libraries/ADC -I../Libraries/OBLib/MIRF#extra directories to search for headers, used for library headers
+#INC_PARAMS=$(foreach d, $(INC), -I$d)#prepends a -I to each item in INC
 LIBS=#Libraries to include
-$(foreach d, $(LIBS), -l$d)#prepends a -l to each item in LIBS
+#LIBS_PARAMS$(foreach d, $(LIBS), -l$d)#prepends a -l to each item in LIBS
 LIBPATHS=#Paths to libraries to include
-$(foreach d, $(LIBPATHS), -L$d)#prepends a -L to each item in LIBPATHS
+#LIBPATHS_PARAMS=$(foreach d, $(LIBPATHS), -L$d)#prepends a -L to each item in LIBPATHS
 
 #Chip and project global definitions
 MCU=atmega328p#compiler name of target chip, avr-gcc take atmega328p, avrdude does not. Also used for avr-size
@@ -38,14 +38,11 @@ flash: hex
 hex: elf
 	$(OBJCOPY) -j .text -j .data -O ihex $(TARGET).elf $(TARGET).hex
 
-elf: object $(OBJECTS)
-	$(CC) $(LDFLAGS) $(TARGET_ARCH) $^ -o $(TARGET).elf
-
-object: $(SRC)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(INC) $(TARGET_ARCH) $^ -o $(TARGET).o
+elf: $(OBJECTS) $(SRC)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH) $(INC) $(OBJECTS) $^ -o $(TARGET).elf
 
 clean:
-	rm -f $(TARGET).elf $(TARGET).hex $(TARGET).map $(TARGET).o
+	rm -f $(TARGET).elf $(TARGET).hex $(TARGET).map
 	
 size: hex
-	avr-size -c -d -t --mcu=$(MCU) $(TARGET).hex
+	avr-size -C -d -t --mcu=$(MCU) $(TARGET).elf

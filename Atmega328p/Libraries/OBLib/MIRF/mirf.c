@@ -93,12 +93,12 @@ void mirf_set_TADDR(uint8_t * adr)
 ISR(PCINT0_vect)
   // Interrupt handler 
 {
-  uint8_t status;   
+  //uint8_t status;   
   // If still in transmitting mode then finish transmission
   if (PTX) {
     // Read MiRF status 
     mirf_CSN_lo;                                // Pull down chip select
-    status = spi_fast_shift(NOP);               // Read status register
+    /*status = */spi_fast_shift(NOP);               // Read status register
     mirf_CSN_hi;                                // Pull up chip select
 
     mirf_CE_lo;                             // Deactivate transreceiver

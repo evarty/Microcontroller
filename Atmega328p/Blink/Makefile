@@ -34,8 +34,11 @@ flash: hex
 hex: elf
 	$(OBJCOPY) -j .text -j .data -O ihex $(TARGET).elf $(TARGET).hex
 
-elf: $(OBJECTS) $(SRC)
-	$(CC) $(CFLAGS) $(INC) $(LDFLAGS) $(TARGET_ARCH) $^ -o $(TARGET).elf
+elf: object $(OBJECTS)
+	$(CC) $(LDFLAGS) $(TARGET_ARCH) $^ -o $(TARGET).elf
+
+object: $(SRC)
+	$(CC) $(CFLAGS) $(INC) $(TARGET_ARCH) $^ -o $(TARGET)
 
 clean:
 	rm -f $(TARGET).elf $(TARGET).hex $(TARGET).map

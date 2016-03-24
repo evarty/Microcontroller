@@ -15,7 +15,7 @@ INC_PARAMS=$(foreach d, $(INC), -I$d)#prepends a -I to each item in INC
 
 #Chip and project global definitions
 MCU=atmega328p#compiler name of target chip, avr-gcc take atmega328p, avrdude does not. Also used for avr-size
-F_CPU=1000000UL#uC clock, for macros, sent to preprocessor
+F_CPU=8000000UL#uC clock, for macros, sent to preprocessor
 BAUD=9600UL#uC baud, for macros, sent to preprocessor
 CPPFLAGS=-DF_CPU$(F_CPU) -DBAUD$(BAUD) -I.#Flags passed to preprocessor. This allows for macros and such to have the selected clock rate and baud universally without having to put it into each file
 

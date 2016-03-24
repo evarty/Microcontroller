@@ -17,7 +17,7 @@ INC_PARAMS=$(foreach d, $(INC), -I$d)#prepends a -I to each item in INC
 MCU=atmega328p#compiler name of target chip
 F_CPU=1000000UL#uC clock
 BAUD=9600UL#uC baud
-CPPFLAGS=-DF_CPU$(F_CPU) -DBAUD$(BAUD) -I#Flags
+CPPFLAGS=-DF_CPU$(F_CPU) -DBAUD$(BAUD) -I.#Flags
 
 #Flashing options
 FLASHMETHOD=arduino#linuxgpio #name of programmer in avrdude

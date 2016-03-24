@@ -18,17 +18,18 @@ CPPFLAGS=-DF_CPU$(F_CPU) -DBAUD$(BAUD) -I
 
 #Flashing options
 FLASHMETHOD=arduino
-FLASHPORT=/dev/tty0
+FLASHPORT=/dev/ttyACM0
 FLASHBAUD=19200
+CHIP=m328p
 
 #Rules
 all: flash
 
-flash: $(TARGET).hex
-	avrdude -c $(FLASHMETHOD) -P $(FLASHPORT) -b $(FLASHBAUD) -p $(MCU) -U flash:w:$(TARGET).hex
+flash: hex
+	avrdude -c $(FLASHMETHOD) -p $(CHIP) -P $(FLASHPORT) -b $(FLASHBAUD) -p $(MCU) -U flash:w:$(TARGET).hex
 
-hex: $(TARGET).elf
-	$(OBJCOPY) -j .text -j .data -O ihex $< $(TARGET).hex
+hex: elf
+	$(OBJCOPY) -j .text -j .data -O ihex $(TARGET).elf $(TARGET).hex
 
 elf: $(OBJECTS) $(SRC)
 	$(CC) $(LDFLAGS) $(TARGET_ARCH) $^ -o $(TARGET).elf

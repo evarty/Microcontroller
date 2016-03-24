@@ -1,26 +1,26 @@
 #General compiler and linker stuff
-CC=avr-gcc
-CFLAGS=-Os -g -std=gnu99 -Wall -ffunctions-sections -fdata-sections
-OBJCOPY=avr-objcopy
-TARGET_ARCH=-mmcu=$(MCU)
-LDFLAGS=-Wl,-Map,$(TARGET).map -Wl,--gc-sections
+CC=avr-gcc#which compiler to use
+CFLAGS=-Os -g -std=gnu99 -Wall -ffunctions-sections -fdata-sections#compiler flags to use
+OBJCOPY=avr-objcopy#what version of objcopy to use to change formats
+TARGET_ARCH=-mmcu=$(MCU)#compiler flag for target uC name come from MCU below
+LDFLAGS=-Wl,-Map,$(TARGET).map -Wl,--gc-sections#linker flags
 
 #Project files and output
-SRC=main.c
-TARGET=Blink
-OBJECTS=
+SRC=main.c#source files
+TARGET=Blink#name of output
+OBJECTS=#object files to include
 
 #Chip and project global definitions
-MCU=atmega328p
-F_CPU=1000000UL
-BAUD=9600UL
-CPPFLAGS=-DF_CPU$(F_CPU) -DBAUD$(BAUD) -I
+MCU=atmega328p#compiler name of target chip
+F_CPU=1000000UL#uC clock
+BAUD=9600UL#uC baud
+CPPFLAGS=-DF_CPU$(F_CPU) -DBAUD$(BAUD) -I#Flags
 
 #Flashing options
-FLASHMETHOD=arduino
-FLASHPORT=/dev/ttyACM0
-FLASHBAUD=19200
-CHIP=m328p
+FLASHMETHOD=arduino#name of programmer in avrdude
+FLASHPORT=/dev/ttyACM0#what port avrdude should use
+FLASHBAUD=19200#baudrate that avrdude will flash at
+CHIP=m328p#avrdude name of target chip
 
 #Rules
 all: flash

@@ -1,10 +1,11 @@
 #General compiler and linker stuff
-CC=avr-gcc#which compiler to use
+CC=arm-none-eabi-gcc#which compiler to use
 CFLAGS=-O$(OPT) -g -std=gnu99 -Wall -Wstrict-prototypes -ffunctions-sections -fdata-sections#compiler flags to use
-OBJCOPY=avr-objcopy#what version of objcopy to use to change formats
+OBJCOPY=arm-none-eabi-objcopy#what version of objcopy to use to change formats
 TARGET_ARCH=-mmcu=$(MCU)#compiler flag for target uC name come from MCU below
 LDFLAGS=-Wl,-Map,$(TARGET).map -Wl,--gc-sections#linker flags
 OPT=s#optimization level: s (size), 0 (off), 1, 2, 3
+AR=arm-none-eabi-ar
 
 #Project files and output
 SRC=main.c#C source files, including files in other folders, "library" method suported
@@ -48,4 +49,4 @@ clean:
 	rm -f $(TARGET).elf $(TARGET).hex $(TARGET).map $(TARGET).o
 	
 size: hex
-	avr-size -c -d -t --mcu=$(MCU) $(TARGET).hex
+	arm-none-eabi-size -c -d -t --mcu=$(MCU) $(TARGET).hex

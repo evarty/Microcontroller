@@ -1,0 +1,58 @@
+RC Car
+RC Hovercraft
+make prior semi-autonomous
+various clocks, in other doc
+automatic plant waterer
+wifi lights with bells and whistles
+line following robot
+motion detecting lights
+lock box
+continuity tester
+ESR meter
+automatic shutoff for soldering iron
+temp/humidity sensing station
+base station for data to be relayed to
+workout timer
+NFC/RFID spatial locator
+balancing robot
+power meter a la killawatt
+BLDC motor controller
+POV clock (prop, pendulum, etc)
+reflow oven
+usb-serial adapter
+usb-JTAG adapter
+usb-SWD adapter
+AVR/PIC/ARM programmer
+brightness adjustable lights (encoder)
+AM radio
+FM radio
+GPS navigation (to point only min)
+Compass (this and prior solar/will always work)
+servo controller
+gyro stablized platform (camera positioning things)
+desk lamp with magnifying glass
+proper power supply
+metal detector
+doorbell
+arbitrary PLL
+robot arm
+sound locater
+IR receiver/sender (find Roomba pattern, make IR walls)
+clock with decorative pendulum
+laser rangefinder
+anemometer
+EKG
+EEG
+PC mouse
+frequency counter
+sous vide cooker
+guitar tuner
+pedometer
+quadcopter
+RC airplane
+Nixie test jig
+hand-held games
+scrolling led matrix display (base config, easily configured)
+office status display
+clapper
+lock box that only opens at predetermined times

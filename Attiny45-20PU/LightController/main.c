@@ -6,8 +6,6 @@
 
 #define TurnOnMask 0x08
 #define TurnOnPort PINB
-#define TurnOffMask 0x10
-#define TurnOffPort PINB
 
 int main(void)
 {
@@ -33,13 +31,9 @@ int main(void)
     //Check whether the lights should be on or off. Because the two input pins are tied together, TurnOnEngaged and TurnOffEngaged will always be opposite. You don't actually need both variables.
     if(TurnOnMask & TurnOnPort){
       TurnOnEngaged = 1;
-    }else{
-      TurnOnEngaged = 0;
-    }
-
-    if(TurnOffMask & TurnOffPort){
       TurnOffEngaged = 0;
     }else{
+      TurnOnEngaged = 0;
       TurnOffEngaged = 1;
     }
 
@@ -52,7 +46,7 @@ int main(void)
       TCCR0B &= ~(1<<CS00);//Disable PWM clock and therefore output
       _delay_ms(100);
       PORTB &= ~(1<<1);//Force PB1 low
-      //If lights are on and signal is low, toggle onstate to off. This works because the two input pins are tied together.
+      //If lights are on and signal is low, toggle onstate to off. 
     }else if(!TurnOnEngaged && OnState){
       OnState = 0;//set state variable
       PORTB &= ~(1<<1);//force PB1 Low
@@ -67,7 +61,7 @@ int main(void)
       TCCR0B &= ~(1<<CS00);//disable clock and therefor PWM output
       _delay_ms(100);
       PORTB &= ~(1<<1);//Force PB1 low
-      //If lights are off and the signal pin is high, toggle offstate to false. This works because the two input pins are tied together.
+      //If lights are off and the signal pin is high, toggle offstate to false. 
     }else if(!TurnOffEngaged && OffState){
       OffState = 0;//set state variable
       PORTB &= ~(1<<1);//Force PB1 low

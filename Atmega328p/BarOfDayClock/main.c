@@ -26,7 +26,7 @@ volatile uint8_t MinuteButton = 0;
 
 
 int main(void){
-  _delay_ms(50);
+  _delay_ms(100);
   //set up output pins
   DDRD = 0xFF;//DDRD |= (1 << 4) | (1 << 3) | (1 << 2);
   DDRC |= (1 << 5) | (1 << 4);

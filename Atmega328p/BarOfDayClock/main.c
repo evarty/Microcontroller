@@ -8,9 +8,6 @@
 #include "IIC.h"
 #include "Timer0.h"
 
-//define number of LEDs
-#define NumLED 16
-
 //define button pins
 #define HourPort PINC
 #define HourMask 0x01 //C0
@@ -18,7 +15,7 @@
 #define MinuteMask 0x02 //C1
 
 //Function prototype
-uint16_t ConvertToBar(uint8_t num);
+uint32_t ConvertToBar(uint8_t num);
 
 //define variables that will be affected by ISR
 volatile uint8_t HourButton = 0;
@@ -33,7 +30,7 @@ int main(void){
   DDRB = 0xFF;
   //define clock iic address
   uint8_t address = 0xD0; //1101000
-
+  //uint8_t NumLED = 16;
 
   //init clock chip (ds1307)
   TWIInit();
@@ -80,7 +77,7 @@ int main(void){
     //define Bar variables
     static uint8_t DecMinutes = 0, DecHours = 0, IntLEDS = 0;
     static double FracHour = 0, FHours = 0, FracDay = 0, LEDS = 0;
-    static uint16_t LIntLEDS = 0;
+    static uint32_t LIntLEDS = 0;
 
     //separate digits from read values
     MinutesOnes = Minutes & 0x0F;
@@ -188,42 +185,15 @@ ISR(TIMER0_OVF_vect){//ISR takes ~14 us, occurs every ~15ms
 }
 
 
-uint16_t ConvertToBar(uint8_t num){
-
-  if(num == 0)
-    return 0b0000000000000000;
-  else if(num == 1)
-    return 0b0000000000000001;
-  else if(num == 2)
-    return 0b0000000000000011;
-  else if(num == 3)
-    return 0b0000000000000111;
-  else if(num == 4)
-    return 0b0000000000001111;
-  else if(num == 5)
-    return 0b0000000000011111;
-  else if(num == 6)
-    return 0b0000000000111111;
-  else if(num == 7)
-    return 0b0000000001111111;
-  else if(num == 8)
-    return 0b0000000011111111;
-  else if(num == 9)
-    return 0b0000000111111111;
-  else if(num == 10)
-    return 0b0000001111111111;
-  else if(num == 11)
-    return 0b0000011111111111;
-  else if(num == 12)
-    return 0b0000111111111111;
-  else if(num ==13)
-    return 0b0001111111111111;
-  else if(num ==14)
-    return 0b0011111111111111;
-  else if(num == 15)
-    return 0b0111111111111111;
-  else if(num ==16)
-    return 0b1111111111111111;
-  else 
-    return 0x0000;
+uint32_t ConvertToBar(uint8_t num){
+  if(num > 32)
+    return 0xFFFFFFFF;
+ 
+  uint32_t hold = 0x00000000;
+    
+  for(int i = 0; i < num; i++){
+    hold |= (1<<i);
+  }
+  
+  return hold;
 }

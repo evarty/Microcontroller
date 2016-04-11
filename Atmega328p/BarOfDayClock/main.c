@@ -2,11 +2,11 @@
 #define F_CPU 1000000
 #include <avr/io.h> //allows more human readable stuff
 #include <avr/interrupt.h>  //allows interrupts 
-#include <util/delay.h>
-#include <math.h>
+#include <util/delay.h> //Gives delay functions
+#include <math.h> //Used in this case just for "round" because I didn't want to implement it myself.
 
-#include "IIC.h"
-#include "Timer0.h"
+#include "IIC.h" //IIC communication functions via TWI
+#include "Timer0.h" //Setup and control of Timer0
 
 //define button pins
 #define HourPort PINC
@@ -23,11 +23,11 @@ volatile uint8_t MinuteButton = 0;
 
 
 int main(void){
-  _delay_ms(50);
+  _delay_ms(50);//the delay is to give the DS1307 time to initialize. 
   //set up output pins
-  DDRD = 0xFF;//DDRD |= (1 << 4) | (1 << 3) | (1 << 2);
-  DDRC |= (1 << 5) | (1 << 4);
-  DDRB = 0xFF;
+  DDRD = 0xFF;//set all of port D to be output
+  DDRC |= (1 << 5) | (1 << 4);//Set TWI pins to be output. Probably don't need.
+  DDRB = 0xFF;//set all of port C to be output
   //define clock iic address
   uint8_t address = 0xD0; //1101000
   //uint8_t NumLED = 16;

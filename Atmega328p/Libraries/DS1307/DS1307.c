@@ -6,11 +6,11 @@
 void DS1307Init(){//Initialize the DS1307 to midnight and enable clock.
 
   TWIStart();
-  TWIWrite(ADDRESS | (0 << 0));
+  TWIWrite(DS1307ADDRESS | (0 << 0));
   TWIWrite(0x00);
   TWIWrite(0x00);
   TWIStart();
-  TWIWrite(ADDRESS | (0 << 0));
+  TWIWrite(DS1307ADDRESS | (0 << 0));
   TWIWrite(0x07);
   TWIWrite(0x03);
   TWIStop();
@@ -21,7 +21,7 @@ void DS1307Init(){//Initialize the DS1307 to midnight and enable clock.
 void DS1307RegisterW(uint8_t reg, uint8_t data){//Write to a single register
 
     TWIStart();
-    TWIWrite(ADDRESS | (0 << 0));
+    TWIWrite(DS1307ADDRESS | (0 << 0));
     TWIWrite(reg);
     TWIWrite(data);
     TWIStop();
@@ -34,10 +34,10 @@ uint8_t DS1307RegisterR(uint8_t reg){//Read from a single register
   uint8_t data = 0;
   
   TWIStart();
-  TWIWrite(ADDRESS | (0 << 0));
+  TWIWrite(DS1307ADDRESS | (0 << 0));
   TWIWrite(reg);
   TWIStart();
-  TWIWrite(ADDRESS | (1 << 0));
+  TWIWrite(DS1307ADDRESS | (1 << 0));
   data = TWIReadNACK();
   TWIStop();
   
@@ -49,7 +49,7 @@ void DS1307RegisterWMult(uint8_t *reg, uint8_t RegLength, uint8_t *data, uint8_t
 
   for(uint8_t i = 0; i < RegLength; i++){
     TWIStart();
-    TWIWrite(ADDRESS | (0 << 0));
+    TWIWrite(DS1307ADDRESS | (0 << 0));
     TWIWrite(reg[i]);
     TWIWrite(data[i]);
   }
@@ -60,10 +60,10 @@ void DS1307RegisterWMult(uint8_t *reg, uint8_t RegLength, uint8_t *data, uint8_t
 void DS1307RegisterRMult(uint8_t FirstReg, uint8_t NumReg, uint8_t *data){//Read from arbitrary number of registers
 
   TWIStart();
-  TWIWrite(ADDRESS | (0 << 0));
+  TWIWrite(DS1307ADDRESS | (0 << 0));
   TWIWrite(FirstReg);
   TWIStart();
-  TWIWrite(ADDRESS | (1 << 0));
+  TWIWrite(DS1307ADDRESS | (1 << 0));
   for(uint8_t i = 0; i < (NumReg - 1); i++){
     data[i] = TWIReadACK();
   }

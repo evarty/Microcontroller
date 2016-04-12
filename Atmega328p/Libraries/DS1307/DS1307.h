@@ -1,7 +1,7 @@
 #ifndef DS1307_H
 #define DS1307_H
 
-#define ADDRESS 0xD0
+#define DS1307ADDRESS 0xD0
 
 void DS1307Init(void);
 void DS1307RegisterW(uint8_t reg, uint8_t data);

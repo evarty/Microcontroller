@@ -96,7 +96,7 @@ int main(void){
     //round to nearest LED
     LEDS = FracDay * (16.);
     LEDS = round(LEDS);
-    IntLEDS = (uint8_t)LEDS;
+    IntLEDS = (uint8_t)LEDS & 0xFF;
     LIntLEDS = ConvertToBar(IntLEDS);
     //output to Bars
     PORTB = (LIntLEDS & 0xFF);

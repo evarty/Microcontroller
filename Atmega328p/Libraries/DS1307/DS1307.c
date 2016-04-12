@@ -3,7 +3,7 @@
 #include "IIC.h"
 
 
-void DS1307Init(){
+void DS1307Init(){//Initialize the DS1307 to midnight and enable clock.
 
   TWIStart();
   TWIWrite(ADDRESS | (0 << 0));
@@ -18,7 +18,7 @@ void DS1307Init(){
 }
 
 
-void DS1307RegisterW(uint8_t reg, uint8_t data){
+void DS1307RegisterW(uint8_t reg, uint8_t data){//Write to a single register
 
     TWIStart();
     TWIWrite(ADDRESS | (0 << 0));
@@ -29,7 +29,7 @@ void DS1307RegisterW(uint8_t reg, uint8_t data){
 }
 
 
-uint8_t DS1307RegisterR(uint8_t reg){
+uint8_t DS1307RegisterR(uint8_t reg){//Read from a single register
 
   uint8_t data = 0;
   
@@ -45,7 +45,7 @@ uint8_t DS1307RegisterR(uint8_t reg){
 
 }
 
-void DS1307RegisterWMult(uint8_t *reg, uint8_t RegLength, uint8_t *data, uint8_t dataLength){
+void DS1307RegisterWMult(uint8_t *reg, uint8_t RegLength, uint8_t *data, uint8_t dataLength){//Write to arbitrary number of registers
 
   for(uint8_t i = 0; i < RegLength; i++){
     TWIStart();
@@ -57,7 +57,7 @@ void DS1307RegisterWMult(uint8_t *reg, uint8_t RegLength, uint8_t *data, uint8_t
 
 }
 
-void DS1307RegisterRMult(uint8_t FirstReg, uint8_t NumReg, uint8_t *data){
+void DS1307RegisterRMult(uint8_t FirstReg, uint8_t NumReg, uint8_t *data){//Read from arbitrary number of registers
 
   TWIStart();
   TWIWrite(ADDRESS | (0 << 0));

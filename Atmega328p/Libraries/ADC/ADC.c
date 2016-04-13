@@ -1,6 +1,4 @@
 #include <avr/io.h>
-#include <stdio.h>
-#include <avr/pgmspace.h>
 
 #include "ADC.h"
 

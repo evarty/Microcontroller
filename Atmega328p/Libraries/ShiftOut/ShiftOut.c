@@ -10,9 +10,9 @@ void ShiftOutByte(uint8_t CLKPin, uint8_t *ClockPORT, uint8_t DataPin, uint8_t *
   for (int i = 0; i < 8; i++){
 
     ClockPORT &= ~(1 << CLKPin);
-    DataPORT |= (((data & (0x01 << i)) >> i) << DataPin );
+    DataPORT |= (((data >> i) & 0x01) << DataPin);
     ClockPORT |= (1 << CLKPin); 
-    DataPORT &= ~(((dat a& (0x01 << i)) >> i) << DataPin );
+    DataPORT &= ~(((data >> i) & 0x01) << DataPin);
   }
 
   LatchPORT |= (1 << LatchPin); 
@@ -26,9 +26,9 @@ void ShiftOutMultiByte(uint8_t CLKPin, uint8_t *ClockPORT, uint8_t DataPin, uint
   for(int i = 0; i < (8 * NumDataByte); i++){
     
     ClockPORT &= ~(1 << CLKPin);
-    DataPORT |= (((data & (0x01 << i)) >> i) << DataPin );
+    DataPORT |= (((data[i] >> i ) & 0x01 ) << DataPin );
     ClockPORT |= (1 << CLKPin);
-    DataPORT &= ~(((data & (0x01 << i)) >> i) << DataPin );
+    DataPORT &= ~(((data[i] >> i ) & 0x01) << DataPin );
     
   }
   

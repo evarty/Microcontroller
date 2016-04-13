@@ -33,7 +33,6 @@ int main(void){
   _delay_ms(50);
   //set up output pins
   DDRD = 0xFF;//DDRD |= (1 << 4) | (1 << 3) | (1 << 2);
-  DDRC = 0xFF;//DDRC |= (1 << 5) | (1 << 4);
   //define 7 seg output values
   uint8_t numbers[] = {252,96,218,242,102,182,62,224,254,230};
   //define clock iic address

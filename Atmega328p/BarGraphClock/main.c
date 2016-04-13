@@ -27,7 +27,6 @@ int main(void){
   _delay_ms(50);//the delay is to give the DS1307 time to initialize. 
   //set up output pins
   DDRD = 0xFF;//set all of port D to be output
-  DDRC |= (1 << 5) | (1 << 4);//Set TWI pins to be output. Probably don't need.
   DDRB = 0xFF;//set all of port C to be output
 
   //init clock chip (ds1307)

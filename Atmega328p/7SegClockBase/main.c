@@ -89,12 +89,10 @@ int main(void){
     HoursTens = (Hours & 0x30) >> 4;
 
     //output to 7 segs
-    PORTD &= ~(1 << LatchPin);
-    ShiftOut(ClockPin,DataPin,numbers[MinutesOnes]);
-    ShiftOut(ClockPin,DataPin,numbers[MinutesTens]);
-    ShiftOut(ClockPin,DataPin,numbers[HoursOnes]);
-    ShiftOut(ClockPin,DataPin,numbers[HoursTens]);
-    PORTD |= (1 << LatchPin);
+    ShiftOutByte(ClockPin, &PORTD, DataPin, &PORTD, LatchPin, &PORTD, numbers[MinutesOnes]);
+    ShiftOutByte(ClockPin, &PORTD, DataPin, &PORTD, LatchPin, &PORTD, numbers[MinutesTens]);
+    ShiftOutByte(ClockPin, &PORTD, DataPin, &PORTD, LatchPin, &PORTD, numbers[HoursOnes]);
+    ShiftOutByte(ClockPin, &PORTD, DataPin, &PORTD, LatchPin, &PORTD, numbers[HoursTens]);
 
 
     //signal if adding an hour, deal with hour state

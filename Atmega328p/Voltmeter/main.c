@@ -1,12 +1,11 @@
 #include <avr/io.h>
-#include <stdio.h>
-#include <avr/pgmspace.h>
 
 #include "ShiftOut.h"
 
-#define OneLatch 2
-#define OneData 3
-#define OneClock 4
+#define LatchPin 2
+#define DataPin 3
+#define ClockPin 4
+
 void ADCInitilize(void)
 {
   PORTC = 0x00;
@@ -45,10 +44,9 @@ int main(void)
     int Tenths = (int)(10 * llama2) % 10;
     int Ones = (int)llama2 % 10;
 
-    PORTD &= ~(1<<OneLatch);
-    ShiftOut(OneClock,OneData,numbers[Tenths]);
-    ShiftOut(OneClock,OneData,numbers[Ones]);
-    PORTD |= 1<<OneLatch;
+    ShiftOutByte(ClockPin, &PORTD, DataPin, &PORTD, LatchPin, &PORTD, numbers[Tenths]);
+    ShiftOutByte(ClockPin, &PORTD, DataPin, &PORTD, LatchPin, &PORTD, numbers[Ones]);
+  
   }
 }
 

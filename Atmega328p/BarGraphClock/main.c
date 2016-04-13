@@ -34,11 +34,7 @@ int main(void){
   TWIInit();
   DS1307Init();
 
-  //set up timer0
-  //  sei();
-  //  Timer0SetupMode(0x00);
-  //  Timer0SetupPrescale(0b01100000);
-  //  Timer0SetupInterrupt(0x20);
+  //set up timer0 and enable interrupts
   TCCR0A |= (0 << CS02);
   TCCR0B |= (1 << CS01) | (1 << CS00);
   TIMSK0 |= (1 << TOIE0);
@@ -46,6 +42,7 @@ int main(void){
 
   while(1){  
 
+    //define time variables
     static uint8_t Minutes = 0, Hours = 0;
     //read current time from clock
     cli();
@@ -73,14 +70,16 @@ int main(void){
     DecHours = HoursOnes + 10*HoursTens;
 
     //Calculate fraction of Day that has occured
-    FracHour = (float)DecMinutes / (60.);
-    FHours = (float)DecHours + FracHour;
+    FracHour = (double)DecMinutes / (60.);
+    FHours = (double)DecHours + FracHour;
     FracDay = FHours / (24.);
+    
     //round to nearest LED
-    LEDS = FracDay * (16.);
-    LEDS = round(LEDS);
-    IntLEDS = (uint8_t)LEDS & 0xFF;
-    LIntLEDS = ConvertToBar(IntLEDS);
+    LEDS = FracDay * (16.);//exact number of LEDs needed
+    LEDS = round(LEDS);//round to nearest integer
+    IntLEDS = (uint8_t)LEDS & 0xFF;//pull the bottom byte into a smaller variable
+    LIntLEDS = ConvertToBar(IntLEDS);//convert number of LEDs needed to a string of "1"s in a 32 bit int
+    
     //output to Bars
     PORTB = (LIntLEDS & 0xFF);
     PORTD = ((LIntLEDS >> 8) & 0xFF);
@@ -113,6 +112,7 @@ int main(void){
         HoursOnes = 0;
       }
 
+      //write new time back to DS1307
       cli();
       DS1307RegisterW(0x02, 0x00 | (HoursTens << 4) | (HoursOnes << 0));
       sei();
@@ -130,6 +130,7 @@ int main(void){
         MinutesOnes = 0;
       }
 
+      //write new time back to DS1307
       cli();
       DS1307RegisterW(0x01, 0x00 | (MinutesTens << 4) | (MinutesOnes << 0));
       sei();
@@ -159,7 +160,9 @@ ISR(TIMER0_OVF_vect){//ISR takes ~14 us, occurs every ~15ms
 
 }
 
-
+//converts integer to a string of "1"s at the low side of a 32 bit int. For example, "8" becomes "00000000000000000000000011111111"
+//This imposes a 32 LED maximum, which can be easily expanded to 64 by using uint64_t.
+//None of the 32 bit operations are atomic, but non of the variables are touched by the ISR, so it doesn't matter
 uint32_t ConvertToBar(uint8_t num){
   if(num > 32)
     return 0xFFFFFFFF;

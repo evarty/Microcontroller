@@ -1,10 +1,7 @@
-#include <avr/pgmspace.h>
-#include <stdio.h>
 #include <avr/io.h>
 
 #include "ShiftOut.h"
-//int main(void){
-//}
+
 
 
 void ShiftOutByte(uint8_t CLKPin, uint8_t *ClockPORT, uint8_t DataPin, uint8_t *DataPORT, uint8_t LatchPin, uint8_t *LatchPORT, uint8_t data){

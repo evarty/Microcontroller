@@ -17,18 +17,15 @@ void ADCInitilize(void)
   loop_until_bit_is_clear(ADCSRA,ADSC);
 }
 
-unsigned int ADCRead(void)
+uint16_t ADCRead(void)
 {
-  unsigned int r;
-
-
-  r = 0x10;
-  ADMUX = r;
-  ADCSRA |= 1<<ADSC;
+  
+  ADMUX = 0x10;
+  ADCSRA |= 1 << ADSC;
   loop_until_bit_is_clear(ADCSRA,ADSC);
-  char l = ADCL;
-  char h = ADCH; 
-  return ((int)h)<<8|l; 
+  uint8_t l = ADCL;
+  uint8_t  h = ADCH; 
+  return (0x00 | (h << 8) | l); 
 }
 
 int main(void)

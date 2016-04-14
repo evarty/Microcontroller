@@ -1,5 +1,0 @@
-use:
-avr-size -C -d --mcu=<name of micro> <.out file>
-
-example:
-avr-size -C -d --mcu=atmega328p myproject.out

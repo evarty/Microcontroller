@@ -7,10 +7,10 @@ LDFLAGS=-Wl,-Map=$(TARGET).map -Wl,--gc-sections#linker flags
 OPT=s#optimization level: s (size), 0 (off), 1, 2, 3
 
 #Project files and output
-SRC=main.c ../Libraries/ShiftOut/ShiftOut.c ../Libraries/IIC/IIC.c ../Libraries/Timer0/Timer0.c#C source files, including files in other folders, "library" method suported
+SRC=main.c ../Libraries/ShiftOut/ShiftOut.c ../Libraries/IIC/IIC.c ../Libraries/Timer0/Timer0.c ../Libraries/DS1307/DS1307.c#C source files, including files in other folders, "library" method suported
 TARGET=7SegClock#name of output, change for project, or dont, doesnt matter
 OBJECTS=#object files to include, for precompiled libraries
-INC=-I../Libraries/ShiftOut -I../Libraries/IIC -I../Libraries/Timer0#extra directories to search for headers, used for library headers
+INC=-I../Libraries/ShiftOut -I../Libraries/IIC -I../Libraries/Timer0 -I../Libraries/DS1307#extra directories to search for headers, used for library headers
 #INC_PARAMS=$(foreach d, $(INC), -I$d)#prepends a -I to each item in INC
 LIBS=#Libraries to include
 #LIBS_PARAMS$(foreach d, $(LIBS), -l$d)#prepends a -l to each item in LIBS

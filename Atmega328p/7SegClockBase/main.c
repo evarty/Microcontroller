@@ -17,8 +17,6 @@
 
 
 //define button pins
-#define MilMask 0x08 //B3
-#define MilPin PINB
 #define HourPort PINB
 #define HourMask 0x02 //B1
 #define MinutePort PINB
@@ -42,22 +40,9 @@ int main(void){
 
   //init clock chip (ds1307)
   TWIInit();
-  TWIStart();
-  TWIWrite(address | (0<<0));
-  TWIWrite(0x00);
-  TWIWrite(0x00);
-  TWIStart();
-  TWIWrite(address | (0<<0));
-  TWIWrite(0x07);
-  TWIWrite(0x03);
-  TWIStop();
-
+  DS1307Init();
 
   //set up timer0
-  //  sei();
-  //  Timer0SetupMode(0x00);
-  //  Timer0SetupPrescale(0b01100000);
-  //  Timer0SetupInterrupt(0x20);
   TCCR0A |= (0 << CS02);
   TCCR0B |= (1 << CS01) | (1 << CS00);
   TIMSK0 |= (1 << TOIE0);
@@ -68,14 +53,8 @@ int main(void){
     static uint8_t Minutes = 0, Hours = 0;
     //read current time from clock
     cli();
-    TWIStart();
-    TWIWrite(address | (0<<0));
-    TWIWrite(0x01);
-    TWIStart();
-    TWIWrite(address | (1<<0));
-    Minutes = TWIReadACK();
-    Hours = TWIReadNACK();
-    TWIStop();
+    Minutes = DS1307RegisterR(0x01);
+    Hours = DS1307RegisterR(0x02);
     sei();
 
     //define state variables
@@ -125,11 +104,7 @@ int main(void){
       }
 
       cli();
-      TWIStart();
-      TWIWrite(address | (0<<0));
-      TWIWrite(0x02);
-      TWIWrite(0x00 | (HoursTens << 4) | (HoursOnes << 0));
-      TWIStop();
+      DS1307RegisterW(0x02, 0x00 | (HoursTens << 4) | (HoursOnes << 0));
       sei();
       HourAdd = 0;
     }
@@ -146,11 +121,7 @@ int main(void){
       }
 
       cli();
-      TWIStart();
-      TWIWrite(address | (0<<0));
-      TWIWrite(0x01);
-      TWIWrite(0x00 | (MinutesTens << 4) | (MinutesOnes << 0));
-      TWIStop();
+      DS1307RegisterW(0x01, 0x00 | (MinutesTens << 4) | (MinutesOnes << 0));
       sei();
 
       MinuteAdd = 0;

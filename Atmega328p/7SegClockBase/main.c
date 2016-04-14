@@ -7,6 +7,7 @@
 #include "ShiftOut.h"
 #include "IIC.h"
 #include "Timer0.h"
+#include "DS1307.h"
 
 
 //define pins for 7 seg output 

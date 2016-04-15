@@ -68,7 +68,7 @@ int main(void){
     HoursOnes = Hours & 0x0F;
     HoursTens = (Hours & 0x30) >> 4;
 
-    //output to 7 segs
+    //output to 7 segment displays
     ShiftOutByte(ClockPin, &PORTD, DataPin, &PORTD, LatchPin, &PORTD, numbers[MinutesOnes]);
     ShiftOutByte(ClockPin, &PORTD, DataPin, &PORTD, LatchPin, &PORTD, numbers[MinutesTens]);
     ShiftOutByte(ClockPin, &PORTD, DataPin, &PORTD, LatchPin, &PORTD, numbers[HoursOnes]);

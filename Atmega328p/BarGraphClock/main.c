@@ -83,8 +83,12 @@ int main(void){
     LIntLEDS = ConvertToBar(IntLEDS);//convert number of LEDs needed to a string of "1"s in a 32 bit int
     
     //output to Bars
+    #ifndef USESHIFTREGISTER
     PORTB = (LIntLEDS & 0xFF);
     PORTD = ((LIntLEDS >> 8) & 0xFF);
+    #endif
+    #ifdef USESHIFTREGISTER
+    ShiftOutByte
 
     //signal if adding an hour, deal with hour state
     if(HourButton && !HourState){

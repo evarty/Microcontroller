@@ -15,6 +15,9 @@
 #define MinutePort PINC
 #define MinuteMask 0x02 //C1
 
+//Use shift register for output
+//#define USESHIFTREGISTER
+
 //Function prototype
 uint32_t ConvertToBar(uint8_t num);
 
@@ -35,7 +38,7 @@ int main(void){
 
   //set up timer0 and enable interrupts
   TCCR0A |= (0 << CS02);
-  TCCR0B |= (1 << CS01) | (1 << CS00);
+  1TCCR0B |= (1 << CS01) | (1 << CS00);
   TIMSK0 |= (1 << TOIE0);
   sei(); 
 

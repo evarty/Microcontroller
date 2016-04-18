@@ -90,6 +90,8 @@ int main(void){
     #ifdef USESHIFTREGISTER
     ShiftOutByte
 
+    #endif 
+
     //signal if adding an hour, deal with hour state
     if(HourButton && !HourState){
       HourAdd = 1;

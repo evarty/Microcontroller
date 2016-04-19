@@ -88,7 +88,7 @@ int main(void){
     PORTD = ((LIntLEDS >> 8) & 0xFF);
     #endif
     #ifdef USESHIFTREGISTER
-    ShiftOutByte
+    ShiftOutByte(LatchPin, &LatchPORT
 
     #endif 
 

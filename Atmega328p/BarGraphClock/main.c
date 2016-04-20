@@ -38,7 +38,7 @@ int main(void){
 
   //set up timer0 and enable interrupts
   TCCR0A |= (0 << CS02);
-  1TCCR0B |= (1 << CS01) | (1 << CS00);
+  TCCR0B |= (1 << CS01) | (1 << CS00);
   TIMSK0 |= (1 << TOIE0);
   sei(); 
 
@@ -88,7 +88,8 @@ int main(void){
     PORTD = ((LIntLEDS >> 8) & 0xFF);
     #endif
     #ifdef USESHIFTREGISTER
-    ShiftOutByte(LatchPin, &LatchPORT
+    ShiftOutByte(ClockPin, &ClockPORT, DataPin, &DataPORT, LatchPin, &LatchPORT, LIntLEDS & 0xFF);
+    ShiftOutByte(ClockPin, &ClockPORT, DataPin, &DataPORT, LatchPin, &LatchPORT, (LIntLEDS >> 8) & 0xFF);
 
     #endif 
 

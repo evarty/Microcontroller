@@ -16,10 +16,16 @@
 #define MinuteMask 0x02 //C1
 
 //Use shift register for output
-#define USESHIFTREGISTER
+//#define USESHIFTREGISTER
 
 #ifdef USESHIFTREGISTER
 #include "ShiftOut.h"
+#define ClockPin 0
+#define ClockPORT DDRB
+#define DataPin 1
+#define DataPORT DDRB
+#define LatchPin 2
+#define LatchPORT DDRB
 #endif
 
 //Function prototype

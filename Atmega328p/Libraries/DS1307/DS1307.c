@@ -45,9 +45,9 @@ uint8_t DS1307RegisterR(uint8_t reg){//Read from a single register
 
 }
 
-void DS1307RegisterWMult(uint8_t *reg, uint8_t RegLength, uint8_t *data, uint8_t dataLength){//Write to arbitrary number of registers
+void DS1307RegisterWMult(uint8_t *reg, uint8_t NumReg, uint8_t *data, uint8_t dataLength){//Write to arbitrary number of registers
 
-  for(uint8_t i = 0; i < RegLength; i++){
+  for(uint8_t i = 0; i < NumReg; i++){
     TWIStart();
     TWIWrite(DS1307ADDRESS | (0 << 0));
     TWIWrite(reg[i]);

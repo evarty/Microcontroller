@@ -34,8 +34,6 @@ int main(void){
   DDRD = 0xFF;//DDRD |= (1 << 4) | (1 << 3) | (1 << 2);
   //define 7 seg output values
   uint8_t numbers[] = {252,96,218,242,102,182,62,224,254,230};
-  //define clock iic address
-  uint8_t address = 0xD0; //1101000
 
 
   //init clock chip (ds1307)

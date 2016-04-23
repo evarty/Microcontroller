@@ -2,12 +2,11 @@
 #define F_CPU 1000000
 #include <avr/io.h> //allows more human readable stuff
 #include <avr/interrupt.h>  //allows interrupts 
-#include <util/delay.h>
+#include <util/delay.h> //Includes delays
 
-#include "ShiftOut.h"
-#include "IIC.h"
-#include "Timer0.h"
-#include "DS1307.h"
+#include "ShiftOut.h"//outputs to shfit registers, in particular 74HC595
+#include "IIC.h"//IIC library
+#include "DS1307.h"//functions to interact with DS1307
 
 
 //define pins for 7 seg output 
@@ -29,11 +28,11 @@ volatile uint8_t MinuteButton = 0;
 
 
 int main(void){
-  _delay_ms(50);
+  _delay_ms(50);//brief delay to allow DS1307 to init
   //set up output pins
-  DDRD = 0xFF;//DDRD |= (1 << 4) | (1 << 3) | (1 << 2);
+  DDRD = 0xFF;//set all Port D pins to be outputs
   //define 7 seg output values
-  uint8_t numbers[] = {252,96,218,242,102,182,62,224,254,230};
+  uint8_t numbers[] = {252,96,218,242,102,182,62,224,254,230};//numbers[i] outputted will show up as digit "i"
 
 
   //init clock chip (ds1307)
@@ -48,6 +47,7 @@ int main(void){
 
   while(1){  
 
+    //define variables to hold current hours and minutes
     static uint8_t Minutes = 0, Hours = 0;
     //read current time from clock
     cli();
@@ -61,10 +61,10 @@ int main(void){
     static uint8_t MinutesOnes = 0, MinutesTens = 0, HoursOnes = 0, HoursTens = 0;
 
     //separate digits from read values
-    MinutesOnes = Minutes & 0x0F;
-    MinutesTens = (Minutes & 0x70) >> 4;
-    HoursOnes = Hours & 0x0F;
-    HoursTens = (Hours & 0x30) >> 4;
+    MinutesOnes = Minutes & 0x0F;//the ones value is the lower nibble
+    MinutesTens = (Minutes & 0x70) >> 4;//the tens value is the lower 3 bits in the upper nibble
+    HoursOnes = Hours & 0x0F;//the ones value is the lower nibble
+    HoursTens = (Hours & 0x30) >> 4;//The tens values is the lower 2 bits in the upper nibble
 
     //output to 7 segment displays
     ShiftOutByte(ClockPin, &PORTD, DataPin, &PORTD, LatchPin, &PORTD, numbers[MinutesOnes]);
@@ -74,14 +74,15 @@ int main(void){
 
 
     //signal if adding an hour, deal with hour state
-    if(HourButton && !HourState){
-      HourAdd = 1;
-      HourState = 1;
-    }else if(!HourButton && HourState){
+    if(HourButton && !HourState){//if the hour button has been pressed and the hour has not been dealt with yet, enter the conditional
+      HourAdd = 1;//signal that the hour variable needs to be incremented
+      HourState = 1;//set state variable
+    }else if(!HourButton && HourState){//if the hour button has not been pressed and the state variable is still set, clear state bit.
       HourState = 0;
     }else {;}
 
     //signal if adding a minute, deal with minute state
+    //same logic as the hours
     if(MinuteButton && !MinuteState){
       MinuteAdd = 1;
       MinuteState = 1;
@@ -102,7 +103,7 @@ int main(void){
       }
 
       cli();
-      DS1307RegisterW(0x02, 0x00 | (HoursTens << 4) | (HoursOnes << 0));
+      DS1307RegisterW(0x02, 0x00 | (HoursTens << 4) | (HoursOnes << 0));//write the new hours back to the DS1307
       sei();
       HourAdd = 0;
     }
@@ -119,7 +120,7 @@ int main(void){
       }
 
       cli();
-      DS1307RegisterW(0x01, 0x00 | (MinutesTens << 4) | (MinutesOnes << 0));
+      DS1307RegisterW(0x01, 0x00 | (MinutesTens << 4) | (MinutesOnes << 0));//write the new minutes back to the DS1307
       sei();
 
       MinuteAdd = 0;

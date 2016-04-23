@@ -1,3 +1,4 @@
+//All code is pulled pretty much directly from the datasheet
 #include <avr/io.h>
 
 void TWIInit(void){

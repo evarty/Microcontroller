@@ -6,7 +6,6 @@
 #include <math.h> //Used in this case just for "round" because I didn't want to implement it myself.
 
 #include "IIC.h" //IIC communication functions via TWI
-#include "Timer0.h" //Setup and control of Timer0
 #include "DS1307.h"//Clock chip functions
 
 //define button pins

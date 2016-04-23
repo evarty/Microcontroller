@@ -68,7 +68,7 @@ int main(void){
     //define Bar variables
     static uint8_t DecMinutes = 0, DecHours = 0, IntLEDS = 0;
     static double FracHour = 0, FHours = 0, FracDay = 0, LEDS = 0;
-    static uint32_t LIntLEDS = 0;
+    static uint32_t LIntLEDS = 0;//define 32 bit variable to hold number of LEDs to light up. This does impose a maximum of 32 LEDs. Given that this is intended to run directly off uC pins, this is not much of a limit, since the uC only has 28 pins total
 
     //separate digits from read values
     MinutesOnes = Minutes & 0x0F;

@@ -8,7 +8,7 @@ void DS1307Init(){//Initialize the DS1307; enable clock.
   TWIStart();
   TWIWrite(DS1307ADDRESS | (0 << 0));
   TWIWrite(0x00);
-  TWIWrite(0x80);
+  TWIWrite(0x00);
   TWIStop();
 
 }

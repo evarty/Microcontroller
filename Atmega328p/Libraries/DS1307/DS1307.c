@@ -3,16 +3,12 @@
 #include "IIC.h"
 
 
-void DS1307Init(){//Initialize the DS1307 to midnight and enable clock.
+void DS1307Init(){//Initialize the DS1307; enable clock.
 
   TWIStart();
   TWIWrite(DS1307ADDRESS | (0 << 0));
   TWIWrite(0x00);
-  TWIWrite(0x00);
-  TWIStart();
-  TWIWrite(DS1307ADDRESS | (0 << 0));
-  TWIWrite(0x07);
-  TWIWrite(0x03);
+  TWIWrite(0x80);
   TWIStop();
 
 }

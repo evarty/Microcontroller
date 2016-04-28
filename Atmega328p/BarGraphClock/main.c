@@ -1,11 +1,12 @@
 //7 segment clock based on DS1307 for timekeeping
 #define F_CPU 1000000
+
 #include <avr/io.h> //allows more human readable stuff
 #include <avr/interrupt.h>  //allows interrupts 
 #include <util/delay.h> //Gives delay functions
 #include <math.h> //Used in this case just for "round" because I didn't want to implement it myself.
 
-#include "IIC.h" //IIC communication functions via TWI
+#include "IIC.h" //IIC communication functions via TWI module 
 #include "DS1307.h"//Clock chip functions
 
 //define button pins

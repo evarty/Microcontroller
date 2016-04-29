@@ -1,6 +1,7 @@
 RC Car
 RC Hovercraft
 make prior semi-autonomous
+N-pod robot
 various clocks, in other doc
 automatic plant waterer
 wifi lights with bells and whistles
@@ -56,3 +57,4 @@ scrolling led matrix display (base config, easily configured)
 office status display
 clapper
 lock box that only opens at predetermined times
+personalized to do list with scheduled things

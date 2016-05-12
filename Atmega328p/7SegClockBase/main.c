@@ -93,17 +93,20 @@ int main(void){
 
     //add an hour, account for base 10 stuff
     if(HourAdd){
+      static uint8_t HourDec = 0;
+      HourDec = HoursOnes + 10×HoursTens;
       HoursOnes += 1;
-      if((HoursOnes == 4) && (HoursTens == 2)){
-        HoursTens = 0;
-        HoursOnes = 0;
-      }else if((HoursOnes == 10) && (HoursTens < 2)){
-        HoursTens += 1;
-        HoursOnes = 0;
+      HoursOnes %= 24;
+      //if((HoursOnes == 4) && (HoursTens == 2)){
+        //HoursTens = 0;
+        //HoursOnes = 0;
+      //}else if((HoursOnes == 10) && (HoursTens < 2)){
+        //HoursTens += 1;
+        //HoursOnes = 0;
       }
 
       cli();
-      DS1307RegisterW(0x02, 0x00 | (HoursTens << 4) | (HoursOnes << 0));//write the new hours back to the DS1307
+      DS1307RegisterW(0x02, 0x00 | (((HoursTens / 10) % 10) << 4) | ((HoursDec % 10) << 0));//write the new hours back to the DS1307
       sei();
       HourAdd = 0;
     }

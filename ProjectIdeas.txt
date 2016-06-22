@@ -1,3 +1,16 @@
+Active Projects
+Hexapod
+SMD Clock
+Bar Graph Clock
+Cufflinks
+Octopus Lights
+Clapper (band pass)
+Interactive Calendar
+Mill Vacuum
+Fume Extractor Lights
+Monitor Mount
+
+
 RC Car
 RC Hovercraft
 make prior semi-autonomous

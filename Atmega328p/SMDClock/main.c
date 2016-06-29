@@ -4,22 +4,14 @@
 #include <avr/interrupt.h>  //allows interrupts 
 #include <util/delay.h> //Includes delays
 
-#include "ShiftOut.h"//outputs to shfit registers, in particular 74HC595
 #include "IIC.h"//IIC library
 #include "DS1307.h"//functions to interact with DS1307
 
-
-//define pins for 7 seg output 
-#define LatchPin 3
-#define DataPin 4
-#define ClockPin 2
-
-
 //define button pins
-#define HourPort PINB
-#define HourMask 0x02 //B1
-#define MinutePort PINB
-#define MinuteMask 0x04 //B2
+#define HourPort PIND
+#define HourMask 0x01 //D1
+#define MinutePort PIND
+#define MinuteMask 0x02 //B2
 
 
 //define variables that will be affected by ISR
@@ -30,9 +22,10 @@ volatile uint8_t MinuteButton = 0;
 int main(void){
   _delay_ms(50);//brief delay to allow DS1307 to init
   //set up output pins
-  DDRD = 0xFF;//set all Port D pins to be outputs
+  DDRB = 0xFF;//set all Port B pins to be outputs
+  DDRC = 0x0F;//set all Port C pins to be outputs
   //define 7 seg output values
-  uint8_t numbers[] = {252,96,218,242,102,182,62,224,254,230};//numbers[i] outputted will show up as digit "i"
+  uint8_t numbers[] = {63,6,91,79,102,109,125,7,127,111};//numbers[i] outputted will show up as digit "i"
 
 
   //init clock chip (ds1307)
@@ -66,12 +59,20 @@ int main(void){
     HoursOnes = Hours & 0x0F;//the ones value is the lower nibble
     HoursTens = (Hours & 0x30) >> 4;//The tens values is the lower 2 bits in the upper nibble
 
-    //output to 7 segment displays
-    ShiftOutByte(ClockPin, &PORTD, DataPin, &PORTD, LatchPin, &PORTD, numbers[MinutesOnes]);
-    ShiftOutByte(ClockPin, &PORTD, DataPin, &PORTD, LatchPin, &PORTD, numbers[MinutesTens]);
-    ShiftOutByte(ClockPin, &PORTD, DataPin, &PORTD, LatchPin, &PORTD, numbers[HoursOnes]);
-    ShiftOutByte(ClockPin, &PORTD, DataPin, &PORTD, LatchPin, &PORTD, numbers[HoursTens]);
+    //define array for outputting
+    uint8_t digit[] = {0, 0, 0, 0};
+    digit[0] = numbers[HoursTens];
+    digit[1] = numbers[HoursOnes];
+    digit[2] = numbers[MinutesTens];
+    digit[3] = numbers[MinutesOnes];
 
+    //Output to seven segment
+    for(uint8_t i = 0; i < 4; i++){
+      PORTB = digit[i];
+      PORTC |= (1 << i);
+      _delay_ms(3);
+      PORTC &= ~(1 << i);
+    }
 
     //signal if adding an hour, deal with hour state
     if(HourButton && !HourState){//if the hour button has been pressed and the hour has not been dealt with yet, enter the conditional
@@ -93,20 +94,17 @@ int main(void){
 
     //add an hour, account for base 10 stuff
     if(HourAdd){
-      static uint8_t HourDec = 0;
-      HourDec = HoursOnes + 10×HoursTens;
-      HoursOnes += 1;
-      HoursOnes %= 24;
-      //if((HoursOnes == 4) && (HoursTens == 2)){
-        //HoursTens = 0;
-        //HoursOnes = 0;
-      //}else if((HoursOnes == 10) && (HoursTens < 2)){
-        //HoursTens += 1;
-        //HoursOnes = 0;
+      HoursOnes+=1;
+      if((HoursOnes == 4) && (HoursTens == 2)){
+        HoursTens = 0;
+        HoursOnes = 0;
+      }else if((HoursOnes == 10) && (HoursTens < 2)){
+        HoursTens += 1;
+        HoursOnes = 0;
       }
 
       cli();
-      DS1307RegisterW(0x02, 0x00 | (((HoursTens / 10) % 10) << 4) | ((HoursDec % 10) << 0));//write the new hours back to the DS1307
+      DS1307RegisterW(0x02, 0x00 | (HoursTens << 4) | ((HoursOnes % 10) << 0));//write the new hours back to the DS1307
       sei();
       HourAdd = 0;
     }
@@ -117,6 +115,7 @@ int main(void){
       if((MinutesOnes == 10) && (MinutesTens == 5)){
         MinutesTens = 0;
         MinutesOnes = 0;
+        HourAdd = 1;
       }else if((MinutesOnes == 10) && (MinutesTens < 6)){
         MinutesTens += 1;
         MinutesOnes = 0;

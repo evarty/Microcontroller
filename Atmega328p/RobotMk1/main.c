@@ -18,21 +18,31 @@ double AngleToDutyCycle(double);
 
 int main(void){
 
+  PCA9685Init();
+
   double DesiredFootPosition[4][3] = {{2,4,5},{2,8,5},{3,2,1},{5,6,7}};
   double MotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
   //double CenterOfMass = 0;
+  uint16_t DutyCycle[4][3];
 
   while(1){
 
+    for(int i = 0; i < 4; i++){
 
-    MotorAngles[0][0] = GammaCalculate(DesiredFootPosition[0][0], DesiredFootPosition[0][1]);
-    MotorAngles[0][1] = AlphaCalculate(DesiredFootPosition[0][0], DesiredFootPosition[0][1], DesiredFootPosition[0][2]);
-    MotorAngles[0][1] = BetaCalculate(DesiredFootPosition[0][0], DesiredFootPosition[0][1], DesiredFootPosition[0][2]);
+    MotorAngles[i][0] = GammaCalculate(DesiredFootPosition[i][0], DesiredFootPosition[i][1]);
+    MotorAngles[i][1] = AlphaCalculate(DesiredFootPosition[i][0], DesiredFootPosition[i][1], DesiredFootPosition[i][2]);
+    MotorAngles[i][1] = BetaCalculate(DesiredFootPosition[i][0], DesiredFootPosition[i][1], DesiredFootPosition[i][2]);
+    }
+
+    for(int l = 0; l < 4; l++){
+      for(int k = 0; k < 3; k++){
+        DutyCycle[l][k] = AngleToDutyCycle(MotorAngles[l][k]);
+        PCA9685OutputNoPhase(l + k, DutyCycle[l][k]);
+      }
+    }
 
     for(int i = 0; i < 4; i++){
-      for(int j = 0; j < 2; j++){
-        DesiredFootPosition[i][j] += 1;
-      }
+        DesiredFootPosition[i][0] += 1;
     }
 
 
@@ -66,3 +76,46 @@ double AngleToDutyCycle(double Angle){
     return DutyCycle;
     
 }
+
+
+
+/*
+ * Forward direction is +Y. Using standard XY plane looking down.
+ *
+ * Set legs to initial positions
+ * Save this as current foot position
+ * Compute current COM
+ * Compute current support polygon
+ *
+ * Compute desired change of position of the center as a 3-vector. 
+ * For the moment assume the distance is only one step cycle total
+ * Compute the leg positions needed for the final position. The legs will move from their current position via one airborne spot to this final position. 
+ * Compute the intermediate airborne position for leg 1. 
+ * 
+ * Compute resulting COM
+ * Compute resulting support poly
+ * Determine if COM is in support poly by ~5cm
+ *  if yes
+ *    then move leg 1 to airborne intermediate position
+ *    save as current leg position
+ *  if no
+ *    move body via body IK away from leg 1, but only in the x direction by ~5cm
+ *    then go back to start of this block
+ * Move leg 1 to desired position. Save as current leg position
+ *
+ * Now leg 1 is in the final position for this step cycle. The other 3 are still where they started.
+ *
+ * Using current leg positions, compute COM and support poly. Check that COM is in the support poly. It should be since it was in the support poly with only three legs.
+ *
+ * Using body IK, compute needed leg positions to move body forward by 5cm. Add this distance to a variable representing how far the center is moving
+ * Compute resulting COM and support poly
+ *  if COM is in support poly
+ *    then go back to top of block
+ *  if COM not in support poly
+ *    subtract 5cm from body position using body IK
+ * Move legs/body to needed positions.
+ * Subtract the distance the center has moved from the desired change of position
+ *
+ * If this puts the center at the desired center position, then done.
+ * If it puts the center past the desired position, take the difference and move the body back that much.
+ * If not at the desired position yet, then move to next leg and repeat. Leg order is 1, 2, 4, 3.

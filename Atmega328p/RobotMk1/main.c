@@ -20,10 +20,16 @@ int main(void){
 
   PCA9685Init();
 
-  double DesiredFootPosition[4][3] = {{2,4,5},{2,8,5},{3,2,1},{5,6,7}};
-  double MotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+  double PlannedFootPosition[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+  double ActualFootPosition[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+  double DesiredFootPosition[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+  double PlannedMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+  double ActualMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+  double DesiredMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
   //double CenterOfMass = 0;
   uint16_t DutyCycle[4][3];
+
+  InitialLegPosistioning();
 
   while(1){
 
@@ -77,6 +83,11 @@ double AngleToDutyCycle(double Angle){
     
 }
 
+void InitialLegPosistions(){
+
+  
+
+}
 
 
 /*

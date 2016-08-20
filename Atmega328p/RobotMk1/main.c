@@ -94,37 +94,37 @@ void InitialLegPosistions(){
  * Forward direction is +Y. Using standard XY plane looking down.
  *
  * Set legs to initial positions
- * Save this as current foot position
+ * Save this as actual foot position
  * Compute current COM
  * Compute current support polygon
  *
  * Compute desired change of position of the center as a 3-vector. 
  * For the moment assume the distance is only one step cycle total
- * Compute the leg positions needed for the final position. The legs will move from their current position via one airborne spot to this final position. 
- * Compute the intermediate airborne position for leg 1. 
+ * Compute the leg positions needed for the final position. The legs will move from their current position via one airborne spot to this final position. Save as desired leg positions. 
+ * Compute the intermediate airborne position for leg 1. Save as planned leg position.
  * 
- * Compute resulting COM
- * Compute resulting support poly
+ * Compute resulting COM. Save as planned COM.
+ * Compute resulting support poly. Save as planned support poly.
  * Determine if COM is in support poly by ~5cm
  *  if yes
- *    then move leg 1 to airborne intermediate position
- *    save as current leg position
+ *    then move leg 1 to airborne intermediate/planned position
+ *    save as actual leg position
  *  if no
  *    move body via body IK away from leg 1, but only in the x direction by ~5cm
  *    then go back to start of this block
- * Move leg 1 to desired position. Save as current leg position
+ * Move leg 1 to desired position. Save as actual leg position
  *
  * Now leg 1 is in the final position for this step cycle. The other 3 are still where they started.
  *
- * Using current leg positions, compute COM and support poly. Check that COM is in the support poly. It should be since it was in the support poly with only three legs.
+ * Using current leg positions, compute COM and support poly. Check that COM is in the support poly. It should be since it was in the support poly with only three legs. Save as actual COM and support poly.
  *
- * Using body IK, compute needed leg positions to move body forward by 5cm. Add this distance to a variable representing how far the center is moving
- * Compute resulting COM and support poly
- *  if COM is in support poly
+ * Using body IK, compute needed leg positions to move body forward by 5cm. Save as planned leg positions.
+ * Compute resulting COM and support poly. Save as planned COM and support poly.
+ *  if COM is in support poly and leg angles within bounds.
  *    then go back to top of block
- *  if COM not in support poly
+ *  if COM not in support poly or leg angles out of bounds.
  *    subtract 5cm from body position using body IK
- * Move legs/body to needed positions.
+ * Move legs/body to needed positions. Save as actual position.
  * Subtract the distance the center has moved from the desired change of position
  *
  * If this puts the center at the desired center position, then done.

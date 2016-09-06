@@ -23,9 +23,11 @@ int main(void){
   double PlannedFootPosition[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
   double ActualFootPosition[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
   double DesiredFootPosition[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+
   double PlannedMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
   double ActualMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
   double DesiredMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+
   //double CenterOfMass = 0;
   uint16_t DutyCycle[4][3];
 
@@ -93,7 +95,7 @@ void InitialLegPosistions(){
 /*
  * Forward direction is +Y. Using standard XY plane looking down.
  *
- * Set legs to initial positions
+ * Set legs to initial positions. In this case just on a square.
  * Save this as actual foot position
  * Compute current COM
  * Compute current support polygon

@@ -17,6 +17,8 @@ double AlphaCalculate(double, double, double);
 double BetaCalculate(double, double, double);
 double AngleToDutyCycle(double);
 
+void FootPositionToMotorAngle(double foot[][], double angle[][]);
+
 int main(void){
 
   PCA9685Init();
@@ -35,7 +37,7 @@ int main(void){
       }
   }
 
-  FootPositionToMotorAngle(&PlannedFootPosition, &PlannedMotorAngles);
+  FootPositionToMotorAngle(PlannedFootPosition, PlannedMotorAngles);
 
 
   //double CenterOfMass = 0;
@@ -95,7 +97,7 @@ double AngleToDutyCycle(double Angle){
     
 }
 
-void InitialLegPosistions(){
+void FootPositionToMotorAngle(double foot[][], double angle[][]){
 
   
 

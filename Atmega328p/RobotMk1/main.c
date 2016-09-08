@@ -10,6 +10,7 @@
 #define COXALENGTH 10.
 #define FEMURLENGTH 10.
 #define TIBIALENGTH 10.
+#define DOWNZ 10.
 
 double GammaCalculate(double, double);
 double AlphaCalculate(double, double, double);
@@ -27,6 +28,15 @@ int main(void){
   double PlannedMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
   double ActualMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
   double DesiredMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+
+  for(int i =0; i < 3; i++){
+      for(int j = 0; j < 2; j++){
+          PlannedFootPosition[i][j] = 10;
+      }
+  }
+
+  FootPositionToMotorAngle(&PlannedFootPosition, &PlannedMotorAngles);
+
 
   //double CenterOfMass = 0;
   uint16_t DutyCycle[4][3];

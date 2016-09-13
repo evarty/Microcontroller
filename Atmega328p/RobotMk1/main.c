@@ -31,28 +31,27 @@ int main(void){
   double ActualMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
   double DesiredMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
 
-  for(int i =0; i < 3; i++){
+  uint16_t DutyCycle[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+
+  for(int i = 0; i < 3; i++){
       for(int j = 0; j < 2; j++){
           PlannedFootPosition[i][j] = 10;
       }
   }
 
-  FootPositionToMotorAngle(PlannedFootPosition, PlannedMotorAngles);
 
+  FootPositionToMotorAngle(PlannedFootPosition, PlannedMotorAngles);
+  
+  
 
   //double CenterOfMass = 0;
-  uint16_t DutyCycle[4][3];
+  
 
   InitialLegPosistioning();
 
   while(1){
 
-    for(int i = 0; i < 4; i++){
-
-    MotorAngles[i][0] = GammaCalculate(DesiredFootPosition[i][0], DesiredFootPosition[i][1]);
-    MotorAngles[i][1] = AlphaCalculate(DesiredFootPosition[i][0], DesiredFootPosition[i][1], DesiredFootPosition[i][2]);
-    MotorAngles[i][1] = BetaCalculate(DesiredFootPosition[i][0], DesiredFootPosition[i][1], DesiredFootPosition[i][2]);
-    }
+   
 
     for(int l = 0; l < 4; l++){
       for(int k = 0; k < 3; k++){
@@ -89,17 +88,22 @@ double AngleToDutyCycle(double Angle){
 
   double DutyCycle;
 
-    DutyCycle =  Angle / 90;
-    DutyCycle *= (0.5);
-    DutyCycle += 1.5;
-    DutyCycle /= 20;
-    return DutyCycle;
+  DutyCycle =  Angle / 90;
+  DutyCycle *= (0.5);
+  DutyCycle += 1.5;
+  DutyCycle /= 20;
+  return DutyCycle;
     
 }
 
 void FootPositionToMotorAngle(double foot[][], double angle[][]){
 
-  
+  for(int i = 0; i < 4; i++){
+
+    angle[i][0] = GammaCalculate (foot[i][0], foot[i][1]);
+    angle[i][1] = AlphaCalculate(foot[i][0], foot[i][1], foot[i][2]);
+    angle[i][1] = BetaCalculate(foot[i][0], foot[i][1], foot[i][2]);
+  }
 
 }
 

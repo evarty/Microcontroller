@@ -15,9 +15,9 @@
 double GammaCalculate(double, double);
 double AlphaCalculate(double, double, double);
 double BetaCalculate(double, double, double);
-double AngleToDutyCycle(double);
+uint16_t MotorAngleToDutyCycle(double angle);
 
-void FootPositionToMotorAngle(double foot[][], double angle[][]);
+void FootPositionToMotorAngle(double foot[4][3], double angle[4][3]);
 
 int main(void){
 
@@ -33,36 +33,36 @@ int main(void){
 
   uint16_t DutyCycle[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
 
+  //Initial Leg Positioning
   for(int i = 0; i < 3; i++){
-      for(int j = 0; j < 2; j++){
-          PlannedFootPosition[i][j] = 10;
-      }
+    for(int j = 0; j < 2; j++){
+      PlannedFootPosition[i][j] = 10;
+    }
   }
 
-
   FootPositionToMotorAngle(PlannedFootPosition, PlannedMotorAngles);
+  for(int i = 0; i < 3; i++){
+    for(int j = 0; j < 2; j++){
+
+      DutyCycle[i][j] = MotorAngleToDutyCycle(PlannedMotorAngles[i][j]);
+      PCA9685OutputNoPhase(i + j, DutyCycle[i][j]);
+      ActualMotorAngles[i][j] = PlannedMotorAngles[i][j];
+      ActualFootPosition[i][j] = PlannedFootPosition[i][j];
+
+    }
+
+  }
   
-  
+
 
   //double CenterOfMass = 0;
-  
 
-  InitialLegPosistioning();
+
 
   while(1){
 
-   
 
-    for(int l = 0; l < 4; l++){
-      for(int k = 0; k < 3; k++){
-        DutyCycle[l][k] = AngleToDutyCycle(MotorAngles[l][k]);
-        PCA9685OutputNoPhase(l + k, DutyCycle[l][k]);
-      }
-    }
 
-    for(int i = 0; i < 4; i++){
-        DesiredFootPosition[i][0] += 1;
-    }
 
 
   } 
@@ -81,22 +81,22 @@ double BetaCalculate(double X, double Y, double Z){
 }
 
 /*double CenterOfMassCalculate(){
-  
-}*/
 
-double AngleToDutyCycle(double Angle){
+  }*/
 
-  double DutyCycle;
+uint16_t MotorAngleToDutyCycle(double angle){
 
-  DutyCycle =  Angle / 90;
+  uint16_t DutyCycle;
+
+  DutyCycle =  angle / 90.;
   DutyCycle *= (0.5);
   DutyCycle += 1.5;
-  DutyCycle /= 20;
+  DutyCycle /= 20.;
   return DutyCycle;
-    
+
 }
 
-void FootPositionToMotorAngle(double foot[][], double angle[][]){
+void FootPositionToMotorAngle(double foot[4][3], double angle[4][3]){
 
   for(int i = 0; i < 4; i++){
 
@@ -148,3 +148,4 @@ void FootPositionToMotorAngle(double foot[][], double angle[][]){
  * If this puts the center at the desired center position, then done.
  * If it puts the center past the desired position, take the difference and move the body back that much.
  * If not at the desired position yet, then move to next leg and repeat. Leg order is 1, 2, 4, 3.
+ * */

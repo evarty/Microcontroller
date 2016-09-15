@@ -12,9 +12,9 @@
 #define TIBIALENGTH 10.
 #define DOWNZ 10.
 
-double GammaCalculate(double, double);
-double AlphaCalculate(double, double, double);
+double AlphaCalculate(double, double);
 double BetaCalculate(double, double, double);
+double GammaCalculate(double, double, double);
 uint16_t MotorAngleToDutyCycle(double angle);
 void CalculateCOM(double foot[4][3], COM[3]);
 
@@ -70,16 +70,16 @@ int main(void){
   } 
 }
 
-double GammaCalculate(double X, double Y){
+double AlphaCalculate(double X, double Y){
   return atan2(Y, X);
 }
 
-double AlphaCalculate(double X, double Y, double Z){
-  return acos(Z / (sqrt(square(Z) + square(sqrt(square(X) + square(Y)) - COXALENGTH)))) + acos((square(TIBIALENGTH) - square(FEMURLENGTH) - (square(Z) + square(sqrt(square(X) + square(Y)) - COXALENGTH)))) / (-2 * FEMURLENGTH * sqrt(square(Z) + square(sqrt(square(X) + square(Y)) - square(COXALENGTH))));
+double BetaCalculate(double X, double Y, double Z){
+  return (acos(Z / (sqrt(square(Z) + square(sqrt(square(X) + square(Y)) - COXALENGTH)))) + acos((square(TIBIALENGTH) - square(FEMURLENGTH) - (square(Z) + square(sqrt(square(X) + square(Y)) - COXALENGTH)))) / (-2 * FEMURLENGTH * sqrt(square(Z) + square(sqrt(square(X) + square(Y)) - square(COXALENGTH)))) - 1.5707963268;
 }
 
-double BetaCalculate(double X, double Y, double Z){
-  return acos((square(Z) + square(sqrt(square(X) + square(Y)) - COXALENGTH) - square(TIBIALENGTH) - square(FEMURLENGTH)) / (-2 * TIBIALENGTH * FEMURLENGTH));
+double GammaCalculate(double X, double Y, double Z){
+  return 3.14159 - (acos((square(Z) + square(sqrt(square(X) + square(Y)) - COXALENGTH) - square(TIBIALENGTH) - square(FEMURLENGTH)) / (-2 * TIBIALENGTH * FEMURLENGTH)));
 }
 
 /*double CenterOfMassCalculate(){

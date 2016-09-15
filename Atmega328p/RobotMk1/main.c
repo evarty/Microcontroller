@@ -16,6 +16,7 @@ double GammaCalculate(double, double);
 double AlphaCalculate(double, double, double);
 double BetaCalculate(double, double, double);
 uint16_t MotorAngleToDutyCycle(double angle);
+void CalculateCOM(double foot[4][3], COM[3]);
 
 void FootPositionToMotorAngle(double foot[4][3], double angle[4][3]);
 
@@ -32,6 +33,7 @@ int main(void){
   double DesiredMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
 
   uint16_t DutyCycle[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+  double COM[3] = {0,0,0};
 
   //Initial Leg Positioning
   for(int i = 0; i < 3; i++){
@@ -107,7 +109,13 @@ void FootPositionToMotorAngle(double foot[4][3], double angle[4][3]){
 
 }
 
+void CalculateCOM(double angle[4][3], double COM[3]){
 
+    COM[0] = 
+    COM[1] =
+    COM[2] =
+    
+}
 /*
  * Forward direction is +Y. Using standard XY plane looking down.
  *

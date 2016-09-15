@@ -75,11 +75,17 @@ double AlphaCalculate(double X, double Y){
 }
 
 double BetaCalculate(double X, double Y, double Z){
-  return (acos(Z / (sqrt(square(Z) + square(sqrt(square(X) + square(Y)) - COXALENGTH)))) + acos((square(TIBIALENGTH) - square(FEMURLENGTH) - (square(Z) + square(sqrt(square(X) + square(Y)) - COXALENGTH)))) / (-2 * FEMURLENGTH * sqrt(square(Z) + square(sqrt(square(X) + square(Y)) - square(COXALENGTH)))) - 1.5707963268;
+
+  double HoldL = sqrt( square(Z) + square (sqrt (square (X) + square (Y)) - COXALENGTH));
+
+  return (acos(Z / HoldL) + acos((square(FEMURLENGTH) - square(TIBIALENGTH) - (square(Z) + square( HoldL ) / (2 * FEMURLENGTH * HoldL) - 1.5707963268;
 }
 
 double GammaCalculate(double X, double Y, double Z){
-  return 3.14159 - (acos((square(Z) + square(sqrt(square(X) + square(Y)) - COXALENGTH) - square(TIBIALENGTH) - square(FEMURLENGTH)) / (-2 * TIBIALENGTH * FEMURLENGTH)));
+
+  double HoldL = sqrt( square(Z) + square (sqrt (square (X) + square (Y)) - COXALENGTH));
+
+  return 3.14159 - (acos( square(TIBIALENGTH) + square(FEMURLENGTH) + square (HoldL)) / (2 * TIBIALENGTH * FEMURLENGTH)));
 }
 
 /*double CenterOfMassCalculate(){

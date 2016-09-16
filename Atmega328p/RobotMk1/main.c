@@ -33,7 +33,7 @@ int main(void){
   double DesiredMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
 
   uint16_t DutyCycle[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
-  double COM[3] = {0,0,0};
+  double COM[2] = {0,0};
 
   //Initial Leg Positioning
   for(int i = 0; i < 3; i++){
@@ -85,7 +85,7 @@ double GammaCalculate(double X, double Y, double Z){
 
   double HoldL = sqrt( square(Z) + square (sqrt (square (X) + square (Y)) - COXALENGTH));
 
-  return 3.14159 - (acos( square(TIBIALENGTH) + square(FEMURLENGTH) + square (HoldL)) / (2 * TIBIALENGTH * FEMURLENGTH)));
+  return 3.14159 - (acos( square(TIBIALENGTH) + square(FEMURLENGTH) + square (HoldL)) / (2 * TIBIALENGTH * FEMURLENGTH));
 }
 
 /*double CenterOfMassCalculate(){
@@ -110,16 +110,15 @@ void FootPositionToMotorAngle(double foot[4][3], double angle[4][3]){
 
     angle[i][0] = GammaCalculate (foot[i][0], foot[i][1]);
     angle[i][1] = AlphaCalculate(foot[i][0], foot[i][1], foot[i][2]);
-    angle[i][1] = BetaCalculate(foot[i][0], foot[i][1], foot[i][2]);
+    angle[i][2] = BetaCalculate(foot[i][0], foot[i][1], foot[i][2]);
   }
 
 }
 
 void CalculateCOM(double angle[4][3], double COM[3]){
 
-    COM[0] = 
-    COM[1] =
-    COM[2] =
+    COM[0] = cos(angle[i][0]) * ((COXACOM * COXAMASS) + FEMURMASS * (COXALENGTH + FEMURCOM * cos (angle[i][1])) + TIBIAMASS * (COXALENGTH + FEMURLENGTH cos(cos[i][1]) + TIBIACOM * cos (angle[i][2] - angle[i][1])));
+    COM[1] = sin(angle[i][0]) * ((COXACOM * COXAMASS) + FEMURMASS * (COXALENGTH + FEMURCOM * cos (angle[i][1])) + TIBIAMASS * (COXALENGTH + FEMURLENGTH cos(cos[i][1]) + TIBIACOM * cos (angle[i][2] - angle[i][1])));
     
 }
 /*

@@ -11,12 +11,18 @@
 #define FEMURLENGTH 10.
 #define TIBIALENGTH 10.
 #define DOWNZ 10.
+#define COXAMASS 10.
+#define FEMURMASS 10.
+#define TIBIAMASS 10.
+#define COXACOM 10.
+#define TIBIACOM 10.
+#define FEMURCOM 10.
 
 double AlphaCalculate(double, double);
 double BetaCalculate(double, double, double);
 double GammaCalculate(double, double, double);
 uint16_t MotorAngleToDutyCycle(double angle);
-void CalculateCOM(double foot[4][3], COM[3]);
+void CalculateCOM(double foot[4][3], double COM[2]);
 
 void FootPositionToMotorAngle(double foot[4][3], double angle[4][3]);
 
@@ -54,7 +60,7 @@ int main(void){
     }
 
   }
-  
+
 
 
   //double CenterOfMass = 0;
@@ -78,7 +84,7 @@ double BetaCalculate(double X, double Y, double Z){
 
   double HoldL = sqrt( square(Z) + square (sqrt (square (X) + square (Y)) - COXALENGTH));
 
-  return (acos(Z / HoldL) + acos((square(FEMURLENGTH) - square(TIBIALENGTH) - (square(Z) + square( HoldL ) / (2 * FEMURLENGTH * HoldL) - 1.5707963268;
+  return (acos(Z / HoldL) + acos((square(FEMURLENGTH) - square(TIBIALENGTH) + (square(HoldL)))) / (2 * FEMURLENGTH * HoldL)) - 1.5707963268;
 }
 
 double GammaCalculate(double X, double Y, double Z){
@@ -108,18 +114,20 @@ void FootPositionToMotorAngle(double foot[4][3], double angle[4][3]){
 
   for(int i = 0; i < 4; i++){
 
-    angle[i][0] = GammaCalculate (foot[i][0], foot[i][1]);
-    angle[i][1] = AlphaCalculate(foot[i][0], foot[i][1], foot[i][2]);
-    angle[i][2] = BetaCalculate(foot[i][0], foot[i][1], foot[i][2]);
+    angle[i][0] = AlphaCalculate (foot[i][0], foot[i][1]);
+    angle[i][1] = BetaCalculate(foot[i][0], foot[i][1], foot[i][2]);
+    angle[i][2] = GammaCalculate(foot[i][0], foot[i][1], foot[i][2]);
   }
 
 }
 
 void CalculateCOM(double angle[4][3], double COM[3]){
 
-    COM[0] = cos(angle[i][0]) * ((COXACOM * COXAMASS) + FEMURMASS * (COXALENGTH + FEMURCOM * cos (angle[i][1])) + TIBIAMASS * (COXALENGTH + FEMURLENGTH cos(cos[i][1]) + TIBIACOM * cos (angle[i][2] - angle[i][1])));
-    COM[1] = sin(angle[i][0]) * ((COXACOM * COXAMASS) + FEMURMASS * (COXALENGTH + FEMURCOM * cos (angle[i][1])) + TIBIAMASS * (COXALENGTH + FEMURLENGTH cos(cos[i][1]) + TIBIACOM * cos (angle[i][2] - angle[i][1])));
-    
+  for(int i = 0; i < 2; i ++){
+    COM[0] = cos(angle[i][0]) * ((COXACOM * COXAMASS) + FEMURMASS * (COXALENGTH + FEMURCOM * cos (angle[i][1])) + TIBIAMASS * (COXALENGTH + FEMURLENGTH * cos(angle[i][1]) + TIBIACOM * cos (angle[i][2] - angle[i][1])));
+    COM[1] = sin(angle[i][0]) * ((COXACOM * COXAMASS) + FEMURMASS * (COXALENGTH + FEMURCOM * cos (angle[i][1])) + TIBIAMASS * (COXALENGTH + FEMURLENGTH * cos(angle[i][1]) + TIBIACOM * cos (angle[i][2] - angle[i][1])));
+  }
+
 }
 /*
  * Forward direction is +Y. Using standard XY plane looking down.

@@ -18,6 +18,22 @@
 #define TIBIACOM 10.
 #define FEMURCOM 10.
 
+struct Leg{
+
+  uint8_t LegNumber;
+  double ActualAngles[3]; //0 is alpha (Coxa angle), 1 is beta (Femur angle). 2 is gamma (Tibia Angle)
+  double ActualPosition[3]; //0 is X, 1 is Y, 2 is Z
+  double PlannedAngles[3];
+  double PlannedPosition[3];
+  double DesiredAngles[3];
+  double DesiredPosition[3];
+  double OffsetX; //Offset from the center of the robot, which is chosen and (0,0)
+  double OffsetY;
+  double COM[2]; //0 is X coordinate, 1 is Y coordinate, starting from the base of leg.
+
+};
+
+
 double AlphaCalculate(double, double);
 double BetaCalculate(double, double, double);
 double GammaCalculate(double, double, double);

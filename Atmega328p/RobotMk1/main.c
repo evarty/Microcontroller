@@ -46,6 +46,11 @@ int main(void){
 
   PCA9685Init();
 
+
+  struct Leg *Legs[3];
+
+
+
   double PlannedFootPosition[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
   double ActualFootPosition[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
   double DesiredFootPosition[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};

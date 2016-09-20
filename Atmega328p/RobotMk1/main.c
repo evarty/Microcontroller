@@ -18,18 +18,36 @@
 #define TIBIACOM 10.
 #define FEMURCOM 10.
 
+struct Angle{
+
+  double CoxaAngle;
+  double FemurAngle;
+  double TibiaAngle;
+
+};
+
+struct Position{
+
+  double XPosition;
+  double YPosition;
+  double ZPosition;
+
+};
+
 struct Leg{
 
   uint8_t LegNumber;
-  double ActualAngles[3]; //0 is alpha (Coxa angle), 1 is beta (Femur angle). 2 is gamma (Tibia Angle)
-  double ActualPosition[3]; //0 is X, 1 is Y, 2 is Z
-  double PlannedAngles[3];
-  double PlannedPosition[3];
-  double DesiredAngles[3];
-  double DesiredPosition[3];
-  double OffsetX; //Offset from the center of the robot, which is chosen and (0,0)
+  struct Angle DesiredAngle;
+  struct Angle PlannedAngle;
+  struct Angle ActualAngle;
+  struct Position DesiredPosition;
+  struct Position PlannedPosition;
+  struct Position ActualPosition;
+  double OffsetX; //Offset from the center of the robot, which is chosen as (0,0)
   double OffsetY;
-  double COM[2]; //0 is X coordinate, 1 is Y coordinate, starting from the base of leg.
+  double COMX;
+  double COMY;
+  uint8_t Quadrant;
 
 };
 
@@ -47,7 +65,7 @@ int main(void){
   PCA9685Init();
 
 
-  struct Leg *Legs[3];
+  struct Leg Legs[3];
 
 
 
@@ -64,12 +82,12 @@ int main(void){
 
   //Initial Leg Positioning
   for(int i = 0; i < 3; i++){
-    for(int j = 0; j < 2; j++){
-      PlannedFootPosition[i][j] = 10;
-    }
+    Legs[i].ActualPosition.XPosition = 10.;
+    Legs[i].ActualPosition.YPosition = 10.;
+    Legs[i].ActualPosition.ZPosition = 10.;
   }
 
-  FootPositionToMotorAngle(PlannedFootPosition, PlannedMotorAngles);
+  FootPositionToMotorAngle(Legs, PlannedMotorAngles);
   for(int i = 0; i < 3; i++){
     for(int j = 0; j < 2; j++){
 

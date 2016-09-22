@@ -48,6 +48,7 @@ struct Leg{
   double COMX;
   double COMY;
   uint8_t Quadrant;
+  uint16_t DutyCycle;
 
 };
 
@@ -67,17 +68,6 @@ int main(void){
 
   struct Leg Legs[3];
 
-
-
-  double PlannedFootPosition[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
-  double ActualFootPosition[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
-  double DesiredFootPosition[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
-
-  double PlannedMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
-  double ActualMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
-  double DesiredMotorAngles[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
-
-  uint16_t DutyCycle[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
   double COM[2] = {0,0};
 
   //Initial Leg Positioning
@@ -87,6 +77,14 @@ int main(void){
     Legs[i].ActualPosition.ZPosition = 10.;
   }
 
+  for (int i = 0; i < 3; i++){
+
+    Legs[i].ActualAngle.CoxaAngle = AlphaCalculate(Legs[i].ActualPosition.XPosition, Legs[i].ActualPosition.YPosition);
+    Legs[i].ActualAngle.FemurAngle = BetaCalculate(Legs[i].ActualPosition.XPosition, Legs[i].ActualPosition.YPosition, Legs[i].ActualPosition.ZPosition);
+    Legs[i].ActualAngle.TibiaAngle = GammaCalculate(Legs[i].ActualPosition.XPosition, Legs[i].ActualPosition.YPosition, Legs[i].ActualPosition.ZPosition);
+
+  }
+/*
   FootPositionToMotorAngle(Legs, PlannedMotorAngles);
   for(int i = 0; i < 3; i++){
     for(int j = 0; j < 2; j++){
@@ -99,7 +97,7 @@ int main(void){
     }
 
   }
-
+*/
 
 
   //double CenterOfMass = 0;

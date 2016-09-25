@@ -17,6 +17,8 @@
 #define COXACOM 10.
 #define TIBIACOM 10.
 #define FEMURCOM 10.
+#define LEGMASS 10.
+#define BODYMASS 10.
 
 struct Angle{
 
@@ -57,47 +59,47 @@ double AlphaCalculate(double, double);
 double BetaCalculate(double, double, double);
 double GammaCalculate(double, double, double);
 uint16_t MotorAngleToDutyCycle(double angle);
-void CalculateCOM(double foot[4][3], double COM[2]);
-
-void FootPositionToMotorAngle(double foot[4][3], double angle[4][3]);
+void CalculateLegCOM(struct Angle, double *COMX, double *COMY);
+void FootPositionToMotorAngle(struct Position, struct Angle);
+void CalculateCOM(struct Leg Legs[4], double COM[2]);
 
 int main(void){
 
   PCA9685Init();
 
 
-  struct Leg Legs[3];
+  struct Leg Legs[4];
 
   double COM[2] = {0,0};
 
   //Initial Leg Positioning
-  for(int i = 0; i < 3; i++){
-    Legs[i].ActualPosition.XPosition = 10.;
-    Legs[i].ActualPosition.YPosition = 10.;
-    Legs[i].ActualPosition.ZPosition = 10.;
+  for(int i = 0; i < 4; i++){
+    Legs[i].PlannedPosition.XPosition = 10.;
+    Legs[i].PlannedPosition.YPosition = 10.;
+    Legs[i].PlannedPosition.ZPosition = 10.;
   }
 
-  for (int i = 0; i < 3; i++){
+  for (int i = 0; i < 4; i++){
 
-    Legs[i].ActualAngle.CoxaAngle = AlphaCalculate(Legs[i].ActualPosition.XPosition, Legs[i].ActualPosition.YPosition);
-    Legs[i].ActualAngle.FemurAngle = BetaCalculate(Legs[i].ActualPosition.XPosition, Legs[i].ActualPosition.YPosition, Legs[i].ActualPosition.ZPosition);
-    Legs[i].ActualAngle.TibiaAngle = GammaCalculate(Legs[i].ActualPosition.XPosition, Legs[i].ActualPosition.YPosition, Legs[i].ActualPosition.ZPosition);
-
-  }
-/*
-  FootPositionToMotorAngle(Legs, PlannedMotorAngles);
-  for(int i = 0; i < 3; i++){
-    for(int j = 0; j < 2; j++){
-
-      DutyCycle[i][j] = MotorAngleToDutyCycle(PlannedMotorAngles[i][j]);
-      PCA9685OutputNoPhase(i + j, DutyCycle[i][j]);
-      ActualMotorAngles[i][j] = PlannedMotorAngles[i][j];
-      ActualFootPosition[i][j] = PlannedFootPosition[i][j];
-
-    }
+    Legs[i].PlannedAngle.CoxaAngle = AlphaCalculate(Legs[i].PlannedPosition.XPosition, Legs[i].PlannedPosition.YPosition);
+    Legs[i].PlannedAngle.FemurAngle = BetaCalculate(Legs[i].PlannedPosition.XPosition, Legs[i].PlannedPosition.YPosition, Legs[i].PlannedPosition.ZPosition);
+    Legs[i].PlannedAngle.TibiaAngle = GammaCalculate(Legs[i].PlannedPosition.XPosition, Legs[i].PlannedPosition.YPosition, Legs[i].PlannedPosition.ZPosition);
 
   }
-*/
+  /*
+     FootPositionToMotorAngle(Legs, PlannedMotorAngles);
+     for(int i = 0; i < 3; i++){
+     for(int j = 0; j < 2; j++){
+
+     DutyCycle[i][j] = MotorAngleToDutyCycle(PlannedMotorAngles[i][j]);
+     PCA9685OutputNoPhase(i + j, DutyCycle[i][j]);
+     ActualMotorAngles[i][j] = PlannedMotorAngles[i][j];
+     ActualFootPosition[i][j] = PlannedFootPosition[i][j];
+
+     }
+
+     }
+     */
 
 
   //double CenterOfMass = 0;
@@ -147,25 +149,85 @@ uint16_t MotorAngleToDutyCycle(double angle){
 
 }
 
-void FootPositionToMotorAngle(double foot[4][3], double angle[4][3]){
+void FootPositionToMotorAngle(struct Position Foot, struct Angle Angles){
+
+
+  Angles.CoxaAngle = AlphaCalculate (Foot.XPosition, Foot.YPosition);
+  Angles.FemurAngle = BetaCalculate(Foot.XPosition, Foot.YPosition, Foot.ZPosition);
+  Angles.TibiaAngle = GammaCalculate(Foot.XPosition, Foot.YPosition, Foot.ZPosition);
+
+}
+
+void CalculateLegCOM(struct Angle Angles, double *COMX, double *COMY){
+
+  *COMX = cos(Angles.CoxaAngle) * ((COXACOM * COXAMASS) + FEMURMASS * (COXALENGTH + FEMURCOM * cos (Angles.FemurAngle)) + TIBIAMASS * (COXALENGTH + FEMURLENGTH * cos(Angles.FemurAngle) + TIBIACOM * cos (Angles.TibiaAngle - Angles.FemurAngle)));
+  *COMY = sin(Angles.CoxaAngle) * ((COXACOM * COXAMASS) + FEMURMASS * (COXALENGTH + FEMURCOM * cos (Angles.FemurAngle)) + TIBIAMASS * (COXALENGTH + FEMURLENGTH * cos(Angles.CoxaAngle) + TIBIACOM * cos (Angles.TibiaAngle - Angles.FemurAngle)));
+
+}
+
+void CalculateCOM(struct Leg Legs[4], double COM[2]){
+
+  COM[0] = ((Legs[0].COMX * (-1) + Legs[1].COMX * (-1) + Legs[2].COMX + Legs[3].COMX) * 4 * LEGMASS) / (LEGMASS + BODYMASS);
+  COM[1] = ((Legs[0].COMY + Legs[1].COMY * (-1) + Legs[2].COMY * (-1) + Legs[3].COMY) * 4 * LEGMASS) / (LEGMASS + BODYMASS);
+
+}
+
+uint8_t TestCOMInPoly(struct Leg Legs[4], double COM[2]){
+
+  double holdx = COM[0];
+  double holdy = COM[1];
+  uint8_t count[50];
+  for(int i = 0; i < 50; i++){
+    count[i] = 0;
+  }
+  uint8_t inpoly = 0;
+  uint8_t isdown[4] = {0,0,0,0};
+  double vector[4][2] = {{0,0},{0,0},{0,0},{0,0}};
 
   for(int i = 0; i < 4; i++){
-
-    angle[i][0] = AlphaCalculate (foot[i][0], foot[i][1]);
-    angle[i][1] = BetaCalculate(foot[i][0], foot[i][1], foot[i][2]);
-    angle[i][2] = GammaCalculate(foot[i][0], foot[i][1], foot[i][2]);
+    if(Legs[i].PlannedPosition.ZPosition == DOWNZ){
+      isdown[i] = 1;
+    }
   }
+
+  for(int i = 0; i < 4; i++){
+    if((isdown[i] == 1) & (isdown[((i+1) % 4)] == 1)){
+      vector[i][0] = Legs[((i+1) % 4)].PlannedPosition.XPosition - Legs[i].PlannedPosition.XPosition;
+      vector[i][1] = Legs[((i+1) % 4)].PlannedPosition.YPosition - Legs[i].PlannedPosition.XPosition;
+    }else if((isdown[i] == 1) & (isdown[((i+2) % 4)] == 1)){
+      vector[i][0] = Legs[((i+2) % 4)].PlannedPosition.XPosition - Legs[i].PlannedPosition.XPosition;
+      vector[i][1] = Legs[((i+2) % 4)].PlannedPosition.YPosition - Legs[i].PlannedPosition.XPosition;
+    }else {
+      vector[i][0] = 0;
+      vector[i][1] = 0;
+    }
+  }
+
+  for(int j = 0; j < 4; j++){
+    for(int i = 0; i < 50; i++){
+      holdx += i;
+      for(int k = 0; k < 10; k++){
+        if(((Legs[j].PlannedPosition.XPosition + (k * vector[j][0] / 10.) - holdx) < 3) & ((Legs[j].PlannedPosition.YPosition + (k * vector[j][1] / 10. ) - holdy) < 3)){
+          count[i] = 1;
+        }
+      }
+    }
+  }
+  
+  for(int i = 0; i < 49; i++){
+
+    if((count[i] == 1) & (count[i+1] != 1)){
+      inpoly += 1;
+    }
+  }
+
+  return (inpoly % 2);
 
 }
 
-void CalculateCOM(double angle[4][3], double COM[3]){
 
-  for(int i = 0; i < 2; i ++){
-    COM[0] = cos(angle[i][0]) * ((COXACOM * COXAMASS) + FEMURMASS * (COXALENGTH + FEMURCOM * cos (angle[i][1])) + TIBIAMASS * (COXALENGTH + FEMURLENGTH * cos(angle[i][1]) + TIBIACOM * cos (angle[i][2] - angle[i][1])));
-    COM[1] = sin(angle[i][0]) * ((COXACOM * COXAMASS) + FEMURMASS * (COXALENGTH + FEMURCOM * cos (angle[i][1])) + TIBIAMASS * (COXALENGTH + FEMURLENGTH * cos(angle[i][1]) + TIBIACOM * cos (angle[i][2] - angle[i][1])));
-  }
 
-}
+
 /*
  * Forward direction is +Y. Using standard XY plane looking down.
  *

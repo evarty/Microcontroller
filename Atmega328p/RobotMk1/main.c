@@ -71,6 +71,7 @@ int main(void){
   struct Leg Legs[4];
 
   double COM[2] = {0,0};
+  uint16_t DutyCycle[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
 
   //Initial Leg Positioning
   for(int i = 0; i < 4; i++){
@@ -86,20 +87,35 @@ int main(void){
     Legs[i].PlannedAngle.TibiaAngle = GammaCalculate(Legs[i].PlannedPosition.XPosition, Legs[i].PlannedPosition.YPosition, Legs[i].PlannedPosition.ZPosition);
 
   }
-  /*
-     FootPositionToMotorAngle(Legs, PlannedMotorAngles);
-     for(int i = 0; i < 3; i++){
-     for(int j = 0; j < 2; j++){
 
-     DutyCycle[i][j] = MotorAngleToDutyCycle(PlannedMotorAngles[i][j]);
-     PCA9685OutputNoPhase(i + j, DutyCycle[i][j]);
-     ActualMotorAngles[i][j] = PlannedMotorAngles[i][j];
-     ActualFootPosition[i][j] = PlannedFootPosition[i][j];
+  for (int i = 0; i < 3; i++){
+    FootPositionToMotorAngle(Legs[i].PlannedPosition, Legs[i].PlannedAngle);
+  }
 
-     }
+  CalculateCOM(Legs, COM);
 
-     }
-     */
+
+  for(int i = 0; i < 3; i++){
+    for(int j = 0; j < 2; j++){
+
+      switch(j) {
+      case '0' :
+        DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.CoxaAngle);
+        Legs[i].ActualAngle.CoxaAngle = Legs[i].PlannedAngle.CoxaAngle;
+      case '1' :
+        DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.FemurAngle);
+        Legs[i].ActualAngle.FemurAngle = Legs[i].PlannedAngle.FemurAngle;
+      case '2' :
+        DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.FemurAngle);
+        Legs[i].ActualAngle.FemurAngle = Legs[i].PlannedAngle.FemurAngle;
+      }
+
+        PCA9685OutputNoPhase(i + j, DutyCycle[i][j]);
+
+
+    }
+
+  }
 
 
   //double CenterOfMass = 0;
@@ -167,12 +183,12 @@ void CalculateLegCOM(struct Angle Angles, double *COMX, double *COMY){
 
 void CalculateCOM(struct Leg Legs[4], double COM[2]){
 
-  COM[0] = ((Legs[0].COMX * (-1) + Legs[1].COMX * (-1) + Legs[2].COMX + Legs[3].COMX) * 4 * LEGMASS) / (LEGMASS + BODYMASS);
-  COM[1] = ((Legs[0].COMY + Legs[1].COMY * (-1) + Legs[2].COMY * (-1) + Legs[3].COMY) * 4 * LEGMASS) / (LEGMASS + BODYMASS);
+  COM[0] = (((Legs[0].COMX * (-1) - Legs[0].OffsetX) + (Legs[1].COMX * (-1) - Legs[1].OffsetX) + (Legs[2].COMX + Legs[2].OffsetX)+ (Legs[3].COMX + Legs[3].OffsetX)) * 4 * LEGMASS) / (LEGMASS + BODYMASS);
+  COM[1] = (((Legs[0].COMY + Legs[0].OffsetY) + (Legs[1].COMY * (-1) - Legs[1].OffsetY) + (Legs[2].COMY * (-1) - Legs[2].OffsetY)+ (Legs[3].COMY + Legs[3].OffsetY)) * 4 * LEGMASS) / (LEGMASS + BODYMASS);
 
 }
 
-uint8_t TestCOMInPoly(struct Leg Legs[4], double COM[2]){
+uint8_t TestPlannedCOMInPoly(struct Leg Legs[4], double COM[2]){
 
   double holdx = COM[0];
   double holdy = COM[1];
@@ -213,7 +229,7 @@ uint8_t TestCOMInPoly(struct Leg Legs[4], double COM[2]){
       }
     }
   }
-  
+
   for(int i = 0; i < 49; i++){
 
     if((count[i] == 1) & (count[i+1] != 1)){
@@ -226,6 +242,58 @@ uint8_t TestCOMInPoly(struct Leg Legs[4], double COM[2]){
 }
 
 
+uint8_t TestDesiredCOMInPoly(struct Leg Legs[4], double COM[2]){
+
+  double holdx = COM[0];
+  double holdy = COM[1];
+  uint8_t count[50];
+  for(int i = 0; i < 50; i++){
+    count[i] = 0;
+  }
+  uint8_t inpoly = 0;
+  uint8_t isdown[4] = {0,0,0,0};
+  double vector[4][2] = {{0,0},{0,0},{0,0},{0,0}};
+
+  for(int i = 0; i < 4; i++){
+    if(Legs[i].DesiredPosition.ZPosition == DOWNZ){
+      isdown[i] = 1;
+    }
+  }
+
+  for(int i = 0; i < 4; i++){
+    if((isdown[i] == 1) & (isdown[((i+1) % 4)] == 1)){
+      vector[i][0] = Legs[((i+1) % 4)].DesiredPosition.XPosition - Legs[i].DesiredPosition.XPosition;
+      vector[i][1] = Legs[((i+1) % 4)].DesiredPosition.YPosition - Legs[i].DesiredPosition.XPosition;
+    }else if((isdown[i] == 1) & (isdown[((i+2) % 4)] == 1)){
+      vector[i][0] = Legs[((i+2) % 4)].DesiredPosition.XPosition - Legs[i].DesiredPosition.XPosition;
+      vector[i][1] = Legs[((i+2) % 4)].DesiredPosition.YPosition - Legs[i].DesiredPosition.XPosition;
+    }else {
+      vector[i][0] = 0;
+      vector[i][1] = 0;
+    }
+  }
+
+  for(int j = 0; j < 4; j++){
+    for(int i = 0; i < 50; i++){
+      holdx += i;
+      for(int k = 0; k < 10; k++){
+        if(((Legs[j].DesiredPosition.XPosition + (k * vector[j][0] / 10.) - holdx) < 3) & ((Legs[j].DesiredPosition.YPosition + (k * vector[j][1] / 10. ) - holdy) < 3)){
+          count[i] = 1;
+        }
+      }
+    }
+  }
+
+  for(int i = 0; i < 49; i++){
+
+    if((count[i] == 1) & (count[i+1] != 1)){
+      inpoly += 1;
+    }
+  }
+
+  return (inpoly % 2);
+
+}
 
 
 /*

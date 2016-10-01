@@ -19,6 +19,7 @@
 #define FEMURCOM 10.
 #define LEGMASS 10.
 #define BODYMASS 10.
+#define STEPSIZE 10.
 
 struct Angle{
 
@@ -62,6 +63,7 @@ uint16_t MotorAngleToDutyCycle(double angle);
 void CalculateLegCOM(struct Angle, double *COMX, double *COMY);
 void FootPositionToMotorAngle(struct Position, struct Angle);
 void CalculateCOM(struct Leg Legs[4], double COM[2]);
+uint8_t TestPlannedCOMInPoly(struct Leg Legs[4], double COM[2]);
 
 int main(void){
 
@@ -70,6 +72,10 @@ int main(void){
 
   struct Leg Legs[4];
 
+  for (int i = 0; i < 3; i++){
+    Legs[i].LegNumber = i;
+  }
+
   double COM[2] = {0,0};
   uint16_t DutyCycle[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
 
@@ -77,52 +83,126 @@ int main(void){
   for(int i = 0; i < 4; i++){
     Legs[i].PlannedPosition.XPosition = 10.;
     Legs[i].PlannedPosition.YPosition = 10.;
-    Legs[i].PlannedPosition.ZPosition = 10.;
-  }
-
-  for (int i = 0; i < 4; i++){
-
-    Legs[i].PlannedAngle.CoxaAngle = AlphaCalculate(Legs[i].PlannedPosition.XPosition, Legs[i].PlannedPosition.YPosition);
-    Legs[i].PlannedAngle.FemurAngle = BetaCalculate(Legs[i].PlannedPosition.XPosition, Legs[i].PlannedPosition.YPosition, Legs[i].PlannedPosition.ZPosition);
-    Legs[i].PlannedAngle.TibiaAngle = GammaCalculate(Legs[i].PlannedPosition.XPosition, Legs[i].PlannedPosition.YPosition, Legs[i].PlannedPosition.ZPosition);
-
+    Legs[i].PlannedPosition.ZPosition = DOWNZ;
   }
 
   for (int i = 0; i < 3; i++){
     FootPositionToMotorAngle(Legs[i].PlannedPosition, Legs[i].PlannedAngle);
   }
 
-  CalculateCOM(Legs, COM);
-
-
   for(int i = 0; i < 3; i++){
     for(int j = 0; j < 2; j++){
 
       switch(j) {
-      case '0' :
-        DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.CoxaAngle);
-        Legs[i].ActualAngle.CoxaAngle = Legs[i].PlannedAngle.CoxaAngle;
-      case '1' :
-        DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.FemurAngle);
-        Legs[i].ActualAngle.FemurAngle = Legs[i].PlannedAngle.FemurAngle;
-      case '2' :
-        DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.FemurAngle);
-        Legs[i].ActualAngle.FemurAngle = Legs[i].PlannedAngle.FemurAngle;
+        case '0' :
+          DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.CoxaAngle);
+          Legs[i].ActualAngle.CoxaAngle = Legs[i].PlannedAngle.CoxaAngle;
+        case '1' :
+          DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.FemurAngle);
+          Legs[i].ActualAngle.FemurAngle = Legs[i].PlannedAngle.FemurAngle;
+        case '2' :
+          DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.FemurAngle);
+          Legs[i].ActualAngle.FemurAngle = Legs[i].PlannedAngle.FemurAngle;
       }
 
-        PCA9685OutputNoPhase(i + j, DutyCycle[i][j]);
-
+      PCA9685OutputNoPhase(i + j, DutyCycle[i][j]);
 
     }
-
   }
 
 
-  //double CenterOfMass = 0;
-
-
-
   while(1){
+
+    for (int p = 0; p < 3; p++){
+
+      for (int i = 0; i < 3; i++){
+        Legs[i].DesiredPosition.XPosition = Legs[i].ActualPosition.XPosition + STEPSIZE;
+      }
+
+      Legs[p].PlannedPosition.XPosition += STEPSIZE / 2.;
+      Legs[p].PlannedPosition.ZPosition = 0;
+
+      for (int i = 0; i < 3; i++){
+        FootPositionToMotorAngle(Legs[i].PlannedPosition, Legs[i].PlannedAngle);
+      }
+
+      for (int i = 0; i < 3; i++){
+        CalculateLegCOM(Legs[i].PlannedAngle, &Legs[i].COMX, &Legs[i].COMY);
+      }
+
+      CalculateCOM(Legs, COM);
+
+      if(TestPlannedCOMInPoly(Legs, COM)){
+
+        for(int i = 0; i < 3; i++){
+          for(int j = 0; j < 2; j++){
+
+            switch(j) {
+              case '0' :
+                DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.CoxaAngle);
+                Legs[i].ActualAngle.CoxaAngle = Legs[i].PlannedAngle.CoxaAngle;
+              case '1' :
+                DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.FemurAngle);
+                Legs[i].ActualAngle.FemurAngle = Legs[i].PlannedAngle.FemurAngle;
+              case '2' :
+                DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.FemurAngle);
+                Legs[i].ActualAngle.FemurAngle = Legs[i].PlannedAngle.FemurAngle;
+            }
+
+            PCA9685OutputNoPhase(i + j, DutyCycle[i][j]);
+
+
+          }
+
+        }
+      }
+
+      Legs[p].PlannedPosition.XPosition += STEPSIZE / 2.;
+      Legs[p].PlannedPosition.ZPosition = DOWNZ;
+
+
+      for (int i = 0; i < 3; i++){
+        FootPositionToMotorAngle(Legs[i].PlannedPosition, Legs[i].PlannedAngle);
+      }
+
+      for (int i = 0; i < 3; i++){
+        CalculateLegCOM(Legs[i].PlannedAngle, &Legs[i].COMX, &Legs[i].COMY);
+      }
+
+      CalculateCOM(Legs, COM);
+
+      if(TestPlannedCOMInPoly(Legs, COM)){
+
+        for(int i = 0; i < 3; i++){
+          for(int j = 0; j < 2; j++){
+
+            switch(j) {
+              case '0' :
+                DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.CoxaAngle);
+                Legs[i].ActualAngle.CoxaAngle = Legs[i].PlannedAngle.CoxaAngle;
+              case '1' :
+                DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.FemurAngle);
+                Legs[i].ActualAngle.FemurAngle = Legs[i].PlannedAngle.FemurAngle;
+              case '2' :
+                DutyCycle[i][j] = MotorAngleToDutyCycle(Legs[i].PlannedAngle.FemurAngle);
+                Legs[i].ActualAngle.FemurAngle = Legs[i].PlannedAngle.FemurAngle;
+            }
+
+            PCA9685OutputNoPhase(i + j, DutyCycle[i][j]);
+
+
+          }
+
+        }
+      }
+    }
+
+
+
+
+
+
+
 
 
 
@@ -132,26 +212,20 @@ int main(void){
 }
 
 double AlphaCalculate(double X, double Y){
-  return atan2(Y, X);
+  return (atan2(Y, X) / 3.14159 * 180.);
 }
 
 double BetaCalculate(double X, double Y, double Z){
-
   double HoldL = sqrt( square(Z) + square (sqrt (square (X) + square (Y)) - COXALENGTH));
 
-  return (acos(Z / HoldL) + acos((square(FEMURLENGTH) - square(TIBIALENGTH) + (square(HoldL)))) / (2 * FEMURLENGTH * HoldL)) - 1.5707963268;
+  return (((acos(Z / HoldL) + acos((square(FEMURLENGTH) - square(TIBIALENGTH) + (square(HoldL)))) / (2 * FEMURLENGTH * HoldL)) - 1.5707963268) / 3.14159 * 180.);
 }
 
 double GammaCalculate(double X, double Y, double Z){
-
   double HoldL = sqrt( square(Z) + square (sqrt (square (X) + square (Y)) - COXALENGTH));
 
-  return 3.14159 - (acos( square(TIBIALENGTH) + square(FEMURLENGTH) + square (HoldL)) / (2 * TIBIALENGTH * FEMURLENGTH));
+  return ((3.14159 - (acos( square(TIBIALENGTH) + square(FEMURLENGTH) + square (HoldL)) / (2 * TIBIALENGTH * FEMURLENGTH))) / 3.14159 * 180.);
 }
-
-/*double CenterOfMassCalculate(){
-
-  }*/
 
 uint16_t MotorAngleToDutyCycle(double angle){
 

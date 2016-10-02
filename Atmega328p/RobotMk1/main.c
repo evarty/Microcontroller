@@ -112,12 +112,16 @@ int main(void){
 
 
   while(1){
-
-    for (int p = 0; p < 3; p++){
-
+    
+    
+    
       for (int i = 0; i < 3; i++){
         Legs[i].DesiredPosition.XPosition = Legs[i].ActualPosition.XPosition + STEPSIZE;
       }
+    
+
+    for (int p = 0; p < 3; p++){
+
 
       Legs[p].PlannedPosition.XPosition += STEPSIZE / 2.;
       Legs[p].PlannedPosition.ZPosition = 0;

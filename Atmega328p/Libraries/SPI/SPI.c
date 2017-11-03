@@ -24,16 +24,16 @@ uint8_t SPI_MasterTransmitByte(uint8_t Data){
   return SPDR;
 }
 
-void SPI_MasterTransmitArb(uint8_t *DataArray, ArrayLength){
+void SPI_MasterTransmitArb(uint8_t *DataArray, uint8_t ArrayLength){
   uint8_t i = 0;
   for(i = 0; i < ArrayLength; i++){
     SPI_MasterTransmitByte(DataArray[i]);
   }
 }
 
-void SPI_MasterReceiveArb(uint8_t *DataArray, uint8_t ArrayLength){
+void SPI_MasterReceiveArb(uint16_t *DataArray, uint8_t ArrayLength){
   uint8_t i = 0;
-  for(i = 0; i < Length; i++){
+  for(i = 0; i < ArrayLength; i++){
     DataArray[i] = SPI_MasterTransmitByte(0x00);
   }
 }

@@ -13,7 +13,7 @@ uint8_t SPI_MasterTransmitByte(uint8_t Data);
 
 void SPI_MasterTransmitArb(uint8_t *DataArray, uint8_t ArrayLength);
 
-void SPI_MasterReceiveArb(uint8_t *DataArray, uint8_t ArrayLength);
+void SPI_MasterReceiveArb(uint16_t *DataArray, uint8_t ArrayLength);
 
 void SPI_SlaveInit(void);
 

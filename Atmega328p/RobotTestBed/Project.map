@@ -6,8 +6,25 @@ Archive member included because of file (symbol)
 Discarded input sections
 
  .bss           0x0000000000000000        0x0 /usr/lib/gcc/avr/4.8.1/../../../avr/lib/avr5/crtm328p.o
- .text          0x0000000000000000        0x0 /tmp/ccqYzqJY.o
- .bss           0x0000000000000000        0x0 /tmp/ccqYzqJY.o
+ .text          0x0000000000000000        0x0 /tmp/ccJx8aM0.o
+ .bss           0x0000000000000000        0x0 /tmp/ccJx8aM0.o
+ .text.PWM8BitOutput
+                0x0000000000000000        0x4 /tmp/ccJx8aM0.o
+ .text          0x0000000000000000        0x0 /tmp/ccBZIWkR.o
+ .bss           0x0000000000000000        0x0 /tmp/ccBZIWkR.o
+ .text.SPI_MasterTransmitArb
+                0x0000000000000000       0x3a /tmp/ccBZIWkR.o
+ .text.SPI_SlaveInit
+                0x0000000000000000        0xa /tmp/ccBZIWkR.o
+ .text.SPI_SlaveReceive
+                0x0000000000000000        0xa /tmp/ccBZIWkR.o
+ .text          0x0000000000000000        0x0 /tmp/ccMoDTYH.o
+ .bss           0x0000000000000000        0x0 /tmp/ccMoDTYH.o
+ .text.ADCInitilize
+                0x0000000000000000       0x2a /tmp/ccMoDTYH.o
+ .text.ADCRead  0x0000000000000000       0x2e /tmp/ccMoDTYH.o
+ .text.ADCRead8Bit
+                0x0000000000000000       0x1e /tmp/ccMoDTYH.o
  .text          0x0000000000000000        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
  .bss           0x0000000000000000        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
  .text.libgcc.mul
@@ -40,7 +57,9 @@ Linker script and memory map
 
 Address of section .data set to 0x800100
 LOAD /usr/lib/gcc/avr/4.8.1/../../../avr/lib/avr5/crtm328p.o
-LOAD /tmp/ccqYzqJY.o
+LOAD /tmp/ccJx8aM0.o
+LOAD /tmp/ccBZIWkR.o
+LOAD /tmp/ccMoDTYH.o
 START GROUP
 LOAD /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a
 LOAD /usr/lib/gcc/avr/4.8.1/../../../avr/lib/avr5/libm.a
@@ -137,7 +156,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000       0xd6
+.text           0x0000000000000000      0x17e
  *(.vectors)
  .vectors       0x0000000000000000       0x68 /usr/lib/gcc/avr/4.8.1/../../../avr/lib/avr5/crtm328p.o
                 0x0000000000000000                __vectors
@@ -218,14 +237,31 @@ END GROUP
                 0x000000000000007c                __vector_20
                 0x0000000000000080                . = ALIGN (0x2)
  *(.text.*)
+ .text.PWM8BitSetup
+                0x0000000000000080        0xe /tmp/ccJx8aM0.o
+                0x0000000000000080                PWM8BitSetup
+ .text.ADCInit  0x000000000000008e       0x16 /tmp/ccJx8aM0.o
+                0x000000000000008e                ADCInit
+ .text.ADCReadTest
+                0x00000000000000a4       0x26 /tmp/ccJx8aM0.o
+                0x00000000000000a4                ADCReadTest
  .text.startup.main
-                0x0000000000000080       0x52 /tmp/ccqYzqJY.o
-                0x0000000000000080                main
-                0x00000000000000d2                . = ALIGN (0x2)
+                0x00000000000000ca       0x5a /tmp/ccJx8aM0.o
+                0x00000000000000ca                main
+ .text.SPI_MasterInit
+                0x0000000000000124        0xc /tmp/ccBZIWkR.o
+                0x0000000000000124                SPI_MasterInit
+ .text.SPI_MasterTransmitByte
+                0x0000000000000130        0xc /tmp/ccBZIWkR.o
+                0x0000000000000130                SPI_MasterTransmitByte
+ .text.SPI_MasterReceiveArb
+                0x000000000000013c       0x3e /tmp/ccBZIWkR.o
+                0x000000000000013c                SPI_MasterReceiveArb
+                0x000000000000017a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000000000000d2        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
-                0x00000000000000d2                exit
-                0x00000000000000d2                _exit
+ .fini9         0x000000000000017a        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+                0x000000000000017a                exit
+                0x000000000000017a                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -244,15 +280,17 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000000000000d2        0x4 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+ .fini0         0x000000000000017a        0x4 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x00000000000000d6                _etext = .
+                0x000000000000017e                _etext = .
 
-.data           0x0000000000800100        0x0 load address 0x00000000000000d6
+.data           0x0000000000800100        0x0 load address 0x000000000000017e
                 0x0000000000800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.8.1/../../../avr/lib/avr5/crtm328p.o
- .data          0x0000000000800100        0x0 /tmp/ccqYzqJY.o
+ .data          0x0000000000800100        0x0 /tmp/ccJx8aM0.o
+ .data          0x0000000000800100        0x0 /tmp/ccBZIWkR.o
+ .data          0x0000000000800100        0x0 /tmp/ccMoDTYH.o
  .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
  *(.data*)
  *(.rodata)
@@ -268,8 +306,8 @@ END GROUP
  *(.bss*)
  *(COMMON)
                 0x0000000000800100                PROVIDE (__bss_end, .)
-                0x00000000000000d6                __data_load_start = LOADADDR (.data)
-                0x00000000000000d6                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000000000000017e                __data_load_start = LOADADDR (.data)
+                0x000000000000017e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0000000000800100        0x0
                 0x0000000000800100                PROVIDE (__noinit_start, .)
@@ -297,13 +335,18 @@ END GROUP
 .user_signatures
  *(.user_signatures*)
 
-.stab           0x0000000000000000      0x5dc
+.stab           0x0000000000000000      0xe10
  *(.stab)
- .stab          0x0000000000000000      0x5dc /tmp/ccqYzqJY.o
+ .stab          0x0000000000000000      0x6f0 /tmp/ccJx8aM0.o
+                                        0x738 (size before relaxing)
+ .stab          0x00000000000006f0      0x450 /tmp/ccBZIWkR.o
+                                        0x720 (size before relaxing)
+ .stab          0x0000000000000b40      0x2d0 /tmp/ccMoDTYH.o
+                                        0x6b4 (size before relaxing)
 
-.stabstr        0x0000000000000000      0xbe2
+.stabstr        0x0000000000000000      0xe93
  *(.stabstr)
- .stabstr       0x0000000000000000      0xbe2 /tmp/ccqYzqJY.o
+ .stabstr       0x0000000000000000      0xe93 /tmp/ccJx8aM0.o
 
 .stab.excl
  *(.stab.excl)
@@ -319,8 +362,10 @@ END GROUP
 
 .comment        0x0000000000000000       0x11
  *(.comment)
- .comment       0x0000000000000000       0x11 /tmp/ccqYzqJY.o
+ .comment       0x0000000000000000       0x11 /tmp/ccJx8aM0.o
                                          0x12 (size before relaxing)
+ .comment       0x0000000000000000       0x12 /tmp/ccBZIWkR.o
+ .comment       0x0000000000000000       0x12 /tmp/ccMoDTYH.o
 
 .note.gnu.build-id
  *(.note.gnu.build-id)

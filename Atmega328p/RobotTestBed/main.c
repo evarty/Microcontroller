@@ -1,6 +1,6 @@
 #include <avr/io.h> //allows more human readable stuff
 #include <avr/interrupt.h>  //allows interrupts
-#include <avr/power.h> //power reduction management
+#include <avr/power.h> //power reduction management 
 
 #include "ADC.h"
 #include "SPI.h"
